@@ -1,0 +1,54 @@
+schema_version = "1.0"
+
+[scenario]
+name = "api-and-observability"
+description = "Multi-service environment with OpenSearch, ECS, Lambda, API Gateway, CloudFront, Redshift, Step Functions, Bedrock, and ELBv2 across us-east-1, us-west-2, and ap-southeast-1."
+account_tags = ["PRIMARY"]
+regions = ["us-east-1", "us-west-2", "ap-southeast-1"]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+
+[[environment.mounts_json]]
+type = "bind"
+source = "/var/run/docker.sock"
+target = "/var/run/docker.sock"
+
+[deploy]
+timeout_sec = 5400.0
+
+[verify]
+timeout_sec = 120.0
+
+[cleanup]
+timeout_sec = 5400.0
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-0263D0A3"
+desired_value = 10
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 10
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "vpc"
+quota_code = "L-FE5A380F"
+desired_value = 10
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-west-2"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 10

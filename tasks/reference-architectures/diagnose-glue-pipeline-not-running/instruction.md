@@ -1,0 +1,3 @@
+A PM flagged that {{reference-architectures-Glue-etlpipeline-us-east-1-PipelineName}} has not produced a single Glue job run since the stack shipped four days ago — the Glue console shows zero jobs and the artifact bucket is empty. We want to unblock it, but before we ship a fix we also want to know what else along the deploy path is broken or fragile, so the whole mess goes into one change. What is actually stopping this pipeline from running right now, and once that is fixed, what other problems are sitting in the wiring between the pipeline, the launcher, and the Glue job that we should be pulling into the same PR?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

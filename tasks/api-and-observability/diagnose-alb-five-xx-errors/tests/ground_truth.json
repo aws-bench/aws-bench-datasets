@@ -1,0 +1,4 @@
+{
+  "instruction": "My ALB {{api-and-observability-ecs-t81xcoww7-us-east-1-ALBArn}} started returning 5XX errors. What is going on?",
+  "expected_answer": "The ALB access logs show that earlier requests to POST /jobInstance/updateStatus returned HTTP 200 with normal processing times. Recent requests are all going to POST /jobInstance/ instead, which the application rejects with HTTP 500 almost instantly. The root cause is a client-side endpoint misconfiguration. Clients switched from the correct path /jobInstance/updateStatus to the incorrect path /jobInstance/."
+}

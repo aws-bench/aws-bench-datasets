@@ -1,0 +1,4 @@
+{
+  "instruction": "Bulk regression requests in the alpha environment are not being processed by the Onyx Lambda ({{api-and-observability-Lambda-b0d9783d3-us-east-1-OnyxFunctionName}}). What is going on?",
+  "expected_answer": "The Onyx Lambda handler checks for the presence of OldImage in DynamoDB stream records before processing. Bulk regression requests are inserted directly into the BasaltRegressionRequests-alpha table with state IN_PROGRESS, which produces INSERT stream events. INSERT events do not contain an OldImage, so the handler skips them. Individual BAT requests work because they are first created in BUFFER state in the BasaltRequests-alpha table and then updated to IN_PROGRESS, producing MODIFY events that include OldImage."
+}

@@ -1,0 +1,3 @@
+We want to extend our AWS Backup setup to protect a second S3 bucket and also add cross-region copy for disaster recovery. The current backup vault is {{reference-architectures-Backup-s3-us-east-1-BackupVaultName}} and it backs up {{reference-architectures-Backup-s3-us-east-1-BucketName}} under plan {{reference-architectures-Backup-s3-us-east-1-BackupPlanId}}. Review the current configuration: how does the backup plan select which resources to protect, what is the schedule and retention, and what encryption does the vault use? Based on this, explain what we need to do to add a second S3 bucket to the existing backup plan, and whether the current vault setup supports adding a cross-region copy rule.
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

@@ -1,0 +1,4 @@
+{
+  "instruction": "Need to change the embedding model on our Bedrock KBs. Any CloudFormation dependencies I should handle first?",
+  "expected_answer": "The agent stack api-and-observability-bedrock-agent-dwiwbg5rr-us-east-1 has Fn::ImportValue dependencies on EscalationWriteupsKBKnowledgeBaseId and MetadataKBKnowledgeBaseId. Remove those imports before replacing the KB stack."
+}

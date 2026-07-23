@@ -1,0 +1,4 @@
+{
+  "instruction": "Do I have any s3 lifecycle expiration rules that filter resources based on their tags? If so, what tag and expiration period?",
+  "expected_answer": "Yes, the bucket {{serverless-apps-S3Storage-us-east-1-LifeCycleBucket}} has a lifecycle expiration rule that deletes objects after 1 day when tagged with shouldDelete: true."
+}

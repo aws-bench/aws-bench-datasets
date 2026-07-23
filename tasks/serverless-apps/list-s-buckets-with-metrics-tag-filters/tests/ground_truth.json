@@ -1,0 +1,4 @@
+{
+  "instruction": "List all my S3 buckets that have metrics configurations with tag filters.",
+  "expected_answer": "You have the bucket {{serverless-apps-S3Storage-us-east-1-MetricsBucketName}} which uses tag filters."
+}

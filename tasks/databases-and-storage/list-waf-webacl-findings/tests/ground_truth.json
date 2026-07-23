@@ -1,0 +1,4 @@
+{
+  "instruction": "Describe the configuration of my WAF WebACLs — what rules are defined and what are their settings?",
+  "expected_answer": "The WebACL has a default action set to {{databases-and-storage-WAF-18b01a02d-us-east-1-WebAcldefaultAction}} with a rate-limiting rule named {{databases-and-storage-WAF-18b01a02d-us-east-1-RuleName}} with a priority of {{databases-and-storage-WAF-18b01a02d-us-east-1-RulePriority}}, which blocks IP addresses exceeding {{databases-and-storage-WAF-18b01a02d-us-east-1-RuleRateLimit}} requests. The Web ACL ID is {{databases-and-storage-WAF-18b01a02d-us-east-1-WebAclId}} and the Web ACL ARN is {{databases-and-storage-WAF-18b01a02d-us-east-1-WebAclArn}}."
+}

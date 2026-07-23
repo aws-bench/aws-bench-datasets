@@ -1,0 +1,4 @@
+{
+  "instruction": "Does outbound internet traffic from instance {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadInstanceId}} in ap-northeast-2 pass through AWS Network Firewall?",
+  "expected_answer": "No. The DMZ VPC ({{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCId}}) has no Internet Gateway and its route tables only contain the local 10.2.0.0/16 route. Traffic never reaches the firewall endpoints. The workload subnet route table ({{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadSubnetRouteTableId}}) sends 0.0.0.0/0 to Transit Gateway {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-TransitGatewayId}} and the TGW route table ({{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-TGWRouteTableId}}) forwards 0.0.0.0/0 to the DMZ VPC attachment ({{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCAttachmentId}}). However, the DMZ VPC has no path out."
+}

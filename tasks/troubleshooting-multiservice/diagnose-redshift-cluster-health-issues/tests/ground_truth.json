@@ -1,0 +1,4 @@
+{
+  "instruction": "Why is my Redshift cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} showing health issues?",
+  "expected_answer": "The CloudWatch alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} is in ALARM state because it uses the wrong comparison operator. The alarm is configured with GreaterThanThreshold and a threshold of 0.5 on the HealthStatus metric. Since a healthy cluster reports HealthStatus of 1.0, which is greater than 0.5, the alarm fires continuously. The comparison operator should be LessThanThreshold to detect unhealthy status. The cluster itself is healthy and in available status. The other alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthLeaderAlarmName}} is in INSUFFICIENT_DATA, which is expected for a single-node cluster where the node has a SHARED role and no Leader-specific metrics are emitted."
+}

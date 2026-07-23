@@ -1,0 +1,4 @@
+{
+  "instruction": "Can you fetch sample records showing id, workflowId, and status attributes, count how many records have status = 'completed', and get all unique workflow IDs from the {{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}} DynamoDB table?",
+  "expected_answer": "Here's a summary of the {{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}} DynamoDB table:\n\nSample Records (3 records):\n- Record 1: id=web-003, workflowId=wf-alpha, status=completed\n- Record 2: id=web-001, workflowId=wf-alpha, status=completed\n- Record 3: id=web-002, workflowId=wf-beta, status=processing\n\nCount by Criteria (status = \"completed\"):\n- 2 records have status \"completed\" (out of 3 total records scanned)\n\nUnique Workflow IDs:\n- wf-alpha (appears 2 times)\n- wf-beta (appears 1 time)\n\nThe table contains 3 total records with 2 unique workflow IDs."
+}

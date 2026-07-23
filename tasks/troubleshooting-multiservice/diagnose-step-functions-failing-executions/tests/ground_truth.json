@@ -1,0 +1,4 @@
+{
+  "instruction": "My Step Functions state machine {{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-StateMachineArn}} in ap-southeast-2 has failing executions. Why?",
+  "expected_answer": "All executions fail at the InvokeProcessingLambda state because the Lambda function {{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-ProcessingLambdaArn}} throws a RuntimeError: \"Configuration validation failed: missing required field 'targetBucket'\"."
+}

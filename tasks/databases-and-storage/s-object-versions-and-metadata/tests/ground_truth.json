@@ -1,0 +1,4 @@
+{
+  "instruction": "In the S3 bucket {{databases-and-storage-s3-y5esr5w6g-us-east-1-BucketName}}, which object was most recently modified and what is its version ID? Also, what is the size in bytes and version ID of `prod_data.txt`?",
+  "expected_answer": "The most recently modified object is `{{898c7f19-MostRecentKey}}` with version ID `{{898c7f19-MostRecentVersionId}}`. The object `prod_data.txt` has version ID `{{898c7f19-ProdDataVersionId}}` and is {{898c7f19-ProdDataSizeBytes}} bytes."
+}

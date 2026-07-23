@@ -1,0 +1,4 @@
+{
+  "instruction": "What container images are used by the services in the ECS cluster {{serverless-apps-ECS-us-east-1-EcsClusterName}}, and can they access the ECR repository my-ecr-repo",
+  "expected_answer": "The container images used by the service in the ECS cluster {{serverless-apps-ECS-us-east-1-EcsClusterName}} is mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019. The service cannot access the ECR repository my-ecr-repo"
+}

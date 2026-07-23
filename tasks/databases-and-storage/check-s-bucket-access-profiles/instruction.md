@@ -1,0 +1,3 @@
+I want to know which of these IAM users {{databases-and-storage-s3-8hdgte56j-us-east-1-DevProfileUserName}}, {{databases-and-storage-s3-8hdgte56j-us-east-1-StagingProfileUserName}} have access to a specific S3 bucket {{databases-and-storage-s3-8hdgte56j-us-east-1-BucketName}} and also want to check if there are other IAM users which have access and also verify the contents of the bucket.
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

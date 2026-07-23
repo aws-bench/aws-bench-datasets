@@ -1,0 +1,4 @@
+{
+  "instruction": "Describe my EC2 instances across us-east-1, us-west-1, and us-west-2. How many do I have in each region, and which instances in us-east-1 share network connectivity (same VPC)?",
+  "expected_answer": "You have {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-NUMEC2Running}} EC2 instances in us-east-1, {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-NUMEC2Running}} in us-west-1, and {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-NUMEC2Running}} in us-west-2. In us-east-1, instances {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}, and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} share the same VPC ({{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}}). The remaining instance is in the default VPC and is not network-adjacent to the others."
+}

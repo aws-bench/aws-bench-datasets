@@ -1,0 +1,4 @@
+{
+  "instruction": "which dynamodb tables have a resource based policy? Check us-east-1 and us-west-2.",
+  "expected_answer": "The DynamoDB table named {{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy}} in the us-east-1 region and {{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy}} in the us-west-2 region are having resource-based policies."
+}

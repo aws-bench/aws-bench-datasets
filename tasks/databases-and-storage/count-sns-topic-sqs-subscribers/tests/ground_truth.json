@@ -1,0 +1,4 @@
+{
+  "instruction": "in us-west-2, how many subscribers are subscribed to all my SNS topics in aggregate?",
+  "expected_answer": "You have total of {{databases-and-storage-SQS-e5ldy6q5p-us-west-2-NUMSubscribers}} subscribers subscribed to the topics."
+}

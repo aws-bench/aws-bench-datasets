@@ -1,0 +1,4 @@
+{
+  "instruction": "The internal ALB {{api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName}} that fronts our OpenSearch domain {{api-and-observability-opensearch-60603f075-us-east-1-DomainName}} started returning 502s to all requests. The CloudWatch alarm {{api-and-observability-opensearch-60603f075-us-east-1-AlarmName}} is firing. What is going on?",
+  "expected_answer": "Both ALB target groups (flint-dashboards-tg and flint-api-tg) have IP targets 10.80.4.37 and 10.80.8.112 registered, but those IPs are not attached to any active ENI in the VPC. The OpenSearch domain flint-analytics is deployed in the VPC and its current ENI private IPs are different from the ones registered in the target groups. Because the registered target IPs don't correspond to any running network interface, every health check fails and the ALB returns 502 for all requests."
+}

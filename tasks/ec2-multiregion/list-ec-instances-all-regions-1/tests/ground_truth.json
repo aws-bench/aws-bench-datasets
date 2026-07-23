@@ -1,0 +1,4 @@
+{
+  "instruction": "Which EC2 instances in my account are reachable via SSH from the internet? My account only operates in these regions: {{aws-bench-scenario-allowed-regions}}.",
+  "expected_answer": "Only 2 instances are SSH-reachable from the internet: {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}."
+}

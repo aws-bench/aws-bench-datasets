@@ -1,0 +1,3 @@
+Bucket {{reference-architectures-S3-eventnotif-us-east-1-BucketName}} is supposed to route ObjectCreated events under CategoryA/* to queue {{reference-architectures-S3-eventnotif-us-east-1-QueueName}} and under CategoryB/* to topic {{reference-architectures-S3-eventnotif-us-east-1-TopicName}}. Both CloudFormation custom resources that set up those notifications (SampleBucketNotificationA, SampleBucketNotificationB) show CREATE_COMPLETE. But when we upload a test file to `CategoryA/test.csv`, the SQS queue never receives a message. Where is the break?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

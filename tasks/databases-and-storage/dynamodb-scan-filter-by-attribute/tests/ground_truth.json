@@ -1,0 +1,4 @@
+{
+  "instruction": "Scan the DynamoDB table {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-TableName}} to retrieve all items having attribute {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-AttributeNames}}",
+  "expected_answer": "The DynamoDB table {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-TableName}} scan has been completed successfully, retrieving all items containing the specified attributes {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-AttributeNames}}. Found 3 items total: 1 item with status \"inactive\" and 2 items with status \"active\"."
+}

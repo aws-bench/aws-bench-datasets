@@ -1,0 +1,79 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Tigris Background Worker Service",
+  "Resources": {
+    "WorkerRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+        ]
+      }
+    },
+    "WorkerSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Tigris worker Lambda SG",
+        "VpcId": "vpc-0dead0dead0dead00",
+        "SecurityGroupEgress": [
+          {
+            "IpProtocol": "-1",
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
+    "WorkerFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "FunctionName": "tigris-worker-function-e71d403fc",
+        "Runtime": "python3.11",
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": ["WorkerRole", "Arn"]
+        },
+        "Code": {
+          "ZipFile": "def handler(event, context):\n    return {'statusCode': 200, 'body': 'Worker processed'}\n"
+        },
+        "MemorySize": 512,
+        "Timeout": 300,
+        "VpcConfig": {
+          "SubnetIds": ["subnet-0dead0dead0dead01", "subnet-0dead0dead0dead02"],
+          "SecurityGroupIds": [{"Ref": "WorkerSecurityGroup"}]
+        }
+      }
+    },
+    "WorkerQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": "tigris-worker-queue-e71d403fc",
+        "VisibilityTimeout": 300
+      }
+    }
+  },
+  "Outputs": {
+    "WorkerFunctionArn": {
+      "Value": {
+        "Fn::GetAtt": ["WorkerFunction", "Arn"]
+      }
+    },
+    "WorkerQueueUrl": {
+      "Value": {
+        "Ref": "WorkerQueue"
+      }
+    }
+  }
+}

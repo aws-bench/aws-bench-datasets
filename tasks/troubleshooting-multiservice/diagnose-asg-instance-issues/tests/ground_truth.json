@@ -1,0 +1,4 @@
+{
+  "instruction": "What is wrong with the instances in my ASG {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-AutoScalingGroupName}} in us-west-2?",
+  "expected_answer": "The instances are failing health checks because security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}} has no inbound rules, blocking NLB health check requests to port 4000 (/sync-health-check). This causes 10 consecutive failures, marking instances unhealthy, and since the grace period is 0 seconds, ASG immediately terminates and replaces them in a continuous loop. To resolve, add inbound TCP rules for ports 4000 and 44300 from CIDR 172.25.0.0/23 (the subnet where the internal NLB resides) to the security group."
+}

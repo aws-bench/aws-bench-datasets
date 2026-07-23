@@ -1,0 +1,45 @@
+schema_version = "1.0"
+
+[scenario]
+name = "reference-architectures"
+description = "Multi-service environment with ALB, API Gateway, AppSync, Backup, Batch, CloudFormation, CloudFront, CloudWatch, CodePipeline, Cognito, DynamoDB, EC2, ECS, EventBridge, Glue, ImageBuilder, Lambda, Lex, MQ, RDS, Rekognition, Route53, S3, Service Catalog, SSM, Step Functions, Transfer Family, and WAF stacks in us-east-1."
+account_tags = ["PRIMARY"]
+regions = ["us-east-1"]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+
+[deploy]
+timeout_sec = 3600.0
+
+[verify]
+timeout_sec = 120.0
+
+[cleanup]
+timeout_sec = 5400.0
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-0263D0A3"
+desired_value = 10
+# Elastic IPs: VPCs with NAT gateways
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-1216C47A"
+desired_value = 20
+# vCPUs: EC2 instances across stacks
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 20
+# VPCs: multiple stacks each create a VPC

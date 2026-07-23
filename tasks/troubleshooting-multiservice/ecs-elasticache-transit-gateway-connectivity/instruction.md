@@ -1,0 +1,3 @@
+Why can't my ECS service {{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-EcsServiceArn}} connect to ElastiCache cluster {{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-ElastiCacheClusterId}}? They're supposed to be connected via Transit Gateway {{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-TransitGatewayId}}.
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

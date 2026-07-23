@@ -1,0 +1,4 @@
+{
+  "instruction": "Check for any ECS services with custom configurations, including non-default desired task counts or modified deployment and networking settings. My account only operates in these regions: {{aws-bench-scenario-allowed-regions}}.",
+  "expected_answer": "{{serverless-apps-ECS-us-east-1-EcsServiceName}} has several non-default settings: desired task count is 2 (default 1), public IP assignment is enabled (default disabled for Fargate), it uses a Windows Server 2019 Full platform (default Linux), has a health check grace period of 60 seconds (default 0), and minimumHealthyPercent is 50 (default 100)."
+}

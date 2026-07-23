@@ -1,0 +1,4 @@
+{
+  "instruction": "Why can't I SSH to the instances in my Auto Scaling Group {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} in us-west-2? What are my options for connecting to them?",
+  "expected_answer": "SSH to instances in ASG `{{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}}` is blocked because: the instances were launched without an SSH key pair, they are in a private subnet (`{{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrimarySubnetId}}`, CIDR 172.25.0.0/24) with no public IP address, and the network ACL `{{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrivateSubnetNaclId}}` on the subnet explicitly denies inbound TCP port 22 (rule 50). The best option for connecting is SSM Session Manager via `aws ssm start-session`, which is already configured and ready to use."
+}

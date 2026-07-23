@@ -1,0 +1,4 @@
+{
+  "instruction": "List all my S3 bucket analytics configurations that export data to a bucket owned by a different AWS account.",
+  "expected_answer": "One analytics configuration exports to a different account: 'testAnalyticsConfiguration' on {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}}, whose S3BucketDestination sets BucketAccountId to 111122223333, which is not the account that owns the source bucket. It is the only such configuration."
+}

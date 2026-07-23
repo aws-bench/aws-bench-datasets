@@ -1,0 +1,4 @@
+{
+  "instruction": "I have an IAM role that should be able to call {{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiUrl}}{{api-and-observability-ApiGateway-6b015c55c-us-east-1-AgreementPath}} but I keep getting 403 Forbidden. The role does have execute-api:Invoke permission. Why is it not working?",
+  "expected_answer": "Note that the request URL contains a double slash but API Gateway normalizes this to resolve correctly. The actual issue is the IAM policy on role {{api-and-observability-ApiGateway-6b015c55c-us-east-1-RestrictedRoleArn}} allows execute-api:Invoke for POST/* on API {{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiId}}, but the /data-agreements/{agreementId} endpoint only supports GET. The resource ARN in the policy needs to use GET instead of POST."
+}

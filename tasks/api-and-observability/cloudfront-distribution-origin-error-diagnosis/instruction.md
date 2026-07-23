@@ -1,0 +1,3 @@
+Tenants provisioned through our Step Functions workflow ({{api-and-observability-cloudfront-e0239752d-us-east-1-TenantProvisioningWorkflowArn}}) get a CloudFront URL stored in DynamoDB, but visiting those URLs just returns a generic CloudFront error instead of the tenant's index page. The S3 objects are there. What's wrong with distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}}?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

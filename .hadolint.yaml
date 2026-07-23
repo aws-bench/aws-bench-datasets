@@ -1,0 +1,12 @@
+# hadolint configuration for the public-tooling Docker lint gate (see Makefile).
+#
+# The gate fails only on error-severity findings. The many warning/info hints
+# across the 200+ Dockerfiles (version pinning, --platform, WORKDIR, etc.) are
+# surfaced for visibility but do not block the build. Tighten by lowering
+# failure-threshold or removing entries from the ignore list below as the
+# Dockerfiles are hardened.
+failure-threshold: error
+
+# Warnings intentionally not treated as failures today. Remove a code here to
+# start enforcing it once the corresponding cleanup lands.
+ignored: []

@@ -1,0 +1,4 @@
+{
+  "instruction": "Find my ec2 instances that are in a public subnet in us-east-1, us-west-1, us-west-2",
+  "expected_answer": "Here are your EC2 instances that are in a public subnet, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}} in the us-east-1 region. The instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}} is in public subnet in us-west-1 and the instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}} is in public subnet in us-west-2."
+}

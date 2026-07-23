@@ -1,0 +1,20 @@
+name: PR Opened Notification
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send to Slack
+        run: |
+          curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "pr_url": "${{ github.event.pull_request.html_url }}",
+              "pr_title": "${{ github.event.pull_request.title }}",
+              "action": "${{ github.event.action }}",
+              "user": "${{ github.event.pull_request.user.login }}",
+              "repo_name": "${{ github.event.repository.full_name }}"
+            }'

@@ -1,0 +1,4 @@
+{
+  "instruction": "I want my S3 inventory reports delivered under a prefix inside their destination bucket. Is any inventory configuration missing that destination prefix? If so, which one, and where would its reports land instead?",
+  "expected_answer": "Yes. Your 'InventoryBucketInventory0' configuration on bucket {{serverless-apps-S3Storage-us-east-1-InventoryBucketName}} has no Destination.S3BucketDestination.Prefix, so its reports land at the destination bucket's root rather than under a prefix. The 'inventory-data' prefix on it is the source-side Filter.Prefix (which objects get inventoried), not a destination prefix."
+}

@@ -1,0 +1,4 @@
+{
+  "instruction": "My Lambda function {{api-and-observability-Lambda-37634fcce-us-west-2-LambdaFunctionName}} processes reconciliation requests from SQS. I can see it running in CloudWatch metrics, but the analytics pipeline reports no new data. Why?",
+  "expected_answer": "The Lambda tries to write to an S3 bucket in us-east-1 but runs in isolated subnets (us-west-2) with only an S3 gateway endpoint. Gateway endpoints only route to the same region, so cross-region PutObject calls time out. The Lambda's ANALYTICS_S3_BUCKET and ANALYTICS_S3_REGION environment variables point to us-east-1. SQS works via its VPC interface endpoint."
+}

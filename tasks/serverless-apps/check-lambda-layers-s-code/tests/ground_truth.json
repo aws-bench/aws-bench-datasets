@@ -1,0 +1,4 @@
+{
+  "instruction": "Do I have any Lambda layers with code hosted on Amazon S3? My account only operates in these regions: {{aws-bench-scenario-allowed-regions}}.",
+  "expected_answer": "Yes {{serverless-apps-LambdaMisc-us-east-1-S3LayerArnExport}} is using code hosted on S3."
+}

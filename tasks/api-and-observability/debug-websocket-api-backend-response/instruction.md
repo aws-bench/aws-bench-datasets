@@ -1,0 +1,3 @@
+My Flint agents keep disconnecting from the WebSocket API at {{api-and-observability-WebSocket-d761a646a-us-east-1-WebSocketEndpoint}}. They connect, but never seem to get a response back from the backend. The agent scripts are deployed from S3 bucket {{api-and-observability-WebSocket-d761a646a-us-east-1-AgentScriptsBucketName}}. What's going wrong?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

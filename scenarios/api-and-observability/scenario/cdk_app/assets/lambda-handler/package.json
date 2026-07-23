@@ -1,0 +1,9 @@
+{
+  "name": "agent-message-handler",
+  "version": "1.0.0",
+  "description": "WebSocket message handler for agent connections",
+  "main": "agent-message.js",
+  "dependencies": {
+    "aws-sdk": "^2.1000.0"
+  }
+}

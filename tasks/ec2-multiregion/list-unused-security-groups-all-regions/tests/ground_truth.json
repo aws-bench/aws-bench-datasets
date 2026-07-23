@@ -1,0 +1,4 @@
+{
+  "instruction": "Provide me a list of unused Security Groups by all regions",
+  "expected_answer": "You have {{4b68864e-UnusedSecurityGroupCount}} unused security groups. Most are default security groups automatically created for each VPC. In us-east-1, one of the unused security groups is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-UnusedSecurityGroupId}}."
+}

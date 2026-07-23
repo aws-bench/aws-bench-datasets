@@ -1,0 +1,4 @@
+{
+  "instruction": "Which of my S3 buckets have website hosting enabled?",
+  "expected_answer": "One S3 bucket in your account has website hosting enabled: 1/ {{serverless-apps-S3Storage-us-east-1-WebsiteHostingBucketName}}"
+}

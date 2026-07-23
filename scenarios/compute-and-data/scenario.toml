@@ -1,0 +1,110 @@
+schema_version = "1.0"
+
+[scenario]
+name = "compute-and-data"
+description = "Mutation scenario (compute-and-data) — multi-region: us-east-1 (primary deployments), us-east-2 (Image Builder distribution), ap-southeast-1 (EMR cluster creation)."
+account_tags = ["PRIMARY"]
+regions = ["us-east-1", "us-east-2", "ap-southeast-1"]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+
+[deploy]
+timeout_sec = 1800.0
+
+[verify]
+timeout_sec = 120.0
+
+[cleanup]
+timeout_sec = 5400.0
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 10
+# 7 VPCs created by stacks + 1 default = 8 needed. 10 with headroom.
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-1216C47A"
+desired_value = 16
+# EC2 instances across multiple stacks. 16 stays within auto-approve.
+
+
+[reset]
+timeout_sec = 1200.0
+
+[reset.env]
+# amplify-deploy-frontend-from-s3
+AMPLIFY_DATA_BUCKET = "{{compute-and-data-s3-s5wscsi4m-us-east-1-BucketName}}"
+
+# analyze-b2b-commerce-summary-and-lifecycle
+B2B_DATA_BUCKET = "{{compute-and-data-s3-dkj487ewd-us-east-1-BucketName}}"
+
+# athena-table-cloudfront-logs
+EXPECTED_LOG_BUCKET = "{{compute-and-data-cloudfront-t5s43s6ye-us-east-1-BucketName}}"
+
+# bedrock-distill-from-s3-jsonl
+TRAINING_BUCKET_NAME = "{{compute-and-data-s3-e8i6bw6cu-us-east-1-TrainingBucketName}}"
+OUTPUT_BUCKET_NAME = "{{compute-and-data-s3-e8i6bw6cu-us-east-1-OutputBucketName}}"
+
+# create-athena-tables-from-s3
+CSV_BUCKET = "{{compute-and-data-athena-k89bh5er2-us-east-1-CsvBucketName}}"
+
+# create-dynamodb-tables-from-csv
+DDB_SOURCE_BUCKET = "{{compute-and-data-s3-7894hwoc7-us-east-1-CsvBucketName}}"
+
+# create-eks-cluster
+VPC_ID = "{{compute-and-data-ec2-vlf3847wf-us-east-1-VpcId}}"
+
+# create-emr-hbase-cluster
+WAL_BUCKET = "{{compute-and-data-s3-3r8jz453a-us-east-1-WALBucketName}}"
+
+# deploy-ec2-instance-with-ebs
+VOLUME_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-EBSVolumeId}}"
+
+# dynamodb-strip-ec2-fields-from-prod
+EXPECTED_TABLE = "{{compute-and-data-dynamodb-fyu89ikhg-us-east-1-TableName}}"
+
+# expand-elasticsearch-cfn-template
+BUCKET_NAME = "{{compute-and-data-s3-dz8q7r549-us-east-1-BucketName}}"
+
+# install-efs-csi-fips
+CLUSTER_NAME = "{{compute-and-data-eks-jhsgt6yg2-us-east-1-ClusterName}}"
+
+# ipam-create-verification-tokens
+EXPECTED_IPAM_ID = "{{compute-and-data-ec2-abcdefclj-us-east-1-IPAMId}}"
+
+# invalidate-cloudfront-cache
+CF_DATA_BUCKET = "{{compute-and-data-cloudfront-492sidmdo-us-east-1-BucketName}}"
+
+# lambda-versioned-alias-update
+EXPECTED_FUNCTION = "{{compute-and-data-dynamodb-zx5kclfft-us-east-1-ValidationFunctionName}}"
+EXPECTED_OLD_TABLE = "{{compute-and-data-dynamodb-zx5kclfft-us-east-1-OldTableName}}"
+
+# manage-buckets-eks-sagemaker
+EXPECTED_CLUSTER = "{{compute-and-data-eks-gztvy25g1-us-east-1-EksClusterName}}"
+EXPECTED_BUCKETS_CSV = "{{compute-and-data-eks-gztvy25g1-us-east-1-S3BucketNames}}"
+
+# move-s3-contents-and-cleanup
+SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
+DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
+
+# move-s3-contents-within-bucket
+MOVE_DATA_BUCKET = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"
+
+# sync-s3-buckets-with-metadata
+SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
+DESTINATION_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-DestinationBucketName}}"
+
+AWS_REGION = "us-east-1"
+AWS_DEFAULT_REGION = "us-east-1"
+
+# Per-task region overrides (tasks operating outside us-east-1)
+EMR_MULTI_MASTER_REGION = "ap-southeast-1"

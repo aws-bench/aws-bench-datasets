@@ -1,0 +1,4 @@
+{
+  "instruction": "Are there any alarms that use or have been defined on tag-filtered metrics for any of the S3 buckets?",
+  "expected_answer": "You have the bucket {{serverless-apps-S3Storage-us-east-1-MetricsBucketName}} which uses tag filters. No downstream resources consume this tag-filtered metrics to create alarms."
+}

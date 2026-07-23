@@ -1,0 +1,4 @@
+{
+  "instruction": "Tenants provisioned through our Step Functions workflow ({{api-and-observability-cloudfront-e0239752d-us-east-1-TenantProvisioningWorkflowArn}}) get a CloudFront URL stored in DynamoDB, but visiting those URLs just returns a generic CloudFront error instead of the tenant's index page. The S3 objects are there. What's wrong with distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}}?",
+  "expected_answer": "The distribution has no defaultRootObject and zero additional cache behaviors, only the default behavior pointing at the S3 origin. Requests to /tenant-id/ are forwarded to S3 as-is, but S3 doesn't auto-resolve directory paths to index.html. Without a CloudFront Function or cache behavior that rewrites /tenant-id/ to /tenant-id/index.html, every tenant path returns an error."
+}

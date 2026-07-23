@@ -1,0 +1,3 @@
+State machine {{reference-architectures-StepFunctions-jobpoller-us-east-1-StateMachineName}} is called a 'job poller' and the ASL has a Wait30Seconds state followed by a Choice that loops back for non-terminal statuses. It's triggered on a cron by rule {{reference-architectures-StepFunctions-jobpoller-us-east-1-RuleName}} with no custom input. In a typical production execution, how many times does CheckStatus ({{reference-architectures-StepFunctions-jobpoller-us-east-1-CheckStatusFunctionName}}) actually run, and under what realistic condition would the Wait→CheckStatus loop iterate more than once?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

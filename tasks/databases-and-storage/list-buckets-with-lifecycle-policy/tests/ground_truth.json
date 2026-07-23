@@ -1,0 +1,4 @@
+{
+  "instruction": "Which of my buckets have lifecycle policy set? Ignore CDK asset buckets, CloudTrail bucket, `deployments...` buckets, and any `do-not-delete-*` buckets.",
+  "expected_answer": "You have one S3 bucket with lifecycle policy set named {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules}}."
+}

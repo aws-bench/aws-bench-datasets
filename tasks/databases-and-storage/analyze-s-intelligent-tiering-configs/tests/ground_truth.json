@@ -1,0 +1,4 @@
+{
+  "instruction": "Analyze S3 buckets prefixed with \"bucket<some_number>\" for missing Intelligent-Tiering configurations",
+  "expected_answer": "You have two S3 buckets without Intelligent-Tiering configurations currently in your account named {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations1}} and {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations2}}."
+}

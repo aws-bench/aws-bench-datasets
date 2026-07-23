@@ -1,0 +1,4 @@
+{
+  "instruction": "what is the ownership control of my buckets {{databases-and-storage-S3-18475e2fc-us-east-1-EmptyS3Bucket1}}, {{databases-and-storage-S3-18475e2fc-us-east-1-EmptyS3Bucket2}} and {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules}}?",
+  "expected_answer": "The object ownership for {{databases-and-storage-S3-18475e2fc-us-east-1-EmptyS3Bucket1}} and {{databases-and-storage-S3-18475e2fc-us-east-1-EmptyS3Bucket2}} is {{databases-and-storage-S3-18475e2fc-us-east-1-ACLStatus1}} and for {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules}} is {{databases-and-storage-S3-18475e2fc-us-east-1-ACLStatus3}}."
+}

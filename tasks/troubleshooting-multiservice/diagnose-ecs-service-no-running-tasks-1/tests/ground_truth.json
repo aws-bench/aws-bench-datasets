@@ -1,0 +1,4 @@
+{
+    "instruction": "My ECS service {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-ServiceName}} in cluster {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-AppClusterName}} has no running tasks. What would I need to fix to get tasks running?",
+    "expected_answer": "The service has desiredCount=0, which is the immediate reason no tasks run.\n\nTwo additional blockers exist: the task definition references image tags (dev_build_service_latest and dev_build_sidecar_latest) that do not exist in the ECR repo {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri}}. The only available tag is dev_build_service_main. Also, the cluster has 0 registered EC2 container instances and no capacity provider strategy, so even with desired count > 0, tasks would stay in PROVISIONING indefinitely with no compute to schedule on."
+}

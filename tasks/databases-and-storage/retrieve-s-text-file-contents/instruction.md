@@ -1,0 +1,3 @@
+Retrieve the contents of the text file present in the S3 bucket {{databases-and-storage-s3-f63sr5wt6-us-east-1-BucketName}}, and find the file with the most similar content among the other S3 buckets in my account. Give me the name and the content of this file.
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

@@ -1,0 +1,9 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: "⚠️ Report a security vulnerability"
+    url: https://aws.amazon.com/security/vulnerability-reporting/
+    about: Please report security vulnerabilities through AWS Security, not as a public GitHub issue.
+  - name: "💬 General Question"
+    url: https://github.com/aws-bench/aws-bench-datasets/discussions/categories/q-a
+    about: Please ask and answer questions as a discussion thread

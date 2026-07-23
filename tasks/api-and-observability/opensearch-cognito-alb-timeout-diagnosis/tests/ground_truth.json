@@ -1,0 +1,4 @@
+{
+  "instruction": "I have an OpenSearch domain called {{api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName}} in a VPC with Cognito authentication for the dashboards and an internal ALB in front of it so our team can access it over VPN. Users can get to the Cognito login page fine, but after authenticating the browser just times out instead of loading the dashboards. What's causing this?",
+  "expected_answer": "The OpenSearch domain has no custom endpoint configured (CustomEndpointEnabled is false), so Cognito's post-authentication redirect points to the VPC endpoint hostname instead of the ALB. The browser can't reach it, causing the timeout. Configure a custom endpoint on the domain that points to the ALB so auth redirects go through it."
+}

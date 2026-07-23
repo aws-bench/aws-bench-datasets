@@ -1,0 +1,13 @@
+[judge]
+judge = "bedrock/us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+files = [
+    "/logs/agent/agent-output.txt",
+    "/tests/ground_truth.json",
+]
+prompt_template = "judge_prompt.md"
+mode = "individual"
+
+[[criterion]]
+name = "answers_equivalent"
+description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+type = "binary"

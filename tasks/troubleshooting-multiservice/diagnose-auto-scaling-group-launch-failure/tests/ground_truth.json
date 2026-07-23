@@ -1,0 +1,4 @@
+{
+    "instruction": "Instances aren't launching in my Auto Scaling Group {{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-AutoScalingGroupName}}. What's the issue?",
+    "expected_answer": "Two issues prevent launching: (1) DesiredCapacity is 0 (MaxSize=1, MinSize=0). No launches have been attempted. (2) Even after increasing desired capacity, launches would fail because the launch template's EBS encryption uses KMS key {{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-KmsKeyId}}, which is disabled. EC2 cannot create encrypted volumes from a disabled key (Client.InvalidKMSKey.InvalidState)."
+}

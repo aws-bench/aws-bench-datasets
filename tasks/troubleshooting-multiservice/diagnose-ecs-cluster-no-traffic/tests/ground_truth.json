@@ -1,0 +1,4 @@
+{
+    "instruction": "My ECS cluster {{troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-ClusterName}} in ap-northeast-1 is not serving any traffic. What is wrong?",
+    "expected_answer": "Both ECS services in cluster {{troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-ClusterName}} have desiredCount=0, so no tasks are running and no targets are registered with the ALB.\n\nScaling up alone will not fix the issue. The services run in isolated subnets without internet access (no IGW, no NAT, no VPC endpoints). The task definitions reference a public ECR nginx image that cannot be pulled without connectivity. The ALB is also configured as internal, so it cannot receive public traffic regardless."
+}

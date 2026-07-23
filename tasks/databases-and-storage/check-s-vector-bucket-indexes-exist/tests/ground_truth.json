@@ -1,0 +1,4 @@
+{
+  "instruction": "Check if vectors exist in the Vector bucket {{databases-and-storage-s3-jayd5c428-us-east-1-VectorBucketName}} in the S3 service having the indexes {{databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex}} and {{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}}.",
+  "expected_answer": "The first index {{databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex}} contains vectors (3 documents with metadata including categories like science and engineering). The second index {{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}} is empty. No vectors exist in it."
+}

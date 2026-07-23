@@ -1,0 +1,4 @@
+{
+  "instruction": "The CloudWatch alarm {{api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName}} has triggered again in ap-southeast-1. We have X-Ray tracing enabled on the Flint service. What's causing the latency?",
+  "expected_answer": "The alarm fires because P90 FrameQuartzLag latency exceeds the 15-second threshold. X-Ray traces show the bottleneck is in the downstream Quartz service. The QuartzAPI subsegment (ReportPerson calls) accounts for most of the total trace duration. Internal pipeline components and CPU are within normal ranges. Root cause is Quartz service degradation, not the ECS service."
+}

@@ -1,0 +1,4 @@
+{
+  "instruction": "What Node.js version is configured for the CodeBuild project {{databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName}}?",
+  "expected_answer": "The Node.js version configured for the CodeBuild project {{databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName}} is {{databases-and-storage-codebuild-g5etw5eu5-us-east-1-NodeVersion}}."
+}

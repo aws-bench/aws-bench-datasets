@@ -1,0 +1,721 @@
+[[criteria]]
+name = "verifiable"
+severity = "blocker"
+scope = "both"
+description = "Verification reliably separates correct from incorrect; re-running on the same end-state never flips."
+guidance = """
+Passes iff the task is genuinely solved. mutation: each check.py @criterion asserts
+real resource state via boto3. introspection: ground_truth.json.expected_answer is an
+unambiguous reference that a correct answer matches and a wrong one does not.
+Re-running the verifier on an unchanged AWS end-state must always return the same
+verdict.
+"""
+
+[[criteria]]
+name = "deterministic_reproducible"
+severity = "blocker"
+scope = "both"
+description = "Same AWS end-state yields the same verdict; no dependence on time, random IDs, or wall-clock."
+guidance = """
+The verdict is a function of the AWS end-state, nothing else. Confirm check.py and
+ground_truth.json contain no comparisons against wall-clock timestamps, random resource
+IDs, or current time as part of the pass/fail decision. aws-bench depends on live AWS by
+design, so determinism means "same end-state, same verdict." These patterns are not
+violations and should pass: (a) pre_invoke or setup scripts that use time.sleep or
+datetime.now to seed state (log patterns, counts) once before the agent runs, when the
+resulting timestamps do not appear in expected_answer or the check comparison; (b) a
+placeholder computed once from live state at seed time and stored as a fixed value in
+ground_truth.json (for example a bucket count), since the resolved reference is a
+constant the judge compares against; (c) relative-time windows in check.py
+(datetime.now() minus a few seconds, or time.time() bounded polling deadlines) used to
+filter prior-run residue, absorb clock skew, or wait for propagation, since the verdict
+still turns on whether the resource reached the required state. A real violation is a
+comparison whose result changes for the same end-state: a hardcoded absolute timestamp
+the answer is graded against, a check that an age crosses a threshold at verdict time,
+or a random ID generated at check time and compared to a constant.
+"""
+
+[[criteria]]
+name = "functional_verification"
+severity = "major"
+scope = "both"
+description = "This task's checks assert real resource/behavior state and substance, not keyword or substring presence."
+guidance = """
+String matching is brittle and gameable. mutation: check.py queries AWS (describe_*,
+invoking the bridge Lambda); flag bare substring matches such as
+`BUCKET in location`. introspection: ground_truth.json.expected_answer pins concrete
+values or conditions (not vague prose), so a correct answer is distinguishable on
+substance. For introspection, grading is LLM-judged prose rather than execution; the
+bar is that this task's reference answer is substantive enough to grade against.
+"""
+
+[[criteria]]
+name = "test_instruction_alignment"
+severity = "blocker"
+scope = "both"
+description = "Every graded check traces to an instruction requirement; every explicit ask is graded; no unstated requirements; the verifier makes no assumptions the instruction didn't state."
+guidance = """
+introspection: ground_truth.json.expected_answer covers exactly what instruction.md
+asks, no more and no less; if the instruction's question embeds a premise (for example
+"something already owns the resources"), the expected_answer may correct that premise,
+so do not fail solely because the answer names a cause the user's framing did not
+anticipate. mutation: each @criterion maps to a stated requirement, and the
+agent-output.json keys check.py consumes match what the instruction tells the agent to
+write. Fail when an explicit, gradeable ask in instruction.md has no corresponding
+@criterion (for example the instruction names specific subnets, "ALL" or "every" of some
+set, a step that must create a named resource, or a second deliverable, and check.py
+never verifies it), and fail when check.py reads the wrong target so a do-nothing or
+partial-work agent passes (for example it checks a path or value the instruction's own
+placeholder points at when that path is the seeded-empty decoy, or it pre-passes on
+resources the environment already seeded). The verifier must not assume details the
+instruction left to the agent's discretion: if the instruction does not dictate where a
+resource goes (region, name, path) or a tunable the agent may legitimately choose (for
+example StartingPosition, BatchSize), check.py must read what the agent reports or
+creates and verify against THAT, not against a hardcoded value the agent had no way to
+know. Distinguish this from properties that are strictly necessary for the stated goal
+to function: when the instruction states a goal (for example a transit instance that
+forwards traffic, an end-to-end pipeline that runs), an implementation property required
+for that goal to work (for example disabling SourceDestCheck on a forwarding ENI, a task
+reaching running state) does map to a stated requirement even if the instruction names
+only the goal, so do not fail for verifying it. Also confirm the agent-output.json keys,
+the verifier.env values, and the authored solution in task.toml all agree on the same
+engine type, resource type, or identifier: if check.py demands one value while the
+instruction's placeholder or task.toml's solution_explanation specifies a different one,
+that is a mismatch and fails. A prose output path the instruction requests but check.py
+never reads is not a violation by itself, as long as every verified @criterion still
+traces to a stated requirement.
+"""
+
+[[criteria]]
+name = "verifier_independence"
+severity = "blocker"
+scope = "mutation"
+description = "Verdict derives from live AWS state, never solely from agent-output.json; the agent reporting success must not be the pass condition."
+guidance = """
+Confirm self-reported values are cross-checked against AWS: for example, the agent
+reports a load_id and check.py queries that resource's real status, rather than
+trusting the reported value. A check.py that reads only agent-output.json and makes
+no boto3 call is a failure. This is also the adversarial lens: the end-state is
+checked independently via boto3, so a filler answer or a bare success claim can't pass.
+"""
+
+[[criteria]]
+name = "outcome_verified"
+severity = "major"
+scope = "both"
+description = "Grading targets the result/end-state, not the method; the instruction describes the desired end state, not a procedure."
+guidance = """
+This criterion is about WHAT grading targets (the result/end-state) versus HOW the agent
+got there (the method). It is not about whether every stated deliverable is graded or
+whether a half-done or no-op solution can slip through: incomplete coverage of an
+instruction's asks, partial-work passes, no-op passes, and brittle substring proxies are
+judged under the criteria that own verifier completeness, exactness, and substance, so
+do not fail this criterion for any of those. Pass this criterion whenever the checks
+that exist target end-state rather than the agent's procedure.
+
+mutation: pass when check.py's @criterion functions query the resulting AWS resource or
+behavior state (describe_*, get_*, invoking the bridge Lambda, an end-to-end probe) and
+are agnostic to how that state was reached (CLI, SDK, console, CDK, Terraform all
+acceptable). Fail only when grading targets the method itself: for example inspecting
+the agent's command history or tool-call sequence, scanning process or deployment logs
+to confirm a particular workflow, or requiring a specific API call to have been used. A
+check that asserts end-state is still a pass here even if it leaves some deliverable
+unverified (that gap belongs to the completeness and exactness criteria). A multi-step
+instruction that lists the pieces of a desired build ("first create X, then Y, finally
+Z") still describes an end state, not a graded procedure, so it does not fail on
+phrasing alone.
+
+introspection: pass when this task's expected_answer states a result or finding rather
+than a required investigation path, so any correct route that reaches the finding earns
+the answer and the LLM judge scores on substance, not on which API calls or sequence the
+agent used. A process verifier (grading the investigation steps rather than the
+conclusion) is acceptable only in unusual cases and never as the primary objective; fail
+if the task's primary grading is on the method rather than the finding.
+"""
+
+[[criteria]]
+name = "instruction_concision"
+severity = "major"
+scope = "both"
+description = "States what to achieve, not step-by-step how; no solution leakage, roleplay, or fluff."
+guidance = """
+The instruction reads as a realistic engineer goal: it states what to achieve, not how.
+Flag it when it enumerates API calls, SDK methods, CLI flags, or named tools the agent
+should discover; names the fix or root cause; restates a data file, config, or schema
+the agent can read itself; pastes verifier thresholds or exact expected values; adds an
+evaluation or output section that re-derives the output schema; carries scaffolding for
+an over-literal reader ("any approach is allowed", "see file X for Y", permitted-tool
+lists); warns about edge cases the environment already handles; or front-loads
+paragraphs of domain or business backstory between the inputs and the deliverable. Flag
+leading hints that pre-narrow the diagnosis or telegraph the expected failure mode and
+solution path (for example "if access is denied, use alternative services"). Do not flag
+the output contract: a line directing the agent to write its answer or structured output
+to a fixed path such as /logs/agent/agent-output.txt (or to an agent-output.json schema)
+is a verifier-enforced contract and a dataset-wide convention, present in both
+introspection and mutation tasks. It is not bloat or type mismatch even when a mutation
+verifier never reads that file, so do not fail on it. A single time or iteration budget
+line and a single do-not-hardcode line are also fine. Behavioral constraints not encoded
+in the shipped files and the genuinely non-discoverable kernel of the task (placeholder
+resource identifiers, required field names and tag values, structural constraints the
+verifier checks) are necessary, not bloat.
+"""
+
+[[criteria]]
+name = "structured_data_schema"
+severity = "blocker"
+scope = "both"
+description = "Output contract documented. introspection: answer path stated. mutation: structured output path + schema documented."
+guidance = """
+Check that the output contract is documented and matches what the verifier actually
+consumes. For introspection tasks: instruction.md must state where to write the answer
+(typically "Write your final answer to /logs/agent/agent-output.txt"), and that path
+must be among the files judge.toml feeds the judge. Introspection answers are prose, so
+no structured key schema is required; pass when the path is stated and matches
+judge.toml. For mutation tasks: first determine whether tests/check.py reads any
+agent-produced output file. If a @criterion function opens an output path (for example
+Path("/logs/agent/agent-output.json")) and reads keys from it, then instruction.md must
+state that path and document the exact keys check.py consumes; pass when the documented
+path and keys match what check.py reads, fail when they are missing or mismatched. If
+check.py verifies entirely through boto3 against live AWS and reads no agent output file
+(the workspace parameter is present in the @criterion signatures but never dereferenced
+to open a file), then there are no keys to document: the correct contract is the prose
+directive to /logs/agent/agent-output.txt, and you should pass (or mark not_applicable).
+Do not fail a mutation task for lacking a JSON output schema when the verifier never
+consumes one; the prose-only directive is the intended contract in that case.
+"""
+
+[[criteria]]
+name = "typos"
+severity = "minor"
+scope = "both"
+description = "No typos in the instruction prose: service names, resource descriptions, and explanatory text."
+guidance = """
+Lint instruction.md for spelling/grammar that would confuse a reader (wrong service
+names, garbled descriptions). Judge only the human-readable prose; typos in paths,
+filenames, and placeholder names are caught by separate deterministic checks, not here.
+"""
+
+[[criteria]]
+name = "task_name"
+severity = "minor"
+scope = "both"
+description = "Task name is descriptive and specific, not generic."
+guidance = """
+Pass when the folder name is descriptive and specific enough to identify the task, and
+fail only when it is generic (for example "task-1", "fix-bug", "test", "tmp") or
+actively misleading about what the task does. Judge descriptiveness only; the kebab-case
+form is enforced mechanically elsewhere, so do not fail for purely mechanical slug
+artifacts. In particular, a service abbreviation in the slug (for example a bare "s"
+where "s3" was intended, because the digit was dropped during slug generation) is not a
+descriptiveness defect: confirm against the task.toml description field and
+instruction.md, and if those make the service and intent clear, pass. Apply this
+consistently: the same abbreviation or truncation pattern must get the same verdict
+across tasks. Fail when the name names a service, technology, or pattern that the task
+does not actually use (for example "stripe" when there is no Stripe integration, or
+"versioned-alias" when the task performs no versioning or alias operation), since such a
+name misdescribes the task; cite the instruction.md, task.toml description, aws_services
+list, or check.py that contradicts the name.
+"""
+
+[[criteria]]
+name = "scenario_supports_task"
+severity = "major"
+scope = "both"
+description = "The instruction narrative assumes only resources the scenario actually deploys."
+guidance = """
+Read instruction.md against the scenario CDK. This criterion checks one thing only: does
+the instruction PROSE refer to or assume a resource, service, or condition as already
+existing that the scenario's CDK stacks (and any setup or pre_invoke scripts) do not
+create? Fail only when the narrative names or presupposes a specific pre-existing thing
+that nothing in the deployment provides (for example the prose says 'the existing Aurora
+cluster' but no stack creates an Aurora cluster). Find the scenario_id in task.toml
+under the scenario section and read the stacks under
+scenarios/<scenario_id>/scenario/cdk_app/, plus any setup or pre_invoke scripts, since
+resources may be created or mutated there rather than in raw CDK.
+
+Judge the narrative's assumptions about what exists, not the substance or correctness of
+any answer and not whether the task is solvable. In particular, pass and do not penalize
+for any of the following, which are covered by other criteria or are normal: - The
+expected_answer in ground_truth.json asserts counts, property values, or a yes/no
+conclusion that you think is wrong or not fully traceable to the CDK. Whether the
+reference answer is correct or derivable is checked elsewhere; it is not a narrative
+assumption. - The answer relies on account-level resources that AWS provisions
+automatically and that the agent reads live (for example default VPCs and their default
+security groups in every region, service-linked roles, account-wide settings). The CDK
+is not expected to create these, and the instruction is not assuming a scenario-specific
+resource by referring to them. - The scenario deliberately deploys a broken, denied,
+misconfigured, or conflicting setup (often described as intentional in a stack comment)
+that makes the task hard or that an investigation must uncover. A
+present-but-misconfigured resource still satisfies the narrative's assumption that the
+resource exists; difficulty and solvability are not judged here. - For a mutation task
+that asks the agent to create resources from scratch, the scenario not pre-deploying
+those resources is correct, not a violation. - The prose refers to a principal or
+resource by a colloquial or shortened name (for example 'Admin') and the scenario
+deploys an entity that clearly fills that role (for example a role whose name contains
+'Admin' with the relevant permissions). A plausibly resolvable reference is not a
+missing resource; ambiguity of naming is judged under the query-clarity criterion, not
+here.
+
+Only fail when, after reading the CDK and setup scripts, no deployed resource can
+satisfy a thing the prose treats as already existing.
+"""
+
+[[criteria]]
+name = "difficult"
+severity = "major"
+scope = "both"
+description = "Genuinely and essentially difficult: real AWS reasoning, not volume, trivia, or formatting."
+guidance = """
+Two lenses, both must hold. (1) Genuinely hard for the agent, not the computer:
+difficulty comes from AWS reasoning, not from volume, tedium, or breadth (iterating many
+regions, buckets, or resources is volume, not reasoning), and is not answerable by
+general or undergraduate knowledge. (2) Essentially hard, not incidentally: flag tasks
+whose only difficulty is output-format gymnastics, trivia, an obscure-fact lookup,
+knowing one API or one CLI flag, or reading a single value from one resource; the
+challenge must be the diagnosis or the multi-step operation itself. Treat as failing
+lens 2 a task that reduces to one API call (or one create call with no required
+configuration or constraint that the verifier checks) once the agent knows which API to
+use, even if the API is niche. For mutation tasks, look at tests/check.py: if it only
+confirms named resources exist without checking any non-trivial configuration,
+interdependency, ordering, or trap, the difficulty is incidental. For introspection
+tasks, read tests/ground_truth.json expected_answer: a single value, count, or one-field
+readout signals incidental difficulty, whereas a multi-service causal chain or a
+non-obvious AWS behavior signals essential difficulty. A purely confirmatory check (the
+answer is yes and nothing is misconfigured) can still pass lens 2 if confirming it
+genuinely requires reasoning across several independent dimensions whose interaction is
+non-obvious; do not fail such a task solely because the answer is positive or because
+the scenario was built to work, but do fail it if each dimension is a straightforward
+independent lookup. Do not treat an answer as easy merely because its substance is
+written in ground_truth.json or could be in training data: the agent still must inspect
+live state, so judge the operation the agent must perform. Do not penalize a task for
+opaque or sparse difficulty metadata or sourcing tags; whether such fields are populated
+is checked elsewhere. Corroborate with pass-rate data where available.
+"""
+
+[[criteria]]
+name = "difficulty_explanation_quality"
+severity = "major"
+scope = "both"
+description = "difficulty_explanation describes intrinsic difficulty (the reasoning/knowledge required)."
+guidance = """
+metadata.difficulty_explanation in task.toml must describe the intrinsic challenge: the
+reasoning or knowledge a solver (agent or human) needs, and where a solver is likely to
+go wrong. It must be substantive, not vague and not circular: naming the service domain
+plus saying there are multiple steps is not enough, and restating the task description
+or saying nothing beyond "the agent must do X" is not enough. Phrasing that leads with
+"the agent must" is a form weakness worth noting but is not by itself disqualifying when
+the sentence still conveys a real difficulty (an async wait, an ordering constraint, a
+non-obvious API limitation, a deceptive shared symptom). Penalize text that is purely
+circular, purely a restatement of the deliverable, or that grounds difficulty in
+pass-rates or how often agents fail.
+
+Scope: this criterion judges only the QUALITY of an explanation that is present. If
+metadata.difficulty_explanation is an empty string or absent, return not_applicable:
+whether the field is populated at all is a separate mechanical check, not this one.
+Apply this uniformly; an empty value is never a fail under this criterion.
+
+Do NOT require the explanation to enumerate every fault, break, or @criterion that
+tests/check.py verifies. An explanation that captures the core challenge can pass even
+if it omits some verified sub-steps; completeness against the verifier is not what this
+criterion measures. Only fail a populated explanation when its prose is genuinely vague,
+circular, pass-rate-based, or a bare restatement of the task.
+"""
+
+[[criteria]]
+name = "requires_live_state"
+severity = "major"
+scope = "both"
+description = "Answer requires live inspection, not repo text; the dataset is memorizable if it leaks."
+guidance = """
+This criterion asks whether producing the graded answer actually requires inspecting the
+live deployed environment, given that the grading agent runs with AWS credentials only
+and has no access to this repository (no CDK source, no ground_truth.json, no check.py).
+Judge the task as the agent experiences it, not as a model that may have memorized the
+repo.
+
+Default to pass for introspection and mutation tasks alike: reading the live AWS
+configuration, resource contents, item data, counts, or status to answer the question is
+the normal, intended way these tasks work. The answer substance being authored in
+ground_truth.json or traceable to a constant in the CDK source is expected and is NOT a
+defect: the agent cannot see those files and must query live AWS (for example
+describe-projects to read a build setting, get-object to read a file body,
+describe-task-definition to read an env array, scan to count items) to produce it. Do
+not fail a task merely because a value is hardcoded somewhere in the repo, because the
+answer is a short yes/no string, or because a model trained on the repo could in
+principle reproduce it. That contamination hypothetical is out of scope here.
+
+The token {{Like-This}} in instruction.md, ground_truth.json, or task.toml
+[verifier.env] resolves at run time from a live CloudFormation export or a pre_invoke
+computation, so an unresolved placeholder in the reference is a sign the answer is wired
+to live state, not a sign of weakness.
+
+Fail only when the task can be passed WITHOUT inspecting live AWS. Concrete defects to
+look for: (1) a mutation check.py whose criteria already hold on the freshly deployed
+CDK state, so the agent passes without performing the required change (for example a
+source prefix that is empty at deploy time and a destination object that the CDK already
+seeded); (2) a check.py that accepts essentially any plausible output (for example only
+checking that an uploaded file parses and contains a couple of generic keywords) so a
+fabricated answer passes; (3) an introspection answer that the agent could write
+correctly with zero live calls because the instruction or provided files already state
+it. When you fail, name the file and the specific criterion or value that lets the agent
+pass without touching the live environment.
+"""
+
+[[criteria]]
+name = "state_restoration"
+severity = "major"
+scope = "mutation"
+description = "The post_invoke reset actually undoes the mutation, so the task can't poison later tasks on the shared account."
+guidance = """
+Mutating tasks share a scenario account, so leftover state from one task or trial can
+contaminate a later one. This criterion asks whether the task's reset story is sound,
+not whether a post_invoke/ directory exists. Three reset layers are legitimate and you
+must account for all of them by reading pre_invoke/, post_invoke/, task.toml, and
+tests/check.py:
+
+1. post_invoke/ (runs after the verifier): required for mutations on baseline resources
+that a CCAPI sweep cannot see, such as uploads into a pre-existing bucket,
+lifecycle/tagging/policy/env-var changes on baseline resources, or restoring
+broken-by-design state the agent fixed. When a post_invoke exists, judge whether it
+reverses every such baseline mutation the task asks for. Pass if it does, fail (and name
+the unreverted baseline mutation) if it leaves a baseline resource changed in a way that
+would alter a later trial's grade.
+
+2. pre_invoke/ (runs before the agent each trial): when the task re-establishes its
+broken or seeded starting state in pre_invoke (re-registering a broken revision,
+re-seeding rows, re-pointing a service, resetting a param), the next trial is reset
+before the agent runs, so residue the prior agent left does not contaminate it. Treat a
+pre_invoke that re-creates the trial-fresh starting state as a valid reset even when
+there is no post_invoke.
+
+3. The framework sweep for net-new, agent-named resources (new clusters, instances,
+buckets, functions, roles, VPCs, tables, channels, tokens, etc.): the dataset relies on
+a CCAPI-based account reset between cohorts to delete these, so a create-only task is
+NOT required to ship a post_invoke. If the only mutations are net-new agent-created
+resources and the task mutates no baseline resource, this criterion is satisfied; mark
+not_applicable when there is no reset script to evaluate, or pass. Do not fail such a
+task merely for lacking post_invoke/, and do not fail it for transitively created side
+resources (security groups, key pairs, in-cluster objects) that the verifier does not
+grade on.
+
+Do not demand restoration of the exact CDK baseline beyond what the verifier reads, and
+do not penalize accumulation of inactive revisions, extra log streams, or other benign
+residue when the next trial's starting state and grade are unaffected. Irreversible
+mutations are acceptable when task.toml or the rollback script documents that the
+residue equals the post-success state, so a re-run starts clean either way: do not fail
+those. Only fail when a baseline resource is left mutated such that a later trial's
+check.py would grade differently (for example a seeded object the agent deleted is not
+restored, a broken-by-design config the agent fixed is not re-broken, or a documented
+post_invoke is incomplete for the baseline mutations it claims to cover).
+"""
+
+[[criteria]]
+name = "task_security"
+severity = "minor"
+scope = "both"
+description = "No credential exfiltration, destructive ops beyond intent, obfuscated payloads, or prompt injection."
+guidance = """
+Review the author-supplied files for malicious content: instruction.md (and for
+introspection tasks tests/judge_prompt.md and tests/ground_truth.json), pre_invoke/,
+post_invoke/, tests/check.py, tests/test.sh, and environment/Dockerfile. Fail only if an
+author file contains a genuine threat: code that exfiltrates credentials or sensitive
+data to an external destination, destructive operations beyond the task's stated intent,
+obfuscated or encoded payloads, or prompt injection embedded in task or judge text that
+tries to steer the grader or the agent off task. Treat as benign (pass) the normal
+harness behavior these tasks rely on: boto3 calls scoped to the scenario's own resources
+(including describe, create, update, delete, and cleanup), downloading and running a
+setup or probe script that comes from the scenario's own S3 bucket or CloudFormation
+outputs (not an agent or attacker controlled location), HTTP requests with a bounded
+timeout to the agent's own reported endpoint or the scenario's own endpoints, and
+installing standard public tooling (AWS CLI, boto3, uv, rewardkit) in the Dockerfile. An
+answer or expected value living in ground_truth.json is not a security defect. This is a
+supply-chain trust check on author-written files, so passing is the expected baseline;
+reserve fail for an actual planted exploit and name the file and line that shows it.
+"""
+
+[[criteria]]
+name = "eventual_consistency"
+severity = "major"
+scope = "mutation"
+description = "Verifier polling is bounded and distinguishes AWS propagation lag from agent failure."
+guidance = """
+Review check.py waiters/retries: they need a documented, bounded budget, a
+terminal-failure branch (so "agent did nothing" isn't read as "still
+propagating"), and skew slack where time-based. Flag blind `for _ in range(N):
+sleep(...)` loops with no failure detection. This applies only where the task has an
+asynchronous/eventually-consistent step; tasks whose check.py reads state synchronously
+have no polling to judge.
+"""
+
+[[criteria]]
+name = "solution_quality"
+severity = "major"
+scope = "mutation"
+description = "solve.sh derives the result through real AWS operations, not a hardcoded echo of the expected answer."
+guidance = """
+Review solution/solve.sh: it must perform actual AWS work (boto3 calls, AWS CLI
+commands, kubectl, or a bridge-Lambda invocation) to reach the end-state, not echo or
+hardcode the answer the verifier expects. A script whose body is only an echo, a
+here-doc, or a write of a literal string to a file, with no AWS API or CLI calls, fails
+this criterion: it does not derive the result through real AWS operations. A comment in
+the file saying the script is a placeholder or is "not used for scoring" does not exempt
+it; judge what the script actually does. This criterion concerns the quality of a
+solve.sh that exists; whether a solve.sh is present at all is a separate matter, not
+judged here, so a task with no solution/solve.sh is not_applicable. You are not judging
+whether the script would pass on a live deployment, only whether its body attempts real
+AWS work rather than echoing a canned answer.
+"""
+
+[[criteria]]
+name = "derived_answers"
+severity = "major"
+scope = "both"
+description = "Expected answers are derived/reproducible from the solution or scenario, not magic values."
+guidance = """
+Hardcoded expected values with no derivation path are a red flag. introspection: can
+expected_answer be reproduced from the deployed stack? A value qualifies if it traces to
+the scenario, meaning it appears in the CDK source, pre_invoke or setup scripts, the
+instruction, or is computed by a script that queries live state. A value that is baked
+into a deployed resource (for example an image URI passed to
+ContainerImage.fromRegistry, a hardcoded role or bucket name, a tag value, or a literal
+that pre_invoke writes into SSM) satisfies this even though it is also a literal
+constant in the source: it traces to the scenario and is observable live by inspecting
+the resource. Do not fail a value merely because it is written in the repo or because it
+could be read from the CDK rather than re-derived from scratch; the standard is
+traceability, not independence from the source. mutation: do EXPECTED_* constants trace
+to the scenario (CloudFormation outputs, seeded data, the instruction) rather than being
+magic numbers? Fail when a claimed value has no traceable origin in any of these: it is
+not set anywhere in the scenario code (so the deployed resource would not actually have
+it), or it is an empirical observation of account-level state that the scenario does not
+deploy and does not pin (for example a count that depends on default VPCs or
+pre-existing resources in regions the scenario never touches). A reviewer should be able
+to re-derive each value from the scenario sources or from a live query against what the
+scenario deploys.
+"""
+
+[[criteria]]
+name = "explanation_quality"
+severity = "minor"
+scope = "both"
+description = "solution_explanation and verification_explanation match reality; tolerances justified."
+guidance = """
+The explanations must describe the actual solution and verification, and any tolerance
+bounds must be justified. Whether the fields are populated at all is a separate
+mechanical check: do not fail this criterion because solution_explanation or
+difficulty_explanation is an empty string, and do not judge an empty field. Judge only
+the explanation fields that contain text, and judge them for congruence, not for
+completeness or specificity. Congruence means the statement is true of what the task and
+tests actually do and makes no claim that contradicts them. A short, generic
+verification_explanation that accurately names the grading mechanism passes: for
+mutation tasks "Programmatic boto3 @criterion checks against mutated state." is
+congruent when tests/check.py uses @criterion functions that query live AWS via boto3,
+and for introspection tasks "LLM judge compares agent output against reference answer"
+is congruent when tests/judge.toml runs an LLM judge comparing the agent output to
+tests/ground_truth.json. Do not fail such a field for omitting the individual checks,
+instance types, statuses, key names, or tolerance values: enumerating every @criterion
+is not required and brevity is not a defect. Fail only when a populated field is
+actually wrong: it states a check, engine type, value, or step that tests/check.py does
+not enforce or that the verifier contradicts (for example claiming a SHA256 or code-hash
+check that check.py does not contain, or naming an engine type the verifier rejects); a
+populated solution_explanation omits a step that the verifier requires, so an
+implementer following it exactly would fail a criterion; or a stated tolerance bound is
+not justified by the verifier logic. Name the file and line that shows the contradiction
+or the missing required step.
+"""
+
+[[criteria]]
+name = "category_and_tags"
+severity = "minor"
+scope = "both"
+description = "category/request_type are correct; tags are specific and meaningful."
+guidance = """
+Judge whether category and request_type accurately classify the task, and whether
+aws_services lists the services the task actually exercises. category should be
+aws-introspection for read-only diagnosis tasks (those with tests/judge.toml and
+tests/ground_truth.json) and aws-mutation for tasks that change resources (those graded
+by tests/check.py); request_type should match (introspection or mutation). Confirm
+aws_services in task.toml names the services central to the task: for mutation tasks,
+cross-check against the boto3 clients used inside the @criterion functions in
+tests/check.py; for introspection tasks, cross-check against the services the agent must
+query per instruction.md and tests/ground_truth.json. Fail only when category or
+request_type is wrong, or when aws_services omits a service the task clearly requires or
+lists a service the task does not touch. The tags field in this dataset carries fixed
+convention labels (for example milestone or batch codes like M1 or M2, a framework name
+like rewardkit, and pipeline or scenario status flags like validated, not-validated, or
+stack-agnostic); these are the dataset's standard provenance and bookkeeping markers,
+not per-task content descriptors, and their presence is not a defect. Do not fail a task
+because its tags are convention labels rather than topical words, and do not require
+topical tags, since per-task subject classification is carried by category,
+request_type, and aws_services. Treat tags only as a fail signal if a tag is factually
+wrong or actively misleading about the task (for example a mutation tag on an
+introspection task).
+"""
+
+[[criteria]]
+name = "realistic"
+severity = "major"
+scope = "both"
+description = "Real-world relevant: reflects work a real AWS engineer would be paid to do."
+guidance = """
+Review instruction.md (and the scenario CDK when needed) for realism: flag artificial or
+contrived scenarios that would not occur in real AWS operations. An injected
+misconfiguration, broken resource, or failure mode is realistic when the instruction
+presents it as the problem to solve (a troubleshooting, diagnosis, remediation, or
+cleanup request that names or describes the symptom). The standard fail case is a
+scenario that hands the agent a resource secretly engineered to obstruct the requested
+action while the instruction frames it as a routine provisioning or operational request
+with no mention of the obstacle: for example a bucket whose resource policy explicitly
+denies the service the task must use, or a resource deliberately misconfigured against
+its stated purpose, presented as a normal handoff. Read the CDK to check whether
+deployed obstacles are acknowledged by the instruction or hidden behind innocuous
+framing. Do not penalize a task merely for containing a gotcha, a decoy, or a
+deliberately seeded bug: those are realistic when an engineer would plausibly be paid to
+find and fix them and the instruction sets up that work. Judge the scenario as
+presented, not the abstract underlying engineering.
+"""
+
+[[criteria]]
+name = "unambiguous_query"
+severity = "major"
+scope = "both"
+description = "The instruction has a single valid interpretation and is understandable to a human."
+guidance = """
+Read instruction.md as the agent would, judging ambiguity from the instruction text
+alone. There must be exactly one reasonable reading of what is being asked: if more than
+one valid interpretation exists (for example "the database" when several exist, or an
+unscoped "list the resources"), the query needs tightening until only one answer can be
+correct. Apply the reading an ordinary AWS practitioner would settle on; do not fail a
+query merely because a strained or pedantic alternate reading can be constructed if a
+competent reader would dismiss it, and do not invent candidate targets (users, roles,
+resources) that the scenario does not deploy. When the instruction names a target
+loosely but the deployed environment contains exactly one entity that plausibly matches
+(for example one role whose name contains the loosely named term), that counts as a
+single reading. The wording must be understandable: flawless grammar is not required,
+but genuine vagueness or ill formed phrasing that a reader could not confidently act on
+is not acceptable. Do not reverse engineer ambiguity from tests/check.py or
+tests/ground_truth.json: the fact that the verifier expects a value a naive reading
+would not produce does not by itself prove the query has two readings. If the
+instruction has a single clear reading but the verifier rewards working around an AWS
+limitation or otherwise expects behavior the instruction does not call for, that is a
+solvability or instruction versus reality concern handled by other criteria, not a query
+ambiguity. The exception is when the instruction text or its own output schema points
+one way while the required end state points the other (a genuine internal contradiction
+in what is shipped to the agent), which is a real ambiguity. This is about the question
+being precise, distinct from instruction_concision (which is about not leaking the
+method).
+"""
+
+[[criteria]]
+name = "non_guessable_answer"
+severity = "label"
+scope = "introspection"
+description = "Distinguishes a substantive expected answer from a trivial negative, empty, or zero result."
+guidance = """
+The distinction is between a guessable non-finding the agent could reach without genuine
+investigation and a substantive answer that required inspecting live state. The
+guessable category is specifically a NEGATIVE, EMPTY, or ZERO result: "no such
+resource", "none found", "0 instances", "nothing is misconfigured", "you can't / cannot
+be determined", or an empty list. Label fail only when the expected_answer in
+tests/ground_truth.json is one of these negative forms. An AFFIRMATIVE finding ("Yes,
+access is granted", "Yes, the role has the permission", a specific named resource, a
+positive count, a concrete configuration value) is NOT in scope here even when it is a
+short yes/no: a binary "Yes" is not a guessable non-finding, so label it pass. Likewise,
+a negative answer that is only nominally negative but carries a substantive,
+non-guessable kernel (specific resource IDs, route table contents, named
+misconfiguration the agent had to discover) should be weighed on whether the core
+deliverable the instruction asks for is itself the bare negative; if the substance is
+the bare negative, label fail, otherwise pass. Do NOT label fail merely because the
+reference answer is written in the repo, encoded in the CDK, or could plausibly be in
+training data: whether the answer is derivable from sources other than live state is
+checked elsewhere, and a substantive value still requires inspection to produce. This is
+a label, not a defect: a single negative answer does not make the task bad, since true
+negatives are legitimate and useful. The labels are aggregated outside the rubric, where
+the share of negatives across the introspection dataset is held to a cap (the dataset is
+too guessable if too many answers are negatives). The judgment here is about this one
+task's answer alone, not its prevalence.
+"""
+
+[[criteria]]
+name = "requires_distractors"
+severity = "major"
+scope = "both"
+description = "For locate/identify tasks, the scenario contains distractors so a broad or lazy match can't satisfy a precise query."
+guidance = """
+When the task asks the agent to find or identify a specific resource by applying a
+stated condition (a filter or property the query names), the deployed scenario must not
+make that match trivially unique: there should be other objects of the same type that a
+broader or lazier filter would also catch, so the agent has to apply the precise
+condition. If the scenario deploys exactly one object of the relevant type, any filter
+"works" and the task tests nothing; flag that as too easy. Judge this from the
+scenario's CDK stacks plus the instruction. It overlaps difficult but is specifically
+about environmental ambiguity, not reasoning depth. Apply this only when the find step
+turns on a stated filter or matching condition. It does not bind to: configuration,
+root-cause, or diagnosis tasks; tasks where the target resource is named or given by
+placeholder in the instruction; creation or mutation tasks; or tasks whose core work is
+retrieval, aggregation, or calculation (for example reading specific attribute values,
+version IDs, sizes, or counts, or taking a max or min over the objects present) rather
+than excluding wrong candidates by a filter. In those retrieval and aggregation cases
+the substance the agent must read from live state is the test, not a distractor set, so
+do not fail for the absence of distractors.
+"""
+
+[[criteria]]
+name = "verification_exactness"
+severity = "major"
+scope = "mutation"
+description = "check.py requires the solution done 'just right': no partial credit, and overwork within the targeted resource types is rejected."
+guidance = """
+Review check.py's @criterion set: collectively they must pass ONLY when every important
+detail of the task is satisfied. A half-done change that meets some criteria but not the
+full requirement must fail, and gratuitous overwork within the targeted resource types
+must be caught: if the task asks to modify or create one resource, creating extra
+resources of that type (or over-broad changes) that go beyond the ask should not
+silently pass. This criterion is about the verifier being too lenient, so fail when any
+of these lets incorrect or incomplete work pass: (a) a criterion checks only that a
+value is non-empty or that a substring is present (for example "fips" in a config, any
+user metadata present, BucketName truthy) rather than the exact required end-state; (b)
+the verifier checks only the set of resources the agent self-reports (a name list it
+wrote to agent-output.json) instead of the full required set discovered from live state,
+so reporting one of many required items passes; (c) a count check has a lower bound but
+no upper bound, so creating more than asked passes; (d) a criterion compares two things
+only for inequality (a != b) without checking which side is which, so a reversed
+configuration passes; (e) an instruction requirement (a specific subnet, role, bucket,
+table, expression, state, or end-to-end behavior such as data actually written to the
+sink) has no criterion at all; (f) the verifier's seed or precondition state already
+satisfies a criterion before the agent acts (an always-empty typo'd prefix, an
+always-present placeholder object, a resource that was already ACTIVE), so an idle agent
+passes; (g) the absence of cleanup lets residue from a prior run satisfy a criterion. A
+criterion that anchors on the specific resource the agent reported and ignores unrelated
+extra resources is acceptable when the task asks to create "a" resource (singular). Do
+not fail under this criterion for the opposite problem of the verifier being too strict:
+requiring a specific configuration value (a starting position, batch size, name, or
+CIDR) that the instruction never specified is a false-negative concern handled
+elsewhere, not a lenient-pass defect.
+"""
+
+[[criteria]]
+name = "answer_stability"
+severity = "major"
+scope = "introspection"
+description = "expected_answer contains no account-specific or one-time-run specifics unless the query is temporal, and temporal queries must be script-scored, not NL-judged."
+guidance = """
+The reference answer in ground_truth.json must be graded against a value that is fixed
+before grading, not against a value that drifts. Strip free-floating account-specific or
+one-time-run specifics that are baked in as literal strings (timestamps, resource ages,
+"created 3 days ago", live counts written directly into expected_answer): use
+{{placeholder}} tokens for resource names, IDs, and any value that varies by deployment
+or by the moment of the run. A placeholder is acceptable when the framework anchors it
+to live state before the judge runs: a pre_invoke step (pre_invoke/pre_invoke.py)
+computes the value against live AWS, task.toml declares it under [verifier.env], and
+tests/resolve_placeholders.py substitutes it into ground_truth.json so the
+natural-language judge compares the agent's answer against a concrete resolved value.
+When a query is temporal by nature (it explicitly asks about time, age, recency, or a
+"created within N" threshold), the volatile value is the answer, so it must be anchored
+this way (pre_invoke placeholder resolved against live state) OR scored by a validation
+script (check.py). Do not fail a temporal task merely because it uses the
+natural-language judge: if the volatile value is resolved from live state via the
+pre_invoke and placeholder mechanism before grading, the judge is comparing fixed values
+and the criterion is satisfied. Fail only when a volatile value is baked into
+expected_answer as a literal that is neither a placeholder nor recomputed against live
+state, so the judge would grade a stale or moving number.
+"""

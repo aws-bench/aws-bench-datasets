@@ -1,0 +1,4 @@
+{
+  "instruction": "I set up all my S3 buckets to block public access completely. Can you confirm that every bucket has full public access blocking in place? If any bucket is missing part of that configuration, let me know which one, and whether that gap actually leaves it exposed to the public.",
+  "expected_answer": "Not quite. One bucket, {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}}, has BlockPublicAcls false while its other three settings (IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets) are true; every other bucket has all four true. That gap does not actually expose it. IgnorePublicAcls=true makes S3 ignore any public ACLs that BlockPublicAcls=false would otherwise allow, and BlockPublicPolicy=true plus RestrictPublicBuckets=true block public access via bucket policy or access points. So one bucket deviates from complete blocking, but none currently allow public access."
+}

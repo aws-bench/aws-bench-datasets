@@ -1,0 +1,22 @@
+# Tool configuration for the public-tooling build (see Makefile).
+# This file configures ruff and ty ONLY. aws-bench-datasets is not a Python
+# distributable, so there is intentionally no [project] table — ruff and ty
+# read their [tool.*] tables regardless.
+
+[tool.ruff]
+target-version = "py39"
+extend-exclude = ["node_modules", "cdk.out", "dist", "build", ".git"]
+
+[tool.ruff.lint]
+# Enforced gate: correctness-critical rules only — syntax errors (E9),
+# invalid literal/comparison and f-string bugs (F63, F7) and undefined names
+# (F82). This passes clean on current content. Broader rules (unused imports,
+# style) can be enabled incrementally without blocking the OSS build.
+select = ["E9", "F63", "F7", "F82"]
+
+[tool.ty.rules]
+# Third-party (boto3, aws-cdk, ...) and cross-package (harbor) modules are not
+# installed during static analysis, so unresolved imports are expected and not
+# actionable here. Suppress them so ty reports only real type errors in the
+# maintained first-party code it is pointed at (see PY_TYPECHECK_PATHS).
+unresolved-import = "ignore"

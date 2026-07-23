@@ -1,0 +1,74 @@
+import * as cdk from 'aws-cdk-lib';
+import { EnvironmentProps } from './lib/shared';
+import { Cloudformation_t9dx4pgqw } from './stacks/cloudformation/cloudformation_t9dx4pgqw';
+import { Cloudformation_vesgrw3ay } from './stacks/cloudformation/cloudformation_vesgrw3ay';
+import { EC2_kxu4k2xpt } from './stacks/ec2/ec2_kxu4k2xpt';
+import { Ec2_cc1xvkdie } from './stacks/ec2/ec2_cc1xvkdie';
+import { Ec2_m3jbrd9n2 } from './stacks/ec2/ec2_m3jbrd9n2';
+import { EC2_nx19kzwoj } from './stacks/ec2/ec2_nx19kzwoj';
+import { Ec2_pg4rychx0 } from './stacks/ec2/ec2_pg4rychx0';
+import { Ec2_u5j9r8syp } from './stacks/ec2/ec2_u5j9r8syp';
+import { Ecs_a32gg1f3b } from './stacks/ecs/ecs_a32gg1f3b';
+import { Ecs_bp8hv08t8 } from './stacks/ecs/ecs_bp8hv08t8';
+import { Ecs_i5l02s5g8 } from './stacks/ecs/ecs_i5l02s5g8';
+import { Ecs_p2axm00yu } from './stacks/ecs/ecs_p2axm00yu';
+import { Elbv2_n35haewp6 } from './stacks/elbv2/elbv2_n35haewp6';
+import { Emr_0hr2dw3rz } from './stacks/emr/emr_0hr2dw3rz';
+import { Eventbridge_odyzjo3n0 } from './stacks/eventbridge/eventbridge_odyzjo3n0';
+import { Glue_c3j34cj9z } from './stacks/glue/glue_c3j34cj9z';
+import { Lambda_mw9wjm2q7 } from './stacks/lambda/lambda_mw9wjm2q7';
+import { Glue_4hc72iv0v } from './stacks/glue/glue_4hc72iv0v';
+import { LakeFormationSettings } from './stacks/glue/lakeformation_settings';
+import { Redshift_wfic8j0dt } from './stacks/redshift/redshift_wfic8j0dt';
+import { Sagemaker_vszf4yl62 } from './stacks/sagemaker/sagemaker_vszf4yl62';
+import { Ecs_aso5jpbz5 } from './stacks/ecs/ecs_aso5jpbz5';
+import { Ec2_wlee0aizq } from './stacks/ec2/ec2_wlee0aizq';
+import { S3_2oks7w11a } from './stacks/s3/s3_2oks7w11a';
+import { Ec2_67wz6v9zc } from './stacks/ec2/ec2_67wz6v9zc';
+import { Ecs_t3oo10okn } from './stacks/ecs/ecs_t3oo10okn';
+import { Sagemaker_yhxcakof0 } from './stacks/sagemaker/sagemaker_yhxcakof0';
+import { Ecs_i7uzvvzgr } from './stacks/ecs/ecs_i7uzvvzgr';
+import { Rds_dbu3efc8j } from './stacks/rds/rds_dbu3efc8j';
+import { Lambda_1sscp39dx } from './stacks/lambda/lambda_1sscp39dx';
+import { Cloudformation_49pz2mo3y } from './stacks/cloudformation/cloudformation_49pz2mo3y';
+import { QARolesStack } from './stacks/qa_roles_stack';
+
+export function createEnvironment(app: cdk.App, envId: string, props: EnvironmentProps): void {
+    const { account } = props;
+    new QARolesStack(app,             `${envId}-QARoles-us-east-1`,                       { env: { account, region: 'us-east-1' } });
+    new Cloudformation_t9dx4pgqw(app, `${envId}-cloudformation-t9dx4pgqw-us-east-1`,      { env: { account, region: 'us-east-1' } });
+    new Cloudformation_vesgrw3ay(app, `${envId}-cloudformation-vesgrw3ay-us-east-1`,      { env: { account, region: 'us-east-1' } });
+    new EC2_kxu4k2xpt(app,            `${envId}-ec2-kxu4k2xpt-eu-west-1`,                 { env: { account, region: 'eu-west-1' } });
+    new Ec2_cc1xvkdie(app,            `${envId}-ec2-cc1xvkdie-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new Ec2_m3jbrd9n2(app,            `${envId}-ec2-m3jbrd9n2-ap-northeast-2`,            { env: { account, region: 'ap-northeast-2' } });
+    new EC2_nx19kzwoj(app,            `${envId}-ec2-nx19kzwoj-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new Ec2_pg4rychx0(app,            `${envId}-ec2-pg4rychx0-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new Ec2_u5j9r8syp(app,            `${envId}-ec2-u5j9r8syp-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new Ecs_a32gg1f3b(app,            `${envId}-ecs-a32gg1f3b-us-east-1`,                 { env: { account, region: 'us-east-1' } });
+    new Ecs_bp8hv08t8(app,            `${envId}-ecs-bp8hv08t8-us-east-1`,                 { env: { account, region: 'us-east-1' } });
+    new Ecs_i5l02s5g8(app,            `${envId}-ecs-i5l02s5g8-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new Ecs_p2axm00yu(app,            `${envId}-ecs-p2axm00yu-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new Elbv2_n35haewp6(app,          `${envId}-elbv2-n35haewp6-us-west-2`,               { env: { account, region: 'us-west-2' } });
+    new Emr_0hr2dw3rz(app,            `${envId}-emr-0hr2dw3rz-eu-west-1`,                 { env: { account, region: 'eu-west-1' } });
+    new Eventbridge_odyzjo3n0(app,    `${envId}-eventbridge-odyzjo3n0-us-east-1`,         { env: { account, region: 'us-east-1' } });
+    new Glue_c3j34cj9z(app,           `${envId}-glue-c3j34cj9z-us-west-2`,                { env: { account, region: 'us-west-2' } });
+    new Lambda_mw9wjm2q7(app,         `${envId}-lambda-mw9wjm2q7-ap-southeast-2`,         { env: { account, region: 'ap-southeast-2' } });
+
+    // Shared Lake Formation settings (required before any LF-governed Glue stack).
+    const lfSettings = new LakeFormationSettings(app, `${envId}-lakeformation-settings-us-east-1`, { env: { account, region: 'us-east-1' } });
+    const glue4hc72 = new Glue_4hc72iv0v(app, `${envId}-glue-4hc72iv0v-us-east-1`, { env: { account, region: 'us-east-1' } });
+    glue4hc72.addDependency(lfSettings);
+
+    new Redshift_wfic8j0dt(app,       `${envId}-redshift-wfic8j0dt-us-east-1`,            { env: { account, region: 'us-east-1' } });
+    new Sagemaker_vszf4yl62(app,      `${envId}-sagemaker-vszf4yl62-us-west-2`,           { env: { account, region: 'us-west-2' } });
+    new Ecs_aso5jpbz5(app,            `${envId}-ecs-aso5jpbz5-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new Ec2_wlee0aizq(app,            `${envId}-ec2-wlee0aizq-us-west-2`,                 { env: { account, region: 'us-west-2' } });
+    new S3_2oks7w11a(app,             `${envId}-s3-2oks7w11a-us-east-1`,                  { env: { account, region: 'us-east-1' } });
+    new Ec2_67wz6v9zc(app,            `${envId}-ec2-67wz6v9zc-us-east-1`,                 { env: { account, region: 'us-east-1' } });
+    new Ecs_t3oo10okn(app,            `${envId}-ecs-t3oo10okn-us-east-1`,                 { env: { account, region: 'us-east-1' } });
+    new Sagemaker_yhxcakof0(app,      `${envId}-sagemaker-yhxcakof0-us-west-2`,           { env: { account, region: 'us-west-2' } });
+    new Ecs_i7uzvvzgr(app,            `${envId}-ecs-i7uzvvzgr-ap-northeast-1`,            { env: { account, region: 'ap-northeast-1' } });
+    new Rds_dbu3efc8j(app,            `${envId}-rds-dbu3efc8j-us-east-1`,                 { env: { account, region: 'us-east-1' } });
+    new Lambda_1sscp39dx(app,         `${envId}-lambda-1sscp39dx-us-west-2`,              { env: { account, region: 'us-west-2' } });
+    new Cloudformation_49pz2mo3y(app, `${envId}-cloudformation-49pz2mo3y-eu-central-1`,   { env: { account, region: 'eu-central-1' } });
+}

@@ -1,0 +1,4 @@
+{
+  "instruction": "Retrieve the immediate subdirectories in an S3 bucket {{databases-and-storage-s3-eor38cdr9-us-east-1-BucketName}}.",
+  "expected_answer": "Successfully retrieved the only sub directory {{databases-and-storage-s3-eor38cdr9-us-east-1-SubDirectoryName}} available in the S3 bucket {{databases-and-storage-s3-eor38cdr9-us-east-1-BucketName}}."
+}

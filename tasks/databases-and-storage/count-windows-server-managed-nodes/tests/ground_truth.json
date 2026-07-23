@@ -1,0 +1,4 @@
+{
+  "instruction": "How many Windows Server 2022 managed nodes do I have?",
+  "expected_answer": "You have {{databases-and-storage-SSM-a1b2c3d46-us-east-1-NumberOfWindows2022ManagedNodes}} windows Server 2022 managed node in us-east-1."
+}

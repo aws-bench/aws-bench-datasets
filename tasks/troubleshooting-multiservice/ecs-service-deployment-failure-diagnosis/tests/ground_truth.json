@@ -1,0 +1,4 @@
+{
+  "instruction": "Why is my ECS service {{troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcsServiceName}} failing to deploy in us-west-2? Are there any other issues I should be aware of?",
+  "expected_answer": "The service is not failing. It has desiredCount set to 0, so no tasks are being launched. The deployment status is COMPLETED because the service successfully reached its target of 0 running tasks. If you increase the desired count, tasks will still fail to start for two reasons: the ECR repository {{troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcrRepositoryName}} has no images pushed to it, and the service runs in private isolated subnets with no NAT gateway or VPC endpoints for ECR, so tasks have no network path to pull container images."
+}

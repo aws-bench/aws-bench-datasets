@@ -1,0 +1,4 @@
+{
+  "instruction": "Scan the DynamoDB table {{databases-and-storage-dynamodb-kdf231sdf-us-east-1-TableName}} for records with various statuses.",
+  "expected_answer": "The DynamoDB table {{databases-and-storage-dynamodb-kdf231sdf-us-east-1-TableName}} successfully retrieved 5 records with statuses including active, inactive, pending, and suspended users."
+}

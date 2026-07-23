@@ -1,0 +1,4 @@
+{
+  "instruction": "Which of my EC2 instances don't have a default VPC (all regions)?",
+  "expected_answer": "The following EC2 instances are not associated with a default VPC: {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}, and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} in us-east-1, {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}} in us-west-1, and {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}} in us-west-2."
+}

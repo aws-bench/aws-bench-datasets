@@ -1,0 +1,4 @@
+{
+  "instruction": "Scan the DynamoDB table {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName}} to get all records, then fetch the specific record with ContentId {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}}.",
+  "expected_answer": "The scan of DynamoDB table {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName}} returned 20 items with various tasks across different priorities, statuses, and assignees. The record with ContentId {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}} has TaskId TASK012, Description 'Database backup', Priority LOW, TaskStatus BLOCKED, and is assigned to user4@example.com."
+}

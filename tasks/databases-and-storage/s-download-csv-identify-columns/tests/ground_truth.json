@@ -1,0 +1,4 @@
+{
+  "instruction": "Download {{databases-and-storage-s3-r29cj1k42-us-east-1-FileName}} from S3 bucket {{databases-and-storage-s3-r29cj1k42-us-east-1-CsvBucketName}} and identify which columns contain only unique values and which have duplicates.",
+  "expected_answer": "The CSV file has 6 columns: product_id, name, category, price, stock, and description. Columns with all unique values: product_id, name, price, stock, and description. Column with duplicate values: category (e.g., 'Electronics' appears more than once)."
+}

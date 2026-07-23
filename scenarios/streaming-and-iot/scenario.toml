@@ -1,0 +1,95 @@
+schema_version = "1.0"
+
+[scenario]
+name = "streaming-and-iot"
+description = "Multi-service environment for niche-service mutation tasks: Connect Customer Profiles, S3, IoT, EventBridge, ECS-on-EC2, Kinesis Data Streams, RDS+S3-Tables, MSK, Neptune. 9 stacks in us-east-1."
+account_tags = ["PRIMARY"]
+regions = ["us-east-1"]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+
+[deploy]
+timeout_sec = 3600.0  # MSK + Neptune can take 15+ minutes each
+
+[verify]
+timeout_sec = 300.0
+
+[cleanup]
+timeout_sec = 5400.0
+
+# VPCs: every stack with its own VPC adds one. Counted: Iot (1), RdsDms (1),
+# Ecs (1), MSK (1), Neptune (1) = 5. Plus default VPC. Add headroom.
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 10
+
+# EC2 vCPUs (standard/A/C/D/H/I/M/R/T/Z): EcsAsg t3.micro (2 vCPU). MSK m5.large
+# brokers don't count against EC2 vCPU quota -- they're MSK-managed.
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-1216C47A"
+desired_value = 16
+
+# Elastic IPs: VPC endpoint and NAT-free design uses none, but IoT VPCE may
+# pin one. 5 default is usually enough; bump conservatively.
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-0263D0A3"
+desired_value = 5
+
+[reset]
+timeout_sec = 600
+
+[reset.env]
+# connect-create-customer-profiles
+DOMAIN_NAME = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-ProfilesDomainName}}"
+ACCOUNT_ID_1 = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-AccountId1}}"
+ACCOUNT_ID_2 = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-AccountId2}}"
+
+# dms-rds-mysql-to-s3-tables
+RDS_ENDPOINT = "{{streaming-and-iot-rds-rdsdms9k4-us-east-1-MySQLEndpoint}}"
+RDS_SECRET_ARN = "{{streaming-and-iot-rds-rdsdms9k4-us-east-1-MySQLSecretArn}}"
+S3_TABLES_BUCKET_ARN = "{{streaming-and-iot-rds-rdsdms9k4-us-east-1-S3TablesBucketArn}}"
+VPC_ID = "{{streaming-and-iot-rds-rdsdms9k4-us-east-1-VpcId}}"
+
+# ecs-on-ec2-with-cloudmap
+ECS_CLUSTER_NAME = "{{streaming-and-iot-ecs-ecsasg7m4-us-east-1-ClusterName}}"
+
+# health-eventbridge-csv-export
+EVENT_BUS_NAME = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-EventBusName}}"
+EXPORT_BUCKET = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-ExportBucketName}}"
+HEALTH_ROLE_NAME = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-HealthRoleName}}"
+
+# iot-thing-restrict-vpce-ipv4
+THING_NAME = "{{streaming-and-iot-iot-iotipv43d8-us-east-1-ThingName}}"
+VPCE_ID = "{{streaming-and-iot-iot-iotipv43d8-us-east-1-VPCEndpoint}}"
+
+# kds-firehose-iceberg-athena
+KINESIS_STREAM_NAME = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-KinesisStreamName}}"
+ICEBERG_SINK_BUCKET_NAME = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-S3BucketName}}"
+S3_SINK_BUCKET = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-S3BucketName}}"
+
+# msk-lambda-esm-iam-sasl
+CLUSTER_ARN = "{{streaming-and-iot-msk-mskmm9q3a-us-east-1-ClusterArn}}"
+SINK_BUCKET_NAME = "{{streaming-and-iot-msk-mskmm9q3a-us-east-1-SinkBucketName}}"
+KAFKA_SINK_BUCKET_NAME = "{{streaming-and-iot-msk-mskmm9q3a-us-east-1-SinkBucketName}}"
+TOPIC_NAME = "{{streaming-and-iot-msk-mskmm9q3a-us-east-1-TopicName}}"
+
+# neptune-bulk-load-and-shortest-path
+BRIDGE_LAMBDA_NAME = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-BridgeLambdaName}}"
+LOADER_BUCKET = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-LoaderBucketName}}"
+
+# s3-csv-to-xlsx-lambda-pipeline
+ETL_BUCKET_NAME = "{{streaming-and-iot-s3-etlcsv9q2-us-east-1-ETLBucketName}}"
+ETL_BUCKET = "{{streaming-and-iot-s3-etlcsv9q2-us-east-1-ETLBucketName}}"
+OUTPUT_PREFIX = "{{streaming-and-iot-s3-etlcsv9q2-us-east-1-SomeFolderName}}"

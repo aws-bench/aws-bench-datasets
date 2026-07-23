@@ -1,0 +1,3 @@
+My CloudFront distribution {{api-and-observability-cloudfront-laljfb348-us-east-1-DistributionId}} is returning 403 for all tenant requests. The S3 bucket {{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}} has content for tenant onyx-test and the distribution has an OAC {{api-and-observability-cloudfront-laljfb348-us-east-1-OACId}} attached. Why are requests failing?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

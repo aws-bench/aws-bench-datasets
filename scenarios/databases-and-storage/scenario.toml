@@ -1,0 +1,48 @@
+schema_version = "1.0"
+
+[scenario]
+name = "databases-and-storage"
+description = "Multi-service environment with Athena, CodeBuild, DynamoDB, EC2, ECS, Route53, S3, SQS, SSM, and WAF stacks across us-east-1 and us-west-2."
+account_tags = ["PRIMARY"]
+regions = ["us-east-1", "us-west-2"]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+
+[deploy]
+timeout_sec = 3600.0
+
+[verify]
+timeout_sec = 120.0
+
+[cleanup]
+timeout_sec = 5400.0
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-0263D0A3"
+desired_value = 7
+# Elastic IPs: VPCs with NAT gateways (ec2, ecs, ssm, cfn, route53 stacks)
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-1216C47A"
+desired_value = 36
+# vCPUs: EC2 instances across ec2, ecs, ssm stacks (t3.micro/medium).
+# Steady-state demand is 20 (ec2:4 + ecs-asg-desired:4 + ssm:12). 36 adds headroom
+# for the ECS ASG at maxCapacity=3 (22) plus create-before-delete replacement of the
+# largest stack (ssm, +12) during updates, which otherwise trips the vCPU limit.
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 6
+# VPCs: ec2, ecs, ssm, cfn, route53 stacks each create a VPC

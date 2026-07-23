@@ -1,0 +1,5 @@
+# shellcheck configuration for the public-tooling shell lint gate (see Makefile).
+# Severity is set on the command line (SHELLCHECK_SEVERITY, default: error), so
+# only error-level issues block the build today. Follow `source` directives into
+# sibling scripts when resolvable.
+external-sources=true

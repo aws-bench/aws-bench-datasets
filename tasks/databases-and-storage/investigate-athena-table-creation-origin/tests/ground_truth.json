@@ -1,0 +1,4 @@
+{
+  "instruction": "I wanted to understand how a particular Athena table {{databases-and-storage-athena-9jhgt3tfs-us-east-1-TableName}} was created in the AWS account and why it shows as a table rather than a view.",
+  "expected_answer": "The Athena table {{databases-and-storage-athena-9jhgt3tfs-us-east-1-TableName}} was created using the CloudFormation stack named {{databases-and-storage-athena-9jhgt3tfs-us-east-1-StackName}}. The resource shows as a table rather than a view because it was created as an AWS::Glue::Table resource in CloudFormation. It has a StorageDescriptor pointing to actual data in S3, and also it has no view-related properties (ViewOriginalText, ViewExpandedText) or view flags (IsMultiDialectView is false)."
+}

@@ -1,0 +1,4 @@
+{
+  "instruction": "Why is my EC2 instance {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-InstanceId}} in us-west-2 getting exit code 255 when trying to retrieve a secret from Secrets Manager?",
+  "expected_answer": "The EC2 instance {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-InstanceId}} gets exit code 255 because its IAM role is missing kms:Decrypt permission for the KMS key that encrypts the secret. The secret {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-SecretArn}} is encrypted with KMS key {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-KmsKeyId}}. The instance role has secretsmanager:GetSecretValue which lets it call Secrets Manager, but when Secrets Manager tries to decrypt the data key with KMS, the call fails with access denied."
+}

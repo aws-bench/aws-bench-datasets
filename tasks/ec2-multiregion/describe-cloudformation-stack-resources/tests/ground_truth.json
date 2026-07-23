@@ -1,0 +1,4 @@
+{
+  "instruction": "Can you describe the resources in the {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} stack in the us-west-1 region?",
+  "expected_answer": "It is a CDK stack that stands up a web server: a VPC with a public subnet, an EC2 instance ({{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}), its security group, IAM role, and a Lambda-backed custom resource that locks down the default SG. There are 16 resources in total, all created successfully."
+}

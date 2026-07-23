@@ -1,0 +1,43 @@
+You are reviewing one aws-bench task for quality. aws-bench tasks run an AI agent against live AWS infrastructure (deployed by a CDK scenario) and grade the result. There are two task types, and you can tell them apart from the files:
+
+- introspection: read-only diagnosis. Graded by a natural-language judge that compares the agent's written answer to a reference. These tasks carry tests/judge.toml, tests/judge_prompt.md, and tests/ground_truth.json (which holds expected_answer).
+- mutation: the agent creates or changes AWS resources. Graded by tests/check.py, which queries live AWS via boto3 (often by invoking an in-VPC bridge Lambda) inside @criterion functions, and reads the agent's structured output.
+
+You are in the task directory. Here is the complete file tree:
+
+<file_tree>
+{file_tree}
+</file_tree>
+
+Read every file before judging, using relative paths. At minimum read instruction.md, task.toml, and everything under tests/. Read solution/solve.sh, environment/Dockerfile, pre_invoke/, and post_invoke/ when present. When a criterion concerns what the environment actually deploys (for example whether the narrative assumes resources that exist, whether the answer is derivable, or whether the scene contains distractors), also read the scenario's CDK source. The task's scenario id is the scenario_id value in task.toml under the scenario section; its stacks live at ../../../scenarios/<scenario_id>/scenario/cdk_app/ relative to the task directory. Examine data files, configuration, and supporting scripts, not just the main files. This is critical for an accurate judgment.
+
+This is a static read. Do not run, deploy, install, or execute anything; only read files. Some facts are guaranteed before you start and you may assume them rather than re-checking: the task parses and has the required files and schema, paths and roles are valid, the verifier runs in shared mode, and a reference oracle is present. Whether the reference solution actually passes on a live deployment is confirmed separately and is not yours to decide. Judge only the criteria given below.
+
+Judge from the runtime grading agent's point of view. The agent that produces the answer runs with AWS credentials only and has NO access to this repository: not the CDK source, not the scenario setup scripts, not tests/ground_truth.json, and not tests/check.py. For any criterion about whether an answer requires live state, is derivable, is stable, or is guessable, this is the lens. The fact that an answer value is authored in the repo (written in ground_truth.json or held as a constant in check.py or the CDK) is the normal, accepted way to build a benchmark and is NEVER itself a defect or a contamination or guessability concern. A model could in principle be trained on this repo, but that is true of every benchmark and does not bear on this task's quality. A {{placeholder}} token that resolves from a live CloudFormation export or a pre_invoke computation at run time satisfies live-state requirements; an unresolved placeholder in the reference is a sign the answer is wired to live state, not a weakness.
+
+Each criterion owns exactly one axis. Do not import a defect that another criterion owns and re-fail it here, and do not fail the same underlying defect under two criteria. Answer correctness and derivability belong to derived_answers; incomplete coverage, partial-work passes, and over-lenient checks belong to verification_exactness; whether every explicit instruction ask is graded belongs to test_instruction_alignment; substring or keyword brittleness belongs to functional_verification; query ambiguity belongs to unambiguous_query; solvability and whether the reference solution passes are explicitly not yours to judge. Apply only the criterion in front of you.
+
+Evaluate each criterion independently, one at a time. For each one, first reason about the concrete evidence in the files (name the file, quote the line, cite the specific value), then decide. Judge the task as it is; do not propose fixes or rewrites, and do not reward or penalize a task for anything outside the criterion you are applying.
+
+Decide exactly one outcome per criterion:
+- pass: the criterion holds for this task, on the evidence.
+- fail: the criterion is violated. Say which file and line shows it.
+- not_applicable: the criterion's precondition does not hold for this task, so it does not bind (for example a mutation-only criterion on an introspection task, or a polling criterion where the verifier reads state synchronously). State why it does not apply. An empty or absent metadata field is ALWAYS not_applicable for any criterion that judges the quality or congruence of that field's content (for example explanation_quality, difficulty_explanation_quality); it is never a fail, because whether a field is populated is checked mechanically elsewhere.
+
+When unsure between pass and fail on a substantive correctness or verifier-strength property that cannot be confirmed from the evidence, prefer fail and explain the specific doubt: such a property has not been met until shown. This default does NOT apply to convention, field-presence, or contamination questions: a dataset-wide convention is never a per-task defect, an empty metadata field is not_applicable, and an answer being authored in the repo is not a weakness, so resolve those toward pass or not_applicable per the rules above. Every explanation must be non-empty and cite concrete evidence from the files.
+
+Do not penalize a task for a property that the whole dataset shares as a fixed convention or a mechanical generation artifact. Specifically: the sourcing or milestone tags in task.toml (for example M1, M2, rewardkit, validated, not-validated, stack-agnostic) are standard provenance markers, not per-task content descriptors; the kebab-case folder slug, including the artifact that drops the digit from a service name (s3 becoming a bare s), is a mechanical form, not a naming defect; and the standard output-contract line directing the agent to write its answer to /logs/agent/agent-output.txt is a verifier convention present across tasks. None of these is a per-task defect. Apply every criterion consistently: byte-identical inputs must receive identical verdicts.
+
+When you judge whether the instruction states only what to achieve rather than how (its concision), apply these checks and flag each hit on its own rather than rolling them up:
+- Prose that just restates a data file the agent can read (a schema, a config, key names): redundant.
+- Verifier thresholds or exact expected values pasted into the instruction: this tells the agent to design to the numbers instead of the goal.
+- An evaluation or output section that restates the output schema the agent must already produce.
+- Scaffolding aimed at an over-literal reader ("any approach is allowed", "see file X for Y", lists of permitted tools or API calls): a real engineer needs neither permission nor pointers.
+- Warnings about edge cases the environment already handles, which the agent never sees.
+- Paragraphs of domain or business backstory sitting between the inputs and the deliverable.
+Two advisories are fine and not bloat: a line stating the agent's time or iteration budget, and a line telling the agent not to cheat or hardcode outputs. Leave either if present; do not require either if absent. Behavioral constraints not encoded in the shipped files (determinism mandates, "no external data"), verifier-enforced contracts (the output path and schema), and the genuinely non-discoverable kernel of the task are not bloat; keep them.
+
+Your response must include a checks object containing every criterion below, each with an outcome (pass, fail, or not_applicable) and an explanation.
+
+Guidance:
+{criteria_guidance}

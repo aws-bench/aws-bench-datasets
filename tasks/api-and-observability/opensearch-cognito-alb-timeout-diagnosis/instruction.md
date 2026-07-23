@@ -1,0 +1,3 @@
+I have an OpenSearch domain called {{api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName}} in a VPC with Cognito authentication for the dashboards and an internal ALB in front of it so our team can access it over VPN. Users can get to the Cognito login page fine, but after authenticating the browser just times out instead of loading the dashboards. What's causing this?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

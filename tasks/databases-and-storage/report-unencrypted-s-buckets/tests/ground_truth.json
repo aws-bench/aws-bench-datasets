@@ -1,0 +1,4 @@
+{
+  "instruction": "List which of my S3 buckets use AWS KMS encryption rather than the default S3-managed encryption.",
+  "expected_answer": "The bucket prod-bucket-jdn294ng4 uses AWS KMS encryption (SSE-KMS with the AWS-managed key). The CDK infrastructure staging buckets also use KMS encryption. All other buckets use the default S3-managed encryption (SSE-S3/AES256)."
+}

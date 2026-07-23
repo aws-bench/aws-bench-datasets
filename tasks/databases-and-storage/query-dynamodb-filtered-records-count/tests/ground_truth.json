@@ -1,0 +1,4 @@
+{
+  "instruction": "How many records in my DynamoDB table with name {{databases-and-storage-dynamodb-tk2o3jasd-us-east-1-TableName}} have an empty tag field and a ResolvedAt value greater than zero?",
+  "expected_answer": "There are {{databases-and-storage-dynamodb-tk2o3jasd-us-east-1-RecordCount}} records with the specified attributes"
+}

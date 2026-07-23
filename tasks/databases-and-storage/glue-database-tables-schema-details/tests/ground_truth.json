@@ -1,0 +1,4 @@
+{
+  "instruction": "List all tables in the Glue database {{databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName}} and show me the detailed schema for each table.",
+  "expected_answer": "The database {{databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName}} contains one table: andes_3_0_data. This table has 3 columns: id (bigint), name (string), and created_date (date). It's an EXTERNAL_TABLE with data stored in S3."
+}

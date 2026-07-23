@@ -1,0 +1,4 @@
+{
+  "instruction": "My VPC {{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcId}} in us-east-1 appears to have flow logs going to multiple destinations. Can you check what's actually configured and which of them are really being used?",
+  "expected_answer": "The VPC has a single active flow log ({{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-FlowLogId}}) delivering all traffic to S3 bucket {{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcFlowLogsBucketName}} with a 600-second aggregation interval. There are two CloudWatch Log Groups (QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup1 and QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup2) with names suggesting VPC flow log usage, but no flow log data is being written to them."
+}

@@ -1,0 +1,4 @@
+{
+  "instruction": "Could you please list my account's EC2 instance ids in all regions.",
+  "expected_answer": "You have the following EC2 instances {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}}, and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} from us-east-1 region. In the region us-west-1 you have the instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}. In the region us-west-2 you have the instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}."
+}

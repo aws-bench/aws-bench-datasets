@@ -1,0 +1,4 @@
+{
+  "instruction": "Are there any metric streams that exclude metrics from a specific namespace? My account only operates in these regions: {{aws-bench-scenario-allowed-regions}}.",
+  "expected_answer": "Yes, the metric stream {{serverless-apps-Monitoring-us-east-1-MetricStreamName}} excludes the metrics CPUUtilization, NetworkIn, NetworkOut, DiskReadBytes, and DiskWriteBytes from the AWS/EC2 namespace."
+}

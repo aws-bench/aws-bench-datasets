@@ -1,0 +1,4 @@
+{
+  "instruction": "List my DynamoDB tables with Kinesis streams across all regions. My account only operates in these regions: {{aws-bench-scenario-allowed-regions}}.",
+  "expected_answer": "The DynamoDB table named {{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableWithStream}} in the us-east-1 region and {{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableWithStream}} in the us-west-2 region are having Kinesis streams configured."
+}

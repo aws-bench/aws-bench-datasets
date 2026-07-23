@@ -1,0 +1,4 @@
+{
+  "instruction": "I made a GET request for document changeset-a3f8b921 on my OpenSearch domain {{api-and-observability-opensearch-zf57i4r1i-us-east-1-OpenSearchDomainName}}. How do I check from the logs if it returned a 404 or 200?",
+  "expected_answer": "You can't. OpenSearch audit logs only capture authentication and authorization events (AUTHENTICATED, GRANTED_PRIVILEGES), not HTTP response codes. The audit logs confirm the GET to /changesets/_doc/changeset-a3f8b921 was authenticated and authorized, but no log category records whether the response was 200 or 404. None of the other enabled log types (application, slow search, slow index) capture per-request status codes either. OpenSearch has no built-in access log that records HTTP response codes."
+}

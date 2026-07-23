@@ -1,0 +1,4 @@
+{
+  "instruction": "CloudWatch alarm {{api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName}} is firing in ap-southeast-1. Why?",
+  "expected_answer": "The alarm tracks P90 FrameQuartzLag in the Flint namespace and fires when it exceeds 15 seconds. The internal pipeline metrics (ProcessFrame, MotionDetection, HLSStartLag, CPU) are all normal. The bottleneck is in the downstream Quartz service's ReportPerson operation, whose API latency is well above the threshold. The elevated Quartz latency is driven by the SSM parameter controlling latency mode being set to 'degraded', which causes the ECS task to publish high Quartz API latency. The fix is to set the latency mode parameter back to 'healthy'. The key finding is that the alarm fires due to downstream Quartz latency, not an issue with the ECS service's own internal processing pipeline."
+}

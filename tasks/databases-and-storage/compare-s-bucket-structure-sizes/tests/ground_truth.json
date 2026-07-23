@@ -1,0 +1,4 @@
+{
+  "instruction": "Compare the structure and file sizes between two S3 buckets {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket1Name}} and {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket2Name}}.",
+  "expected_answer": "The S3 buckets {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket1Name}} and {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket2Name}} contain different folder structures: {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}} and {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}} respectively, both having identical file content and size of 14 bytes."
+}

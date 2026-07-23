@@ -1,0 +1,91 @@
+schema_version = "1.0"
+
+[scenario]
+name = "troubleshooting-multiservice"
+description = "30 stacks across 7 regions exercising EC2/ECS/ECR/Glue/Lambda/CFN/RDS/Redshift/SageMaker. Includes setup scripts that build & push Docker images to ECR, mutate KMS key policies, trigger expected Glue/SFN states, and intentionally drive one CFN stack into UPDATE_FAILED for a troubleshooting task."
+account_tags = ["PRIMARY"]
+regions = [
+    "us-east-1",
+    "us-west-2",
+    "eu-west-1",
+    "eu-central-1",
+    "ap-northeast-1",
+    "ap-northeast-2",
+    "ap-southeast-2",
+]
+
+[environment]
+build_timeout_sec = 900.0
+cpus = 2
+memory_mb = 8192
+# Setup scripts shell out to `docker build` / `docker push`; the in-container
+# docker CLI proxies to the host daemon via this bind-mount.
+[[environment.mounts_json]]
+type = "bind"
+source = "/var/run/docker.sock"
+target = "/var/run/docker.sock"
+
+[deploy]
+timeout_sec = 5400.0
+
+[verify]
+timeout_sec = 300.0
+
+[cleanup]
+timeout_sec = 5400.0
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "ec2"
+quota_code = "L-0263D0A3"
+desired_value = 20
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 15
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-west-2"
+service_code = "ec2"
+quota_code = "L-0263D0A3"
+desired_value = 10
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-west-2"
+service_code = "ec2"
+quota_code = "L-1216C47A"
+desired_value = 24
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-west-2"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 15
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "eu-west-1"
+service_code = "ec2"
+quota_code = "L-0263D0A3"
+desired_value = 10
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "eu-west-1"
+service_code = "ec2"
+quota_code = "L-1216C47A"
+desired_value = 20
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "eu-west-1"
+service_code = "vpc"
+quota_code = "L-F678F1CE"
+desired_value = 10

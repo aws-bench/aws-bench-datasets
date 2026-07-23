@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Pre-commit hook: verify shared/tasks helper drift and judge output contract.
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+# Verify canonical per-task helpers (shared/tasks/) match their hook-dir copies
+if git diff --cached --name-only | grep -qE '^(shared/tasks/|tasks/[^/]+/[^/]+/(pre_invoke|post_invoke)/)'; then
+    echo "[pre-commit] Checking shared/tasks helper drift..."
+    bash "${REPO_ROOT}/shared/tasks/scripts/sync.sh" --check
+fi
+
+# Verify judge output contract when judge or task files are staged
+if git diff --cached --name-only | grep -qE '^(shared/judge/|tasks/[^/]+/[^/]+/(instruction\.md|tests/check\.py))'; then
+    echo "[pre-commit] Checking judge output contract..."
+    bash "${REPO_ROOT}/shared/judge/scripts/sync.sh" --check-output-contract
+fi

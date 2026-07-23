@@ -1,0 +1,4 @@
+{
+  "instruction": "Why can't I find the Step Functions state machine {{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}} even though CloudFormation says it was deployed successfully?",
+  "expected_answer": "The state machine {{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}} was manually deleted outside of CloudFormation. CloudFormation stack api-and-observability-stepfunctions-9bww99xri-us-east-1 shows status CREATE_COMPLETE and lists the state machine as CREATE_COMPLETE, but calling describe-state-machine on {{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn}} returns StateMachineDoesNotExist. CloudTrail confirms a DeleteStateMachine event was issued against the state machine after the stack was deployed."
+}

@@ -1,0 +1,4 @@
+{
+  "instruction": "Retrieve the contents of the CSV object file {{databases-and-storage-s3-jkdf342er-us-east-1-ObjectName}} available in the S3 bucket {{databases-and-storage-s3-jkdf342er-us-east-1-BucketName}}",
+  "expected_answer": "Successfully retrieved the contents of the CSV object file {{databases-and-storage-s3-jkdf342er-us-east-1-ObjectName}} that is available in S3 bucket {{databases-and-storage-s3-jkdf342er-us-east-1-BucketName}}: Name,Age,City\\nJohn,25,New York\\nJane,30,London\\nBob,35,Paris"
+}

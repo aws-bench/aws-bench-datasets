@@ -1,0 +1,4 @@
+{
+  "instruction": "How many of my CloudFormation stacks in us-east-1 have S3 buckets? Count any active stack that declares an S3 bucket resource. Break the answer down by S3 variant.",
+  "expected_answer": "In us-east-1, {{00da49d8-TotalStacksWithS3}} active CloudFormation stacks declare an S3 bucket resource. Of those, {{00da49d8-RegularBucketStackCount}} contain a regular `AWS::S3::Bucket`. Vector buckets (`AWS::S3Vectors::VectorBucket`) are declared by these stacks: {{00da49d8-VectorBucketStacks}}. Table buckets (`AWS::S3Tables::TableBucket`) are declared by these stacks: {{00da49d8-TableBucketStacks}}."
+}

@@ -1,0 +1,3 @@
+The internal ALB {{api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName}} that fronts our OpenSearch domain {{api-and-observability-opensearch-60603f075-us-east-1-DomainName}} started returning 502s to all requests. The CloudWatch alarm {{api-and-observability-opensearch-60603f075-us-east-1-AlarmName}} is firing. What is going on?
+
+IMPORTANT: Write your final answer to `/logs/agent/agent-output.txt`.

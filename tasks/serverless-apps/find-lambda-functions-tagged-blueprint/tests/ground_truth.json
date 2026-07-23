@@ -1,0 +1,4 @@
+{
+  "instruction": "Do I have any Lambda functions in my account which are tagged with lambda-console:blueprint? My account only operates in these regions: {{aws-bench-scenario-allowed-regions}}.",
+  "expected_answer": "The `{{serverless-apps-LambdaMisc-us-east-1-TaggedLambdaName}}` lambda function has the 'lambda-console:blueprint' tag."
+}
