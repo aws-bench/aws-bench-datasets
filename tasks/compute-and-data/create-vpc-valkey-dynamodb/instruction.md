@@ -1,4 +1,4 @@
-Create a storage application by setting up a VPC, Valkey cluster, and DynamoDB table.
+Create a storage application in us-east-1 by setting up a VPC, Valkey cluster, and DynamoDB table.
 
 IMPORTANT: Write your final prose answer to `/logs/agent/agent-output.txt`.
 
