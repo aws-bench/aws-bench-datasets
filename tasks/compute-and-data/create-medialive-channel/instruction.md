@@ -1,4 +1,4 @@
-Create a MediaLive channel with all the necessary resources.
+Create a MediaLive channel in us-east-1 with all the necessary resources.
 
 IMPORTANT: Write your final prose answer to `/logs/agent/agent-output.txt`.
 

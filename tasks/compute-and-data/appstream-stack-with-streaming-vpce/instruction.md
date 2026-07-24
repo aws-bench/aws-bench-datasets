@@ -1,4 +1,4 @@
-Create AWS AppStream 2.0 stack with create-stack that has a VPC endpoint for streaming. The AppStream stack needs to have access endpoints configured for streaming through the VPC endpoint.
+Create an AWS AppStream 2.0 stack in us-east-1 with create-stack that has a VPC endpoint for streaming. The AppStream stack needs to have access endpoints configured for streaming through the VPC endpoint.
 
 IMPORTANT: Write your final prose answer to `/logs/agent/agent-output.txt`.
 
