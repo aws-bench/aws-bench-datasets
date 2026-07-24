@@ -8,13 +8,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_ACTION: ${{ github.event.action }}
+          PR_USER: ${{ github.event.pull_request.user.login }}
+          REPO_NAME: ${{ github.event.repository.full_name }}
         run: |
-          curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
+          payload="$(jq -n \
+            --arg pr_url "$PR_URL" \
+            --arg pr_title "$PR_TITLE" \
+            --arg action "$PR_ACTION" \
+            --arg user "$PR_USER" \
+            --arg repo_name "$REPO_NAME" \
+            '{pr_url: $pr_url, pr_title: $pr_title, action: $action, user: $user, repo_name: $repo_name}')"
+          curl -X POST "$SLACK_WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d '{
-              "pr_url": "${{ github.event.pull_request.html_url }}",
-              "pr_title": "${{ github.event.pull_request.title }}",
-              "action": "${{ github.event.action }}",
-              "user": "${{ github.event.pull_request.user.login }}",
-              "repo_name": "${{ github.event.repository.full_name }}"
-            }'
+            -d "$payload"
