@@ -34,9 +34,9 @@ def _ws_connect_and_send(url, payload, timeout=5):
     parsed = urllib.parse.urlparse(url)
     raw = socket.create_connection((parsed.hostname, 443), timeout=timeout)
     try:
-        sock = ssl.create_default_context().wrap_socket(
-            raw, server_hostname=parsed.hostname
-        )
+        context = ssl.create_default_context()
+        context.minimum_version = ssl.TLSVersion.TLSv1_2
+        sock = context.wrap_socket(raw, server_hostname=parsed.hostname)
     except Exception:
         raw.close()
         raise
