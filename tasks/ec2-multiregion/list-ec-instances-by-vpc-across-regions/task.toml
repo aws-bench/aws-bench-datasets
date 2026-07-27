@@ -52,7 +52,6 @@ ec2-multiregion-EC2-ls9fuhb522-us-west-2-VpcId = "{{ec2-multiregion-EC2-ls9fuhb5
 
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
 ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 

@@ -44,10 +44,6 @@ ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId = "{{ec2-multiregion-EC2-ls9
 ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
 ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId = "{{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}}"
 
-[solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
-
-
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

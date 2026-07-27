@@ -47,7 +47,6 @@ ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId = "{{ec2-multiregion-EC2-ls9
 
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
 ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 
