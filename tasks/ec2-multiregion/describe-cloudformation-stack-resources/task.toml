@@ -6,7 +6,7 @@ description = "Describe the resources in a specific CloudFormation stack in us-w
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"

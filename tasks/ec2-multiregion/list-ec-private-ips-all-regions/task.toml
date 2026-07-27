@@ -6,7 +6,7 @@ description = "List all EC2 instances and their private IPs across all AWS regio
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"

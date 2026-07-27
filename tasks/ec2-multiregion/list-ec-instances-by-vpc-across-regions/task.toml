@@ -6,7 +6,7 @@ description = "Identify which EC2 instances belong to which VPCs across all AWS 
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"

@@ -6,7 +6,7 @@ description = "Identify EC2 instances across all regions that are not running in
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"

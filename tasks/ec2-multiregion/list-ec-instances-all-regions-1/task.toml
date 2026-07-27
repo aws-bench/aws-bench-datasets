@@ -6,7 +6,7 @@ description = "List all EC2 instances across every AWS region"
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"

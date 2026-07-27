@@ -6,7 +6,7 @@ description = "Identify and list unused EC2 security groups across all AWS regio
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Sequential"
 layer = "ControlPlane"
 
 
-# --- AWSBench extension --- pre-invoke step
+# --- aws-bench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
