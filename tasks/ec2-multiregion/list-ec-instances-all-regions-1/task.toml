@@ -6,7 +6,7 @@ description = "List all EC2 instances across every AWS region"
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -44,6 +44,11 @@ ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId = "{{ec2-multi
 ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId = "{{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}}"
 ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}"
 ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
+
+
+[solution.env]
+AWS_DEFAULT_REGION = "us-east-1"
+ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 
 # --- Harbor standard ---

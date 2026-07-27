@@ -6,7 +6,7 @@ description = "List all EC2 instances and their private IPs across all AWS regio
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -51,6 +51,10 @@ ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId = "{{ec2-multiregion-EC2-ls9
 ec2-multiregion-EC2-ls9fuhb522-us-west-1-PrivateIPOfInstance = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-PrivateIPOfInstance}}"
 ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
 ec2-multiregion-EC2-ls9fuhb522-us-west-2-PrivateIPOfInstance = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-2-PrivateIPOfInstance}}"
+
+
+[solution.env]
+ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 
 # --- Harbor standard ---

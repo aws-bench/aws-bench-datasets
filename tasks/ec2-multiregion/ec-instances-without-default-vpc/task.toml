@@ -6,7 +6,7 @@ description = "Identify EC2 instances across all regions that are not running in
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -43,6 +43,9 @@ ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId = "{{ec2-multi
 ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}"
 ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
 ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId = "{{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}}"
+
+[solution.env]
+AWS_DEFAULT_REGION = "us-east-1"
 
 
 # --- Harbor standard ---

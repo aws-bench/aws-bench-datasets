@@ -6,7 +6,7 @@ description = "Describe the resources in a specific CloudFormation stack in us-w
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -40,6 +40,9 @@ timeout_sec = 240.0
 [verifier.env]
 ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}"
 ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}}"
+
+[solution.env]
+STACK_ID = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}}"
 
 
 # --- Harbor standard ---

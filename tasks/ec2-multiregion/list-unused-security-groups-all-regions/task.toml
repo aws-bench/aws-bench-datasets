@@ -6,7 +6,7 @@ description = "Identify and list unused EC2 security groups across all AWS regio
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Sequential"
 layer = "ControlPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
@@ -45,7 +45,6 @@ timeout_sec = 240.0
 [verifier.env]
 ec2-multiregion-EC2-ks84v1fh12-us-east-1-UnusedSecurityGroupId = "{{ec2-multiregion-EC2-ks84v1fh12-us-east-1-UnusedSecurityGroupId}}"
 4b68864e-UnusedSecurityGroupCount = "{{4b68864e-UnusedSecurityGroupCount}}"
-
 
 # --- Harbor standard ---
 [environment]
