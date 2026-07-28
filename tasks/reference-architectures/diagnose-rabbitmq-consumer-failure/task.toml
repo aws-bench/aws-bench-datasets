@@ -48,3 +48,6 @@ reference-architectures-AmazonMQ-rabbitmq-us-east-1-BrokerId = "placeholder"
 reference-architectures-AmazonMQ-rabbitmq-us-east-1-BrokerName = "placeholder"
 reference-architectures-AmazonMQ-rabbitmq-us-east-1-FunctionName = "placeholder"
 reference-architectures-AmazonMQ-rabbitmq-us-east-1-QueueName = "placeholder"
+
+[solution.env]
+BROKER_NAME = "{{reference-architectures-AmazonMQ-rabbitmq-us-east-1-BrokerName}}"
