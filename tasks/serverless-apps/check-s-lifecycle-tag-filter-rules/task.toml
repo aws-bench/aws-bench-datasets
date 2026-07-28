@@ -6,7 +6,7 @@ description = "Check if any S3 bucket lifecycle archiving rules use tag-based fi
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,7 +39,6 @@ timeout_sec = 240.0
 
 [verifier.env]
 serverless-apps-S3Storage-us-east-1-LifeCycleBucket = "{{serverless-apps-S3Storage-us-east-1-LifeCycleBucket}}"
-
 
 # --- Harbor standard ---
 [environment]

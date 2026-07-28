@@ -6,7 +6,7 @@ description = "List all S3 bucket inventory configurations that have a prefix se
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,7 +39,6 @@ timeout_sec = 240.0
 
 [verifier.env]
 serverless-apps-S3Storage-us-east-1-InventoryBucketName = "{{serverless-apps-S3Storage-us-east-1-InventoryBucketName}}"
-
 
 # --- Harbor standard ---
 [environment]

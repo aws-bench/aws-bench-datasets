@@ -6,7 +6,7 @@ description = "Check for Lambda functions tagged with lambda-console:blueprint i
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -41,6 +41,8 @@ timeout_sec = 240.0
 aws-bench-scenario-allowed-regions = "{{aws-bench-scenario-allowed-regions}}"
 serverless-apps-LambdaMisc-us-east-1-TaggedLambdaName = "{{serverless-apps-LambdaMisc-us-east-1-TaggedLambdaName}}"
 
+[solution.env]
+ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 # --- Harbor standard ---
 [environment]
