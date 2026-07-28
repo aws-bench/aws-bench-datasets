@@ -6,7 +6,7 @@ description = "Check ECS services for custom configs including non-default desir
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"

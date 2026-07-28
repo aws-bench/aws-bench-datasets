@@ -6,7 +6,7 @@ description = "Identify container images used by ECS cluster services and verify
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"

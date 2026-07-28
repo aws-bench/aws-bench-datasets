@@ -6,7 +6,7 @@ description = "List all S3 buckets that have metrics configurations containing t
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"

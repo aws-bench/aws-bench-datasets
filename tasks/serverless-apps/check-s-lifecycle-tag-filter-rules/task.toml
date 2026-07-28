@@ -6,7 +6,7 @@ description = "Check if any S3 bucket lifecycle archiving rules use tag-based fi
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"

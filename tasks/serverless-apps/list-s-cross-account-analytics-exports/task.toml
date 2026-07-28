@@ -6,7 +6,7 @@ description = "List all S3 bucket analytics configurations that export data to a
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "serverless-apps"
 agent_role_name = "QALocalInvocationApplicationRole"
