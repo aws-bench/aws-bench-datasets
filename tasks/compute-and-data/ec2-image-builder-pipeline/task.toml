@@ -42,6 +42,9 @@ timeout_sec = 4800.0
 [verifier]
 timeout_sec = 360.0
 
+[verifier.env]
+SCENARIO_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
+
 [solution.env]
 AWS_DEFAULT_REGION = "us-east-1"
 

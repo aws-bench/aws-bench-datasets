@@ -45,12 +45,13 @@ timeout_sec = 2400.0
 timeout_sec = 1440.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 KINESIS_STREAM_NAME = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-KinesisStreamName}}"
 S3_SINK_BUCKET = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-S3BucketName}}"
 FIREHOSE_ROLE_NAME = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-FirehoseRoleName}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 KINESIS_STREAM_NAME = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-KinesisStreamName}}"
 S3_SINK_BUCKET = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-S3BucketName}}"
 FIREHOSE_ROLE_NAME = "{{streaming-and-iot-kinesis-kdsicb52e-us-east-1-FirehoseRoleName}}"

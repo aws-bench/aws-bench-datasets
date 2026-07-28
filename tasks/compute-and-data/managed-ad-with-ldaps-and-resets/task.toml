@@ -38,6 +38,9 @@ timeout_sec = 7200.0
 [verifier]
 timeout_sec = 720.0
 
+[verifier.env]
+AWS_REGION = "us-east-1"
+
 [solution.env]
 AWS_DEFAULT_REGION = "us-east-1"
 

@@ -45,6 +45,7 @@ timeout_sec = 2400.0
 timeout_sec = 600.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 VPC_ID = "{{compute-and-data-ec2-vlf3847wf-us-east-1-VpcId}}"
 SUBNET_ID_1 = "{{compute-and-data-ec2-vlf3847wf-us-east-1-SubnetId1}}"
 SUBNET_ID_2 = "{{compute-and-data-ec2-vlf3847wf-us-east-1-SubnetId2}}"
