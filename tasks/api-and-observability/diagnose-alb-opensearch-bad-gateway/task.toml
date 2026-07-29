@@ -6,7 +6,7 @@ description = "Investigate why an internal ALB fronting an OpenSearch domain is 
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"

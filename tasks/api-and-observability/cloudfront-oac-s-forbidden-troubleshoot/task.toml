@@ -6,7 +6,7 @@ description = "Diagnose why CloudFront distribution with OAC returns 403 errors 
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"

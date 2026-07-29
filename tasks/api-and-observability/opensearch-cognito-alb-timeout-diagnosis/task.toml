@@ -6,7 +6,7 @@ description = "Diagnose why OpenSearch dashboards time out after Cognito authent
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"

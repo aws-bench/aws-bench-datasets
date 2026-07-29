@@ -6,7 +6,7 @@ description = "Investigate why a CloudWatch service latency alarm is firing in a
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -26,7 +26,7 @@ complexity = "Orchestrated"
 layer = "CrossPlane"
 
 
-# --- AWSBench extension --- pre-invoke step
+# --- aws-bench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 1440.0
 
