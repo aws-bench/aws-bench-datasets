@@ -6,7 +6,7 @@ description = "Count active CloudFormation stacks that contain an S3 bucket reso
 authors = []
 keywords = []
 
-# --- AWSBench extension --- which scenario this task uses
+# --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Orchestrated"
 layer = "ControlPlane"
 
 
-# --- AWSBench extension --- pre-invoke step
+# --- aws-bench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
