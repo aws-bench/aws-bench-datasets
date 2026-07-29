@@ -10,7 +10,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 BUCKET_NAME = os.environ.get("BUCKET_NAME", "")
 
 # Baseline object. Content-Type is binary/octet-stream (S3's default for .yaml)

@@ -7,7 +7,7 @@ from botocore.exceptions import BotoCoreError, ClientError
 
 _AWS_ERRORS = (ClientError, BotoCoreError)
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 DOMAIN_NAME = os.environ.get("DOMAIN_NAME", "")
 ACCOUNT_ID_1 = os.environ.get("ACCOUNT_ID_1", "")
 ACCOUNT_ID_2 = os.environ.get("ACCOUNT_ID_2", "")

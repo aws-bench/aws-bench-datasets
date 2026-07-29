@@ -35,7 +35,7 @@ timeout_sec = 2400.0
 CLUSTER_NAME = "{{compute-and-data-eks-jhsgt6yg2-us-east-1-ClusterName}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 CLUSTER_NAME = "{{compute-and-data-eks-jhsgt6yg2-us-east-1-ClusterName}}"
 
 [post_invoke]

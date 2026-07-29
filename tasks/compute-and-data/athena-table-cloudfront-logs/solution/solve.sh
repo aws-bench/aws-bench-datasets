@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 BUCKET="${EXPECTED_LOG_BUCKET}"
 DB="${ATHENA_DATABASE:-cloudfront_logs}"
 TABLE="${ATHENA_TABLE:-cloudfront_access_logs}"

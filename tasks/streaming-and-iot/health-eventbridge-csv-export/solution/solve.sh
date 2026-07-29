@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 EVENT_BUS_NAME="${EVENT_BUS_NAME}"
 EXPORT_BUCKET="${EXPORT_BUCKET}"
 HEALTH_ROLE_NAME="${HEALTH_ROLE_NAME}"

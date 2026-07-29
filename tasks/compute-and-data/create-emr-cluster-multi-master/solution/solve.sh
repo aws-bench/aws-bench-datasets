@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-ap-southeast-1}"
+REGION="${AWS_REGION:-ap-southeast-1}"
 SERVICE_ROLE="EMR_DefaultRole"
 EC2_ROLE="EMR_EC2_DefaultRole"
 OUT=/logs/agent/agent-output.txt

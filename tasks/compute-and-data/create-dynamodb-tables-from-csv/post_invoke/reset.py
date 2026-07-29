@@ -14,7 +14,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError, WaiterError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 SOURCE_BUCKET = os.environ.get("DDB_SOURCE_BUCKET", "")
 
 # Exact CSV content from the CDK stack (s3_7894hwoc7.ts)

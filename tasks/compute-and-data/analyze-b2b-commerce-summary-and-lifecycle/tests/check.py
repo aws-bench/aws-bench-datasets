@@ -28,7 +28,7 @@ from rewardkit import criterion
 
 # ── Inputs ───────────────────────────────────────────────────────────────────
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 
 # The bucket is published as a CFN export and given to the agent in the
 # instruction prompt — the agent has no choice. All criteria operate

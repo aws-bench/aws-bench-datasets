@@ -38,7 +38,7 @@ timeout_sec = 360.0
 [post_invoke.env]
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 MEDIALIVE_ROLE_NAME = "MediaLiveAccessRole"
 
 [environment]

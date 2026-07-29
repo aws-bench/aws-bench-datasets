@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 TABLE="${TABLE_NAME:-visitor-ip-log}"
 FUNCTION="${FUNCTION_NAME:-visitor-ip-capture}"
 ROLE="${ROLE_NAME:-visitor-ip-lambda-role}"
