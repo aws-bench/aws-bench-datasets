@@ -6,7 +6,7 @@ description = "Retrieve the contents of a text file stored in an S3 bucket"
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,6 +39,9 @@ timeout_sec = 240.0
 
 [verifier.env]
 databases-and-storage-s3-f63sr5wt6-us-east-1-BucketName = "{{databases-and-storage-s3-f63sr5wt6-us-east-1-BucketName}}"
+
+[solution.env]
+TARGET_BUCKET_NAME = "{{databases-and-storage-s3-f63sr5wt6-us-east-1-BucketName}}"
 
 # --- Harbor standard ---
 [environment]

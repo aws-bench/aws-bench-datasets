@@ -6,7 +6,7 @@ description = "Find top 3 active CloudFormation stacks prefixed with 'databases-
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Sequential"
 layer = "ControlPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
@@ -52,7 +52,6 @@ timeout_sec = 240.0
 4dd10da5-Stack3Name = "{{4dd10da5-Stack3Name}}"
 4dd10da5-Stack3Count = "{{4dd10da5-Stack3Count}}"
 4dd10da5-Stack3TopTypes = "{{4dd10da5-Stack3TopTypes}}"
-
 
 # --- Harbor standard ---
 [environment]

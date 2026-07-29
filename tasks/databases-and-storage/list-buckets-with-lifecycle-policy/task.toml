@@ -6,7 +6,7 @@ description = "Identify S3 buckets with lifecycle policies, excluding CDK asset,
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,7 +39,6 @@ timeout_sec = 240.0
 
 [verifier.env]
 databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules = "{{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules}}"
-
 
 # --- Harbor standard ---
 [environment]

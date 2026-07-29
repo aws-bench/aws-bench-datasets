@@ -6,7 +6,7 @@ description = "Count the total number of SQS protocol subscribers across all SNS
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,7 +39,6 @@ timeout_sec = 240.0
 
 [verifier.env]
 databases-and-storage-SQS-e5ldy6q5p-us-west-2-NUMSubscribers = "{{databases-and-storage-SQS-e5ldy6q5p-us-west-2-NUMSubscribers}}"
-
 
 # --- Harbor standard ---
 [environment]

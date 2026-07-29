@@ -6,7 +6,7 @@ description = "Fetch sample records, count completed statuses, and list unique w
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,6 +39,9 @@ timeout_sec = 240.0
 
 [verifier.env]
 databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName = "{{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}}"
+
+[solution.env]
+DYNAMODB_TABLE_NAME = "{{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}}"
 
 
 # --- Harbor standard ---

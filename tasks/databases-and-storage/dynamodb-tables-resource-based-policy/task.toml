@@ -6,7 +6,7 @@ description = "Identify DynamoDB tables that have a resource-based policy config
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -40,7 +40,6 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy = "{{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy}}"
 databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy = "{{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy}}"
-
 
 # --- Harbor standard ---
 [environment]

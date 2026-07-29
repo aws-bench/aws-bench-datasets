@@ -6,7 +6,7 @@ description = "List DynamoDB tables that have Kinesis streaming enabled across a
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -42,6 +42,8 @@ aws-bench-scenario-allowed-regions = "{{aws-bench-scenario-allowed-regions}}"
 databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableWithStream = "{{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableWithStream}}"
 databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableWithStream = "{{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableWithStream}}"
 
+[solution.env]
+ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 # --- Harbor standard ---
 [environment]

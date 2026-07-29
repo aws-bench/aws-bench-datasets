@@ -6,7 +6,7 @@ description = "Analyze S3 buckets prefixed with bucket<number> for missing Intel
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -40,7 +40,6 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations1 = "{{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations1}}"
 databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations2 = "{{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations2}}"
-
 
 # --- Harbor standard ---
 [environment]

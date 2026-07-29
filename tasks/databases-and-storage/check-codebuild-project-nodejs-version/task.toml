@@ -6,7 +6,7 @@ description = "Identify the Node.js version configured for a specific AWS CodeBu
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -40,6 +40,9 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName = "{{databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName}}"
 databases-and-storage-codebuild-g5etw5eu5-us-east-1-NodeVersion = "{{databases-and-storage-codebuild-g5etw5eu5-us-east-1-NodeVersion}}"
+
+[solution.env]
+PROJECT_NAME = "{{databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName}}"
 
 
 # --- Harbor standard ---

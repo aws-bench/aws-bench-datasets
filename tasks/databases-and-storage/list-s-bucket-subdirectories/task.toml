@@ -6,7 +6,7 @@ description = "Retrieve the immediate subdirectories in a specified S3 bucket"
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -41,6 +41,8 @@ timeout_sec = 240.0
 databases-and-storage-s3-eor38cdr9-us-east-1-SubDirectoryName = "{{databases-and-storage-s3-eor38cdr9-us-east-1-SubDirectoryName}}"
 databases-and-storage-s3-eor38cdr9-us-east-1-BucketName = "{{databases-and-storage-s3-eor38cdr9-us-east-1-BucketName}}"
 
+[solution.env]
+BUCKET_NAME = "{{databases-and-storage-s3-eor38cdr9-us-east-1-BucketName}}"
 
 # --- Harbor standard ---
 [environment]

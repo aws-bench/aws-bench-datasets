@@ -6,7 +6,7 @@ description = "Count the number of Windows Server 2022 managed nodes in AWS Syst
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,7 +39,6 @@ timeout_sec = 240.0
 
 [verifier.env]
 databases-and-storage-SSM-a1b2c3d46-us-east-1-NumberOfWindows2022ManagedNodes = "{{databases-and-storage-SSM-a1b2c3d46-us-east-1-NumberOfWindows2022ManagedNodes}}"
-
 
 # --- Harbor standard ---
 [environment]

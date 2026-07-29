@@ -6,7 +6,7 @@ description = "Count the number of S3 buckets that were created more than one da
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Atomic"
 layer = "ControlPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
@@ -44,7 +44,6 @@ timeout_sec = 240.0
 
 [verifier.env]
 c480b808-BucketCount = "{{c480b808-BucketCount}}"
-
 
 # --- Harbor standard ---
 [environment]

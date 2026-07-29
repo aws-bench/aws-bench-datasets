@@ -6,7 +6,7 @@ description = "Calculate total estimated hourly on-demand cost of running EC2 in
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Orchestrated"
 layer = "ControlPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
@@ -45,7 +45,6 @@ timeout_sec = 240.0
 [verifier.env]
 f6287f43-TotalHourlyCost = "{{f6287f43-TotalHourlyCost}}"
 f6287f43-Breakdown = "{{f6287f43-Breakdown}}"
-
 
 # --- Harbor standard ---
 [environment]

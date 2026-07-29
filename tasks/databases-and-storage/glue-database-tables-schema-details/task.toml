@@ -6,7 +6,7 @@ description = "List all tables in a Glue database and display the detailed schem
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -40,6 +40,8 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName = "{{databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName}}"
 
+[solution.env]
+DATABASE_NAME = "{{databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName}}"
 
 # --- Harbor standard ---
 [environment]

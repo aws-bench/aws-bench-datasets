@@ -6,7 +6,7 @@ description = "Identify most recently modified object and retrieve size and vers
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Sequential"
 layer = "DataPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 [pre_invoke.env]
@@ -51,6 +51,8 @@ timeout_sec = 240.0
 898c7f19-ProdDataSizeBytes = "{{898c7f19-ProdDataSizeBytes}}"
 databases-and-storage-s3-y5esr5w6g-us-east-1-BucketName = "{{databases-and-storage-s3-y5esr5w6g-us-east-1-BucketName}}"
 
+[solution.env]
+BUCKET_NAME = "{{databases-and-storage-s3-y5esr5w6g-us-east-1-BucketName}}"
 
 # --- Harbor standard ---
 [environment]

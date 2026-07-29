@@ -6,7 +6,7 @@ description = "Generate a report identifying all S3 buckets that do not have ser
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -36,7 +36,6 @@ timeout_sec = 600.0
 # --- Harbor standard ---
 [verifier]
 timeout_sec = 240.0
-
 
 # --- Harbor standard ---
 [environment]

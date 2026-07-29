@@ -6,7 +6,7 @@ description = "Download the latest CSV file from an S3 bucket and identify uniqu
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -41,6 +41,9 @@ timeout_sec = 240.0
 databases-and-storage-s3-r29cj1k42-us-east-1-FileName = "{{databases-and-storage-s3-r29cj1k42-us-east-1-FileName}}"
 databases-and-storage-s3-r29cj1k42-us-east-1-CsvBucketName = "{{databases-and-storage-s3-r29cj1k42-us-east-1-CsvBucketName}}"
 
+[solution.env]
+CSV_FILE_NAME = "{{databases-and-storage-s3-r29cj1k42-us-east-1-FileName}}"
+CSV_BUCKET_NAME = "{{databases-and-storage-s3-r29cj1k42-us-east-1-CsvBucketName}}"
 
 # --- Harbor standard ---
 [environment]

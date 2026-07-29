@@ -6,7 +6,7 @@ description = "Count active CloudFormation stacks that contain an S3 bucket reso
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "databases-and-storage"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -29,7 +29,7 @@ complexity = "Orchestrated"
 layer = "ControlPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
@@ -47,7 +47,6 @@ timeout_sec = 240.0
 00da49d8-RegularBucketStackCount = "{{00da49d8-RegularBucketStackCount}}"
 00da49d8-VectorBucketStacks = "{{00da49d8-VectorBucketStacks}}"
 00da49d8-TableBucketStacks = "{{00da49d8-TableBucketStacks}}"
-
 
 # --- Harbor standard ---
 [environment]
