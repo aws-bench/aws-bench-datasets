@@ -52,7 +52,7 @@ ETL_BUCKET = "{{streaming-and-iot-s3-etlcsv9q2-us-east-1-ETLBucketName}}"
 OUTPUT_PREFIX = "{{streaming-and-iot-s3-etlcsv9q2-us-east-1-SomeFolderName}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 ETL_BUCKET = "{{streaming-and-iot-s3-etlcsv9q2-us-east-1-ETLBucketName}}"
 OUTPUT_PREFIX = "{{streaming-and-iot-s3-etlcsv9q2-us-east-1-SomeFolderName}}"
 

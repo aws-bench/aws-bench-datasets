@@ -46,7 +46,7 @@ timeout_sec = 360.0
 SCENARIO_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 # --- Harbor standard ---
 [environment]

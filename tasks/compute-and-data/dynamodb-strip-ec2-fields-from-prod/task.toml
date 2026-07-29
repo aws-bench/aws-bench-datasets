@@ -30,14 +30,14 @@ timeout_sec = 360.0
 
 [pre_invoke.env]
 EXPECTED_TABLE = "{{compute-and-data-dynamodb-fyu89ikhg-us-east-1-TableName}}"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 360.0
 
 [post_invoke.env]
 EXPECTED_TABLE = "{{compute-and-data-dynamodb-fyu89ikhg-us-east-1-TableName}}"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 # --- Harbor standard ---
 [agent]
@@ -52,7 +52,7 @@ EXPECTED_TABLE = "{{compute-and-data-dynamodb-fyu89ikhg-us-east-1-TableName}}"
 
 [solution.env]
 EXPECTED_TABLE = "{{compute-and-data-dynamodb-fyu89ikhg-us-east-1-TableName}}"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 # --- Harbor standard ---
 [environment]

@@ -37,7 +37,7 @@ timeout_sec = 360.0
 EXPECTED_IPAM_POOL_ID = "{{compute-and-data-ec2-we0c39jd3-us-east-1-PrivatePoolId}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 IPAM_POOL_ID = "{{compute-and-data-ec2-we0c39jd3-us-east-1-PrivatePoolId}}"
 
 # --- Harbor standard ---

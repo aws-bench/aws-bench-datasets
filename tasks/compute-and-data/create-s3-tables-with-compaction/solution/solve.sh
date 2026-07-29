@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 BUCKET="${BUCKET_NAME:-sort-compaction-demo}"
 NAMESPACE="${NAMESPACE:-analytics}"
 TABLE_WITH="${TABLE_WITH:-user_events_with_sort_compaction}"

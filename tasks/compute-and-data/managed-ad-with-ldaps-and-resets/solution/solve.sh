@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 DOMAIN="${AD_DOMAIN:-corp.example.com}"
 SHORT="${AD_SHORT_NAME:-CORP}"
 PASSWORD="${AD_PASSWORD:-C0rpSecret#2024x}"
