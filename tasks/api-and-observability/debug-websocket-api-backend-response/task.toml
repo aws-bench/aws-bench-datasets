@@ -6,7 +6,7 @@ description = "Diagnose why WebSocket API connections succeed but backend respon
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -26,7 +26,7 @@ complexity = "Orchestrated"
 layer = "CrossPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
@@ -42,6 +42,10 @@ timeout_sec = 240.0
 [verifier.env]
 api-and-observability-WebSocket-d761a646a-us-east-1-AgentScriptsBucketName = "{{api-and-observability-WebSocket-d761a646a-us-east-1-AgentScriptsBucketName}}"
 api-and-observability-WebSocket-d761a646a-us-east-1-WebSocketEndpoint = "{{api-and-observability-WebSocket-d761a646a-us-east-1-WebSocketEndpoint}}"
+
+[solution.env]
+AGENT_SCRIPTS_BUCKET = "{{api-and-observability-WebSocket-d761a646a-us-east-1-AgentScriptsBucketName}}"
+WS_ENDPOINT = "{{api-and-observability-WebSocket-d761a646a-us-east-1-WebSocketEndpoint}}"
 
 
 # --- Harbor standard ---

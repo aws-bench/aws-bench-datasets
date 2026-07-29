@@ -6,7 +6,7 @@ description = "Investigate why a Step Functions state machine is not found despi
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -40,6 +40,10 @@ timeout_sec = 240.0
 [verifier.env]
 api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}}"
 api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn}}"
+
+
+[solution.env]
+STATE_MACHINE_NAME = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}}"
 
 
 # --- Harbor standard ---

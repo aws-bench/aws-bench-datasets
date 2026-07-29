@@ -6,7 +6,7 @@ description = "Diagnose why a Lambda function processing SQS reconciliation requ
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -26,7 +26,7 @@ complexity = "Orchestrated"
 layer = "CrossPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 840.0
 
@@ -41,6 +41,9 @@ timeout_sec = 240.0
 
 [verifier.env]
 api-and-observability-Lambda-37634fcce-us-west-2-LambdaFunctionName = "{{api-and-observability-Lambda-37634fcce-us-west-2-LambdaFunctionName}}"
+
+[solution.env]
+LAMBDA_FUNCTION_NAME = "{{api-and-observability-Lambda-37634fcce-us-west-2-LambdaFunctionName}}"
 
 
 # --- Harbor standard ---

@@ -6,7 +6,7 @@ description = "Diagnose why a CloudFront distribution returns generic errors ins
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -40,6 +40,9 @@ timeout_sec = 240.0
 [verifier.env]
 api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId = "{{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}}"
 api-and-observability-cloudfront-e0239752d-us-east-1-TenantProvisioningWorkflowArn = "{{api-and-observability-cloudfront-e0239752d-us-east-1-TenantProvisioningWorkflowArn}}"
+
+[solution.env]
+DISTRIBUTION_ID = "{{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}}"
 
 
 # --- Harbor standard ---

@@ -6,7 +6,7 @@ description = "Investigate why an internal ALB fronting an OpenSearch domain is 
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -41,6 +41,11 @@ timeout_sec = 240.0
 api-and-observability-opensearch-60603f075-us-east-1-AlarmName = "{{api-and-observability-opensearch-60603f075-us-east-1-AlarmName}}"
 api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName = "{{api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName}}"
 api-and-observability-opensearch-60603f075-us-east-1-DomainName = "{{api-and-observability-opensearch-60603f075-us-east-1-DomainName}}"
+
+[solution.env]
+ALB_DNS_NAME = "{{api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName}}"
+DOMAIN_NAME = "{{api-and-observability-opensearch-60603f075-us-east-1-DomainName}}"
+ALARM_NAME = "{{api-and-observability-opensearch-60603f075-us-east-1-AlarmName}}"
 
 
 # --- Harbor standard ---

@@ -6,7 +6,7 @@ description = "Diagnose why OpenSearch dashboards time out after Cognito authent
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -39,6 +39,9 @@ timeout_sec = 240.0
 
 [verifier.env]
 api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName = "{{api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName}}"
+
+[solution.env]
+OPENSEARCH_DOMAIN_NAME = "{{api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName}}"
 
 
 # --- Harbor standard ---

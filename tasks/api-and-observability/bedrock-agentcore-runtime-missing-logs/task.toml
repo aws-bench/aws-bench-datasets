@@ -6,7 +6,7 @@ description = "Diagnose why Bedrock AgentCore MCP runtime is missing despite log
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -26,7 +26,7 @@ complexity = "Orchestrated"
 layer = "CrossPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 240.0
 
@@ -43,6 +43,10 @@ timeout_sec = 240.0
 api-and-observability-logs-6b635d316-us-west-2-BasaltMcpApplicationLogsGroupName = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpApplicationLogsGroupName}}"
 api-and-observability-logs-6b635d316-us-west-2-BasaltMcpUsageLogsGroupName = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpUsageLogsGroupName}}"
 api-and-observability-logs-6b635d316-us-west-2-BasaltMcpLogGroupName = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpLogGroupName}}"
+
+[solution.env]
+BASALT_MCP_LOG_GROUP_NAME = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpLogGroupName}}"
+BASALT_MCP_APPLICATION_LOGS_GROUP_NAME = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpApplicationLogsGroupName}}"
 
 
 # --- Harbor standard ---

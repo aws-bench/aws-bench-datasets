@@ -6,7 +6,7 @@ description = "Diagnose why an IAM role with execute-api:Invoke permission gets 
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -42,6 +42,10 @@ api-and-observability-ApiGateway-6b015c55c-us-east-1-RestrictedRoleArn = "{{api-
 api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiId = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiId}}"
 api-and-observability-ApiGateway-6b015c55c-us-east-1-AgreementPath = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-AgreementPath}}"
 api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiUrl = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiUrl}}"
+
+[solution.env]
+API_URL = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiUrl}}"
+AGREEMENT_PATH = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-AgreementPath}}"
 
 
 # --- Harbor standard ---

@@ -6,7 +6,7 @@ description = "Investigate why an Application Load Balancer started returning 5X
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -26,7 +26,7 @@ complexity = "Orchestrated"
 layer = "CrossPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 1800.0
 
@@ -41,6 +41,9 @@ timeout_sec = 240.0
 
 [verifier.env]
 api-and-observability-ecs-t81xcoww7-us-east-1-ALBArn = "{{api-and-observability-ecs-t81xcoww7-us-east-1-ALBArn}}"
+
+[solution.env]
+ALB_ARN = "{{api-and-observability-ecs-t81xcoww7-us-east-1-ALBArn}}"
 
 
 # --- Harbor standard ---

@@ -6,7 +6,7 @@ description = "Investigate why a CloudWatch service latency alarm is firing in a
 authors = []
 keywords = []
 
-# --- aws-bench extension --- which scenario this task uses
+# --- AWSBench extension --- which scenario this task uses
 [scenario]
 scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
@@ -26,7 +26,7 @@ complexity = "Orchestrated"
 layer = "CrossPlane"
 
 
-# --- aws-bench extension --- pre-invoke step
+# --- AWSBench extension --- pre-invoke step
 [pre_invoke]
 timeout_sec = 1440.0
 
@@ -41,6 +41,9 @@ timeout_sec = 240.0
 
 [verifier.env]
 api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName = "{{api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName}}"
+
+[solution.env]
+SERVICE_LATENCY_ALARM_NAME = "{{api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName}}"
 
 
 # --- Harbor standard ---
