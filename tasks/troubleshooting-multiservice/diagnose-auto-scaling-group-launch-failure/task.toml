@@ -42,6 +42,9 @@ troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-LaunchTemplateName = "{{tro
 troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-KmsKeyId = "{{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-KmsKeyId}}"
 troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-AutoScalingGroupName = "{{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-AutoScalingGroupName}}"
 
+[solution.env]
+ASG_NAME = "{{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-AutoScalingGroupName}}"
+
 
 # --- Harbor standard ---
 [environment]

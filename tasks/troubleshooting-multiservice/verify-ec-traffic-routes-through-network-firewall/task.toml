@@ -45,6 +45,9 @@ troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-TGWRouteTableId = "{{t
 troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCAttachmentId = "{{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCAttachmentId}}"
 troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadInstanceId = "{{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadInstanceId}}"
 
+[solution.env]
+WORKLOAD_INSTANCE_ID = "{{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadInstanceId}}"
+
 
 # --- Harbor standard ---
 [environment]

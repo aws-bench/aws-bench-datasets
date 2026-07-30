@@ -44,6 +44,9 @@ layer = "ControlPlane"
 [agent]
 timeout_sec = 600.0
 
+[solution.env]
+ASG_NAME = "{{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-ASGName}}"
+
 # --- Harbor standard ---
 [verifier]
 timeout_sec = 240.0

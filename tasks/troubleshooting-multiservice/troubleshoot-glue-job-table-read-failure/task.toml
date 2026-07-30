@@ -43,6 +43,10 @@ troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueTableName = "{{trouble
 troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueServiceRoleArn = "{{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueServiceRoleArn}}"
 troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueDatabaseName = "{{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueDatabaseName}}"
 
+[solution.env]
+GLUE_JOB_NAME = "{{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueJobName}}"
+GLUE_TABLE_NAME = "{{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueTableName}}"
+
 
 # --- Harbor standard ---
 [environment]

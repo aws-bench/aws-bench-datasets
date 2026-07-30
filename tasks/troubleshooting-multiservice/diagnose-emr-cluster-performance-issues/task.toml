@@ -40,6 +40,9 @@ timeout_sec = 240.0
 [verifier.env]
 troubleshooting-multiservice-emr-0hr2dw3rz-eu-west-1-EmrClusterId = "{{troubleshooting-multiservice-emr-0hr2dw3rz-eu-west-1-EmrClusterId}}"
 
+[solution.env]
+EMR_CLUSTER_ID = "{{troubleshooting-multiservice-emr-0hr2dw3rz-eu-west-1-EmrClusterId}}"
+
 
 # --- Harbor standard ---
 [environment]

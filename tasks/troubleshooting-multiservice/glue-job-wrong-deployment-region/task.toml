@@ -42,6 +42,9 @@ troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion = "{{trou
 troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}}"
 troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName}}"
 
+[solution.env]
+EXPECTED_REGION = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}}"
+
 
 # --- Harbor standard ---
 [environment]

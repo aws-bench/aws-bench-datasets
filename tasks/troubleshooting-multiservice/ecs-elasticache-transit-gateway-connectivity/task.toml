@@ -49,6 +49,12 @@ troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheVpcTgwAttachmentId = "
 troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-EcsServiceArn = "{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-EcsServiceArn}}"
 
 
+[solution.env]
+ECS_SERVICE_ARN = "{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-EcsServiceArn}}"
+CACHE_CLUSTER_ID = "{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-ElastiCacheClusterId}}"
+TGW_ID = "{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-TransitGatewayId}}"
+
+
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0
