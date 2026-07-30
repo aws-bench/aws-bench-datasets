@@ -30,7 +30,7 @@ timeout_sec = 300.0
 [pre_invoke.env]
 CF_DATA_BUCKET = "{{compute-and-data-cloudfront-492sidmdo-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 300.0
@@ -38,7 +38,7 @@ timeout_sec = 300.0
 [post_invoke.env]
 CF_DATA_BUCKET = "{{compute-and-data-cloudfront-492sidmdo-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [agent]
 timeout_sec = 1200.0
@@ -50,7 +50,7 @@ timeout_sec = 360.0
 DISTRIBUTION_ID = "{{compute-and-data-cloudfront-492sidmdo-us-east-1-DistributionId}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 DISTRIBUTION_ID = "{{compute-and-data-cloudfront-492sidmdo-us-east-1-DistributionId}}"
 
 [environment]

@@ -13,7 +13,7 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 SOURCE_BUCKET = os.environ.get("DDB_SOURCE_BUCKET", "")
 
 AGENT_OUTPUT_PATH = Path("/logs/agent/agent-output.json")

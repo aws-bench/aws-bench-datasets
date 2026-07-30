@@ -5,7 +5,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 BUCKETS_CSV = os.environ.get("EXPECTED_BUCKETS_CSV", "")
 SAGEMAKER_BUCKET = os.environ.get("SAGEMAKER_BUCKET", "")
 CLUSTER_NAME = os.environ.get("EXPECTED_CLUSTER", "")

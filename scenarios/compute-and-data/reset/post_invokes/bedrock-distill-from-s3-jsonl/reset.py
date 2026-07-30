@@ -12,7 +12,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 BUCKET_NAME = os.environ.get("TRAINING_BUCKET_NAME", "")
 OUTPUT_BUCKET_NAME = os.environ.get("OUTPUT_BUCKET_NAME", "")
 

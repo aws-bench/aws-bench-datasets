@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 DIST="${DISTRIBUTION_ID}"
 OUT=/logs/agent/agent-output.txt
 OUT_JSON=/logs/agent/agent-output.json

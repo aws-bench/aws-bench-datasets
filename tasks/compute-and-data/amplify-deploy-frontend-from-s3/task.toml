@@ -32,7 +32,7 @@ timeout_sec = 300.0
 [pre_invoke.env]
 AMPLIFY_DATA_BUCKET = "{{compute-and-data-s3-s5wscsi4m-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 300.0
@@ -40,7 +40,7 @@ timeout_sec = 300.0
 [post_invoke.env]
 AMPLIFY_DATA_BUCKET = "{{compute-and-data-s3-s5wscsi4m-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 # --- Harbor standard ---
 [agent]
@@ -54,7 +54,7 @@ timeout_sec = 360.0
 EXPECTED_BUCKET = "{{compute-and-data-s3-s5wscsi4m-us-east-1-BucketName}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 BUCKET_NAME = "{{compute-and-data-s3-s5wscsi4m-us-east-1-BucketName}}"
 
 # --- Harbor standard ---

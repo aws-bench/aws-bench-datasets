@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 SRC="${SOURCE_PATH%/}/"
 DEST="${DEST_PATH%/}/"
 OUT=/logs/agent/agent-output.txt

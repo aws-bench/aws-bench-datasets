@@ -13,7 +13,7 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 SOURCE_PATH = os.environ.get("SOURCE_PATH", "")
 DEST_PATH = os.environ.get("DEST_PATH", "")
 

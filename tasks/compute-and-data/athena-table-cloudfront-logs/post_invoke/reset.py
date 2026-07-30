@@ -25,7 +25,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 LOG_BUCKET = os.environ.get("EXPECTED_LOG_BUCKET", "")
 # Prefix under LOG_BUCKET where Athena writes query results. The output
 # location is agent-chosen at query time; ``athena-results/`` is the

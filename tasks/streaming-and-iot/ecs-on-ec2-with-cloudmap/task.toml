@@ -43,7 +43,7 @@ timeout_sec = 600.0
 CLUSTER_NAME = "{{streaming-and-iot-ecs-ecsasg7m4-us-east-1-ClusterName}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 CLUSTER_NAME = "{{streaming-and-iot-ecs-ecsasg7m4-us-east-1-ClusterName}}"
 ASG_NAME = "{{streaming-and-iot-ecs-ecsasg7m4-us-east-1-ASGName}}"
 
