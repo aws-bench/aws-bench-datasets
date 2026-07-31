@@ -47,3 +47,8 @@ storage_mb = 10240
 reference-architectures-StepFunctions-jobpoller-us-east-1-CheckStatusFunctionName = "placeholder"
 reference-architectures-StepFunctions-jobpoller-us-east-1-RuleName = "placeholder"
 reference-architectures-StepFunctions-jobpoller-us-east-1-StateMachineName = "placeholder"
+
+[solution.env]
+STATE_MACHINE_NAME = "{{reference-architectures-StepFunctions-jobpoller-us-east-1-StateMachineName}}"
+CHECK_STATUS_FUNCTION_NAME = "{{reference-architectures-StepFunctions-jobpoller-us-east-1-CheckStatusFunctionName}}"
+RULE_NAME = "{{reference-architectures-StepFunctions-jobpoller-us-east-1-RuleName}}"

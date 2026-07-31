@@ -41,6 +41,9 @@ timeout_sec = 240.0
 databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName = "{{databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName}}"
 databases-and-storage-codebuild-g5etw5eu5-us-east-1-NodeVersion = "{{databases-and-storage-codebuild-g5etw5eu5-us-east-1-NodeVersion}}"
 
+[solution.env]
+PROJECT_NAME = "{{databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName}}"
+
 
 # --- Harbor standard ---
 [environment]

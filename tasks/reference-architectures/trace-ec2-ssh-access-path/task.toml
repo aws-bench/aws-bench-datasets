@@ -46,3 +46,6 @@ storage_mb = 10240
 [verifier.env]
 reference-architectures-EC2-instance-us-east-1-InstanceId = "placeholder"
 reference-architectures-EC2-instance-us-east-1-SshCommand = "placeholder"
+
+[solution.env]
+INSTANCE_ID = "{{reference-architectures-EC2-instance-us-east-1-InstanceId}}"

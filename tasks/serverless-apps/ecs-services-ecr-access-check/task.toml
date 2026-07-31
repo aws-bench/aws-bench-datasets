@@ -40,6 +40,8 @@ timeout_sec = 240.0
 [verifier.env]
 serverless-apps-ECS-us-east-1-EcsClusterName = "{{serverless-apps-ECS-us-east-1-EcsClusterName}}"
 
+[solution.env]
+ECS_CLUSTER_NAME = "{{serverless-apps-ECS-us-east-1-EcsClusterName}}"
 
 # --- Harbor standard ---
 [environment]

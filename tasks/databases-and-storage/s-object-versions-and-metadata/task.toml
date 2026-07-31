@@ -51,6 +51,8 @@ timeout_sec = 240.0
 898c7f19-ProdDataSizeBytes = "{{898c7f19-ProdDataSizeBytes}}"
 databases-and-storage-s3-y5esr5w6g-us-east-1-BucketName = "{{databases-and-storage-s3-y5esr5w6g-us-east-1-BucketName}}"
 
+[solution.env]
+BUCKET_NAME = "{{databases-and-storage-s3-y5esr5w6g-us-east-1-BucketName}}"
 
 # --- Harbor standard ---
 [environment]

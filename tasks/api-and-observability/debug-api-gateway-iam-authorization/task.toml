@@ -43,6 +43,10 @@ api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiId = "{{api-and-observab
 api-and-observability-ApiGateway-6b015c55c-us-east-1-AgreementPath = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-AgreementPath}}"
 api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiUrl = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiUrl}}"
 
+[solution.env]
+API_URL = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiUrl}}"
+AGREEMENT_PATH = "{{api-and-observability-ApiGateway-6b015c55c-us-east-1-AgreementPath}}"
+
 
 # --- Harbor standard ---
 [environment]

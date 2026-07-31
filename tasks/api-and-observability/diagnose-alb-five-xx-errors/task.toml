@@ -42,6 +42,9 @@ timeout_sec = 240.0
 [verifier.env]
 api-and-observability-ecs-t81xcoww7-us-east-1-ALBArn = "{{api-and-observability-ecs-t81xcoww7-us-east-1-ALBArn}}"
 
+[solution.env]
+ALB_ARN = "{{api-and-observability-ecs-t81xcoww7-us-east-1-ALBArn}}"
+
 
 # --- Harbor standard ---
 [environment]

@@ -41,6 +41,9 @@ timeout_sec = 240.0
 databases-and-storage-s3-jkdf342er-us-east-1-ObjectName = "{{databases-and-storage-s3-jkdf342er-us-east-1-ObjectName}}"
 databases-and-storage-s3-jkdf342er-us-east-1-BucketName = "{{databases-and-storage-s3-jkdf342er-us-east-1-BucketName}}"
 
+[solution.env]
+BUCKET_NAME = "{{databases-and-storage-s3-jkdf342er-us-east-1-BucketName}}"
+OBJECT_NAME = "{{databases-and-storage-s3-jkdf342er-us-east-1-ObjectName}}"
 
 # --- Harbor standard ---
 [environment]

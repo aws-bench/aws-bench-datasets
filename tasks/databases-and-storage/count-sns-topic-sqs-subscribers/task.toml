@@ -40,7 +40,6 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-SQS-e5ldy6q5p-us-west-2-NUMSubscribers = "{{databases-and-storage-SQS-e5ldy6q5p-us-west-2-NUMSubscribers}}"
 
-
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

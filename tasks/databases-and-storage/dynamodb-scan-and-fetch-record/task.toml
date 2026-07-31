@@ -41,6 +41,9 @@ timeout_sec = 240.0
 databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName = "{{databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName}}"
 databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId = "{{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}}"
 
+[solution.env]
+TABLE_NAME = "{{databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName}}"
+CONTENT_ID = "{{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}}"
 
 # --- Harbor standard ---
 [environment]

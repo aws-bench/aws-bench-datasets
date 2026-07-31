@@ -40,6 +40,9 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-s3-f63sr5wt6-us-east-1-BucketName = "{{databases-and-storage-s3-f63sr5wt6-us-east-1-BucketName}}"
 
+[solution.env]
+TARGET_BUCKET_NAME = "{{databases-and-storage-s3-f63sr5wt6-us-east-1-BucketName}}"
+
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

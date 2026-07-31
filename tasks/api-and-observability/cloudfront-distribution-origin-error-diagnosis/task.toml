@@ -41,6 +41,9 @@ timeout_sec = 240.0
 api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId = "{{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}}"
 api-and-observability-cloudfront-e0239752d-us-east-1-TenantProvisioningWorkflowArn = "{{api-and-observability-cloudfront-e0239752d-us-east-1-TenantProvisioningWorkflowArn}}"
 
+[solution.env]
+DISTRIBUTION_ID = "{{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}}"
+
 
 # --- Harbor standard ---
 [environment]

@@ -43,6 +43,9 @@ databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket2Name = "{{databases-and-stor
 databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name = "{{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}}"
 databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name = "{{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}}"
 
+[solution.env]
+BUCKET1_NAME = "{{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket1Name}}"
+BUCKET2_NAME = "{{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket2Name}}"
 
 # --- Harbor standard ---
 [environment]

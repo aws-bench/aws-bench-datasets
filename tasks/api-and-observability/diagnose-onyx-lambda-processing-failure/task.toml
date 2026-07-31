@@ -42,6 +42,9 @@ timeout_sec = 240.0
 [verifier.env]
 api-and-observability-Lambda-b0d9783d3-us-east-1-OnyxFunctionName = "{{api-and-observability-Lambda-b0d9783d3-us-east-1-OnyxFunctionName}}"
 
+[solution.env]
+ONYX_FUNCTION_NAME = "{{api-and-observability-Lambda-b0d9783d3-us-east-1-OnyxFunctionName}}"
+
 
 # --- Harbor standard ---
 [environment]

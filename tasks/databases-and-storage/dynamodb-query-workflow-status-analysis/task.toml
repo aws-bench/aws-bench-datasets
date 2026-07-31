@@ -40,6 +40,9 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName = "{{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}}"
 
+[solution.env]
+DYNAMODB_TABLE_NAME = "{{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}}"
+
 
 # --- Harbor standard ---
 [environment]

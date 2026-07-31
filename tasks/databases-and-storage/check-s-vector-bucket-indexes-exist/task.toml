@@ -46,6 +46,9 @@ databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex = "{{databases-and
 databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex = "{{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}}"
 databases-and-storage-s3-jayd5c428-us-east-1-VectorBucketName = "{{databases-and-storage-s3-jayd5c428-us-east-1-VectorBucketName}}"
 
+[solution.env]
+FIRST_INDEX_ARN = "{{databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex}}"
+SECOND_INDEX_ARN = "{{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}}"
 
 # --- Harbor standard ---
 [environment]

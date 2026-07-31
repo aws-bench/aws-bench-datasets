@@ -47,3 +47,8 @@ storage_mb = 10240
 reference-architectures-Rekognition-s3trigger-us-east-1-BucketName = "placeholder"
 reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName = "placeholder"
 reference-architectures-Rekognition-s3trigger-us-east-1-TableName = "placeholder"
+
+[solution.env]
+BUCKET_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-BucketName}}"
+FUNCTION_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName}}"
+TABLE_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-TableName}}"
