@@ -46,7 +46,6 @@ databases-and-storage-WAF-18b01a02d-us-east-1-WebAclId = "{{databases-and-storag
 databases-and-storage-WAF-18b01a02d-us-east-1-WebAclArn = "{{databases-and-storage-WAF-18b01a02d-us-east-1-WebAclArn}}"
 databases-and-storage-WAF-18b01a02d-us-east-1-WafConsoleUrl = "{{databases-and-storage-WAF-18b01a02d-us-east-1-WafConsoleUrl}}"
 
-
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

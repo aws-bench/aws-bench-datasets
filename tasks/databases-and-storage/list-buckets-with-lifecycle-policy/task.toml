@@ -40,7 +40,6 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules = "{{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules}}"
 
-
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

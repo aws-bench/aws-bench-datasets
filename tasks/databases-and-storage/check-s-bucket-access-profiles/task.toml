@@ -43,6 +43,10 @@ databases-and-storage-s3-8hdgte56j-us-east-1-StagingProfileUserName = "{{databas
 databases-and-storage-s3-8hdgte56j-us-east-1-BucketName = "{{databases-and-storage-s3-8hdgte56j-us-east-1-BucketName}}"
 databases-and-storage-s3-8hdgte56j-us-east-1-Content = "{{databases-and-storage-s3-8hdgte56j-us-east-1-Content}}"
 
+[solution.env]
+DEV_PROFILE_USER_NAME = "{{databases-and-storage-s3-8hdgte56j-us-east-1-DevProfileUserName}}"
+STAGING_PROFILE_USER_NAME = "{{databases-and-storage-s3-8hdgte56j-us-east-1-StagingProfileUserName}}"
+BUCKET_NAME = "{{databases-and-storage-s3-8hdgte56j-us-east-1-BucketName}}"
 
 # --- Harbor standard ---
 [environment]

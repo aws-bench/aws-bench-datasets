@@ -41,7 +41,6 @@ timeout_sec = 240.0
 databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy = "{{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy}}"
 databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy = "{{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy}}"
 
-
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

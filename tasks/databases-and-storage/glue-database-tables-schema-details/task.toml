@@ -40,6 +40,8 @@ timeout_sec = 240.0
 [verifier.env]
 databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName = "{{databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName}}"
 
+[solution.env]
+DATABASE_NAME = "{{databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName}}"
 
 # --- Harbor standard ---
 [environment]

@@ -41,6 +41,9 @@ timeout_sec = 240.0
 databases-and-storage-s3-r29cj1k42-us-east-1-FileName = "{{databases-and-storage-s3-r29cj1k42-us-east-1-FileName}}"
 databases-and-storage-s3-r29cj1k42-us-east-1-CsvBucketName = "{{databases-and-storage-s3-r29cj1k42-us-east-1-CsvBucketName}}"
 
+[solution.env]
+CSV_FILE_NAME = "{{databases-and-storage-s3-r29cj1k42-us-east-1-FileName}}"
+CSV_BUCKET_NAME = "{{databases-and-storage-s3-r29cj1k42-us-east-1-CsvBucketName}}"
 
 # --- Harbor standard ---
 [environment]

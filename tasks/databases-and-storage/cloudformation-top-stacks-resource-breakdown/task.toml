@@ -53,7 +53,6 @@ timeout_sec = 240.0
 4dd10da5-Stack3Count = "{{4dd10da5-Stack3Count}}"
 4dd10da5-Stack3TopTypes = "{{4dd10da5-Stack3TopTypes}}"
 
-
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

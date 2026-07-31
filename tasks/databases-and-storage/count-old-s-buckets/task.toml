@@ -45,7 +45,6 @@ timeout_sec = 240.0
 [verifier.env]
 c480b808-BucketCount = "{{c480b808-BucketCount}}"
 
-
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

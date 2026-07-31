@@ -41,6 +41,8 @@ timeout_sec = 240.0
 databases-and-storage-athena-9jhgt3tfs-us-east-1-TableName = "{{databases-and-storage-athena-9jhgt3tfs-us-east-1-TableName}}"
 databases-and-storage-athena-9jhgt3tfs-us-east-1-StackName = "{{databases-and-storage-athena-9jhgt3tfs-us-east-1-StackName}}"
 
+[solution.env]
+TABLE_NAME = "{{databases-and-storage-athena-9jhgt3tfs-us-east-1-TableName}}"
 
 # --- Harbor standard ---
 [environment]
