@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 FUNCTION="${EXPECTED_FUNCTION}"
 NEW_TABLE="${EXPECTED_NEW_TABLE}"
 OUT=/logs/agent/agent-output.txt

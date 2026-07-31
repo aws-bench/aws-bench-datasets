@@ -30,6 +30,7 @@ timeout_sec = 1200.0
 timeout_sec = 360.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 VOLUME_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-EBSVolumeId}}"
 VPC_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-VpcId}}"
 SUBNET_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-SubnetId}}"
@@ -41,17 +42,17 @@ timeout_sec = 360.0
 
 [pre_invoke.env]
 VOLUME_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-EBSVolumeId}}"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 360.0
 
 [post_invoke.env]
 VOLUME_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-EBSVolumeId}}"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 VOLUME_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-EBSVolumeId}}"
 SUBNET_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-SubnetId}}"
 SECURITY_GROUP_ID = "{{compute-and-data-ec2-ra5bh6w8u-us-east-1-SecurityGroupId}}"

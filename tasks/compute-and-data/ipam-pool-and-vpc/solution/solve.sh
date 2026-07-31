@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 POOL_ID="${IPAM_POOL_ID}"
 OUT=/logs/agent/agent-output.txt
 
