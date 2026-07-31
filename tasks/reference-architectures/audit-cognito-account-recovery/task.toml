@@ -45,3 +45,6 @@ storage_mb = 10240
 
 [verifier.env]
 reference-architectures-Cognito-apilambda-us-east-1-UserPoolId = "placeholder"
+
+[solution.env]
+USER_POOL_ID = "{{reference-architectures-Cognito-apilambda-us-east-1-UserPoolId}}"

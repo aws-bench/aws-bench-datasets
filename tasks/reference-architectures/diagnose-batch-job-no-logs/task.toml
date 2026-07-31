@@ -50,3 +50,7 @@ reference-architectures-Batch-openmp-us-east-1-FunctionName = "placeholder"
 reference-architectures-Batch-openmp-us-east-1-JobDefinitionArn = "placeholder"
 reference-architectures-Batch-openmp-us-east-1-JobQueueArn = "placeholder"
 reference-architectures-Batch-openmp-us-east-1-LogGroupName = "placeholder"
+
+[solution.env]
+FUNCTION_NAME = "{{reference-architectures-Batch-openmp-us-east-1-FunctionName}}"
+LOG_GROUP_NAME = "{{reference-architectures-Batch-openmp-us-east-1-LogGroupName}}"
