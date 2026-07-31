@@ -53,6 +53,10 @@ troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId
 troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-AutoScalingGroupName = "{{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-AutoScalingGroupName}}"
 
 
+[solution.env]
+ASG_NAME = "{{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-AutoScalingGroupName}}"
+
+
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

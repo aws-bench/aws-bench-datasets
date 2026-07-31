@@ -42,6 +42,9 @@ troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-InstanceId = "{{troubleshoo
 troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-SecretArn = "{{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-SecretArn}}"
 troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-KmsKeyId = "{{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-KmsKeyId}}"
 
+[solution.env]
+INSTANCE_ID = "{{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-InstanceId}}"
+
 
 # --- Harbor standard ---
 [environment]

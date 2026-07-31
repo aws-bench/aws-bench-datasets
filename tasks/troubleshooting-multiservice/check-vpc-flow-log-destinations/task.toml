@@ -42,6 +42,9 @@ troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-FlowLogId = "{{t
 troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcFlowLogsBucketName = "{{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcFlowLogsBucketName}}"
 troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcId = "{{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcId}}"
 
+[solution.env]
+VPC_ID = "{{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcId}}"
+
 
 # --- Harbor standard ---
 [environment]

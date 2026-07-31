@@ -41,6 +41,9 @@ timeout_sec = 240.0
 troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-ProcessingLambdaArn = "{{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-ProcessingLambdaArn}}"
 troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-StateMachineArn = "{{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-StateMachineArn}}"
 
+[solution.env]
+STATE_MACHINE_ARN = "{{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-StateMachineArn}}"
+
 
 # --- Harbor standard ---
 [environment]

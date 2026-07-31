@@ -42,6 +42,9 @@ troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-ClusterName = "{{troub
 troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-RollingServiceName = "{{troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-RollingServiceName}}"
 troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-BlueGreenServiceName = "{{troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-BlueGreenServiceName}}"
 
+[solution.env]
+CLUSTER_NAME = "{{troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-ClusterName}}"
+
 
 # --- Harbor standard ---
 [environment]

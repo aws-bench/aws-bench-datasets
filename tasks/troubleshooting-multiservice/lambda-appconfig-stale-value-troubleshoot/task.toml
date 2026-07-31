@@ -43,6 +43,9 @@ troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-AppConfigApplicationId =
 troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-AppConfigEnvironmentId = "{{troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-AppConfigEnvironmentId}}"
 troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-AppConfigConfigurationProfileId = "{{troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-AppConfigConfigurationProfileId}}"
 
+[solution.env]
+LAMBDA_FUNCTION_NAME = "{{troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-LambdaFunctionName}}"
+
 
 # --- Harbor standard ---
 [environment]

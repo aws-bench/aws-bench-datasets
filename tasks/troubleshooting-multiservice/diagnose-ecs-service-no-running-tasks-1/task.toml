@@ -42,6 +42,10 @@ troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri = "{{troub
 troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-AppClusterName = "{{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-AppClusterName}}"
 troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-ServiceName = "{{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-ServiceName}}"
 
+[solution.env]
+APP_CLUSTER_NAME = "{{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-AppClusterName}}"
+SERVICE_NAME = "{{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-ServiceName}}"
+
 
 # --- Harbor standard ---
 [environment]

@@ -42,6 +42,9 @@ troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmNa
 troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthLeaderAlarmName = "{{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthLeaderAlarmName}}"
 troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier = "{{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}}"
 
+[solution.env]
+GLOBAL_CLUSTER_IDENTIFIER = "{{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}}"
+
 
 # --- Harbor standard ---
 [environment]

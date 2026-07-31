@@ -42,6 +42,9 @@ troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-EventBridgeRuleName
 troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-DeploymentBucketName = "{{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-DeploymentBucketName}}"
 troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-TaskDefinitionArn = "{{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-TaskDefinitionArn}}"
 
+[solution.env]
+EVENTBRIDGE_RULE_NAME = "{{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-EventBridgeRuleName}}"
+
 
 # --- Harbor standard ---
 [environment]

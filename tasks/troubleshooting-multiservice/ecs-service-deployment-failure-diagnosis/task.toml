@@ -41,6 +41,9 @@ timeout_sec = 240.0
 troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcrRepositoryName = "{{troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcrRepositoryName}}"
 troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcsServiceName = "{{troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcsServiceName}}"
 
+[solution.env]
+ECS_SERVICE_NAME = "{{troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcsServiceName}}"
+
 
 # --- Harbor standard ---
 [environment]
