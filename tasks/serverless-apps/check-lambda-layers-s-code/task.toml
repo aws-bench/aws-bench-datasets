@@ -41,6 +41,8 @@ timeout_sec = 240.0
 aws-bench-scenario-allowed-regions = "{{aws-bench-scenario-allowed-regions}}"
 serverless-apps-LambdaMisc-us-east-1-S3LayerArnExport = "{{serverless-apps-LambdaMisc-us-east-1-S3LayerArnExport}}"
 
+[solution.env]
+ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 # --- Harbor standard ---
 [environment]

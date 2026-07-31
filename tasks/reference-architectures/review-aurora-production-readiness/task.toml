@@ -49,3 +49,6 @@ reference-architectures-RDS-aurora-us-east-1-DatabaseName = "placeholder"
 reference-architectures-RDS-aurora-us-east-1-EngineVersion = "placeholder"
 reference-architectures-RDS-aurora-us-east-1-FunctionName = "placeholder"
 reference-architectures-RDS-aurora-us-east-1-SecretArn = "placeholder"
+
+[solution.env]
+CLUSTER_IDENTIFIER = "{{reference-architectures-RDS-aurora-us-east-1-ClusterIdentifier}}"

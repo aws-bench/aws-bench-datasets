@@ -44,6 +44,10 @@ api-and-observability-logs-6b635d316-us-west-2-BasaltMcpApplicationLogsGroupName
 api-and-observability-logs-6b635d316-us-west-2-BasaltMcpUsageLogsGroupName = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpUsageLogsGroupName}}"
 api-and-observability-logs-6b635d316-us-west-2-BasaltMcpLogGroupName = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpLogGroupName}}"
 
+[solution.env]
+BASALT_MCP_LOG_GROUP_NAME = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpLogGroupName}}"
+BASALT_MCP_APPLICATION_LOGS_GROUP_NAME = "{{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpApplicationLogsGroupName}}"
+
 
 # --- Harbor standard ---
 [environment]

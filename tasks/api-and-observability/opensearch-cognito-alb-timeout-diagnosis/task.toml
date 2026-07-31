@@ -40,6 +40,9 @@ timeout_sec = 240.0
 [verifier.env]
 api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName = "{{api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName}}"
 
+[solution.env]
+OPENSEARCH_DOMAIN_NAME = "{{api-and-observability-opensearch-9f79baa8e-us-east-1-OpenSearchDomainName}}"
+
 
 # --- Harbor standard ---
 [environment]
