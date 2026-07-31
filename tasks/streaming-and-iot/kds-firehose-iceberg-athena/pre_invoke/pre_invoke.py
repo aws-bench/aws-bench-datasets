@@ -7,7 +7,7 @@ from reset import reset_data_plane
 
 logger = logging.getLogger(__name__)
 RESULT_FILE = "/logs/pre_invoke/placeholder.json"
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 
 
 def run():

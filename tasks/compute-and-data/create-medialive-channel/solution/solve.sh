@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 ROLE_NAME="${MEDIALIVE_ROLE_NAME:-MediaLiveAccessRole}"
 OUT=/logs/agent/agent-output.txt
 OUT_JSON=/logs/agent/agent-output.json

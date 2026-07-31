@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 ROLE_NAME="${ROLE_NAME:-EC2ImageBuilderRole}"
 PROFILE_NAME="${INSTANCE_PROFILE_NAME:-EC2ImageBuilderInstanceProfile}"
 COMPONENT_NAME="${COMPONENT_NAME:-install-awscli-v2}"

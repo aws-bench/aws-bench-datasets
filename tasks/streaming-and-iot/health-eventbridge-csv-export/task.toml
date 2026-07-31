@@ -50,12 +50,13 @@ timeout_sec = 1800.0
 timeout_sec = 720.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 EVENT_BUS_NAME = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-EventBusName}}"
 EXPORT_BUCKET = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-ExportBucketName}}"
 HEALTH_ROLE_NAME = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-HealthRoleName}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 EVENT_BUS_NAME = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-EventBusName}}"
 EXPORT_BUCKET = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-ExportBucketName}}"
 HEALTH_ROLE_NAME = "{{streaming-and-iot-eventbridge-evbhx72k1-us-east-1-HealthRoleName}}"

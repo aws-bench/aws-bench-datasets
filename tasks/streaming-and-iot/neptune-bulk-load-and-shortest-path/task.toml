@@ -48,6 +48,7 @@ timeout_sec = 3000.0
 timeout_sec = 600.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 NEPTUNE_CLUSTER_ID = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-NeptuneClusterId}}"
 NEPTUNE_ENDPOINT = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-NeptuneEndpoint}}"
 LOADER_BUCKET = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-LoaderBucketName}}"
@@ -55,7 +56,7 @@ LOADER_ROLE_ARN = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-LoaderRoleArn
 BRIDGE_LAMBDA_NAME = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-BridgeLambdaName}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 BRIDGE_LAMBDA_NAME = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-BridgeLambdaName}}"
 LOADER_BUCKET = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-LoaderBucketName}}"
 LOADER_ROLE_ARN = "{{streaming-and-iot-neptune-npt5d8h2v-us-east-1-LoaderRoleArn}}"

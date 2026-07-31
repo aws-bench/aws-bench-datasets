@@ -37,7 +37,7 @@ timeout_sec = 2400.0
 timeout_sec = 360.0
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 # --- Harbor standard ---
 [environment]

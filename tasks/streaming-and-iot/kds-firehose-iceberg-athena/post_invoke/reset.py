@@ -21,7 +21,7 @@ from botocore.exceptions import ClientError
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARNING)
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 
 
 # ============================================================

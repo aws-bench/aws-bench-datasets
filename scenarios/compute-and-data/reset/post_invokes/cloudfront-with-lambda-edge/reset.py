@@ -18,7 +18,7 @@ import time
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 TARGET_ORIGIN_DOMAIN = "example.com"
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_REGION:-${AWS_DEFAULT_REGION:-us-east-1}}"
+REGION="${AWS_REGION:-${AWS_REGION:-us-east-1}}"
 SUBNET1="${SUBNET_ID_1}"
 SUBNET2="${SUBNET_ID_2}"
 K8S_VERSION="${K8S_VERSION:-1.33}"

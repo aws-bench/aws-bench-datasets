@@ -50,12 +50,13 @@ timeout_sec = 1200.0
 timeout_sec = 240.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 DOMAIN_NAME = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-ProfilesDomainName}}"
 ACCOUNT_ID_1 = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-AccountId1}}"
 ACCOUNT_ID_2 = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-AccountId2}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 DOMAIN_NAME = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-ProfilesDomainName}}"
 ACCOUNT_ID_1 = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-AccountId1}}"
 ACCOUNT_ID_2 = "{{streaming-and-iot-connect-cnp4r8t2k-us-east-1-AccountId2}}"
