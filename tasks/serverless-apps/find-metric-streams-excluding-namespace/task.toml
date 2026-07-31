@@ -41,6 +41,8 @@ timeout_sec = 240.0
 aws-bench-scenario-allowed-regions = "{{aws-bench-scenario-allowed-regions}}"
 serverless-apps-Monitoring-us-east-1-MetricStreamName = "{{serverless-apps-Monitoring-us-east-1-MetricStreamName}}"
 
+[solution.env]
+ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
 
 # --- Harbor standard ---
 [environment]
