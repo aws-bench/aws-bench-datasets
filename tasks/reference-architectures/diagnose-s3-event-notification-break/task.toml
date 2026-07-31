@@ -48,3 +48,8 @@ reference-architectures-S3-eventnotif-us-east-1-BucketName = "placeholder"
 reference-architectures-S3-eventnotif-us-east-1-FunctionName = "placeholder"
 reference-architectures-S3-eventnotif-us-east-1-QueueName = "placeholder"
 reference-architectures-S3-eventnotif-us-east-1-TopicName = "placeholder"
+
+[solution.env]
+BUCKET_NAME = "{{reference-architectures-S3-eventnotif-us-east-1-BucketName}}"
+QUEUE_NAME = "{{reference-architectures-S3-eventnotif-us-east-1-QueueName}}"
+TOPIC_NAME = "{{reference-architectures-S3-eventnotif-us-east-1-TopicName}}"

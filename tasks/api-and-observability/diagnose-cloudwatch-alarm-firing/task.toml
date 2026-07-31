@@ -42,6 +42,9 @@ timeout_sec = 240.0
 [verifier.env]
 api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName = "{{api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName}}"
 
+[solution.env]
+SERVICE_LATENCY_ALARM_NAME = "{{api-and-observability-CloudWatch-89fb5762b-ap-southeast-1-ServiceLatencyAlarmName}}"
+
 
 # --- Harbor standard ---
 [environment]

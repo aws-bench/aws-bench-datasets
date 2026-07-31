@@ -47,3 +47,7 @@ storage_mb = 10240
 reference-architectures-Transfer-sftp-us-east-1-AlarmName = "placeholder"
 reference-architectures-Transfer-sftp-us-east-1-LogGroupName = "placeholder"
 reference-architectures-Transfer-sftp-us-east-1-ServerId = "placeholder"
+
+[solution.env]
+ALARM_NAME = "{{reference-architectures-Transfer-sftp-us-east-1-AlarmName}}"
+SERVER_ID = "{{reference-architectures-Transfer-sftp-us-east-1-ServerId}}"

@@ -42,6 +42,11 @@ api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName = 
 api-and-observability-cloudfront-laljfb348-us-east-1-OACId = "{{api-and-observability-cloudfront-laljfb348-us-east-1-OACId}}"
 api-and-observability-cloudfront-laljfb348-us-east-1-DistributionId = "{{api-and-observability-cloudfront-laljfb348-us-east-1-DistributionId}}"
 
+[solution.env]
+TENANT_SERVICES_BUCKET_NAME = "{{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}}"
+OAC_ID = "{{api-and-observability-cloudfront-laljfb348-us-east-1-OACId}}"
+DISTRIBUTION_ID = "{{api-and-observability-cloudfront-laljfb348-us-east-1-DistributionId}}"
+
 
 # --- Harbor standard ---
 [environment]

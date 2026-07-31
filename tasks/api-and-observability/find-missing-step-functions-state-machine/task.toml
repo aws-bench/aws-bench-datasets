@@ -42,6 +42,10 @@ api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName = "{{ap
 api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn}}"
 
 
+[solution.env]
+STATE_MACHINE_NAME = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}}"
+
+
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0
