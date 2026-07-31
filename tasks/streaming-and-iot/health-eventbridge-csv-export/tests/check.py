@@ -20,7 +20,7 @@ from rewardkit import criterion
 import time
 from datetime import datetime, timezone
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 EVENT_BUS_NAME = os.environ.get("EVENT_BUS_NAME", "")
 EXPORT_BUCKET = os.environ.get("EXPORT_BUCKET", "")
 HEALTH_ROLE_NAME = os.environ.get("HEALTH_ROLE_NAME", "")

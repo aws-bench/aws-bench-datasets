@@ -20,7 +20,7 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 
 KINESIS_STREAM_NAME = os.environ.get("KINESIS_STREAM_NAME", "")
 S3_SINK_BUCKET = os.environ.get("S3_SINK_BUCKET", "")

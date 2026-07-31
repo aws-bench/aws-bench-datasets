@@ -16,7 +16,7 @@ import sys
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 FUNCTION_NAME = os.environ["EXPECTED_FUNCTION"]
 OLD_TABLE = os.environ["EXPECTED_OLD_TABLE"]
 

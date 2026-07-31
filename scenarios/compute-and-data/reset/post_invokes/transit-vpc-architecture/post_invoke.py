@@ -17,7 +17,7 @@ from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 
 DETACH_POLL_SEC = 2
 DETACH_MAX_POLLS = 30

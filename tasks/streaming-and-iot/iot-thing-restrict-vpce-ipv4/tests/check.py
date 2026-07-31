@@ -27,7 +27,7 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 THING_NAME = os.environ.get("THING_NAME", "")
 VPCE_ID = os.environ.get("VPCE_ID", "")
 

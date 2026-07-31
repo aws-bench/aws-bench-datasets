@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 BUCKET="${BUCKET_NAME}"
 TEMPLATE_KEY="${TEMPLATE_KEY:-elasticsearch-template-multi.yaml}"
 OUT=/logs/agent/agent-output.txt

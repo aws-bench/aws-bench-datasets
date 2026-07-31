@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 VPC_NAME="${VPC_NAME:-storage-app-vpc}"
 SUBNET_GROUP="${SUBNET_GROUP:-storage-app-subnet-group}"
 REPLICATION_GROUP_ID="${REPLICATION_GROUP_ID:-storage-app-valkey}"

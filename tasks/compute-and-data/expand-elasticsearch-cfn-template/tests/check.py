@@ -9,7 +9,7 @@ import yaml
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 BUCKET_NAME = os.environ.get("BUCKET_NAME", "")
 
 AGENT_OUTPUT_PATH = Path("/logs/agent/agent-output.json")

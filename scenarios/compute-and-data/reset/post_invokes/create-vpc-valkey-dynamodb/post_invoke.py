@@ -16,7 +16,7 @@ from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 AGENT_OUTPUT_PATH = Path("/logs/agent/agent-output.json")
 
 

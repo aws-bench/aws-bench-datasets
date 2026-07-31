@@ -16,7 +16,7 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 BUCKET_NAME = os.environ.get("MOVE_DATA_BUCKET", "")
 # The REAL source path where CDK deploys files (not the 'sourc/' typo)
 REAL_SOURCE_PATH = "source/"

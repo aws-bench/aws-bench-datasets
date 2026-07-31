@@ -27,7 +27,7 @@ from rewardkit import criterion
 # margin.
 _BRIDGE_INVOKE_CONFIG = Config(read_timeout=360, retries={"max_attempts": 1})
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 BRIDGE_LAMBDA_NAME = os.environ.get("BRIDGE_LAMBDA_NAME", "")
 
 EXPECTED_VERTEX_COUNT = 5

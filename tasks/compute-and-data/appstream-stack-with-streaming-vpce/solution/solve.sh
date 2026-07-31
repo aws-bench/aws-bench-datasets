@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 STACK_NAME="${APPSTREAM_STACK_NAME:-appstream-streaming-vpce-stack}"
 ROLE_NAME="${APPSTREAM_ROLE_NAME:-AmazonAppStreamServiceAccess}"
 OUT=/logs/agent/agent-output.txt
