@@ -13,7 +13,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 BUCKET_NAME = os.environ.get("AMPLIFY_DATA_BUCKET", "")
 
 # index.html references assets/main.css and build/app.bundle.js, but those

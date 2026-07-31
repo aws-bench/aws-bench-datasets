@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 THING="${THING_NAME}"
 POLICY_NAME="${POLICY_NAME:-${THING}-vpce-restrict}"
 OUT=/logs/agent/agent-output.json

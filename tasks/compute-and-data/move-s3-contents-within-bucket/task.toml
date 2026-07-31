@@ -30,7 +30,7 @@ timeout_sec = 300.0
 [pre_invoke.env]
 MOVE_DATA_BUCKET = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 360.0
@@ -38,7 +38,7 @@ timeout_sec = 360.0
 [post_invoke.env]
 MOVE_DATA_BUCKET = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [agent]
 timeout_sec = 1200.0
@@ -47,12 +47,13 @@ timeout_sec = 1200.0
 timeout_sec = 360.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 MOVE_DATA_BUCKET = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"
 SOURCE_PATH = "{{compute-and-data-s3-oeimf302d-us-east-1-WrongSourceFolderPath}}"
 DESTINATION_PATH = "{{compute-and-data-s3-oeimf302d-us-east-1-DestinationFolderPath}}"
 
 [solution.env]
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 BUCKET_NAME = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"
 DESTINATION_PATH = "{{compute-and-data-s3-oeimf302d-us-east-1-DestinationFolderPath}}"
 

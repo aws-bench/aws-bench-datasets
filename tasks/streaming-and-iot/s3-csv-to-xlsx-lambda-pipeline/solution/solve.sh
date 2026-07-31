@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 BUCKET="${ETL_BUCKET}"
 PREFIX="${OUTPUT_PREFIX:-converted/}"
 FN_NAME="csv-to-xlsx-converter"

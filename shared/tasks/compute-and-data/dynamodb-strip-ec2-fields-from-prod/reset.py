@@ -16,7 +16,7 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 TABLE_NAME = os.environ.get("EXPECTED_TABLE", "")
 
 TARGET_RECORD_IDS = {

@@ -30,6 +30,7 @@ timeout_sec = 1200.0
 timeout_sec = 360.0
 
 [verifier.env]
+AWS_REGION = "us-east-1"
 SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
 DESTINATION_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-DestinationBucketName}}"
 
@@ -40,12 +41,12 @@ timeout_sec = 300.0
 SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
 DESTINATION_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-DestinationBucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [solution.env]
 SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
 DESTINATION_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-DestinationBucketName}}"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 360.0
@@ -54,7 +55,7 @@ timeout_sec = 360.0
 SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
 DESTINATION_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-DestinationBucketName}}"
 AWS_REGION = "us-east-1"
-AWS_DEFAULT_REGION = "us-east-1"
+AWS_REGION = "us-east-1"
 
 [environment]
 build_timeout_sec = 1200.0
