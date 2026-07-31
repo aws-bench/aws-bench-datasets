@@ -46,6 +46,10 @@ ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId = "{{ec2-multiregion-EC2-ls9
 ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
 
 
+[solution.env]
+ALLOWED_REGIONS = "{{aws-bench-scenario-allowed-regions}}"
+
+
 # --- Harbor standard ---
 [environment]
 build_timeout_sec = 1200.0

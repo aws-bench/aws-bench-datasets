@@ -15,7 +15,10 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+SCENARIO_REGIONS = [
+    r.strip() for r in os.environ.get("SCENARIO_REGIONS", "us-east-1").split(",")
+]
+REGION = SCENARIO_REGIONS[0]  # Primary region for backwards compat
 
 try:
     AGENT_OUTPUT = json.loads(Path("/logs/agent/agent-output.json").read_text())
@@ -28,19 +31,41 @@ PIPELINE_ARN = AGENT_OUTPUT.get("image_pipeline_arn") or ""
 REQUIRED_DISTRIBUTION_REGION = "us-east-2"
 
 
-def _imagebuilder():
-    return boto3.client("imagebuilder", region_name=REGION)
+def _imagebuilder(region=None):
+    return boto3.client("imagebuilder", region_name=region or REGION)
 
 
 def _get_pipeline() -> dict | None:
     """Fetch the pipeline. Returns the imagePipeline dict, or None on failure."""
     if not PIPELINE_ARN:
         return None
-    try:
-        resp = _imagebuilder().get_image_pipeline(imagePipelineArn=PIPELINE_ARN)
-    except ClientError:
+    for region in SCENARIO_REGIONS:
+        try:
+            resp = _imagebuilder(region).get_image_pipeline(
+                imagePipelineArn=PIPELINE_ARN
+            )
+        except ClientError:
+            continue
+        pipeline = resp.get("imagePipeline") or None
+        if pipeline:
+            return pipeline
+    return None
+
+
+def _get_pipeline_region() -> str | None:
+    """Find the region where the pipeline exists."""
+    if not PIPELINE_ARN:
         return None
-    return resp.get("imagePipeline") or None
+    for region in SCENARIO_REGIONS:
+        try:
+            resp = _imagebuilder(region).get_image_pipeline(
+                imagePipelineArn=PIPELINE_ARN
+            )
+            if resp.get("imagePipeline"):
+                return region
+        except ClientError:
+            continue
+    return None
 
 
 @criterion(description="agent wrote agent-output.json with all required keys")
@@ -73,8 +98,10 @@ def distribution_targets_us_east_2(workspace: Path) -> bool:
     dist_arn = pipeline.get("distributionConfigurationArn")
     if not dist_arn:
         return False
+    # Use the region where the pipeline was found
+    pipeline_region = _get_pipeline_region()
     try:
-        resp = _imagebuilder().get_distribution_configuration(
+        resp = _imagebuilder(pipeline_region).get_distribution_configuration(
             distributionConfigurationArn=dist_arn
         )
     except ClientError:
@@ -100,9 +127,12 @@ def launch_template_uses_pipeline_ami(workspace: Path) -> bool:
     if not pipeline_arn:
         return False
 
+    # Use the region where the pipeline was found
+    pipeline_region = _get_pipeline_region()
+
     # Collect AMI IDs produced by this specific pipeline
     try:
-        img_resp = _imagebuilder().list_image_pipeline_images(
+        img_resp = _imagebuilder(pipeline_region).list_image_pipeline_images(
             imagePipelineArn=pipeline_arn
         )
     except ClientError:
@@ -118,29 +148,30 @@ def launch_template_uses_pipeline_ami(workspace: Path) -> bool:
     if not pipeline_ami_ids:
         return False
 
-    # Check all launch templates for one that references a pipeline-produced AMI
-    ec2 = boto3.client("ec2", region_name=REGION)
-    try:
-        lt_resp = ec2.describe_launch_templates()
-    except ClientError:
-        return False
-
-    for lt in lt_resp.get("LaunchTemplates") or []:
-        lt_id = lt.get("LaunchTemplateId")
-        if not lt_id:
-            continue
+    # Check all launch templates across regions for one that references a pipeline-produced AMI
+    for region in SCENARIO_REGIONS:
+        ec2 = boto3.client("ec2", region_name=region)
         try:
-            ver_resp = ec2.describe_launch_template_versions(
-                LaunchTemplateId=lt_id, Versions=["$Default"]
-            )
+            lt_resp = ec2.describe_launch_templates()
         except ClientError:
             continue
-        versions = ver_resp.get("LaunchTemplateVersions") or []
-        if not versions:
-            continue
-        launch_data = versions[0].get("LaunchTemplateData") or {}
-        image_id = launch_data.get("ImageId")
-        if image_id and image_id in pipeline_ami_ids:
-            return True
+
+        for lt in lt_resp.get("LaunchTemplates") or []:
+            lt_id = lt.get("LaunchTemplateId")
+            if not lt_id:
+                continue
+            try:
+                ver_resp = ec2.describe_launch_template_versions(
+                    LaunchTemplateId=lt_id, Versions=["$Default"]
+                )
+            except ClientError:
+                continue
+            versions = ver_resp.get("LaunchTemplateVersions") or []
+            if not versions:
+                continue
+            launch_data = versions[0].get("LaunchTemplateData") or {}
+            image_id = launch_data.get("ImageId")
+            if image_id and image_id in pipeline_ami_ids:
+                return True
 
     return False

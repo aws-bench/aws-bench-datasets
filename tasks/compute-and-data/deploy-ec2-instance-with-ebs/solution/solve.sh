@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 VOLUME_ID="${VOLUME_ID}"
 SUBNET_ID="${SUBNET_ID}"
 SECURITY_GROUP_ID="${SECURITY_GROUP_ID}"

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 CLUSTER="${EXPECTED_CLUSTER}"
 BUCKETS_CSV="${EXPECTED_BUCKETS_CSV}"
 OUT=/logs/agent/agent-output.txt

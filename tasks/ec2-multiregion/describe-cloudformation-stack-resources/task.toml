@@ -41,6 +41,9 @@ timeout_sec = 240.0
 ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}"
 ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}}"
 
+[solution.env]
+STACK_ID = "{{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}}"
+
 
 # --- Harbor standard ---
 [environment]

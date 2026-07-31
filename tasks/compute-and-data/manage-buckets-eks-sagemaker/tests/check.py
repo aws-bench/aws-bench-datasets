@@ -19,7 +19,7 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 CLUSTER_NAME = os.environ["EXPECTED_CLUSTER"]
 BUCKET_NAMES = tuple(
     b.strip() for b in os.environ["EXPECTED_BUCKETS_CSV"].split(",") if b.strip()

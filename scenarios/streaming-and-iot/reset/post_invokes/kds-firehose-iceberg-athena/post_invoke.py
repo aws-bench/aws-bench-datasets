@@ -18,7 +18,7 @@ from botocore.exceptions import ClientError
 
 from reset import reset_data_plane
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 S3_SINK_BUCKET = os.environ.get("S3_SINK_BUCKET", "")
 
 try:

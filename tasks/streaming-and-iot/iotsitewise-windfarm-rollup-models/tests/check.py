@@ -15,7 +15,7 @@ import boto3
 from botocore.exceptions import ClientError
 from rewardkit import criterion
 
-REGION = os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+REGION = os.environ.get("AWS_REGION", "us-east-1")
 PARENT_NAME = "WindFarmModel"
 CHILD_NAME = "WindTurbineModel"
 HIERARCHY_NAME = "Turbines"

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 SRC="${SYNC_SOURCE_BUCKET}"
 DST="${DESTINATION_BUCKET}"
 OUT=/logs/agent/agent-output.txt

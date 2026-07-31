@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 APP_NAME="${STUDIO_APP_NAME:-flink-studio-realtime-analytics}"
 ROLE_NAME="${STUDIO_ROLE_NAME:-KinesisAnalyticsStudioRole}"
 GLUE_DB="${STUDIO_GLUE_DB:-flink_studio_db}"

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REGION="${AWS_DEFAULT_REGION:-us-east-1}"
+REGION="${AWS_REGION:-us-east-1}"
 BRIDGE="${BRIDGE_LAMBDA_NAME}"
 BUCKET="${LOADER_BUCKET}"
 ROLE_ARN="${LOADER_ROLE_ARN}"
