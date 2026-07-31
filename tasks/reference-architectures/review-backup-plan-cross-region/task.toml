@@ -47,3 +47,8 @@ storage_mb = 10240
 reference-architectures-Backup-s3-us-east-1-BackupPlanId = "placeholder"
 reference-architectures-Backup-s3-us-east-1-BackupVaultName = "placeholder"
 reference-architectures-Backup-s3-us-east-1-BucketName = "placeholder"
+
+[solution.env]
+BACKUP_PLAN_ID = "{{reference-architectures-Backup-s3-us-east-1-BackupPlanId}}"
+BACKUP_VAULT_NAME = "{{reference-architectures-Backup-s3-us-east-1-BackupVaultName}}"
+BUCKET_NAME = "{{reference-architectures-Backup-s3-us-east-1-BucketName}}"

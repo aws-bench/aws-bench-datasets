@@ -48,3 +48,6 @@ reference-architectures-Glue-etlpipeline-us-east-1-CodeCommitRepoName = "placeho
 reference-architectures-Glue-etlpipeline-us-east-1-GlueJobName = "placeholder"
 reference-architectures-Glue-etlpipeline-us-east-1-LambdaFunctionName = "placeholder"
 reference-architectures-Glue-etlpipeline-us-east-1-PipelineName = "placeholder"
+
+[solution.env]
+PIPELINE_NAME = "{{reference-architectures-Glue-etlpipeline-us-east-1-PipelineName}}"
