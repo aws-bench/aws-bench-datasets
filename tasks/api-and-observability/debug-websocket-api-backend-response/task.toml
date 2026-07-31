@@ -43,6 +43,10 @@ timeout_sec = 240.0
 api-and-observability-WebSocket-d761a646a-us-east-1-AgentScriptsBucketName = "{{api-and-observability-WebSocket-d761a646a-us-east-1-AgentScriptsBucketName}}"
 api-and-observability-WebSocket-d761a646a-us-east-1-WebSocketEndpoint = "{{api-and-observability-WebSocket-d761a646a-us-east-1-WebSocketEndpoint}}"
 
+[solution.env]
+AGENT_SCRIPTS_BUCKET = "{{api-and-observability-WebSocket-d761a646a-us-east-1-AgentScriptsBucketName}}"
+WS_ENDPOINT = "{{api-and-observability-WebSocket-d761a646a-us-east-1-WebSocketEndpoint}}"
+
 
 # --- Harbor standard ---
 [environment]

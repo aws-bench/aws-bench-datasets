@@ -42,6 +42,11 @@ api-and-observability-opensearch-60603f075-us-east-1-AlarmName = "{{api-and-obse
 api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName = "{{api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName}}"
 api-and-observability-opensearch-60603f075-us-east-1-DomainName = "{{api-and-observability-opensearch-60603f075-us-east-1-DomainName}}"
 
+[solution.env]
+ALB_DNS_NAME = "{{api-and-observability-opensearch-60603f075-us-east-1-AlbDnsName}}"
+DOMAIN_NAME = "{{api-and-observability-opensearch-60603f075-us-east-1-DomainName}}"
+ALARM_NAME = "{{api-and-observability-opensearch-60603f075-us-east-1-AlarmName}}"
+
 
 # --- Harbor standard ---
 [environment]
