@@ -9,18 +9,11 @@ set -exo pipefail
 
 uv run --no-project /tests/resolve_placeholders.py
 
-# rewardkit only retries its own judge call on a malformed JSON response ---
-# a transient Bedrock/LiteLLM error (throttling, 5xx, connection reset)
-# fails the whole invocation, and with it the whole trial, even though the
-# agent's own work was fine. Retry the invocation, but only when the
-# failure looks transient: a real rubric/config bug should fail fast rather
-# than burn the verifier's timeout budget on retries that can't succeed.
-#
-# Keep the retry budget modest: rewardkit's LLMJudge defaults to a 300s
-# per-call timeout while several tasks set [verifier].timeout_sec as low as
-# 240s for the *entire* verify step, so a large retry budget can itself
-# cause a timeout. Tasks with slower judges can raise these via
-# [verifier.env] in task.toml.
+# rewardkit retries malformed judge JSON internally but not transient
+# Bedrock/LiteLLM errors. This adds that retry, matching only known transient
+# signatures so a genuine rubric/config error still fails fast. The budget is
+# kept modest: LLMJudge's 300s per-call timeout can exceed a task's
+# [verifier].timeout_sec (as low as 240s); override via [verifier.env] if needed.
 REWARDKIT_RETRY_MAX_ATTEMPTS="${REWARDKIT_RETRY_MAX_ATTEMPTS:-3}"
 REWARDKIT_RETRY_BASE_DELAY_SEC="${REWARDKIT_RETRY_BASE_DELAY_SEC:-5}"
 REWARDKIT_RETRY_TRANSIENT_PATTERN='throttl|rate.?limit|too many requests|service.?unavailable|internal.?server|bad.?gateway|connection reset|connection aborted|read timeout|connect.?timeout|remoteprotocolerror|apiconnectionerror|modeltimeoutexception|modelnotreadyexception|http status code: (429|500|502|503|504)'
