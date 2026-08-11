@@ -12,7 +12,11 @@ scenario_id = "reference-architectures"
 agent_role_name = "QALocalInvocationApplicationRole"
 
 [concurrency]
-mode = "read-only"
+# The hooks upload an object, write a table row, and cause Lambda to create its
+# log group. Post-invoke reverses all three, but a post-invoke that never runs
+# (a cancelled or crashed trial) would leave them behind, so the trial takes the
+# framework's post-run account reset as its fail-safe.
+mode = "mutating"
 
 [pre_invoke]
 timeout_sec = 600.0
@@ -29,6 +33,7 @@ timeout_sec = 300.0
 [post_invoke.env]
 BUCKET_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-BucketName}}"
 TABLE_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-TableName}}"
+FUNCTION_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName}}"
 AWS_REGION = "us-east-1"
 
 # --- Harbor standard --- flexible metadata
