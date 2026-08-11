@@ -32,10 +32,13 @@ CONDITION=$(printf '%s\n' "$HANDLER" | grep -oE "ConditionExpression: *'[^']*'" 
 STORED_LABELS=$(aws dynamodb get-item --table-name "$TABLE_NAME" --region "$REGION" \
     --key '{"image_name":{"S":"alpha.jpg"}}' --consistent-read \
     --query "Item.labels.S" --output text)
+# --no-paginate would still return only the first page's events; let the CLI walk
+# every page and count the matches itself, because the matching event does not
+# necessarily land on page one.
 COND_EVENTS=$(aws logs filter-log-events --region "$REGION" \
     --log-group-name "/aws/lambda/${FUNCTION_NAME}" \
     --filter-pattern '"ConditionalCheckFailedException"' \
-    --query "length(events)" --output text)
+    --query "events[].eventId" --output text | tr '\t' '\n' | grep -c . || true)
 
 DDB=$(aws dynamodb describe-table --table-name "$TABLE_NAME" --region "$REGION" \
     --query "Table.[BillingModeSummary.BillingMode,ProvisionedThroughput.ReadCapacityUnits,ProvisionedThroughput.WriteCapacityUnits]" \
