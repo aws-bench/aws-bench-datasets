@@ -54,6 +54,7 @@ export class athena_ton59ib3f extends cdk.Stack {
             databaseName: andesDatabase.ref,
             tableInput: {
                 name: 'andes_3_0_data',
+                tableType: 'EXTERNAL_TABLE',
                 storageDescriptor: {
                     columns: [
                         { name: 'id', type: 'bigint' },
