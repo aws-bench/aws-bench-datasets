@@ -42,6 +42,9 @@ POLL_INTERVAL_SEC = 15
 
 TERMINAL_STATES = ("SUCCEEDED", "FAILED")
 
+# States a job can sit in while still holding queue or compute capacity.
+ACTIVE_STATES = ("SUBMITTED", "PENDING", "RUNNABLE", "STARTING", "RUNNING")
+
 # statusReason fragments Batch uses when the image cannot be pulled. Matched
 # case-insensitively against the job's statusReason plus its attempt reasons.
 IMAGE_PULL_MARKERS = (
@@ -125,10 +128,24 @@ def _wait_for_expected_failure(batch, job_id: str) -> str:
 
 def run() -> dict[str, str]:
     function_name = os.environ["FUNCTION_NAME"]
+    job_queue = os.environ["JOB_QUEUE_ARN"]
     region = os.environ["AWS_REGION"]
 
     batch = boto3.client("batch", region_name=region)
     lambda_client = boto3.client("lambda", region_name=region)
+
+    # Terminate anything a previous run left active so this run's job is the only
+    # one on the queue and no stale submission keeps the compute environment warm.
+    # Trials of this task are serialized by its mutating concurrency mode, so this
+    # cannot cancel a sibling trial's work.
+    for status in ACTIVE_STATES:
+        paginator = batch.get_paginator("list_jobs")
+        for page in paginator.paginate(jobQueue=job_queue, jobStatus=status):
+            for job in page.get("jobSummaryList", []):
+                batch.terminate_job(
+                    jobId=job["jobId"], reason="aws-bench pre_invoke reset"
+                )
+                logger.info(f"terminated stale {status} job {job['jobId']}")
 
     job_id = _submit(lambda_client, function_name)
     reasons = _wait_for_expected_failure(batch, job_id)

@@ -12,13 +12,18 @@ scenario_id = "reference-architectures"
 agent_role_name = "QALocalInvocationApplicationRole"
 
 [concurrency]
-mode = "read-only"
+# Submitting a job makes the MANAGED compute environment scale from zero, which
+# has Batch create an ECS cluster, an Auto Scaling group, and a launch template.
+# Those belong to Batch, so no post-invoke can remove them; the trial takes the
+# framework's post-run account reset as its fail-safe.
+mode = "mutating"
 
 [pre_invoke]
 timeout_sec = 1200.0
 
 [pre_invoke.env]
 FUNCTION_NAME = "{{reference-architectures-Batch-openmp-us-east-1-FunctionName}}"
+JOB_QUEUE_ARN = "{{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}}"
 AWS_REGION = "us-east-1"
 
 [post_invoke]
