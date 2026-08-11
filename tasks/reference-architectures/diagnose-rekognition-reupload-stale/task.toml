@@ -14,6 +14,23 @@ agent_role_name = "QALocalInvocationApplicationRole"
 [concurrency]
 mode = "read-only"
 
+[pre_invoke]
+timeout_sec = 600.0
+
+[pre_invoke.env]
+BUCKET_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-BucketName}}"
+TABLE_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-TableName}}"
+FUNCTION_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName}}"
+AWS_REGION = "us-east-1"
+
+[post_invoke]
+timeout_sec = 300.0
+
+[post_invoke.env]
+BUCKET_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-BucketName}}"
+TABLE_NAME = "{{reference-architectures-Rekognition-s3trigger-us-east-1-TableName}}"
+AWS_REGION = "us-east-1"
+
 # --- Harbor standard --- flexible metadata
 [metadata]
 id = "2e9aaa97-8549-4d2d-9132-abc2585a530f"
