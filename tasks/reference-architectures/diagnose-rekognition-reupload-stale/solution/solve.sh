@@ -27,6 +27,19 @@ MAX_LABELS=$(printf '%s\n' "$HANDLER" | grep -oE 'MaxLabels: *[0-9]+' | grep -oE
 MIN_CONFIDENCE=$(printf '%s\n' "$HANDLER" | grep -oE 'MinConfidence: *[0-9]+' | grep -oE '[0-9]+')
 CONDITION=$(printf '%s\n' "$HANDLER" | grep -oE "ConditionExpression: *'[^']*'" | grep -oE "attribute_not_exists\([a-z_]+\)")
 
+# Observe the symptom rather than only reading configuration: the stored row and
+# the exception the handler swallowed.
+STORED_LABELS=$(aws dynamodb get-item --table-name "$TABLE_NAME" --region "$REGION" \
+    --key '{"image_name":{"S":"alpha.jpg"}}' --consistent-read \
+    --query "Item.labels.S" --output text)
+# --no-paginate would still return only the first page's events; let the CLI walk
+# every page and count the matches itself, because the matching event does not
+# necessarily land on page one.
+COND_EVENTS=$(aws logs filter-log-events --region "$REGION" \
+    --log-group-name "/aws/lambda/${FUNCTION_NAME}" \
+    --filter-pattern '"ConditionalCheckFailedException"' \
+    --query "events[].eventId" --output text | tr '\t' '\n' | grep -c . || true)
+
 DDB=$(aws dynamodb describe-table --table-name "$TABLE_NAME" --region "$REGION" \
     --query "Table.[BillingModeSummary.BillingMode,ProvisionedThroughput.ReadCapacityUnits,ProvisionedThroughput.WriteCapacityUnits]" \
     --output text)
@@ -39,7 +52,7 @@ The S3 event is firing; the team's assumption that the event never fired and ${F
 
 The Lambda runs and calls rekognition.DetectLabels on the new object bytes (MaxLabels ${MAX_LABELS}, MinConfidence ${MIN_CONFIDENCE}), so the Rekognition cost is incurred on every re-upload. The real bug is what the handler does next: its putItem against table ${TABLE_NAME} is issued with ConditionExpression ${CONDITION}, i.e. it requires that the primary key image_name does not already exist. Because the alpha.jpg row was written by the first upload, the second putItem fails with ConditionalCheckFailedException.
 
-The handler wraps that putItem in a try/catch that only logs the error (console.log(err)) and then returns normally, so the invocation exits as a success. That is why Lambda Invocations and Errors look clean, S3 shows successful delivery, and the DynamoDB row for alpha.jpg still contains the old labels. The failure is visible only in CloudWatch Logs for ${FUNCTION_NAME}, where the ConditionalCheckFailedException is printed.
+The handler wraps that putItem in a try/catch that only logs the error (console.log(err)) and then returns normally, so the invocation exits as a success. That is why Lambda Invocations and Errors look clean, S3 shows successful delivery, and the DynamoDB row for alpha.jpg still contains the old labels: reading the row back now returns "${STORED_LABELS}", written by the first upload. The failure is visible only in CloudWatch Logs for ${FUNCTION_NAME}, where ${COND_EVENTS} ConditionalCheckFailedException event(s) are printed.
 
 Diagnosis steps: check the bucket's notification configuration and versioning status (event fires, no versioning); confirm the Lambda's Invocations metric shows the re-upload invocation with no Errors; then read the function's CloudWatch Logs, where the ConditionalCheckFailedException on the conditional putItem appears.
 
