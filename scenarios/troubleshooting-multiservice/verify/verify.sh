@@ -99,22 +99,32 @@ else
     fi
 fi
 
-# ── 6. Step Functions: ≥5 executions exist on the state machine ─────────────
+# ── 6. Step Functions: deploy-time invariants for the diagnose task ─────────
+# The failing executions themselves are no longer scenario state: the task
+# diagnose-step-functions-failing-executions starts fresh executions in its
+# pre_invoke on every trial (and asserts they reach FAILED with the missing
+# 'targetBucket' field there). At scenario-verify time no executions exist yet,
+# so this only confirms the deploy-time invariants pre_invoke depends on: the
+# state machine and processing Lambda exist and the outputs resolve.
 SFN_STACK="troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2"
 sm_arn=$(aws cloudformation describe-stacks $PROF --region ap-southeast-2 \
     --stack-name "$SFN_STACK" \
     --query 'Stacks[0].Outputs[?OutputKey==`StateMachineArn`].OutputValue' --output text 2>/dev/null || true)
-if [ -z "$sm_arn" ]; then
+lambda_arn=$(aws cloudformation describe-stacks $PROF --region ap-southeast-2 \
+    --stack-name "$SFN_STACK" \
+    --query 'Stacks[0].Outputs[?OutputKey==`ProcessingLambdaArn`].OutputValue' --output text 2>/dev/null || true)
+if [ -z "$sm_arn" ] || [ "$sm_arn" = "None" ]; then
     fail "Could not resolve StateMachineArn from $SFN_STACK outputs"
+elif [ -z "$lambda_arn" ] || [ "$lambda_arn" = "None" ]; then
+    fail "Could not resolve ProcessingLambdaArn from $SFN_STACK outputs"
+elif ! aws stepfunctions describe-state-machine $PROF --region ap-southeast-2 \
+        --state-machine-arn "$sm_arn" >/dev/null 2>&1; then
+    fail "State machine $sm_arn does not exist or is not describable"
+elif ! aws lambda get-function $PROF --region ap-southeast-2 \
+        --function-name "$lambda_arn" >/dev/null 2>&1; then
+    fail "Processing Lambda $lambda_arn does not exist"
 else
-    exec_count=$(aws stepfunctions list-executions $PROF --region ap-southeast-2 \
-        --state-machine-arn "$sm_arn" --max-items 10 \
-        --query 'length(executions)' --output text 2>/dev/null || echo 0)
-    if [ "$exec_count" -ge 5 ]; then
-        ok "State machine has $exec_count execution(s) (>=5 expected)"
-    else
-        fail "State machine has only $exec_count execution(s); setup_lambda_mw9wjm2q7 may not have run"
-    fi
+    ok "State machine and processing Lambda exist (executions are started per-trial by the task pre_invoke)"
 fi
 
 # ── Result ──────────────────────────────────────────────────────────────────

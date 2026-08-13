@@ -3,8 +3,16 @@
 Re-implements aws-bench-datasets/src/aws_bench_datasets/mutation_scripts/e4f5g6h7-i8j9-k012-l3m4-n5o6p7q8r9s0/validate.py.
 
 The agent reports the Image Pipeline ARN via agent-output.json.
-Verifier confirms the pipeline exists, its last run isn't FAILED, and
-its distribution config covers `us-east-2`.
+Verifier confirms the pipeline exists in the us-east-1 build region, its
+last run isn't FAILED, and its distribution config copies the AMI to
+`us-east-2`.
+
+The pipeline itself must live in us-east-1: the task builds there and
+distributes (copies) the AMI to us-east-2, so a pipeline built directly
+in us-east-2 subverts the cross-region-distribution intent and also leaks
+resources the reset (us-east-1 only) can't clean up. AMIs and launch
+templates are still scanned across all scenario Regions, since the AMI
+legitimately lands in us-east-2.
 """
 
 import json
@@ -19,6 +27,7 @@ SCENARIO_REGIONS = [
     r.strip() for r in os.environ.get("SCENARIO_REGIONS", "us-east-1").split(",")
 ]
 REGION = SCENARIO_REGIONS[0]  # Primary region for backwards compat
+BUILD_REGION = "us-east-1"  # The pipeline must be built here (see module docstring)
 
 try:
     AGENT_OUTPUT = json.loads(Path("/logs/agent/agent-output.json").read_text())
@@ -36,36 +45,26 @@ def _imagebuilder(region=None):
 
 
 def _get_pipeline() -> dict | None:
-    """Fetch the pipeline. Returns the imagePipeline dict, or None on failure."""
+    """Fetch the pipeline from the us-east-1 build region.
+
+    Returns the imagePipeline dict, or None if the pipeline does not exist
+    in us-east-1 (a pipeline built in another Region does not satisfy the
+    task).
+    """
     if not PIPELINE_ARN:
         return None
-    for region in SCENARIO_REGIONS:
-        try:
-            resp = _imagebuilder(region).get_image_pipeline(
-                imagePipelineArn=PIPELINE_ARN
-            )
-        except ClientError:
-            continue
-        pipeline = resp.get("imagePipeline") or None
-        if pipeline:
-            return pipeline
-    return None
+    try:
+        resp = _imagebuilder(BUILD_REGION).get_image_pipeline(
+            imagePipelineArn=PIPELINE_ARN
+        )
+    except ClientError:
+        return None
+    return resp.get("imagePipeline") or None
 
 
 def _get_pipeline_region() -> str | None:
-    """Find the region where the pipeline exists."""
-    if not PIPELINE_ARN:
-        return None
-    for region in SCENARIO_REGIONS:
-        try:
-            resp = _imagebuilder(region).get_image_pipeline(
-                imagePipelineArn=PIPELINE_ARN
-            )
-            if resp.get("imagePipeline"):
-                return region
-        except ClientError:
-            continue
-    return None
+    """Return the build Region if the pipeline exists there, else None."""
+    return BUILD_REGION if _get_pipeline() is not None else None
 
 
 @criterion(description="agent wrote agent-output.json with all required keys")
@@ -74,7 +73,7 @@ def output_contract_followed(workspace: Path) -> bool:
 
 
 @criterion(
-    description="reported Image Pipeline exists, was executed, and last run is not FAILED"
+    description="reported Image Pipeline exists in us-east-1, was executed, and last run is not FAILED"
 )
 def pipeline_runs_clean(workspace: Path) -> bool:
     """A null lastRunStatus (created but never run) fails; any non-FAILED

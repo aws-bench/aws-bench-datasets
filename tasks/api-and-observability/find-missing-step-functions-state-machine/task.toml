@@ -12,7 +12,27 @@ scenario_id = "api-and-observability"
 agent_role_name = "QALocalInvocationApplicationRole"
 
 [concurrency]
-mode = "read-only"
+# pre_invoke deletes the state machine and post_invoke recreates it, so trials
+# mutate shared scenario state and must be serialized: a parallel trial would
+# observe or delete a machine another trial is mid-restore on.
+mode = "mutating"
+
+# --- aws-bench extension --- pre_invoke deletes the state machine each trial so
+# the DeleteStateMachine evidence the agent diagnoses is always fresh.
+[pre_invoke]
+timeout_sec = 300.0
+
+[pre_invoke.env]
+STATE_MACHINE_ARN = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn}}"
+STATE_MACHINE_NAME = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}}"
+
+# --- aws-bench extension --- post_invoke restores the deleted state machine.
+[post_invoke]
+timeout_sec = 300.0
+
+[post_invoke.env]
+STATE_MACHINE_ARN = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn}}"
+STATE_MACHINE_NAME = "{{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}}"
 
 # --- Harbor standard --- flexible metadata
 [metadata]
