@@ -5,7 +5,7 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
 name = "in_us_east_1_region_you_have_the_ec2_instance_ec"

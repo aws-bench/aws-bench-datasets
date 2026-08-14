@@ -53,12 +53,11 @@ The answers are EQUIVALENT if a practitioner following the junior's answer would
 
 ## Per-Claim Grading
 
-This task's reference answer has been decomposed into individual claims. You are being asked to judge ONE claim at a time, not the answer as a whole. For the claim given to you:
+This task's reference answer has been decomposed into the individual claims listed below. Score each claim independently, on its own merits -- whether the junior's answer covers other listed claims should not affect this one.
 
-- Judge whether the junior's answer in agent-output.txt supports that specific claim, allowing for differences in wording, formatting, or level of detail per the Must Match / May Differ / Fail If rules above.
-- Ignore whether the junior's answer covers OTHER claims -- those are graded separately.
+- For each claim, judge whether the junior's answer in agent-output.txt supports it, allowing for differences in wording, formatting, or level of detail per the Must Match / May Differ / Fail If rules above.
 - A claim about a fix or remediation step is satisfied when the junior proposes an equivalent fix; a claim about a root cause is satisfied when the junior identifies an equivalent cause.
-- Objective, machine-checkable facts (specific resource identifiers, counts, and configuration values) are graded separately by a programmatic boto3 check, not by you -- if you are handed one of those as your assigned claim anyway, judge it the same way: based on the junior's stated answer, allowing equivalent phrasing.
-- EXCEPTION: if the claim you are given is the standing "no extraneous or contradicting facts" check (see its own description), it is judging the answer as a WHOLE against the ENTIRE reference answer, not one isolated fact -- follow that claim's own instructions instead of the per-claim rule above.
+- Objective, machine-checkable facts (specific resource identifiers, counts, and configuration values) are graded separately by a programmatic boto3 check, not by you -- if one of the listed claims is one of those anyway, judge it the same way: based on the junior's stated answer, allowing equivalent phrasing.
+- EXCEPTION: the claim named `no_extraneous_or_contradicting_facts` (if listed below) is judged differently from every other claim here -- follow its own description, which judges the answer as a WHOLE against the ENTIRE reference answer, not one isolated fact.
 
 {criteria}

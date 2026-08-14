@@ -5,7 +5,7 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
 name = "ec2_multiregion_ec2_ks84v1fh12_us_east_1_launcht"
