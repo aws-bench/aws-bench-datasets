@@ -8,6 +8,31 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "in_us_east_1_region_one_of_the_account_s_ec2_ins"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}"
+type = "binary"
+
+[[criterion]]
+name = "in_us_east_1_region_one_of_the_account_s_ec2_ins_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}"
+type = "binary"
+
+[[criterion]]
+name = "in_us_east_1_region_one_of_the_account_s_ec2_ins_3"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}}"
+type = "binary"
+
+[[criterion]]
+name = "in_us_east_1_region_one_of_the_account_s_ec2_ins_4"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}}"
+type = "binary"
+
+[[criterion]]
+name = "in_us_west_1_region_the_account_has_the_ec2_inst"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-1 region, the account has the EC2 instance id {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}"
+type = "binary"
+
+[[criterion]]
+name = "in_us_west_2_region_the_account_has_the_ec2_inst"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-2 region, the account has the EC2 instance id {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
 type = "binary"

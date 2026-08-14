@@ -8,6 +8,26 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "there_are_6_ec2_instances_across_3_regions_and_4"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are 6 EC2 instances across 3 regions and 4 VPCs in total."
+type = "binary"
+
+[[criterion]]
+name = "in_region_us_east_1_there_are_3_instances_ec2_mu"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-east-1, there are 3 instances: {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}, and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}}, within VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}}."
+type = "binary"
+
+[[criterion]]
+name = "in_region_us_east_1_there_is_1_instance_ec2_mult"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-east-1, there is 1 instance, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}}, in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVpcId}}."
+type = "binary"
+
+[[criterion]]
+name = "in_region_us_west_1_there_is_1_instance_ec2_mult"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-west-1, there is 1 instance, {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}, within VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-VpcId}}."
+type = "binary"
+
+[[criterion]]
+name = "in_region_us_west_2_there_is_1_instance_ec2_mult"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-west-2, there is 1 instance, {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}, within VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-VpcId}}."
 type = "binary"

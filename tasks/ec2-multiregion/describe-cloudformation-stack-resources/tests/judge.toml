@@ -8,6 +8,51 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_ec2_multiregion_ec2_ls9fuhb522_us_west_1_sta"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} stack is a CDK stack."
+type = "binary"
+
+[[criterion]]
+name = "the_stack_stands_up_a_web_server"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack stands up a web server."
+type = "binary"
+
+[[criterion]]
+name = "the_stack_contains_a_vpc_with_a_public_subnet"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack contains a VPC with a public subnet."
+type = "binary"
+
+[[criterion]]
+name = "the_stack_contains_an_ec2_instance_with_id_ec2_m"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack contains an EC2 instance with ID {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}."
+type = "binary"
+
+[[criterion]]
+name = "the_stack_contains_a_security_group_for_the_ec2_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack contains a security group for the EC2 instance."
+type = "binary"
+
+[[criterion]]
+name = "the_stack_contains_an_iam_role"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack contains an IAM role."
+type = "binary"
+
+[[criterion]]
+name = "the_stack_contains_a_lambda_backed_custom_resour"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack contains a Lambda-backed custom resource."
+type = "binary"
+
+[[criterion]]
+name = "the_lambda_backed_custom_resource_locks_down_the"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda-backed custom resource locks down the default security group."
+type = "binary"
+
+[[criterion]]
+name = "the_stack_contains_16_resources_in_total"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack contains 16 resources in total."
+type = "binary"
+
+[[criterion]]
+name = "all_resources_in_the_stack_were_created_successf"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): All resources in the stack were created successfully."
 type = "binary"

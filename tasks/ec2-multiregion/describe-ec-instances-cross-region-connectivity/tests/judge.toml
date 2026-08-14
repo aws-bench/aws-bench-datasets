@@ -8,6 +8,46 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "you_have_ec2_multiregion_ec2_ks84v1fh12_us_east_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-NUMEC2Running}} EC2 instances running in us-east-1."
+type = "binary"
+
+[[criterion]]
+name = "you_have_ec2_multiregion_ec2_ls9fuhb522_us_west_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-NUMEC2Running}} EC2 instances running in us-west-1."
+type = "binary"
+
+[[criterion]]
+name = "you_have_ec2_multiregion_ec2_ls9fuhb522_us_west__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-NUMEC2Running}} EC2 instances running in us-west-2."
+type = "binary"
+
+[[criterion]]
+name = "in_us_east_1_instance_ec2_multiregion_ec2_ks84v1"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}}."
+type = "binary"
+
+[[criterion]]
+name = "in_us_east_1_instance_ec2_multiregion_ec2_ks84v1_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}}."
+type = "binary"
+
+[[criterion]]
+name = "in_us_east_1_instance_ec2_multiregion_ec2_ks84v1_3"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}}."
+type = "binary"
+
+[[criterion]]
+name = "instances_ec2_multiregion_ec2_ks84v1fh12_us_east"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instances {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}, and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} share the same VPC and therefore share network connectivity."
+type = "binary"
+
+[[criterion]]
+name = "the_remaining_instance_in_us_east_1_is_in_the_de"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The remaining instance in us-east-1 is in the default VPC."
+type = "binary"
+
+[[criterion]]
+name = "the_remaining_instance_is_not_network_adjacent_t"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The remaining instance is not network-adjacent to the other three instances because it is in a different VPC."
 type = "binary"

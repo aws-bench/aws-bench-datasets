@@ -8,6 +8,16 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "there_are_4b68864e_unusedsecuritygroupcount_unus"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{4b68864e-UnusedSecurityGroupCount}} unused security groups in total."
+type = "binary"
+
+[[criterion]]
+name = "most_of_the_unused_security_groups_are_default_s"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Most of the unused security groups are default security groups automatically created for each VPC."
+type = "binary"
+
+[[criterion]]
+name = "in_us_east_1_one_of_the_unused_security_groups_i"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, one of the unused security groups is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-UnusedSecurityGroupId}}."
 type = "binary"

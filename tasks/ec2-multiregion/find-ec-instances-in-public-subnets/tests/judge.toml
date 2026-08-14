@@ -8,6 +8,26 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "instance_ec2_multiregion_ec2_ks84v1fh12_us_east_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is in a public subnet in the us-east-1 region."
+type = "binary"
+
+[[criterion]]
+name = "instance_ec2_multiregion_ec2_ks84v1fh12_us_east__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is in a public subnet in the us-east-1 region."
+type = "binary"
+
+[[criterion]]
+name = "instance_ec2_multiregion_ec2_ks84v1fh12_us_east__3"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}} is in a public subnet in the us-east-1 region."
+type = "binary"
+
+[[criterion]]
+name = "instance_ec2_multiregion_ec2_ls9fuhb522_us_west_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}} is in a public subnet in the us-west-1 region."
+type = "binary"
+
+[[criterion]]
+name = "instance_ec2_multiregion_ec2_ls9fuhb522_us_west__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}} is in a public subnet in the us-west-2 region."
 type = "binary"

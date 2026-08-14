@@ -8,6 +8,16 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "exactly_2_ec2_instances_in_the_account_are_ssh_r"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Exactly 2 EC2 instances in the account are SSH-reachable from the internet."
+type = "binary"
+
+[[criterion]]
+name = "the_ec2_instance_ec2_multiregion_ec2_ks84v1fh12_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is SSH-reachable from the internet."
+type = "binary"
+
+[[criterion]]
+name = "the_ec2_instance_ec2_multiregion_ec2_ks84v1fh12__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is SSH-reachable from the internet."
 type = "binary"

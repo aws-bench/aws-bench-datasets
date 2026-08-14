@@ -49,4 +49,14 @@ The answers are EQUIVALENT if a practitioner following the junior's answer would
 4. Check if any Fail condition applies.
 5. If same effective action and no fail condition: EQUIVALENT.
 
+
+## Per-Claim Grading (this task)
+
+This task's reference answer has been decomposed into individual claims. You are being asked to judge ONE claim at a time, not the answer as a whole. For the claim given to you:
+
+- Judge whether the junior's answer in agent-output.txt supports that specific claim, allowing for differences in wording, formatting, or level of detail per the Must Match / May Differ / Fail If rules above.
+- Ignore whether the junior's answer covers OTHER claims -- those are graded separately.
+- A claim about a fix or remediation step is satisfied when the junior proposes an equivalent fix; a claim about a root cause is satisfied when the junior identifies an equivalent cause.
+- Objective, machine-checkable facts (specific resource identifiers, counts, and configuration values) are graded separately by a programmatic boto3 check, not by you -- if you are handed one of those as your assigned claim anyway, judge it the same way: based on the junior's stated answer, allowing equivalent phrasing.
+
 {criteria}
