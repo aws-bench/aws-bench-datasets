@@ -8,26 +8,36 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "there_are_6_ec2_instances_across_3_regions_and_4"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are 6 EC2 instances across 3 regions and 4 VPCs in total."
+name = "instance_ec2_multiregion_ec2_ks84v1fh12_us_east_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "in_region_us_east_1_there_are_3_instances_ec2_mu"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-east-1, there are 3 instances: {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}, and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}}, within VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}}."
+name = "instance_ec2_multiregion_ec2_ks84v1fh12_us_east__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "in_region_us_east_1_there_is_1_instance_ec2_mult"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-east-1, there is 1 instance, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}}, in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVpcId}}."
+name = "instance_ec2_multiregion_ec2_ks84v1fh12_us_east__3"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "in_region_us_west_1_there_is_1_instance_ec2_mult"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-west-1, there is 1 instance, {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}, within VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-VpcId}}."
+name = "instance_ec2_multiregion_ec2_ks84v1fh12_us_east__4"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "in_region_us_west_2_there_is_1_instance_ec2_mult"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In region us-west-2, there is 1 instance, {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}, within VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-VpcId}}."
+name = "instance_ec2_multiregion_ec2_ls9fuhb522_us_west_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}} is in VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-VpcId}} in region us-west-1"
+type = "binary"
+
+[[criterion]]
+name = "instance_ec2_multiregion_ec2_ls9fuhb522_us_west__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}} is in VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-VpcId}} in region us-west-2"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

@@ -8,31 +8,36 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "in_us_east_1_region_one_of_the_account_s_ec2_ins"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}"
+name = "in_us_east_1_region_you_have_the_ec2_instance_ec"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region you have the EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_region_one_of_the_account_s_ec2_ins_2"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}"
+name = "in_us_east_1_region_you_have_the_ec2_instance_ec_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region you have the EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_region_one_of_the_account_s_ec2_ins_3"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}}"
+name = "in_us_east_1_region_you_have_the_ec2_instance_ec_3"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region you have the EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_region_one_of_the_account_s_ec2_ins_4"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region, one of the account's EC2 instance ids is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}}"
+name = "in_us_east_1_region_you_have_the_ec2_instance_ec_4"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region you have the EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_west_1_region_the_account_has_the_ec2_inst"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-1 region, the account has the EC2 instance id {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}"
+name = "in_us_west_1_region_you_have_the_ec2_instance_ec"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-1 region you have the EC2 instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_west_2_region_the_account_has_the_ec2_inst"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-2 region, the account has the EC2 instance id {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
+name = "in_us_west_2_region_you_have_the_ec2_instance_ec"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-2 region you have the EC2 instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}}"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

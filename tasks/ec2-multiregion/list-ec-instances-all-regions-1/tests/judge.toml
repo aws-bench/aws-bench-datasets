@@ -8,16 +8,21 @@ prompt_template = "judge_prompt.md"
 mode = "individual"
 
 [[criterion]]
-name = "exactly_2_ec2_instances_in_the_account_are_ssh_r"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Exactly 2 EC2 instances in the account are SSH-reachable from the internet."
+name = "ec2_multiregion_ec2_ks84v1fh12_us_east_1_launcht"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is SSH-reachable from the internet"
 type = "binary"
 
 [[criterion]]
-name = "the_ec2_instance_ec2_multiregion_ec2_ks84v1fh12_"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is SSH-reachable from the internet."
+name = "ec2_multiregion_ec2_ks84v1fh12_us_east_1_instanc"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is SSH-reachable from the internet"
 type = "binary"
 
 [[criterion]]
-name = "the_ec2_instance_ec2_multiregion_ec2_ks84v1fh12__2"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is SSH-reachable from the internet."
+name = "no_other_instances_besides_ec2_multiregion_ec2_k"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No other instances besides {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} are SSH-reachable from the internet"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

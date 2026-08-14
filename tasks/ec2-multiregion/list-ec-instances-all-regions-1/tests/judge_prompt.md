@@ -58,5 +58,6 @@ This task's reference answer has been decomposed into individual claims. You are
 - Ignore whether the junior's answer covers OTHER claims -- those are graded separately.
 - A claim about a fix or remediation step is satisfied when the junior proposes an equivalent fix; a claim about a root cause is satisfied when the junior identifies an equivalent cause.
 - Objective, machine-checkable facts (specific resource identifiers, counts, and configuration values) are graded separately by a programmatic boto3 check, not by you -- if you are handed one of those as your assigned claim anyway, judge it the same way: based on the junior's stated answer, allowing equivalent phrasing.
+- EXCEPTION: if the claim you are given is the standing "no extraneous or contradicting facts" check (see its own description), it is judging the answer as a WHOLE against the ENTIRE reference answer, not one isolated fact -- follow that claim's own instructions instead of the per-claim rule above.
 
 {criteria}
