@@ -1,26 +1,13 @@
-"""Resolve {{placeholder}} tokens in /tests/ground_truth.json and, if present, in
-every /tests/judge.toml [[criterion]].description, in place.
+"""Resolve {{placeholder}} tokens in /tests/ground_truth.json and, if present,
+in /tests/judge.toml's [[criterion]].description fields, in place.
 
-The framework injects placeholder values from [verifier.env] in task.toml as
-env vars on the verifier container. This script substitutes {{name}} with the
-corresponding env var and overwrites both files with the resolved version.
-
-ground_truth.json is rewardkit's own [judge.files] input, so its placeholders
-were always resolved here. judge.toml's criterion descriptions need the same
-treatment: rewardkit (see judges.py) does no placeholder substitution of its
-own, it only relays each criterion's description text verbatim into the judge
-prompt -- so a per-claim rubric whose description embeds a raw {{name}} token
-(as AWSBenchRubricGenerator's generated criteria do) would otherwise reach the
-judge unresolved. Line-based rather than a full TOML re-serialize, to preserve
-formatting/comments exactly and avoid a new TOML-writer dependency; safe
-because only description lines ever contain {{...}} tokens.
+rewardkit relays each criterion's description verbatim into the judge prompt
+with no substitution of its own, so a per-claim description embedding a raw
+{{name}} token would otherwise reach the judge unresolved. Line-based rather
+than a full TOML re-serialize, to preserve formatting/comments exactly.
 
 Strict: exits non-zero if any {{name}} isn't set anywhere, surfacing missing
 CFN exports loudly instead of silently leaking literal tokens to the judge.
-
-Skipped per-file when that file doesn't exist (some tasks, e.g. programmatic
-mutation verifiers, have neither; some rewardkit tasks still use the original
-single-criterion judge.toml, which has no placeholders and is a no-op here).
 """
 
 import os
