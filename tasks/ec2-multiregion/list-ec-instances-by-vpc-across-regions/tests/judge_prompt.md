@@ -7,25 +7,27 @@ You will be shown two files in the user message:
    - `instruction`: the task itself (what the user asked).
    - `expected_answer`: the senior engineer's reference answer.
 
-## Evaluation Standard
+## General Guidance
+
+### Evaluation Standard
 
 The answers are EQUIVALENT if a practitioner following the junior's answer would reach the same conclusion and take the same effective action as someone following the senior's answer.
 
-## Must Match
+### Must Match
 
 - The primary root cause or diagnosis.
 - The overall verdict (broken/working, how many, which resource).
 - All distinct root causes if the senior identifies multiple.
 - If a fix is proposed: it must actually work. A command missing required parameters or targeting the wrong resource is NOT equivalent, even if the diagnosis is correct.
 
-## May Differ
+### May Differ
 
 - Wording, formatting, level of detail, or method of investigation.
 - Console URLs, dashboard links, retention periods, region names when obvious.
 - Additional correct information beyond the reference.
 - Formatting details of identifiers when the resource is unambiguously identified.
 
-## Fail If
+### Fail If
 
 1. Wrong verdict (broken vs working).
 2. Wrong root cause that would not explain or fix the problem.
@@ -34,14 +36,14 @@ The answers are EQUIVALENT if a practitioner following the junior's answer would
 5. Missing a primary root cause the senior identified.
 6. Introduces false claims about the infrastructure that would mislead a practitioner. Minor imprecisions in non-actionable details do not count.
 
-## Clarifications
+### Clarifications
 
 - Omitting a detail is acceptable UNLESS it changes what action a practitioner would take.
 - Merely mentioning an approach is not the same as providing it as the solution.
 - Listing more resources than the reference says exist is NOT equivalent.
 - If the junior answers with a question and the senior gives an explicit answer, NOT equivalent.
 
-## Steps
+### Steps
 
 1. Read the instruction to understand what was asked.
 2. Identify what action a practitioner would take from the senior's answer.
@@ -49,8 +51,7 @@ The answers are EQUIVALENT if a practitioner following the junior's answer would
 4. Check if any Fail condition applies.
 5. If same effective action and no fail condition: EQUIVALENT.
 
-
-## Per-Claim Grading (this task)
+## Per-Claim Grading
 
 This task's reference answer has been decomposed into individual claims. You are being asked to judge ONE claim at a time, not the answer as a whole. For the claim given to you:
 
