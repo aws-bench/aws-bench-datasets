@@ -44,9 +44,9 @@ The stack $STACK is in $STATUS. The failing update points its Lambda alias resou
 
 Those versions were published into the template as hardcoded literal string values (FunctionVersion "$SES_TPL_VER" and "$GDO_TPL_VER") rather than deriving them from the function with !GetAtt Function.Version, so the versions do not exist and the aliases cannot be created — leaving the stack unable to roll back.
 
-To fix this and continue the deployment, skip the two failing alias resources so the rollback can complete:
+Since the stack is in UPDATE_FAILED (rollback was disabled during the update), use rollback-stack to roll back to the last stable state:
 
-aws cloudformation continue-update-rollback --stack-name $STACK --resources-to-skip $SES_ALIAS_ID $GDO_ALIAS_ID --region $REGION
+aws cloudformation rollback-stack --stack-name $STACK --region $REGION
 
-Once the stack returns to UPDATE_ROLLBACK_COMPLETE, correct the template so each alias references a valid version (use !GetAtt Function.Version instead of a hardcoded number) and redeploy.
+Once the stack reaches UPDATE_ROLLBACK_COMPLETE, correct the template so each alias references a valid version (use !GetAtt Function.Version instead of a hardcoded number) and redeploy.
 EOF

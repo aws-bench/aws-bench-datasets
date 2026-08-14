@@ -48,33 +48,10 @@ CHECK_URL=$(aws lambda get-function --region "$REGION" --function-name "$CHECK_S
 curl -s -o "$WORKDIR/check.zip" "$CHECK_URL"
 CHECK_CODE=$(cd "$WORKDIR" && unzip -p check.zip index.py)
 
-EXECS=$(aws stepfunctions list-executions --region "$REGION" --state-machine-arn "$SM_ARN" \
-    --max-items 20 --query "executions[?status=='SUCCEEDED'].executionArn" --output text)
-
-DURATIONS=$(for E in $EXECS; do
-    aws stepfunctions describe-execution --region "$REGION" --execution-arn "$E" \
-        --query "[startDate,stopDate]" --output text
-done | python3 -c '
-import sys
-from datetime import datetime
-ds=[]
-for line in sys.stdin:
-    p=line.split()
-    if len(p)!=2: continue
-    a=datetime.fromisoformat(p[0]); b=datetime.fromisoformat(p[1])
-    ds.append((b-a).total_seconds())
-if ds:
-    print("%.0f" % (sum(ds)/len(ds)))')
-
 RULE_SCHEDULE=$(aws events describe-rule --region "$REGION" --name "$RULE_NAME" \
     --query "ScheduleExpression" --output text)
 RULE_INPUT=$(aws events list-targets-by-rule --region "$REGION" --rule "$RULE_NAME" \
     --query "Targets[0].Input" --output text)
-
-TIMING_SENTENCE="No recent SUCCEEDED executions were available to measure end-to-end duration."
-if [ -n "$DURATIONS" ]; then
-    TIMING_SENTENCE="Recent SUCCEEDED executions of this state machine average ~${DURATIONS} seconds end-to-end (the 30s Wait plus two ~50ms Lambda calls plus overhead)."
-fi
 
 cat > "$OUT" <<EOF
 CheckStatus (${CHECK_STATUS_FUNCTION_NAME}) runs exactly TWICE per production execution, and the Wait30Seconds -> CheckStatus loop never iterates, because the handlers in this stack are stubs that hard-code a SUCCEEDED status on the first call.
@@ -93,7 +70,7 @@ It simply echoes SUCCEEDED, or collapses anything else to FAILED.
 
 ASL flow: StartAt SubmitJob -> Wait30Seconds -> CheckStatus -> JobComplete (a Choice on \$.status). If status == SUCCEEDED it goes to GetFinalJobStatus (which invokes the same CheckStatus Lambda one more time) then ends; if status == FAILED it goes to JobFailed (a terminal Fail state); otherwise (Default) it loops back to Wait30Seconds. The state machine definition shows ${CHECK_INVOCATIONS} states invoke the CheckStatus Lambda ARN (${CHECK_ARN}).
 
-Because SubmitJob sets status=SUCCEEDED immediately, the first CheckStatus invocation observes SUCCEEDED, the Choice takes the SUCCEEDED branch, and the execution transitions to GetFinalJobStatus -- which invokes the same CheckStatus Lambda a second time before ending. That is 2 CheckStatus invocations total. ${TIMING_SENTENCE}
+Because SubmitJob sets status=SUCCEEDED immediately, the first CheckStatus invocation observes SUCCEEDED, the Choice takes the SUCCEEDED branch, and the execution transitions to GetFinalJobStatus -- which invokes the same CheckStatus Lambda a second time before ending. That is 2 CheckStatus invocations total. The expected duration of a single execution is approximately 30 seconds (the Wait30Seconds state) plus negligible Lambda invocation overhead.
 
 The Wait -> CheckStatus loop can only iterate if CheckStatus returned a value that is neither SUCCEEDED nor FAILED (the Choice's Default branch back to Wait30Seconds). With the current handler code that case is unreachable: CheckStatus only ever returns SUCCEEDED or FAILED. To make the loop iterate more than once you would have to change SubmitJob to return a non-terminal status, change CheckStatus to return something other than SUCCEEDED/FAILED, or manually start an execution with a custom input that CheckStatus would not immediately terminate on -- but even then CheckStatus's else branch returns FAILED, which is terminal.
 
