@@ -41,7 +41,7 @@ export class ComputeEc2Stack extends cdk.Stack {
 
         // Create EC2 instance with IMDSv2 and tags using launch template
         const instance = new ec2.CfnInstance(this, 'TestInstance', {
-            subnetId: vpc.publicSubnets[0].subnetId,
+            subnetId: vpc.privateSubnets[0].subnetId,
             iamInstanceProfile: instanceProfile.ref,
             launchTemplate: {
                 launchTemplateId: launchTemplate.ref,
