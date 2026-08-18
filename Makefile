@@ -34,6 +34,10 @@ HADOLINT_IMAGE  ?= hadolint/hadolint:latest
 # per-task/per-scenario runtime scripts that execute inside their containers
 # with their own deps). ty typechecks only these paths.
 PY_TYPECHECK_PATHS ?= tools
+# Flat module directories: their .py files import siblings by bare name (e.g.
+# `from lib import ...`). ty resolves modules only from its search path, so each
+# such directory is added to it. Relative to the repo root.
+PY_MODULE_PATHS ?= tools/rubric-runner
 
 # ---- content discovery -------------------------------------------------------
 PRUNE := -path '*/node_modules/*' -o -path '*/cdk.out/*' -o -path '*/dist/*'
@@ -123,7 +127,7 @@ py-lint: ## ruff lint (rule set in pyproject.toml [tool.ruff.lint])
 	$(UVX) ruff check .
 
 py-typecheck: ## ty typecheck of maintained first-party Python
-	$(UVX) ty check $(PY_TYPECHECK_PATHS)
+	$(UVX) ty check $(addprefix --extra-search-path ,$(PY_MODULE_PATHS)) $(PY_TYPECHECK_PATHS)
 
 py-fmt: ## Apply ruff format (mutates files)
 	$(UVX) ruff format .
@@ -146,7 +150,8 @@ docker: ## hadolint lint
 	fi
 
 # ---- Config (task/scenario metadata) -----------------------------------------
-config: ## Validate task.toml fields + verifier toolchain pinning + lockfile registries
+config: ## Validate task.toml parses + fields + verifier toolchain pinning + lockfile registries
+	bash test/ci_utils/check-task-toml-parses.sh
 	bash test/ci_utils/check-task-fields.sh
 	bash test/ci_utils/check-toolchain-pinning.sh
 	bash test/ci_utils/check-lockfile-registries.sh

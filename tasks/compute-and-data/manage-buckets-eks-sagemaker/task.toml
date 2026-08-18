@@ -48,7 +48,6 @@ timeout_sec = 1200.0
 EXPECTED_BUCKETS_CSV = "{{compute-and-data-eks-gztvy25g1-us-east-1-S3BucketNames}}"
 EXPECTED_CLUSTER = "{{compute-and-data-eks-gztvy25g1-us-east-1-EksClusterName}}"
 AWS_REGION = "us-east-1"
-AWS_REGION = "us-east-1"
 
 # --- aws-bench extension --- post_invoke (rollback) runs after verification
 # Note: object-version deletion is irreversible, so post_invoke uninstalls the
@@ -59,7 +58,6 @@ timeout_sec = 1200.0
 [post_invoke.env]
 EXPECTED_CLUSTER = "{{compute-and-data-eks-gztvy25g1-us-east-1-EksClusterName}}"
 EXPECTED_BUCKETS_CSV = "{{compute-and-data-eks-gztvy25g1-us-east-1-S3BucketNames}}"
-AWS_REGION = "us-east-1"
 AWS_REGION = "us-east-1"
 
 [solution.env]

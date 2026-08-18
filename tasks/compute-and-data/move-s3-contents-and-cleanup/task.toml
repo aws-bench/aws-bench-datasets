@@ -30,7 +30,6 @@ timeout_sec = 300.0
 SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
 DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
 AWS_REGION = "us-east-1"
-AWS_REGION = "us-east-1"
 
 [agent]
 timeout_sec = 1200.0
@@ -53,7 +52,6 @@ timeout_sec = 360.0
 [post_invoke.env]
 SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
 DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
-AWS_REGION = "us-east-1"
 AWS_REGION = "us-east-1"
 
 [environment]

@@ -32,14 +32,12 @@ timeout_sec = 300.0
 [pre_invoke.env]
 B2B_DATA_BUCKET = "{{compute-and-data-s3-dkj487ewd-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 360.0
 
 [post_invoke.env]
 B2B_DATA_BUCKET = "{{compute-and-data-s3-dkj487ewd-us-east-1-BucketName}}"
-AWS_REGION = "us-east-1"
 AWS_REGION = "us-east-1"
 
 # --- Harbor standard ---
