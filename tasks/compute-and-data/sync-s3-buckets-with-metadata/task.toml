@@ -41,7 +41,6 @@ timeout_sec = 300.0
 SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
 DESTINATION_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-DestinationBucketName}}"
 AWS_REGION = "us-east-1"
-AWS_REGION = "us-east-1"
 
 [solution.env]
 SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
@@ -54,7 +53,6 @@ timeout_sec = 360.0
 [post_invoke.env]
 SYNC_SOURCE_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-SourceBucketName}}"
 DESTINATION_BUCKET = "{{compute-and-data-s3-mnbh73950-us-east-1-DestinationBucketName}}"
-AWS_REGION = "us-east-1"
 AWS_REGION = "us-east-1"
 
 [environment]

@@ -146,7 +146,8 @@ docker: ## hadolint lint
 	fi
 
 # ---- Config (task/scenario metadata) -----------------------------------------
-config: ## Validate task.toml fields + verifier toolchain pinning + lockfile registries
+config: ## Validate task.toml parses + fields + verifier toolchain pinning + lockfile registries
+	bash test/ci_utils/check-task-toml-parses.sh
 	bash test/ci_utils/check-task-fields.sh
 	bash test/ci_utils/check-toolchain-pinning.sh
 	bash test/ci_utils/check-lockfile-registries.sh
