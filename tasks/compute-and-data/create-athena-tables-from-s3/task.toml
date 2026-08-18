@@ -29,14 +29,12 @@ timeout_sec = 300.0
 [pre_invoke.env]
 CSV_BUCKET = "{{compute-and-data-athena-k89bh5er2-us-east-1-CsvBucketName}}"
 AWS_REGION = "us-east-1"
-AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 300.0
 
 [post_invoke.env]
 CSV_BUCKET = "{{compute-and-data-athena-k89bh5er2-us-east-1-CsvBucketName}}"
-AWS_REGION = "us-east-1"
 AWS_REGION = "us-east-1"
 
 [agent]
