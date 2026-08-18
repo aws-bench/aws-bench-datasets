@@ -30,14 +30,12 @@ timeout_sec = 300.0
 [pre_invoke.env]
 MOVE_DATA_BUCKET = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_REGION = "us-east-1"
 
 [post_invoke]
 timeout_sec = 360.0
 
 [post_invoke.env]
 MOVE_DATA_BUCKET = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"
-AWS_REGION = "us-east-1"
 AWS_REGION = "us-east-1"
 
 [agent]

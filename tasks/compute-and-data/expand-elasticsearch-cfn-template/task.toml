@@ -39,7 +39,6 @@ timeout_sec = 300.0
 [pre_invoke.env]
 BUCKET_NAME = "{{compute-and-data-s3-dz8q7r549-us-east-1-BucketName}}"
 AWS_REGION = "us-east-1"
-AWS_REGION = "us-east-1"
 
 [solution.env]
 BUCKET_NAME = "{{compute-and-data-s3-dz8q7r549-us-east-1-BucketName}}"
@@ -51,7 +50,6 @@ timeout_sec = 360.0
 
 [post_invoke.env]
 BUCKET_NAME = "{{compute-and-data-s3-dz8q7r549-us-east-1-BucketName}}"
-AWS_REGION = "us-east-1"
 AWS_REGION = "us-east-1"
 
 [environment]
