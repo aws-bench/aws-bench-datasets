@@ -108,7 +108,7 @@ async def judge_one(
 ) -> dict:
     """Run harbor check on one task; persist and return a small status record."""
     # Imported lazily so --help works without harbor installed.
-    from harbor.analyze.checker import run_check  # ty: ignore[unresolved-import]
+    from harbor.analyze.checker import run_check
 
     slug = task_slug(task_dir)
     task_type = detect_task_type(task_dir)
