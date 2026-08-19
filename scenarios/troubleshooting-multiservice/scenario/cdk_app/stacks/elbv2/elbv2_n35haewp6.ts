@@ -136,6 +136,55 @@ export class Elbv2_n35haewp6 extends cdk.Stack {
             cpuType: ec2.AmazonLinuxCpuType.X86_64,
         });
 
+        // User data: bring up a deterministic HTTP responder on port 4000 that
+        // returns 200 for /health-check. This makes the ONLY reason the NLB
+        // health check fails the missing security group inbound rule (the bug
+        // being tested) — with ingress opened, the server answers and the
+        // targets go healthy. Run it under systemd so it survives reboots and
+        // restarts if it exits. Amazon Linux 2023 ships python3 at /usr/bin.
+        const healthCheckUserData = ec2.UserData.custom(
+            [
+                '#!/bin/bash',
+                'set -euxo pipefail',
+                "cat > /opt/health-check.py <<'PYEOF'",
+                'from http.server import BaseHTTPRequestHandler, HTTPServer',
+                '',
+                '',
+                'class Handler(BaseHTTPRequestHandler):',
+                '    def do_GET(self):',
+                "        if self.path == '/health-check':",
+                '            self.send_response(200)',
+                "            self.send_header('Content-Type', 'text/plain')",
+                '            self.end_headers()',
+                "            self.wfile.write(b'OK')",
+                '        else:',
+                '            self.send_response(404)',
+                '            self.end_headers()',
+                '',
+                '    def log_message(self, *args):',
+                '        pass',
+                '',
+                '',
+                "HTTPServer(('0.0.0.0', 4000), Handler).serve_forever()",
+                'PYEOF',
+                "cat > /etc/systemd/system/health-check.service <<'UNITEOF'",
+                '[Unit]',
+                'Description=Health-check responder on port 4000',
+                'After=network-online.target',
+                'Wants=network-online.target',
+                '',
+                '[Service]',
+                'ExecStart=/usr/bin/python3 /opt/health-check.py',
+                'Restart=always',
+                '',
+                '[Install]',
+                'WantedBy=multi-user.target',
+                'UNITEOF',
+                'systemctl daemon-reload',
+                'systemctl enable --now health-check.service',
+            ].join('\n'),
+        );
+
         // Create Launch Template
         const launchTemplate = new ec2.LaunchTemplate(this, 'LaunchTemplate', {
             launchTemplateName: `launch-template-appcluster-${this.account}-${this.region}`,
@@ -143,6 +192,7 @@ export class Elbv2_n35haewp6 extends cdk.Stack {
             machineImage: ami,
             securityGroup: securityGroup,
             requireImdsv2: true,
+            userData: healthCheckUserData,
         });
 
         // Override launch template to add instance profile and metadata options

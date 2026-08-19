@@ -56,4 +56,6 @@ The target group ${TG_NAME} uses ${HC_PROTO} health checks on port ${HC_PORT} at
 Because the ASG uses ${HEALTH_CHECK_TYPE} health checks (grace period ${GRACE}s), this causes the ASG to continuously cycle instances: each instance launches, fails the ELB health check after the grace period, is marked unhealthy and terminated, and a replacement is launched.
 
 Fix: add an inbound rule to security group ${SG_ID} allowing TCP on port ${HC_PORT} from the VPC subnet CIDR so the NLB health check traffic reaches the instances.
+
+Once the health checks can reach the instances, they pass, the targets stay healthy, and the terminate/replace loop stops.
 EOF
