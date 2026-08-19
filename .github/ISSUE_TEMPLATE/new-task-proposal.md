@@ -43,7 +43,7 @@ assignees: ''
 
 ## Task Complexity
 
-> How challenging is this task for a frontier AI agent? Briefly describe the conceptual difficulty, estimated time for a domain expert to complete it, and the estimated pass rate for frontier agents.
+> How challenging is this task for a frontier AI agent? Briefly assess its conceptual difficulty, estimate the time required for a domain expert to complete it, and provide an estimated pass rate for frontier AI agents. Where possible, include supporting evidence for the pass-rate estimate, such as observed results from comparable tasks using a specific agent or model, including details on where and why the agent failed.
 
 > Example: *High — requires cross-referencing Lambda configuration, IAM permissions, AppConfig resources, and the Agent setup to isolate the one broken link among several healthy ones. ~20-30 min for an expert; ~20-35% estimated frontier-agent pass rate.*
 
