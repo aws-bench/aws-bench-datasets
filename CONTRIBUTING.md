@@ -122,7 +122,9 @@ A high quality aws-bench task is:
    ```
    Also run the sync/drift checks relevant to what you changed (see
    [README.md](README.md#running-tests) and [AGENTS.md](AGENTS.md#validation)).
-5. **Submit a PR.** Include in the PR description:
+5. **Submit a PR.** Work off the latest `main` and keep the diff focused on your task, batch, or
+   scenario — avoid bundling unrelated reformatting, since it makes your change harder to review.
+   Use clear, descriptive commit messages. Include in the PR description:
    - [ ] Link to the approved proposal issue
    - [ ] `make ready` (or `make check`) passes locally
    - [ ] Relevant sync/drift checks pass, if you touched shared judge/task-helper files
@@ -131,12 +133,25 @@ A high quality aws-bench task is:
    - [ ] No confidential, company-internal, or customer data (see [AGENTS.md](AGENTS.md#publishing-hygiene))
 
    CI runs `make check` on every pull request.
-6. **Review.** A maintainer reviews the PR and may ask for changes before merging.
+6. **Review.** A maintainer reviews the PR and may ask for changes before merging. Watch for CI
+   failures and review comments, and stay engaged in the conversation until it merges.
+
+## Security issue notifications
+
+If you discover a potential security issue in this project, notify AWS/Amazon Security via the
+[vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/). Please do
+**not** create a public GitHub issue.
 
 ## Questions and bugs
 
 - General questions: use [Discussions Q&A](../../discussions/categories/q-a).
 - Bugs: open a [Bug Report](../../issues/new?template=bug_report.yml).
+
+## Code of Conduct
+
+This project has adopted the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct).
+For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) or
+contact opensource-codeofconduct@amazon.com with any additional questions or comments.
 
 ## License
 

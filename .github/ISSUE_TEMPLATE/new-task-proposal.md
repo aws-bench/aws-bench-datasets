@@ -2,7 +2,7 @@
 name: New Task Proposal
 about: This issue template is used to propose tasks for the aws-bench benchmark.
 title: ''
-labels: ''
+labels: new-task-proposal, needs-triage
 assignees: ''
 
 ---
