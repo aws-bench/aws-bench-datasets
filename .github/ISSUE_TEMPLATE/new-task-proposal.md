@@ -2,10 +2,14 @@
 name: New Task Proposal
 about: This issue template is used to propose tasks for the aws-bench benchmark.
 title: ''
-labels: ''
+labels: new-task-proposal, needs-triage
 assignees: ''
 
 ---
+
+> Before completing this form, read the [Task Guidelines](/CONTRIBUTING.md#task-guidelines) in
+> CONTRIBUTING.md. They define the criteria for tasks that are genuinely challenging, unambiguous,
+> and verifiable, with worked accept/reject examples.
 
 ## Task title
 
