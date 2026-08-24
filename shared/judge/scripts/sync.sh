@@ -5,8 +5,8 @@
 # For each such task, the four canonical files (judge_prompt.md, judge.toml,
 # test.sh, resolve_placeholders.py) are overwritten with the shared copy --
 # EXCEPT for tasks whose judge.toml/judge_prompt.md have been intentionally
-# customized by AWSBenchRubricGenerator into a per-claim rubric (no longer
-# just the canonical single "answers_equivalent" criterion). For those tasks,
+# customized into a per-claim rubric (no longer just the canonical single
+# "answers_equivalent" criterion). For those tasks,
 # only test.sh and resolve_placeholders.py are synced -- judge.toml and
 # judge_prompt.md are deliberately per-task and must never be overwritten or
 # flagged as drift. See is_customized() below for the detection rule.
@@ -387,12 +387,12 @@ fi
 
 # ── --check / sync: shared/judge/ files across all tasks ──
 # A task's judge.toml/judge_prompt.md are "customized" once a per-claim rubric
-# (from AWSBenchRubricGenerator) has replaced the canonical single
-# "answers_equivalent" criterion. Detect this without a TOML parser: the
-# canonical judge.toml always has exactly that one criterion name; any task
-# missing that exact line has been regenerated into per-claim criteria.
-# test.sh and resolve_placeholders.py are never touched by that tool, so they
-# always stay canonical regardless of whether the task's judge files were
+# has replaced the canonical single "answers_equivalent" criterion. Detect
+# this without a TOML parser: the canonical judge.toml always has exactly
+# that one criterion name; any task missing that exact line has been
+# regenerated into per-claim criteria. test.sh and resolve_placeholders.py
+# are never touched by that customization, so they always stay canonical
+# regardless of whether the task's judge files were
 # customized.
 is_customized() {
     ! grep -q '^name = "answers_equivalent"$' "$1/judge.toml" 2>/dev/null
