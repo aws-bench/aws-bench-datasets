@@ -1,0 +1,4 @@
+{
+  "instruction": "If I want to configure concurrency on the {{serverless-apps-LambdaMisc-us-east-1-ConnectedLambdaName}} Lambda function, what resources in the current account could trigger events that lead to concurrent executions for this lambda?",
+  "expected_answer": "The Lambda function {{serverless-apps-LambdaMisc-us-east-1-ConnectedLambdaName}} is triggered by the SNS topic {{serverless-apps-LambdaMisc-us-east-1-ConnectedSNSTopicName}}, which can invoke it concurrently. There is also an API Gateway (ConnectedLambdaApi) with a Lambda integration configured, but its execution role lacks lambda:InvokeFunction permission so it cannot successfully invoke the function. Therefore, only the SNS topic can trigger concurrent executions."
+}
