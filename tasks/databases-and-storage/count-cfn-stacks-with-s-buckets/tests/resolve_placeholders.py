@@ -53,7 +53,9 @@ def _resolved_ground_truth(missing: list[str]) -> dict | None:
         return None
     with open(GT) as f:
         gt = json.load(f)
-    return {k: _substitute(v, missing) if isinstance(v, str) else v for k, v in gt.items()}
+    return {
+        k: _substitute(v, missing) if isinstance(v, str) else v for k, v in gt.items()
+    }
 
 
 def _resolved_judge_toml_lines(missing: list[str]) -> list[str] | None:
