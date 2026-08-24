@@ -11,6 +11,8 @@ Tasks copy these into their own `tests/` directory rather than symlinking, becau
 
 `scripts/sync.sh` also runs CI drift checks for **mutation tasks** (`tests/check.py`-based, no judge files) — see `--check-output-contract` below. Those tasks don't ship the four shared judge files, but they do reuse the same sync entry point.
 
+**Customized tasks**: a task whose `judge.toml` no longer has the canonical `answers_equivalent` criterion has an intentionally per-claim rubric. `sync.sh` detects this and only syncs/checks `test.sh` and `resolve_placeholders.py` for such tasks — never `judge.toml`/`judge_prompt.md`.
+
 ## Propagating edits
 
 ```

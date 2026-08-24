@@ -3,11 +3,19 @@
 #
 # A task is considered "rewardkit-based" if it has a tests/judge.toml file.
 # For each such task, the four canonical files (judge_prompt.md, judge.toml,
-# test.sh, resolve_placeholders.py) are overwritten with the shared copy.
+# test.sh, resolve_placeholders.py) are overwritten with the shared copy --
+# EXCEPT for tasks whose judge.toml/judge_prompt.md have been intentionally
+# customized into a per-claim rubric (no longer just the canonical single
+# "answers_equivalent" criterion). For those tasks,
+# only test.sh and resolve_placeholders.py are synced -- judge.toml and
+# judge_prompt.md are deliberately per-task and must never be overwritten or
+# flagged as drift. See is_customized() below for the detection rule.
 #
 # Modes:
 #   sync.sh                          Copy shared files into every task (default).
-#   sync.sh --check                  Verify shared files match across all tasks.
+#   sync.sh --check                  Verify shared files match across all tasks
+#                                    (customized tasks are checked only on
+#                                    test.sh/resolve_placeholders.py).
 #                                    Exits non-zero on the first diff.
 #   sync.sh --check-instructions     Verify each task's instruction.md matches
 #                                    the 'instruction' field of its
@@ -378,11 +386,32 @@ PYEOF
 fi
 
 # ── --check / sync: shared/judge/ files across all tasks ──
+# A task's judge.toml/judge_prompt.md are "customized" once a per-claim rubric
+# has replaced the canonical single "answers_equivalent" criterion. Detect
+# this without a TOML parser: the canonical judge.toml always has exactly
+# that one criterion name; any task missing that exact line has been
+# regenerated into per-claim criteria. test.sh and resolve_placeholders.py
+# are never touched by that customization, so they always stay canonical
+# regardless of whether the task's judge files were
+# customized.
+is_customized() {
+    ! grep -q '^name = "answers_equivalent"$' "$1/judge.toml" 2>/dev/null
+}
+
+ALWAYS_SYNCED_FILES=(test.sh resolve_placeholders.py)
+
 count=0
+customized_count=0
 diff_count=0
 while IFS= read -r -d '' marker; do
     task_tests_dir="$(dirname "$marker")"
-    for f in "${FILES[@]}"; do
+    if is_customized "$task_tests_dir"; then
+        customized_count=$((customized_count + 1))
+        sync_files=("${ALWAYS_SYNCED_FILES[@]}")
+    else
+        sync_files=("${FILES[@]}")
+    fi
+    for f in "${sync_files[@]}"; do
         if [[ "$MODE" == "check" ]]; then
             if ! cmp -s "$SHARED_DIR/$f" "$task_tests_dir/$f"; then
                 echo "DRIFT: $task_tests_dir/$f differs from $SHARED_DIR/$f" >&2
@@ -395,12 +424,13 @@ while IFS= read -r -d '' marker; do
     count=$((count + 1))
 done < <(find "$TASKS_DIR" -name 'judge.toml' -path '*/tests/judge.toml' -print0)
 
+canonical_count=$((count - customized_count))
 if [[ "$MODE" == "check" ]]; then
     if [[ $diff_count -gt 0 ]]; then
         echo "Found $diff_count drifted file(s) across $count task(s). Run sync.sh to fix." >&2
         exit 1
     fi
-    echo "Checked ${#FILES[@]} files in $count task(s); all in sync."
+    echo "Checked ${#FILES[@]} files in $canonical_count canonical task(s) + ${#ALWAYS_SYNCED_FILES[@]} files in $customized_count customized task(s) ($count total); all in sync."
 else
-    echo "Synced ${#FILES[@]} files into $count task(s)."
+    echo "Synced ${#FILES[@]} files into $canonical_count canonical task(s), ${#ALWAYS_SYNCED_FILES[@]} files (test.sh/resolve_placeholders.py only) into $customized_count customized task(s) ($count total)."
 fi
