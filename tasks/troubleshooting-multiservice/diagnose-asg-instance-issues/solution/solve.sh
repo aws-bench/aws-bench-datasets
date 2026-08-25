@@ -66,14 +66,12 @@ instance is marked unhealthy, and because the ASG health-check grace period is
 ${GRACE} seconds the ASG immediately terminates and replaces the instance — producing
 the observed flapping loop.
 
-Fix: add inbound TCP rules to security group $SG_ID for the health-check port
-${HC_PORT} and the traffic port ${TRAFFIC_PORT}, sourced from CIDR ${SUBNET_CIDR}
-(the subnet where the ${NLB_SCHEME} NLB resides). For example:
+Fix: add an inbound TCP rule to security group $SG_ID for the health-check port
+${HC_PORT}, sourced from CIDR ${SUBNET_CIDR} (the subnet where the ${NLB_SCHEME}
+NLB resides). For example:
 
   aws ec2 authorize-security-group-ingress --group-id $SG_ID \\
     --protocol tcp --port ${HC_PORT} --cidr ${SUBNET_CIDR} --region $REGION
-  aws ec2 authorize-security-group-ingress --group-id $SG_ID \\
-    --protocol tcp --port ${TRAFFIC_PORT} --cidr ${SUBNET_CIDR} --region $REGION
 
 Once the health checks can reach the instances, they pass, stay InService, and the
 terminate/replace loop stops.
