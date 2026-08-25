@@ -5,9 +5,49 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "record_with_id_web_003_has_workflowid_wf_alpha_a"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Record with id=web-003 has workflowId=wf-alpha and status=completed"
+type = "binary"
+
+[[criterion]]
+name = "record_with_id_web_001_has_workflowid_wf_alpha_a"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Record with id=web-001 has workflowId=wf-alpha and status=completed"
+type = "binary"
+
+[[criterion]]
+name = "record_with_id_web_002_has_workflowid_wf_beta_an"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Record with id=web-002 has workflowId=wf-beta and status=processing"
+type = "binary"
+
+[[criterion]]
+name = "2_records_have_status_completed"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 2 records have status \"completed\""
+type = "binary"
+
+[[criterion]]
+name = "3_total_records_scanned"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 3 total records scanned. The instruction only asks for sample records, the completed-status count, and the unique workflow ID list -- it does not ask for an explicit total-scanned count. Credit this claim if the junior's shown records/answer are consistent with a total of 3 and do not contradict it, even if the junior never explicitly states the total."
+type = "binary"
+
+[[criterion]]
+name = "wf_alpha_appears_2_times"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): wf-alpha appears 2 times. The instruction only asks for the list of unique workflow IDs, not their frequency counts -- credit this claim if the junior's shown sample records are consistent with wf-alpha appearing 2 times and do not contradict it, even if the junior never explicitly restates the count."
+type = "binary"
+
+[[criterion]]
+name = "wf_beta_appears_1_time"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): wf-beta appears 1 time. The instruction only asks for the list of unique workflow IDs, not their frequency counts -- credit this claim if the junior's shown sample records are consistent with wf-beta appearing 1 time and do not contradict it, even if the junior never explicitly restates the count."
+type = "binary"
+
+[[criterion]]
+name = "the_table_contains_2_unique_workflow_ids"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table contains 2 unique workflow IDs"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

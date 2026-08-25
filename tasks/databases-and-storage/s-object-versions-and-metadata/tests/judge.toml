@@ -5,9 +5,29 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_most_recently_modified_object_is_898c7f19_mo"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recently modified object is `{{898c7f19-MostRecentKey}}`"
+type = "binary"
+
+[[criterion]]
+name = "the_most_recently_modified_object_has_version_id"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recently modified object has version ID `{{898c7f19-MostRecentVersionId}}`"
+type = "binary"
+
+[[criterion]]
+name = "the_object_prod_data_txt_has_version_id_898c7f19"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The object `prod_data.txt` has version ID `{{898c7f19-ProdDataVersionId}}`"
+type = "binary"
+
+[[criterion]]
+name = "the_object_prod_data_txt_is_898c7f19_proddatasiz"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The object `prod_data.txt` is {{898c7f19-ProdDataSizeBytes}} bytes"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

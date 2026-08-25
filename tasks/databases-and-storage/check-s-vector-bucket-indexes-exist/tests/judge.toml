@@ -5,9 +5,29 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_first_index_databases_and_storage_s3_jayd5c4"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The first index {{databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex}} contains vectors"
+type = "binary"
+
+[[criterion]]
+name = "the_first_index_databases_and_storage_s3_jayd5c4_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The first index {{databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex}} contains 3 documents. The instruction only asks to check if vectors exist, not to state a document count or metadata -- credit this claim if the junior's answer confirms vectors exist in this index and does not contradict a count of 3, even if the junior never explicitly states the count."
+type = "binary"
+
+[[criterion]]
+name = "the_second_index_databases_and_storage_s3_jayd5c"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second index {{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}} is empty"
+type = "binary"
+
+[[criterion]]
+name = "no_vectors_exist_in_databases_and_storage_s3_jay"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No vectors exist in {{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}}"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

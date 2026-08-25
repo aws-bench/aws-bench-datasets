@@ -5,9 +5,89 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "there_are_12_tables_currently_active_in_dynamodb"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are 12 tables currently active in DynamoDB in the us-east-1 region"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-tk2o3jasd-us-east-1-TableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__3"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__4"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-InventoryTableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__5"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-OrdersTableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__6"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-TableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__7"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-kdf231sdf-us-east-1-TableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__8"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-ProductsTableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__9"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-CFN-ax9w8fhs7-us-east-1-DynamoDBTableName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__10"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableWithStream}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__11"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_east_1_dynamodb_tables_include_databases__12"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-UsersTableName}}"
+type = "binary"
+
+[[criterion]]
+name = "there_are_2_tables_in_us_west_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are 2 tables in us-west-2"
+type = "binary"
+
+[[criterion]]
+name = "the_us_west_2_dynamodb_tables_include_databases_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-west-2 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableWithStream}}"
+type = "binary"
+
+[[criterion]]
+name = "the_us_west_2_dynamodb_tables_include_databases__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-west-2 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy}}"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"
