@@ -11,9 +11,6 @@ keywords = []
 scenario_id = "troubleshooting-multiservice"
 agent_role_name = "QALocalInvocationApplicationRole"
 
-[concurrency]
-mode = "read-only"
-
 # --- Harbor standard --- flexible metadata
 [metadata]
 id = "f269f927-9453-4720-8a28-87a9819d1caf"
@@ -28,6 +25,13 @@ intent = "Diagnosis"
 complexity = "Orchestrated"
 layer = "CrossPlane"
 
+
+# --- aws-bench extension --- pre-invoke starts fresh failing executions
+[pre_invoke]
+timeout_sec = 240.0
+
+[pre_invoke.env]
+STATE_MACHINE_ARN = "{{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-StateMachineArn}}"
 
 # --- Harbor standard ---
 [agent]

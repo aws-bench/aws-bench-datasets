@@ -121,20 +121,69 @@ export class Sagemaker_vszf4yl62 extends cdk.Stack {
             defaultTargetGroups: [targetGroup],
         });
 
+        // User data: bring up a deterministic HTTP responder on port 4000 that
+        // returns 200 for /sync-health-check. This makes the ONLY reason the
+        // NLB health check fails the missing security group inbound rule (the
+        // bug being tested) — with ingress opened, the server answers and the
+        // targets go healthy. Run it under systemd so it survives reboots and
+        // restarts if it exits. Amazon Linux 2023 ships python3 at /usr/bin.
+        const healthCheckUserData = ec2.UserData.custom(
+            [
+                '#!/bin/bash',
+                'set -euxo pipefail',
+                "cat > /opt/sync-health-check.py <<'PYEOF'",
+                'from http.server import BaseHTTPRequestHandler, HTTPServer',
+                '',
+                '',
+                'class Handler(BaseHTTPRequestHandler):',
+                '    def do_GET(self):',
+                "        if self.path == '/sync-health-check':",
+                '            self.send_response(200)',
+                "            self.send_header('Content-Type', 'text/plain')",
+                '            self.end_headers()',
+                "            self.wfile.write(b'OK')",
+                '        else:',
+                '            self.send_response(404)',
+                '            self.end_headers()',
+                '',
+                '    def log_message(self, *args):',
+                '        pass',
+                '',
+                '',
+                "HTTPServer(('0.0.0.0', 4000), Handler).serve_forever()",
+                'PYEOF',
+                "cat > /etc/systemd/system/sync-health-check.service <<'UNITEOF'",
+                '[Unit]',
+                'Description=Sync health-check responder on port 4000',
+                'After=network-online.target',
+                'Wants=network-online.target',
+                '',
+                '[Service]',
+                'ExecStart=/usr/bin/python3 /opt/sync-health-check.py',
+                'Restart=always',
+                '',
+                '[Install]',
+                'WantedBy=multi-user.target',
+                'UNITEOF',
+                'systemctl daemon-reload',
+                'systemctl enable --now sync-health-check.service',
+            ].join('\n'),
+        );
+
         // Create Launch Template
         // Using a valid AMI for deployment - original AMI doesn't exist in target account
         const launchTemplate = new ec2.LaunchTemplate(this, 'HyperPodLaunchTemplate', {
             launchTemplateName: `Quartz-Helper-LT-cluster1-group1-${this.account}`,
-            // Instance type intentionally small: instances fail health checks due to a
-            // missing security group inbound rule (the bug being tested), so instance
-            // class is irrelevant. Keeping small to stay under L-1216C47A auto-approval
-            // threshold.
+            // Instance type intentionally small: the failure mode is a missing
+            // security group inbound rule (the bug being tested), so instance
+            // class is irrelevant. Keeping small to stay under L-1216C47A
+            // auto-approval threshold.
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
             machineImage: ec2.MachineImage.latestAmazonLinux2023(),
             securityGroup: helperSecurityGroup,
             role: instanceRole,
             requireImdsv2: true,
-            userData: ec2.UserData.custom('#!/bin/bash\n# User data not captured in trace - stub only'),
+            userData: healthCheckUserData,
         });
 
         // Add tags to launch template

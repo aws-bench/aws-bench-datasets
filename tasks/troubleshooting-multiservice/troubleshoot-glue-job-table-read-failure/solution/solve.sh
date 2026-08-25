@@ -11,7 +11,20 @@ ROLE_ARN=$(aws glue get-job --job-name "$JOB_NAME" --region "$REGION" --query "J
 DATABASE_NAME=$(aws glue get-job --job-name "$JOB_NAME" --region "$REGION" --query 'Job.DefaultArguments."--database"' --output text)
 ROLE_NAME="${ROLE_ARN##*/}"
 
+# An absent run and a run that did not fail both leave ErrorMessage empty, which
+# would otherwise be interpolated into the claim that the run failed. Glue keeps
+# run history for 365 days, so a long-lived account can reach that state.
+JOB_RUN_STATE=$(aws glue get-job-runs --job-name "$JOB_NAME" --region "$REGION" --max-results 1 --query "JobRuns[0].JobRunState" --output text)
 JOB_ERROR=$(aws glue get-job-runs --job-name "$JOB_NAME" --region "$REGION" --max-results 1 --query "JobRuns[0].ErrorMessage" --output text)
+
+if [ "$JOB_RUN_STATE" != "FAILED" ]; then
+    echo "latest run of ${JOB_NAME} is '${JOB_RUN_STATE}', expected FAILED" >&2
+    exit 1
+fi
+if ! printf '%s' "$JOB_ERROR" | grep -qiE 'lake ?formation|AccessDenied'; then
+    echo "latest run of ${JOB_NAME} failed for an unexpected reason: ${JOB_ERROR}" >&2
+    exit 1
+fi
 
 CREATE_TABLE_DEFAULTS=$(aws lakeformation get-data-lake-settings --region "$REGION" --query "DataLakeSettings.CreateTableDefaultPermissions" --output json)
 TABLE_PERMS=$(aws lakeformation list-permissions --region "$REGION" --resource "{\"Table\":{\"DatabaseName\":\"$DATABASE_NAME\",\"Name\":\"$TABLE_NAME\"}}" --query "PrincipalResourcePermissions[?Principal.DataLakePrincipalIdentifier=='$ROLE_ARN']" --output json)
