@@ -73,6 +73,11 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
+name = "the_table_is_provisioned_with_5_rcu_5_wcu_not_on"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table is deployed as PROVISIONED with 5 RCU / 5 WCU (no BillingModeSummary), not on-demand, so sustained re-uploads will throttle rather than auto-scale."
+type = "binary"
+
+[[criterion]]
 name = "no_extraneous_or_contradicting_facts"
 description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

@@ -33,8 +33,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "to_resolve_add_inbound_tcp_rules_for_ports_4000_"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve, add inbound TCP rules for ports 4000 and 44300 from CIDR 172.25.0.0/23 to the security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}}"
+name = "to_resolve_add_an_inbound_tcp_rule_for_the_healt"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve, add an inbound TCP rule for the health-check port 4000 from CIDR 172.25.0.0/23 (the subnet where the internal NLB resides) to the security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}}; once the health check can reach the instances it succeeds and the targets stay healthy."
 type = "binary"
 
 [[criterion]]
