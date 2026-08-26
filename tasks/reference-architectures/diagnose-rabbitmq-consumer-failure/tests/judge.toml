@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "the_lambda_event_source_mapping_esm_that_connect"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda event source mapping (ESM) that connects the RabbitMQ broker to the Lambda function has a connection failure and cannot reach the target queue."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda event source mapping (ESM) that connects the RabbitMQ broker to the Lambda function has a connection failure. The missing-queue claims below already establish that the queue is unreachable -- credit this claim if the junior identifies that the ESM has a connection/connectivity failure preventing it from consuming messages, even if the junior attributes the failure to a different, evidence-backed cause (e.g. missing VPC endpoints) rather than specifically saying it cannot reach the target queue."
 type = "binary"
 
 [[criterion]]
