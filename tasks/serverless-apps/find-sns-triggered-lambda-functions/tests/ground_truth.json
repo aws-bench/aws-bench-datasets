@@ -1,4 +1,4 @@
 {
-  "instruction": "Which lambda functions are triggered by SNS? Ignore CDK-managed drain hooks.",
+  "instruction": "Which lambda functions are triggered by SNS? I only care about our application functions, not infrastructure automation.",
   "expected_answer": "The following lambda is triggered by SNS:\n {{serverless-apps-LambdaMisc-us-east-1-ConnectedLambdaName}}\n  - Triggered by SNS topic: {{serverless-apps-LambdaMisc-us-east-1-ConnectedSNSTopicName}}\n"
 }
