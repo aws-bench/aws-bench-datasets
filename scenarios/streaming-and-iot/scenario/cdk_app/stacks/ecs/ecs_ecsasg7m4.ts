@@ -25,10 +25,10 @@ export class ecs_ecsasg7m4 extends cdk.Stack {
         const vpc = new ec2.Vpc(this, 'EcsVpc', {
             ipAddresses: ec2.IpAddresses.cidr('10.50.0.0/16'),
             maxAzs: 2,
-            natGateways: 0,
+            natGateways: 1,
             subnetConfiguration: [
                 { name: 'public', subnetType: ec2.SubnetType.PUBLIC, cidrMask: 24 },
-                { name: 'private', subnetType: ec2.SubnetType.PRIVATE_ISOLATED, cidrMask: 24 },
+                { name: 'private', subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS, cidrMask: 24 },
             ],
             restrictDefaultSecurityGroup: false,
         });
@@ -57,6 +57,7 @@ export class ecs_ecsasg7m4 extends cdk.Stack {
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
             machineImage: ecs.EcsOptimizedImage.amazonLinux2023(),
             role: instanceRole,
+            requireImdsv2: true,
             securityGroup: new ec2.SecurityGroup(this, 'EcsInstanceSg', {
                 vpc,
                 allowAllOutbound: true,
@@ -69,7 +70,7 @@ export class ecs_ecsasg7m4 extends cdk.Stack {
         const asg = new autoscaling.AutoScalingGroup(this, 'EcsAsg', {
             autoScalingGroupName: `bench-asg-${this.account.slice(-6)}`,
             vpc,
-            vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+            vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
             launchTemplate,
             minCapacity: 1,
             maxCapacity: 1,

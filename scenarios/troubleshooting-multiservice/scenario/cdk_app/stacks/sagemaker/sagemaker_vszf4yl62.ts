@@ -37,7 +37,7 @@ export class Sagemaker_vszf4yl62 extends cdk.Stack {
                 {
                     cidrMask: 23,
                     name: 'HelperSubnet',
-                    subnetType: ec2.SubnetType.PUBLIC,
+                    subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
                 },
             ],
         });
@@ -51,14 +51,14 @@ export class Sagemaker_vszf4yl62 extends cdk.Stack {
                 {
                     cidrMask: 20,
                     name: 'WorkloadSubnet',
-                    subnetType: ec2.SubnetType.PUBLIC,
+                    subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
                 },
             ],
         });
 
         // Get the subnets
-        const helperSubnet = helperVpc.publicSubnets[0];
-        const workloadSubnet = workloadVpc.publicSubnets[0];
+        const helperSubnet = helperVpc.isolatedSubnets[0];
+        const workloadSubnet = workloadVpc.isolatedSubnets[0];
 
         // Create Helper Security Group
         const helperSecurityGroup = new ec2.SecurityGroup(this, 'HelperSecurityGroup', {
@@ -90,6 +90,7 @@ export class Sagemaker_vszf4yl62 extends cdk.Stack {
         // Shortened name to comply with 32-char AWS limit (26 chars)
         const nlb = new elbv2.NetworkLoadBalancer(this, 'HyperPodNLB', {
             vpc: helperVpc,
+            vpcSubnets: { subnets: [helperSubnet] },
             internetFacing: false,
             loadBalancerName: 'NLB-cluster1-group1',
         });
