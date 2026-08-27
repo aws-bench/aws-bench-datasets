@@ -5,9 +5,44 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "security_group_troubleshooting_multiservice_sage"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}} has no inbound rules"
+type = "binary"
+
+[[criterion]]
+name = "the_instances_are_failing_health_checks_because_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances are failing health checks because security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}} has no inbound rules, blocking NLB health check requests to port 4000 (/sync-health-check)"
+type = "binary"
+
+[[criterion]]
+name = "this_causes_10_consecutive_failures_marking_inst"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): This causes 10 consecutive failures, marking instances unhealthy"
+type = "binary"
+
+[[criterion]]
+name = "the_grace_period_is_0_seconds_a_non_default_valu"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The grace period is 0 seconds, a non-default value"
+type = "binary"
+
+[[criterion]]
+name = "asg_immediately_terminates_and_replaces_instance"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): ASG immediately terminates and replaces instances in a continuous loop because the grace period is 0 seconds"
+type = "binary"
+
+[[criterion]]
+name = "to_resolve_add_an_inbound_tcp_rule_for_the_healt"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve, add an inbound TCP rule for the health-check port 4000 from CIDR 172.25.0.0/23 (the subnet where the internal NLB resides) to the security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}}; once the health check can reach the instances it succeeds and the targets stay healthy."
+type = "binary"
+
+[[criterion]]
+name = "the_internal_nlb_resides_in_the_subnet_with_cidr"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The internal NLB resides in the subnet with CIDR 172.25.0.0/23"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"
