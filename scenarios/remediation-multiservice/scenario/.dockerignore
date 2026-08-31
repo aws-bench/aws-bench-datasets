@@ -1,0 +1,10 @@
+# A host node_modules is redundant and wrong: the Dockerfile runs `npm install`
+# inside the image, and the host tree is built for the host architecture while
+# the image is linux/amd64.
+cdk_app/node_modules/
+cdk_app/cdk.out/
+cdk_app/dist/
+
+# Python bytecode from local runs of the setup scripts.
+**/__pycache__/
+**/*.pyc
