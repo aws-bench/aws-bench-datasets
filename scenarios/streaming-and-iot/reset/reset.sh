@@ -26,7 +26,7 @@ REGION="us-east-1"
 PROFILE="PRIMARY"
 AWS="aws --profile ${PROFILE} --region ${REGION}"
 ACCOUNT_SUFFIX="${PRIMARY: -6}"
-TABLE_BUCKET_ARN="arn:aws:s3tables:${REGION}:${PRIMARY}:bucket/bench-tables-${ACCOUNT_SUFFIX}"
+TABLE_BUCKET_ARN="arn:aws:s3tables:${REGION}:${PRIMARY}:bucket/app-tables-${ACCOUNT_SUFFIX}"
 
 echo "[reset.sh] streaming-and-iot reset for account ${PRIMARY} (${REGION})"
 

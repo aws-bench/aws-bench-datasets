@@ -53,7 +53,7 @@ export class Lambda_1sscp39dx extends DeploymentStack {
         // gradual-rollout safety is pure overhead. Pin a 0/0 strategy so the
         // first deploy doesn't overrun the framework's STS cred TTL.
         const fastDeployStrategy = new appconfig.DeploymentStrategy(this, 'FastDeploymentStrategy', {
-            deploymentStrategyName: 'AwsBenchAllAtOnceNoBake',
+            deploymentStrategyName: 'AllAtOnceNoBake',
             rolloutStrategy: appconfig.RolloutStrategy.linear({
                 growthFactor: 100,
                 deploymentDuration: cdk.Duration.minutes(0),

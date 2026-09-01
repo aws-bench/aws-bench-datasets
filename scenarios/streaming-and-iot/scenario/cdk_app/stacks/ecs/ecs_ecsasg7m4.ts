@@ -35,7 +35,7 @@ export class ecs_ecsasg7m4 extends cdk.Stack {
 
         const cluster = new ecs.Cluster(this, 'EcsCluster', {
             vpc,
-            clusterName: `bench-cluster-${this.account.slice(-6)}`,
+            clusterName: `app-cluster-${this.account.slice(-6)}`,
         });
 
         const instanceRole = new iam.Role(this, 'EcsInstanceRole', {
@@ -51,7 +51,7 @@ export class ecs_ecsasg7m4 extends cdk.Stack {
         // LaunchTemplate the verifier inspects by name. CDK's L2 LaunchTemplate
         // doesn't expose the name as a synth-time string when only set via
         // launchTemplateName, so we hold the literal in a local and reuse it.
-        const launchTemplateName = `bench-lt-${this.account.slice(-6)}`;
+        const launchTemplateName = `app-lt-${this.account.slice(-6)}`;
         const launchTemplate = new ec2.LaunchTemplate(this, 'EcsLaunchTemplate', {
             launchTemplateName,
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
@@ -67,7 +67,7 @@ export class ecs_ecsasg7m4 extends cdk.Stack {
         });
 
         const asg = new autoscaling.AutoScalingGroup(this, 'EcsAsg', {
-            autoScalingGroupName: `bench-asg-${this.account.slice(-6)}`,
+            autoScalingGroupName: `app-asg-${this.account.slice(-6)}`,
             vpc,
             vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
             launchTemplate,

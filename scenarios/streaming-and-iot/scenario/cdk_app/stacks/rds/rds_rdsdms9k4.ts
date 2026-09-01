@@ -39,11 +39,11 @@ export class rds_rdsdms9k4 extends cdk.Stack {
         // single-instance deployments -- the standby is implicit).
         const subnetGroup = new rds.SubnetGroup(this, 'DbSubnetGroup', {
             vpc,
-            description: 'Subnet group for the bench MySQL instance',
+            description: 'Subnet group for the MySQL instance',
             vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
         });
 
-        const parameterGroup = new rds.ParameterGroup(this, 'BenchMysqlParams', {
+        const parameterGroup = new rds.ParameterGroup(this, 'AppMysqlParams', {
             engine: rds.DatabaseInstanceEngine.mysql({ version: rds.MysqlEngineVersion.VER_8_0 }),
             description: 'ROW-based binlog so DMS CDC can tail the MySQL binlog',
             parameters: {
@@ -59,7 +59,7 @@ export class rds_rdsdms9k4 extends cdk.Stack {
         });
         dbSg.addIngressRule(ec2.Peer.ipv4(vpc.vpcCidrBlock), ec2.Port.tcp(3306), 'MySQL from VPC');
 
-        const db = new rds.DatabaseInstance(this, 'BenchMysql', {
+        const db = new rds.DatabaseInstance(this, 'AppMysql', {
             engine: rds.DatabaseInstanceEngine.mysql({ version: rds.MysqlEngineVersion.VER_8_0 }),
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
             vpc,
@@ -68,7 +68,7 @@ export class rds_rdsdms9k4 extends cdk.Stack {
             parameterGroup,
             databaseName: 'testdb',
             credentials: rds.Credentials.fromGeneratedSecret('admin', {
-                secretName: `bench-mysql-creds-${this.account.slice(-6)}`,
+                secretName: `app-mysql-creds-${this.account.slice(-6)}`,
             }),
             allocatedStorage: 20,
             storageType: rds.StorageType.GP2,
@@ -82,7 +82,7 @@ export class rds_rdsdms9k4 extends cdk.Stack {
         // S3 Tables bucket. The agent uses this as the DMS replication
         // target -- S3 Tables is the Iceberg-managed storage product.
         const tablesBucket = new s3tables.CfnTableBucket(this, 'TablesBucket', {
-            tableBucketName: `bench-tables-${this.account.slice(-6)}`,
+            tableBucketName: `app-tables-${this.account.slice(-6)}`,
         });
         tablesBucket.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
