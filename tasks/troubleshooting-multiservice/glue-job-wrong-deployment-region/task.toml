@@ -39,11 +39,11 @@ timeout_sec = 240.0
 
 [verifier.env]
 troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}}"
-troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}}"
+troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-HomeRegion = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-HomeRegion}}"
 troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName}}"
 
 [solution.env]
-EXPECTED_REGION = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}}"
+EXPECTED_REGION = "{{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-HomeRegion}}"
 
 
 # --- Harbor standard ---

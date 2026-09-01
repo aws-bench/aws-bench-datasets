@@ -140,6 +140,6 @@ export class Glue_c3j34cj9z extends cdk.Stack {
 
         StackUtils.exportStack(this, 'DeploymentRegion', this.region, 'Region the stack is deployed to');
 
-        StackUtils.exportStack(this, 'ExpectedRegion', 'us-east-1', 'Expected region');
+        StackUtils.exportStack(this, 'HomeRegion', 'us-east-1', 'Home region');
     }
 }

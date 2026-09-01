@@ -28,7 +28,7 @@ timeout_sec = 300.0
 
 [pre_invoke.env]
 SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
-DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
+DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-DestinationFolderPath}}"
 AWS_REGION = "us-east-1"
 
 [agent]
@@ -39,19 +39,19 @@ timeout_sec = 360.0
 
 [verifier.env]
 SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
-DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
+DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-DestinationFolderPath}}"
 
 [solution.env]
 AWS_REGION = "us-east-1"
 SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
-DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
+DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-DestinationFolderPath}}"
 
 [post_invoke]
 timeout_sec = 360.0
 
 [post_invoke.env]
 SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
-DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
+DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-DestinationFolderPath}}"
 AWS_REGION = "us-east-1"
 
 [environment]
