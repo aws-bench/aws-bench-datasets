@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { EnvironmentProps } from './lib/shared';
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 import { connect_cnp4r8t2k } from './stacks/connect/connect_cnp4r8t2k';
 import { ecs_ecsasg7m4 } from './stacks/ecs/ecs_ecsasg7m4';
 import { eventbridge_evbhx72k1 } from './stacks/eventbridge/eventbridge_evbhx72k1';
@@ -14,7 +14,7 @@ import { s3_etlcsv9q2 } from './stacks/s3/s3_etlcsv9q2';
 export function createEnvironment(app: cdk.App, envId: string, props: EnvironmentProps): void {
     const { account } = props;
 
-    new QARolesStack(app, `${envId}-QARoles-us-east-1`, {
+    new AppRolesStack(app, `${envId}-AppRoles-us-east-1`, {
         env: { account, region: 'us-east-1' },
     });
 

@@ -145,8 +145,8 @@ export class s3_uijodjso5 extends cdk.Stack {
             destinationKeyPrefix: 'sourc/archive/',
         });
 
-        // Create the correct destination folder with some old files that should be removed
-        const correctFolder = new s3deploy.BucketDeployment(this, 'CorrectFolder', {
+        // Create the destination folder with some old files that should be removed
+        const correctFolder = new s3deploy.BucketDeployment(this, 'DestinationFolder', {
             sources: [
                 s3deploy.Source.data('.gitkeep', ''),
                 // Old files from 2022-2023 that should be removed (older than 1 year)
@@ -200,7 +200,7 @@ export class s3_uijodjso5 extends cdk.Stack {
 
         StackUtils.exportStack(this, 'BucketName', bucket.bucketName);
         StackUtils.exportStack(this, 'FolderPath', `s3://${bucket.bucketName}/sourc`);
-        StackUtils.exportStack(this, 'CorrectedFolderPath', `s3://${bucket.bucketName}/source`);
+        StackUtils.exportStack(this, 'DestinationFolderPath', `s3://${bucket.bucketName}/source`);
         StackUtils.exportStack(this, 'BucketARN', bucket.bucketArn);
         StackUtils.exportStack(this, 'ProblematicUserArn', problematicUser.userArn);
         StackUtils.exportStack(this, 'S3AccessRoleArn', s3AccessRole.roleArn);

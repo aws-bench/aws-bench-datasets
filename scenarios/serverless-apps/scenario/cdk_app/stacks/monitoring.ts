@@ -193,7 +193,7 @@ export class MonitoringStack extends cdk.Stack {
                 },
             ],
             includeLinkedAccountsMetrics: false,
-            name: 'TestEvalStream',
+            name: 'app-metric-stream',
         });
         metricStream.node.addDependency(metricStreamRole);
         metricStream.node.addDependency(firehoseDeliveryStream);

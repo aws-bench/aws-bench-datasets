@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { EnvironmentProps } from './lib/shared';
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 import { Cloudfront_laljfb348 } from './stacks/cloudfront/cloudfront_laljfb348';
 import { Redshift_k3u7kum7v } from './stacks/redshift/redshift_k3u7kum7v';
 import { Stepfunctions_9bww99xri } from './stacks/stepfunctions/stepfunctions_9bww99xri';
@@ -26,7 +26,7 @@ import { main_37634fcce } from './stacks/lambda/main_37634fcce';
 
 export function createEnvironment(app: cdk.App, envId: string, props: EnvironmentProps): void {
     const { account } = props;
-    new QARolesStack(app, `${envId}-QARoles-us-east-1`, { env: { account, region: 'us-east-1' } });
+    new AppRolesStack(app, `${envId}-AppRoles-us-east-1`, { env: { account, region: 'us-east-1' } });
     new Cloudfront_laljfb348(app, `${envId}-cloudfront-laljfb348-us-east-1`, { env: { account, region: 'us-east-1' } });
     new Redshift_k3u7kum7v(app, `${envId}-redshift-k3u7kum7v-us-east-1`, { env: { account, region: 'us-east-1' } });
     new Stepfunctions_9bww99xri(app, `${envId}-stepfunctions-9bww99xri-us-east-1`, { env: { account, region: 'us-east-1' } });

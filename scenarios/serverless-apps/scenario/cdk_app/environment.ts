@@ -8,13 +8,13 @@ import { MonitoringStack } from './stacks/monitoring';
 import { DatabaseStack } from './stacks/database';
 import { ComputeEc2Stack } from './stacks/compute_ec2';
 import { DocDbAthenaNlbStack } from './stacks/docdb_athena_nlb';
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 
 export function createEnvironment(app: cdk.App, envId: string, props: EnvironmentProps): void {
     const { account } = props;
     const env = { account, region: 'us-east-1' };
 
-    new QARolesStack(app, `${envId}-QARoles-us-east-1`, { env });
+    new AppRolesStack(app, `${envId}-AppRoles-us-east-1`, { env });
 
     // Networking is the foundation — all VPC-dependent stacks depend on it
     const networking = new NetworkingStack(app, `${envId}-Networking-us-east-1`, { env });

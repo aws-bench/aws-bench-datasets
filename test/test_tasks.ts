@@ -468,8 +468,8 @@ test('task folder names use only letters, digits, and hyphens', () => {
 // pins the convention: the file-detected type must agree with request_type,
 // category, agent_role_name, and the concurrency rule.
 const ROLE_BY_TYPE: Record<string, string> = {
-    introspection: 'QALocalInvocationApplicationRole',
-    mutation: 'QALocalInvocationApplicationAdmin',
+    introspection: 'ApplicationReadOnlyRole',
+    mutation: 'ApplicationAdminRole',
 };
 const CATEGORY_BY_TYPE: Record<string, string> = {
     introspection: 'aws-introspection',

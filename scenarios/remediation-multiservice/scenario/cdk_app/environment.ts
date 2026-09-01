@@ -2,7 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { EnvironmentProps } from './lib/shared';
 
 // Shared roles — one QA roles stack for the whole environment.
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 
 // Candidate stacks: one directory per remediation domain, each with its own
 // stacks/, assets/ and lib/, so imports resolve to their own lib/shared.
@@ -24,7 +24,7 @@ export function createEnvironment(app: cdk.App, envId: string, props: Environmen
     const env = { account: props.account, region: REGION };
 
     // ── Shared QA roles (agent, admin, verifier) ──
-    new QARolesStack(app, `${envId}-QARoles-${REGION}`, {
+    new AppRolesStack(app, `${envId}-AppRoles-${REGION}`, {
         env,
     });
 

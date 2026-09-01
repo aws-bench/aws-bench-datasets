@@ -937,7 +937,7 @@ export class CicdOidcStack extends cdk.Stack {
             'Shared GitHub Actions deploy role ARN',
         );
         StackUtils.exportStack(this, 'DeployPolicyName', deployPolicyName, 'Inline permission policy on the deploy role');
-        StackUtils.exportStack(this, 'StagingRoleName', stagingRoleName, 'Staging deploy role (correctly configured)');
+        StackUtils.exportStack(this, 'StagingRoleName', stagingRoleName, 'Staging deploy role');
         StackUtils.exportStack(this, 'AuditRoleName', auditRoleName, 'Read-only CI audit role');
         StackUtils.exportStack(this, 'NotificationsRoleName', notificationsRoleName, 'notifications-svc deploy role');
         StackUtils.exportStack(this, 'OrchestratorRoleName', orchestratorRoleName, 'Orchestrator lambda execution role');
