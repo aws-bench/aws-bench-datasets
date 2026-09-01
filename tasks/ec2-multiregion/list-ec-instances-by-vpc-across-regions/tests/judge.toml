@@ -8,32 +8,32 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "first_instance_vpc_region"
+name = "instance_in_vpc_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "launch_template_instance_vpc_region"
+name = "launch_template_instance_in_vpc_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "private_instance_vpc_region"
+name = "private_instance_in_vpc_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "default_vpc_instance_vpc_region"
+name = "default_vpc_instance_in_default_vpc_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}} is in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVpcId}} in region us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "us_west_1_instance_vpc_region"
+name = "instance_in_vpc_us_west_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}} is in VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-VpcId}} in region us-west-1"
 type = "binary"
 
 [[criterion]]
-name = "us_west_2_instance_vpc_region"
+name = "instance_in_vpc_us_west_2"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}} is in VPC {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-VpcId}} in region us-west-2"
 type = "binary"
 

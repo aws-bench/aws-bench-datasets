@@ -8,27 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "first_instance_public_subnet_us_east_1"
+name = "standalone_instance_in_public_subnet_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is an EC2 instance in a public subnet in the us-east-1 region"
 type = "binary"
 
 [[criterion]]
-name = "launch_template_instance_public_subnet_us_east_1"
+name = "launch_template_instance_in_public_subnet_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is an EC2 instance in a public subnet in the us-east-1 region"
 type = "binary"
 
 [[criterion]]
-name = "default_vpc_instance_public_subnet_us_east_1"
+name = "default_vpc_instance_in_public_subnet_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}} is an EC2 instance in a public subnet in the us-east-1 region"
 type = "binary"
 
 [[criterion]]
-name = "instance_public_subnet_us_west_1"
+name = "instance_in_public_subnet_us_west_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}} is an EC2 instance in a public subnet in the us-west-1 region"
 type = "binary"
 
 [[criterion]]
-name = "instance_public_subnet_us_west_2"
+name = "instance_in_public_subnet_us_west_2"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}} is an EC2 instance in a public subnet in the us-west-2 region"
 type = "binary"
 

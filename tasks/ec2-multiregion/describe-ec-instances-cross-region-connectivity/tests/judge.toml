@@ -8,17 +8,17 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "us_east_1_instance_count"
+name = "instance_count_in_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-NUMEC2Running}} EC2 instances in us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "us_west_1_instance_count"
+name = "instance_count_in_us_west_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-NUMEC2Running}} EC2 instances in us-west-1"
 type = "binary"
 
 [[criterion]]
-name = "us_west_2_instance_count"
+name = "instance_count_in_us_west_2"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-NUMEC2Running}} EC2 instances in us-west-2"
 type = "binary"
 

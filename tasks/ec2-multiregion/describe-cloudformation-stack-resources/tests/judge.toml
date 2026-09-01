@@ -38,7 +38,7 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "stack_contains_default_sg_lockdown_custom_resource"
+name = "stack_contains_default_sg_lockdown_resource"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} contains a Lambda-backed custom resource that locks down the default security group."
 type = "binary"
 

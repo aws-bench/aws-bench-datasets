@@ -8,7 +8,7 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "us_east_1_has_first_instance"
+name = "us_east_1_has_instance"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1 region you have the EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}"
 type = "binary"
 

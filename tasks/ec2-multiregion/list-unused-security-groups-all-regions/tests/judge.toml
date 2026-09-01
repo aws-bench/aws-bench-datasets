@@ -13,7 +13,7 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "unused_sgs_are_default_vpc_sgs"
+name = "unused_sgs_mostly_default"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Most unused security groups are default security groups automatically created for each VPC"
 type = "binary"
 
