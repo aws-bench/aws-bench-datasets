@@ -26,7 +26,7 @@ export class DocDbAthenaNlbStack extends cdk.Stack {
         // Create DocumentDB cluster
         const docDBCluster = new docdb.DatabaseCluster(this, 'my-recommendation-engine', {
             masterUser: {
-                username: 'EvalAdmin',
+                username: 'appadmin',
             },
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MEDIUM),
             vpc,

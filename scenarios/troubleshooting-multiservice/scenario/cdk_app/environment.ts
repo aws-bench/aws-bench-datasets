@@ -31,11 +31,11 @@ import { Ecs_i7uzvvzgr } from './stacks/ecs/ecs_i7uzvvzgr';
 import { Rds_dbu3efc8j } from './stacks/rds/rds_dbu3efc8j';
 import { Lambda_1sscp39dx } from './stacks/lambda/lambda_1sscp39dx';
 import { Cloudformation_49pz2mo3y } from './stacks/cloudformation/cloudformation_49pz2mo3y';
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 
 export function createEnvironment(app: cdk.App, envId: string, props: EnvironmentProps): void {
     const { account } = props;
-    new QARolesStack(app,             `${envId}-QARoles-us-east-1`,                       { env: { account, region: 'us-east-1' } });
+    new AppRolesStack(app,             `${envId}-AppRoles-us-east-1`,                       { env: { account, region: 'us-east-1' } });
     new Cloudformation_t9dx4pgqw(app, `${envId}-cloudformation-t9dx4pgqw-us-east-1`,      { env: { account, region: 'us-east-1' } });
     new Cloudformation_vesgrw3ay(app, `${envId}-cloudformation-vesgrw3ay-us-east-1`,      { env: { account, region: 'us-east-1' } });
     new EC2_kxu4k2xpt(app,            `${envId}-ec2-kxu4k2xpt-eu-west-1`,                 { env: { account, region: 'eu-west-1' } });

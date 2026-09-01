@@ -20,7 +20,7 @@ export class kinesis_kdsicb52e extends cdk.Stack {
         super(scope, id, props);
 
         const stream = new kinesis.Stream(this, 'KdsStream', {
-            streamName: `bench-stream-${this.account.slice(-6)}`,
+            streamName: `app-stream-${this.account.slice(-6)}`,
             shardCount: 1,
             retentionPeriod: cdk.Duration.hours(24),
             streamMode: kinesis.StreamMode.PROVISIONED,

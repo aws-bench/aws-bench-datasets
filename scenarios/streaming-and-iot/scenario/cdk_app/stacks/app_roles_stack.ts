@@ -3,19 +3,19 @@ import { AccountPrincipal, Effect, IRole, ManagedPolicy, PolicyStatement, Role }
 import { Construct } from 'constructs';
 
 /**
- * Generic QA roles stack that creates the three standard roles
- * used by aws-bench environments:
+ * Standard application IAM roles stack that creates the three roles
+ * used by the application environment:
  *
- * - QALocalInvocationApplicationRole  (read-only agent role for introspection tasks)
- * - QALocalInvocationApplicationAdmin (admin agent role for mutation tasks)
- * - LLMJudgeFullBedrockAccessRole     (verifier role for LLM-based judging)
+ * - ApplicationReadOnlyRole  (read-only application role)
+ * - ApplicationAdminRole (administrative application role)
+ * - BedrockServiceAccessRole     (Bedrock service access role)
  *
  * Assumes one environment per account -- role names are not env-scoped.
  */
-export class QARolesStack extends Stack {
+export class AppRolesStack extends Stack {
     public readonly readonlyRole: IRole;
     public readonly adminRole: IRole;
-    public readonly judgeRole: IRole;
+    public readonly bedrockRole: IRole;
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
@@ -45,8 +45,8 @@ export class QARolesStack extends Stack {
             ],
         });
 
-        this.readonlyRole = new Role(this, 'QALocalInvocationApplicationRole', {
-            roleName: 'QALocalInvocationApplicationRole',
+        this.readonlyRole = new Role(this, 'ApplicationReadOnlyRole', {
+            roleName: 'ApplicationReadOnlyRole',
             assumedBy: new AccountPrincipal(accountId),
             managedPolicies: [
                 ManagedPolicy.fromAwsManagedPolicyName('ReadOnlyAccess'),
@@ -58,8 +58,8 @@ export class QARolesStack extends Stack {
             ],
         });
 
-        this.adminRole = new Role(this, 'QALocalInvocationApplicationAdmin', {
-            roleName: 'QALocalInvocationApplicationAdmin',
+        this.adminRole = new Role(this, 'ApplicationAdminRole', {
+            roleName: 'ApplicationAdminRole',
             assumedBy: new AccountPrincipal(accountId),
             managedPolicies: [
                 ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess'),
@@ -67,8 +67,8 @@ export class QARolesStack extends Stack {
             ],
         });
 
-        this.judgeRole = new Role(this, 'LLMJudgeFullBedrockAccessRole', {
-            roleName: 'LLMJudgeFullBedrockAccessRole',
+        this.bedrockRole = new Role(this, 'BedrockServiceAccessRole', {
+            roleName: 'BedrockServiceAccessRole',
             assumedBy: new AccountPrincipal(accountId),
             managedPolicies: [
                 ManagedPolicy.fromAwsManagedPolicyName('AmazonBedrockFullAccess'),

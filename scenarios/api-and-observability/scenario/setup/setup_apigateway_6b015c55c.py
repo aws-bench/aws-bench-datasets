@@ -16,7 +16,7 @@ REGION = "us-east-1"
 STACK_NAME = "api-and-observability-ApiGateway-6b015c55c-us-east-1"
 
 AGREEMENT = {
-    "agreementId": "dua-benchmark-001",
+    "agreementId": "dua-2024-001",
     "name": "Benchmark Data Usage Agreement",
     "type": "DataUsageAgreement",
     "scope": "Global",
