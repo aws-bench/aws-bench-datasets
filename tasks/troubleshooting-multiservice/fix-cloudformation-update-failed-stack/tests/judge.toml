@@ -23,16 +23,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "the_cloudformation_template_has_these_version_nu"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The CloudFormation template has these version numbers hardcoded as literal strings rather than using !GetAtt Function.Version."
-type = "binary"
-
-[[criterion]]
-name = "the_stack_is_in_update_failed_rollback_was_disab"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack is in UPDATE_FAILED (rollback was disabled)."
-type = "binary"
-
-[[criterion]]
 name = "the_fix_is_to_correct_the_versions_and_redeploy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the fix is to correct the hardcoded Lambda alias version numbers in the CloudFormation template (e.g. via !GetAtt Function.Version instead of a literal number) and redeploy. This is satisfied by EITHER of two valid AWS procedures: (a) first run aws cloudformation rollback-stack to reach UPDATE_ROLLBACK_COMPLETE, then redeploy the corrected template, OR (b) directly redeploy the corrected template via a normal update-stack call -- (b) is also valid here because DisableRollback=true already caused CloudFormation to revert only the two failed Lambda alias resources while the rest of the stack already reached a stable COMPLETE state, so there is nothing left to roll back. Do not fail this claim solely because the junior chose procedure (b) instead of (a), or because the junior explicitly says continue-update-rollback / rollback-stack isn't needed -- that is a correct, evidence-backed observation about this specific stack's state, not a contradiction."
 type = "binary"

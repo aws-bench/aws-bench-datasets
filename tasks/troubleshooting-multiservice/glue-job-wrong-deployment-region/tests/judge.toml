@@ -5,9 +5,39 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "basaltdataanalyzer_rolereport_isn_t_in_troublesh"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): BasaltDataAnalyzer-RoleReport isn't in {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}} at all"
+type = "binary"
+
+[[criterion]]
+name = "basaltdataanalyzer_rolereport_deployed_to_troubl"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): BasaltDataAnalyzer-RoleReport deployed to {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} as {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName}}"
+type = "binary"
+
+[[criterion]]
+name = "the_cause_is_that_its_cloudformation_stack_was_d"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cause is that its CloudFormation stack was deployed to the wrong region"
+type = "binary"
+
+[[criterion]]
+name = "a_glue_job_is_regional_and_can_t_be_moved_in_pla"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A Glue job is regional and can't be moved in place"
+type = "binary"
+
+[[criterion]]
+name = "the_glue_job_depends_on_the_iam_role_and_s3_buck"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue job depends on the IAM role and S3 buckets the same stack created alongside it"
+type = "binary"
+
+[[criterion]]
+name = "getting_it_into_troubleshooting_multiservice_glu"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Getting it into {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}} means redeploying the whole stack there, not just recreating the job, then tearing down the {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} stack if unwanted"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

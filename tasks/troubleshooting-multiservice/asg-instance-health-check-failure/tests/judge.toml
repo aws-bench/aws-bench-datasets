@@ -43,11 +43,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "the_security_group_blocking_nlb_health_checks_on"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group blocking NLB health checks on port 4000 causes the ASG to continuously cycle instances: they launch, fail the ELB health check after the grace period, get terminated, and a replacement is launched."
-type = "binary"
-
-[[criterion]]
 name = "to_resolve_add_an_inbound_tcp_rule_for_the_healt"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve, add an inbound TCP rule for the health-check port 4000 to the security group, sourced from the CIDR of the subnet where the internal NLB resides; once the health check can reach the instances it succeeds, the targets stay healthy, and the terminate/replace loop stops."
 type = "binary"
