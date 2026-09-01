@@ -8,27 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "there_are_ec2_multiregion_ec2_ks84v1fh12_us_east"
+name = "us_east_1_instance_count"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-NUMEC2Running}} EC2 instances in us-east-1"
 type = "binary"
 
 [[criterion]]
-name = "there_are_ec2_multiregion_ec2_ls9fuhb522_us_west"
+name = "us_west_1_instance_count"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-NUMEC2Running}} EC2 instances in us-west-1"
 type = "binary"
 
 [[criterion]]
-name = "there_are_ec2_multiregion_ec2_ls9fuhb522_us_west_2"
+name = "us_west_2_instance_count"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-NUMEC2Running}} EC2 instances in us-west-2"
 type = "binary"
 
 [[criterion]]
-name = "instances_ec2_multiregion_ec2_ks84v1fh12_us_east"
+name = "three_instances_share_vpc"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Instances {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}}, {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}}, and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} are in VPC {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-VpcId}}"
 type = "binary"
 
 [[criterion]]
-name = "the_remaining_instance_in_us_east_1_is_in_the_de"
+name = "fourth_instance_in_different_vpc"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The remaining instance in us-east-1 is not in the same VPC as (not network-adjacent to) the other three instances. The reference answer additionally notes this VPC is the account's default VPC -- do not require the junior to use the words 'default VPC' or otherwise identify it as default; crediting the substantive non-adjacency fact is sufficient."
 type = "binary"
 

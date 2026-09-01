@@ -8,32 +8,32 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "in_us_east_1_there_is_an_ec2_instance_ec2_multir"
+name = "us_east_first_instance_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, there is an EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} with private IP {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateIPOfInstanceWithoutLaunchTemplate}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_there_is_an_ec2_instance_ec2_multir_2"
+name = "us_east_launch_template_instance_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, there is an EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} with private IP {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateIPOfInstanceWithLaunchTemplate}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_there_is_an_ec2_instance_ec2_multir_3"
+name = "us_east_default_vpc_instance_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, there is an EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-DefaultVPCInstanceId}} with private IP {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateIPOfInstanceWithDefaultVpc}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_there_is_an_ec2_instance_ec2_multir_4"
+name = "us_east_private_instance_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, there is an EC2 instance {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstanceId}} with private IP {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-PrivateInstancePrivateIp}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_west_1_there_is_an_ec2_instance_ec2_multir"
+name = "us_west_1_instance_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-1, there is an EC2 instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}} with private IP {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-PrivateIPOfInstance}}"
 type = "binary"
 
 [[criterion]]
-name = "in_us_west_2_there_is_an_ec2_instance_ec2_multir"
+name = "us_west_2_instance_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-west-2, there is an EC2 instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-InstanceId}} with private IP {{ec2-multiregion-EC2-ls9fuhb522-us-west-2-PrivateIPOfInstance}}"
 type = "binary"
 

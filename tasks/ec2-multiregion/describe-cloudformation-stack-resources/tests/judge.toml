@@ -8,47 +8,47 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west"
+name = "stack_is_cdk_stack"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} in us-west-1 is a CDK stack."
 type = "binary"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west_2"
+name = "stack_contains_vpc"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} contains a VPC."
 type = "binary"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west_3"
+name = "stack_contains_public_subnet"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} contains a public subnet."
 type = "binary"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west_4"
+name = "stack_contains_ec2_instance"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} contains an EC2 instance {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-InstanceId}}."
 type = "binary"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west_5"
+name = "stack_contains_instance_security_group"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} contains a security group for the EC2 instance."
 type = "binary"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west_6"
+name = "stack_contains_iam_role"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} contains an IAM role."
 type = "binary"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west_7"
+name = "stack_contains_default_sg_lockdown_custom_resource"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} contains a Lambda-backed custom resource that locks down the default security group."
 type = "binary"
 
 [[criterion]]
-name = "the_stack_ec2_multiregion_ec2_ls9fuhb522_us_west_8"
+name = "stack_has_sixteen_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} has 16 resources in total."
 type = "binary"
 
 [[criterion]]
-name = "all_resources_in_the_stack_ec2_multiregion_ec2_l"
+name = "all_stack_resources_created_successfully"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): All resources in the stack {{ec2-multiregion-EC2-ls9fuhb522-us-west-1-StackId}} were created successfully."
 type = "binary"
 
