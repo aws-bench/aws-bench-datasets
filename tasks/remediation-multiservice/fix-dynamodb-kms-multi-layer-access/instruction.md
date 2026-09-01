@@ -1,0 +1,3 @@
+Every invocation of `{{remediation-multiservice-Ledger-qxoqk9o4y-us-east-1-WriterFunctionName}}` fails and `{{remediation-multiservice-Ledger-qxoqk9o4y-us-east-1-WriterAlarmName}}` is in ALARM. Investigate the account, find the root cause, and make changes so the writer resumes recording transactions and the alarm returns to OK. Make the smallest set of changes that fixes the failure. Do not swap the writer's code, its role, or the target table itself. Do not disable, detach, or broaden existing security controls to bypass the error.
+
+IMPORTANT: Write your final prose answer to `/logs/agent/agent-output.txt`.
