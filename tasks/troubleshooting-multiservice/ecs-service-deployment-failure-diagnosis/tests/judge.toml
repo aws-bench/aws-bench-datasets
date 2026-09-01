@@ -5,9 +5,49 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_service_has_desiredcount_set_to_0"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The service has desiredCount set to 0"
+type = "binary"
+
+[[criterion]]
+name = "the_deployment_status_is_completed"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The deployment status is COMPLETED"
+type = "binary"
+
+[[criterion]]
+name = "the_service_successfully_reached_its_target_of_0"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The service successfully reached its target of 0 running tasks because desiredCount is 0, so the service is not failing"
+type = "binary"
+
+[[criterion]]
+name = "the_ecr_repository_troubleshooting_multiservice_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECR repository {{troubleshooting-multiservice-ecs-i5l02s5g8-us-west-2-EcrRepositoryName}} has no images pushed to it"
+type = "binary"
+
+[[criterion]]
+name = "the_service_runs_in_private_isolated_subnets"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The service runs in private isolated subnets"
+type = "binary"
+
+[[criterion]]
+name = "the_private_isolated_subnets_have_no_nat_gateway"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The private isolated subnets have no NAT gateway"
+type = "binary"
+
+[[criterion]]
+name = "the_private_isolated_subnets_have_no_vpc_endpoin"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The private isolated subnets have no VPC endpoints for ECR"
+type = "binary"
+
+[[criterion]]
+name = "if_desiredcount_is_increased_tasks_will_fail_to_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): If desiredCount is increased, tasks will fail to start because the ECR repository has no images and tasks have no network path to pull container images due to the subnet isolation"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

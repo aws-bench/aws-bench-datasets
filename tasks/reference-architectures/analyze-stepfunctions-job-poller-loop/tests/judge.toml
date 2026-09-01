@@ -5,9 +5,79 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "checkstatus_runs_exactly_twice_per_production_ex"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): CheckStatus runs exactly twice per production execution"
+type = "binary"
+
+[[criterion]]
+name = "the_wait_checkstatus_loop_never_iterates"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Wait→CheckStatus loop never iterates"
+type = "binary"
+
+[[criterion]]
+name = "submitjob_s_python_handler_is_return_id_event_id"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SubmitJob's Python handler is `return {\"id\": event[\"id\"], \"status\": \"SUCCEEDED\"}`"
+type = "binary"
+
+[[criterion]]
+name = "submitjob_ignores_all_other_input_and_always_emi"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SubmitJob ignores all other input and always emits status=SUCCEEDED"
+type = "binary"
+
+[[criterion]]
+name = "checkstatus_is_if_event_status_succeeded_return_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): CheckStatus is `if event[\"status\"]==\"SUCCEEDED\": return {\"status\":\"SUCCEEDED\", \"id\": event[\"id\"]} else: return {\"status\":\"FAILED\", ...}`"
+type = "binary"
+
+[[criterion]]
+name = "checkstatus_doesn_t_call_batch_ecs_glue_or_any_e"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): CheckStatus doesn't call Batch, ECS, Glue, or any external system; it just echoes SUCCEEDED or collapses anything else to FAILED"
+type = "binary"
+
+[[criterion]]
+name = "the_asl_flow_is_startat_submitjob_wait30seconds_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ASL flow is StartAt SubmitJob → Wait30Seconds → CheckStatus → JobComplete (Choice on $.status) → if SUCCEEDED go to GetFinalJobStatus → end; if FAILED go to JobFailed (terminal fail); otherwise loop back to Wait30Seconds"
+type = "binary"
+
+[[criterion]]
+name = "because_submitjob_sets_status_succeeded_immediat"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Because SubmitJob sets status=SUCCEEDED immediately, the first CheckStatus invocation observes SUCCEEDED, the Choice matches the SUCCEEDED branch, and the execution transitions to GetFinalJobStatus, which itself invokes CheckStatus one more time before ending, resulting in 2 CheckStatus invocations total"
+type = "binary"
+
+[[criterion]]
+name = "the_expected_duration_of_a_single_execution_is_a"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The expected duration of a single execution is approximately 30 seconds (the Wait state) plus negligible Lambda invocation overhead"
+type = "binary"
+
+[[criterion]]
+name = "the_loop_could_only_iterate_if_checkstatus_retur"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The loop could only iterate if CheckStatus returned a non-SUCCEEDED, non-FAILED value, but with the current handler code that case is unreachable"
+type = "binary"
+
+[[criterion]]
+name = "triggering_the_loop_in_this_stack_requires_eithe"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Triggering the loop in this stack requires either changing SubmitJob to return a different status, changing CheckStatus to return something other than SUCCEEDED/FAILED, or manually starting an execution with a custom input that CheckStatus would not immediately terminate on (but even then CheckStatus's else branch returns FAILED, which is terminal)"
+type = "binary"
+
+[[criterion]]
+name = "eventbridge_rule_sends_the_default_scheduled_eve"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): EventBridge rule sends the default scheduled-event payload (which has top-level `id`, `detail-type` etc.)"
+type = "binary"
+
+[[criterion]]
+name = "submitjob_s_event_id_resolves_to_the_eventbridge"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SubmitJob's `event[\"id\"]` resolves to the EventBridge event id rather than any real job id"
+type = "binary"
+
+[[criterion]]
+name = "the_300_second_state_machine_level_timeoutsecond"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The 300-second state-machine-level TimeoutSeconds is effectively never exercised"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

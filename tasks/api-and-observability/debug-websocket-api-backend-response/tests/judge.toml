@@ -5,9 +5,74 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_lambda_function_flint_agent_message_has_no_w"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function flint-agent-message has no WEBSOCKET_ENDPOINT environment variable set."
+type = "binary"
+
+[[criterion]]
+name = "the_sendtoconnection_helper_throws_cannot_read_p"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The sendToConnection helper throws 'Cannot read properties of undefined (reading replace)' when it tries to push a reply back because the WEBSOCKET_ENDPOINT env var is not set."
+type = "binary"
+
+[[criterion]]
+name = "no_response_ever_reaches_the_client_because_the_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No response ever reaches the client because the sendToConnection helper throws an error."
+type = "binary"
+
+[[criterion]]
+name = "the_lambda_handler_does_not_recognize_the_ping_a"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler does not recognize the 'ping' action that the agent script sends."
+type = "binary"
+
+[[criterion]]
+name = "the_lambda_handler_routes_only_heartbeat_registe"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler routes only 'heartbeat', 'register', 'agent_connected', and 'register_ui' actions."
+type = "binary"
+
+[[criterion]]
+name = "ping_actions_fall_through_to_the_default_handler"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Ping actions fall through to the default handler and return 400."
+type = "binary"
+
+[[criterion]]
+name = "flint_agent_sh_keeps_each_websocket_open_for_onl"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh keeps each WebSocket open for only about 2 seconds by piping a registration, sleep 1, ping, sleep 1 into websocat and then closing stdin, causing websocat to tear the socket down."
+type = "binary"
+
+[[criterion]]
+name = "flint_agent_sh_then_sleeps_5s_and_reconnects_in_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh then sleeps 5s and reconnects in a loop, which causes the 'keep disconnecting' behavior."
+type = "binary"
+
+[[criterion]]
+name = "flint_agent_persistent_sh_in_the_same_s3_bucket_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-persistent.sh in the same S3 bucket keeps the socket open."
+type = "binary"
+
+[[criterion]]
+name = "flint_agent_professional_sh_in_the_same_s3_bucke"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh in the same S3 bucket keeps the socket open."
+type = "binary"
+
+[[criterion]]
+name = "flint_agent_persistent_sh_uses_the_unrouted_ping"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-persistent.sh uses the unrouted 'ping' action."
+type = "binary"
+
+[[criterion]]
+name = "flint_agent_professional_sh_uses_the_heartbeat_a"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh uses the 'heartbeat' action."
+type = "binary"
+
+[[criterion]]
+name = "fixing_the_backend_requires_setting_websocket_en"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Fixing the backend requires setting WEBSOCKET_ENDPOINT on the Lambda function flint-agent-message."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

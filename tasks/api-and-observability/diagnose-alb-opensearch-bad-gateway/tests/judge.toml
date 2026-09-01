@@ -5,9 +5,39 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_alb_target_group_flint_dashboards_tg_has_ip_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB target group flint-dashboards-tg has IP targets 10.80.4.37 and 10.80.8.112 registered"
+type = "binary"
+
+[[criterion]]
+name = "the_alb_target_group_flint_api_tg_has_ip_targets"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB target group flint-api-tg has IP targets 10.80.4.37 and 10.80.8.112 registered"
+type = "binary"
+
+[[criterion]]
+name = "the_ips_10_80_4_37_and_10_80_8_112_are_not_attac"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The IPs 10.80.4.37 and 10.80.8.112 are not attached to any active ENI in the VPC"
+type = "binary"
+
+[[criterion]]
+name = "the_opensearch_domain_flint_analytics_is_deploye"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The OpenSearch domain flint-analytics is deployed in the VPC"
+type = "binary"
+
+[[criterion]]
+name = "the_opensearch_domain_flint_analytics_has_curren"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The OpenSearch domain flint-analytics has current ENI private IPs that are different from 10.80.4.37 and 10.80.8.112"
+type = "binary"
+
+[[criterion]]
+name = "because_the_registered_target_ips_don_t_correspo"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Because the registered target IPs don't correspond to any running network interface, every health check fails and the ALB returns 502 for all requests"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

@@ -5,9 +5,29 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_distribution_api_and_observability_cloudfron"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has no defaultRootObject configured."
+type = "binary"
+
+[[criterion]]
+name = "the_distribution_api_and_observability_cloudfron_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has zero additional cache behaviors beyond the default behavior."
+type = "binary"
+
+[[criterion]]
+name = "the_distribution_api_and_observability_cloudfron_3"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has a default behavior pointing at an S3 origin."
+type = "binary"
+
+[[criterion]]
+name = "requests_to_tenant_id_are_forwarded_to_s3_as_is_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Requests to /tenant-id/ are forwarded to S3 as-is, but S3 doesn't auto-resolve directory paths to index.html, causing tenant paths to return errors because there is no CloudFront Function or cache behavior that rewrites /tenant-id/ to /tenant-id/index.html."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

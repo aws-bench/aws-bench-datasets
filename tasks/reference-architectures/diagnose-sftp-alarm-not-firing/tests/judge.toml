@@ -5,9 +5,64 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_alarm_reference_architectures_transfer_sftp_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{reference-architectures-Transfer-sftp-us-east-1-AlarmName}} watches a custom metric SftpErrors in namespace SFTP/Transfer."
+type = "binary"
+
+[[criterion]]
+name = "a_metric_filter_on_log_group_reference_architect"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A metric filter on log group {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}} increments the SftpErrors metric on the literal string \"ERROR\"."
+type = "binary"
+
+[[criterion]]
+name = "the_alarm_triggers_on_sum_1"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm triggers on Sum >= 1."
+type = "binary"
+
+[[criterion]]
+name = "the_alarm_has_treatmissingdata_notbreaching"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm has TreatMissingData=notBreaching."
+type = "binary"
+
+[[criterion]]
+name = "the_alarm_never_fires_because_log_group_referenc"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm never fires because log group {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}} receives no data."
+type = "binary"
+
+[[criterion]]
+name = "the_transfer_server_uses_a_legacy_loggingrole_wi"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Transfer server uses a legacy loggingRole with no structuredLogDestinations."
+type = "binary"
+
+[[criterion]]
+name = "aws_transfer_family_logs_to_the_service_managed_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AWS Transfer Family logs to the service-managed group /aws/transfer/<server-id>, not {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}}, because the server uses a legacy loggingRole with no structuredLogDestinations."
+type = "binary"
+
+[[criterion]]
+name = "with_nothing_published_to_sftperrors_the_alarm_s"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With nothing published to SftpErrors, the alarm stays in INSUFFICIENT_DATA (treated as OK) and cannot reach ALARM from real errors."
+type = "binary"
+
+[[criterion]]
+name = "alarmactions_is_empty"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AlarmActions is empty."
+type = "binary"
+
+[[criterion]]
+name = "even_if_the_alarm_did_fire_no_one_would_be_notif"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Even if the alarm did fire, no one would be notified because AlarmActions is empty."
+type = "binary"
+
+[[criterion]]
+name = "to_fix_route_the_server_s_logs_to_reference_arch"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To fix, route the server's logs to {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}} (add structuredLogDestinations, or repoint the metric filter to /aws/transfer/<server-id>) so ERROR events increment SftpErrors, and add an SNS topic ARN to AlarmActions."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

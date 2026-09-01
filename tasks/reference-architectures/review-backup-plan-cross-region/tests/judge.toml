@@ -5,9 +5,104 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_backup_plan_id_reference_architectures_backu"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The backup plan (id {{reference-architectures-Backup-s3-us-east-1-BackupPlanId}}) uses a tag-based selection"
+type = "binary"
+
+[[criterion]]
+name = "the_backup_plan_targets_all_resources_tagged_dai"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The backup plan targets all resources tagged daily-backup=true with condition STRINGEQUALS"
+type = "binary"
+
+[[criterion]]
+name = "the_plan_has_a_single_rule_named_dailybackuprule"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The plan has a single rule named DailyBackupRule"
+type = "binary"
+
+[[criterion]]
+name = "the_rule_runs_daily_at_midnight_utc_via_cron_0_0"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The rule runs daily at midnight UTC via cron(0 0 * * ? *)"
+type = "binary"
+
+[[criterion]]
+name = "the_rule_has_a_35_day_retention_deleteafterdays_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The rule has a 35-day retention (DeleteAfterDays: 35)"
+type = "binary"
+
+[[criterion]]
+name = "the_rule_has_an_8_hour_start_window"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The rule has an 8-hour start window"
+type = "binary"
+
+[[criterion]]
+name = "the_rule_has_a_7_day_completion_window"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The rule has a 7-day completion window"
+type = "binary"
+
+[[criterion]]
+name = "the_vault_reference_architectures_backup_s3_us_e"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The vault {{reference-architectures-Backup-s3-us-east-1-BackupVaultName}} is encrypted with the AWS-managed Backup KMS key (alias/aws/backup in the account) since no customer-managed CMK was specified"
+type = "binary"
+
+[[criterion]]
+name = "the_vault_is_not_locked"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The vault is not locked"
+type = "binary"
+
+[[criterion]]
+name = "the_existing_s3_bucket_reference_architectures_b"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The existing S3 bucket {{reference-architectures-Backup-s3-us-east-1-BucketName}} has versioning Enabled"
+type = "binary"
+
+[[criterion]]
+name = "the_existing_s3_bucket_reference_architectures_b_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The existing S3 bucket {{reference-architectures-Backup-s3-us-east-1-BucketName}} uses SSE-S3 (AES256) encryption"
+type = "binary"
+
+[[criterion]]
+name = "to_add_a_second_s3_bucket_to_the_backup_plan_you"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To add a second S3 bucket to the backup plan, you need to enable versioning on the new bucket, since AWS Backup requires versioning for S3 backups"
+type = "binary"
+
+[[criterion]]
+name = "to_add_a_second_s3_bucket_to_the_backup_plan_you_2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To add a second S3 bucket to the backup plan, you need to add the tag daily-backup=true to it"
+type = "binary"
+
+[[criterion]]
+name = "the_tag_based_selection_will_automatically_inclu"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The tag-based selection will automatically include any resource with that tag -- no changes to the backup plan or selection are needed"
+type = "binary"
+
+[[criterion]]
+name = "for_cross_region_copy_the_current_vault_setup_is"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): For cross-region copy, the current vault's ENCRYPTION/DESIGN setup is compatible (the destination vault gets its own key, AWS Backup handles re-encryption). This claim is about vault/KMS design compatibility only -- if the junior separately reports a real, evidence-backed account-level permission blocker (e.g. an Organizations SCP restricting the region), that is an orthogonal operational finding, not a contradiction of this design-compatibility claim; do not fail this claim for that."
+type = "binary"
+
+[[criterion]]
+name = "you_would_add_a_copyaction_to_the_existing_backu"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You would add a CopyAction to the existing backup rule specifying a destination backup vault ARN in the target region"
+type = "binary"
+
+[[criterion]]
+name = "the_destination_vault_will_have_its_own_kms_encr"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The destination vault will have its own KMS encryption key (either the AWS-managed default key in that region or a customer-managed CMK you create there)"
+type = "binary"
+
+[[criterion]]
+name = "aws_backup_handles_re_encryption_during_the_copy"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AWS Backup handles re-encryption during the copy process, so using the AWS-managed default key on the source vault does not block cross-region copy"
+type = "binary"
+
+[[criterion]]
+name = "no_changes_to_the_source_vault_encryption_are_re"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No changes to the source vault encryption are required (i.e. the current source-vault encryption is not a BLOCKER for cross-region copy). This is a necessity claim, not a recommendation against optional improvements -- if the junior separately suggests an OPTIONAL enhancement (e.g. 'consider also adding a CMK to the source vault') without saying it's required to make cross-region copy work, that does not contradict this claim."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

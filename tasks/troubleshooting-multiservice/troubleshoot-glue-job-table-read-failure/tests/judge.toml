@@ -5,9 +5,59 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_glue_job_troubleshooting_multiservice_glue_4"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue job {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueJobName}} is failing with an AccessDeniedException: Insufficient Lake Formation permission(s) on {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueTableName}}."
+type = "binary"
+
+[[criterion]]
+name = "the_root_cause_is_that_lake_formation_is_enforci"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is that Lake Formation is enforcing permissions on the table with no grants in place."
+type = "binary"
+
+[[criterion]]
+name = "the_account_s_lake_formation_default_settings_ha"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The account's Lake Formation default settings have CreateTableDefaultPermissions set to empty, meaning the legacy IAMAllowedPrincipals auto-grant is disabled."
+type = "binary"
+
+[[criterion]]
+name = "lake_formation_enforces_permissions_on_all_new_d"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Lake Formation enforces permissions on all new Data Catalog tables. This general AWS behavior is satisfied if the junior's specific diagnosis is consistent with it (e.g. correctly explains that Lake Formation permission enforcement, via the DataAdmin role / default-settings mechanism, is why this specific table's access failed) -- the junior does not need to also state the general principle in the abstract."
+type = "binary"
+
+[[criterion]]
+name = "no_lake_formation_permissions_have_been_granted_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No Lake Formation permissions have been granted to the Glue role {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueServiceRoleArn}} on the table {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueTableName}}."
+type = "binary"
+
+[[criterion]]
+name = "no_lake_formation_permissions_have_been_granted__2"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No Lake Formation permissions have been granted to the Glue role {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueServiceRoleArn}} on the database {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueDatabaseName}}."
+type = "binary"
+
+[[criterion]]
+name = "the_glue_role_has_the_awslakeformationdataadmin_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue role has the AWSLakeFormationDataAdmin managed policy attached."
+type = "binary"
+
+[[criterion]]
+name = "the_awslakeformationdataadmin_managed_policy_gra"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The AWSLakeFormationDataAdmin managed policy grants lakeformation:* including lakeformation:GetDataAccess, the IAM permission required for Lake Formation credential vending."
+type = "binary"
+
+[[criterion]]
+name = "with_lf_enforcing_permissions_and_no_grants_pres"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With LF enforcing permissions and no grants present, the credential vending call fails with AccessDeniedException."
+type = "binary"
+
+[[criterion]]
+name = "to_resolve_this_either_grant_the_glue_role_selec"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve this, either grant the Glue role SELECT and DESCRIBE permissions on the table in Lake Formation, or remove AWSLakeFormationDataAdmin from the role so that Glue falls back to IAM-based S3 access controlled by the AmazonS3FullAccess policy already attached to the role."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

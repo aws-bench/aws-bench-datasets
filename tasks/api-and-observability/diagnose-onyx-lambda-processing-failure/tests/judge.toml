@@ -5,9 +5,49 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_onyx_lambda_handler_checks_for_the_presence_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Onyx Lambda handler checks for the presence of OldImage in DynamoDB stream records before processing"
+type = "binary"
+
+[[criterion]]
+name = "bulk_regression_requests_are_inserted_directly_i"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Bulk regression requests are inserted directly into the BasaltRegressionRequests-alpha table with state IN_PROGRESS"
+type = "binary"
+
+[[criterion]]
+name = "bulk_regression_requests_produce_insert_stream_e"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Bulk regression requests produce INSERT stream events"
+type = "binary"
+
+[[criterion]]
+name = "insert_events_do_not_contain_an_oldimage"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): INSERT events do not contain an OldImage"
+type = "binary"
+
+[[criterion]]
+name = "the_handler_skips_insert_events_because_they_lac"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler skips INSERT events because they lack OldImage"
+type = "binary"
+
+[[criterion]]
+name = "individual_bat_requests_are_first_created_in_buf"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests are first created in BUFFER state in the BasaltRequests-alpha table"
+type = "binary"
+
+[[criterion]]
+name = "individual_bat_requests_are_then_updated_to_in_p"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests are then updated to IN_PROGRESS state"
+type = "binary"
+
+[[criterion]]
+name = "individual_bat_requests_produce_modify_events_th"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests produce MODIFY events that include OldImage"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

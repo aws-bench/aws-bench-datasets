@@ -5,9 +5,74 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "no_spark_steps_have_been_submitted_to_the_cluste"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No Spark steps have been submitted to the cluster, so no job is currently running."
+type = "binary"
+
+[[criterion]]
+name = "spark_driver_memory_is_set_to_60g_in_the_spark_d"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.driver.memory is set to 60G in the spark-defaults configuration."
+type = "binary"
+
+[[criterion]]
+name = "the_m5_2xlarge_instance_has_total_memory_of_32_g"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The m5.2xlarge instance has total memory of 32 GB."
+type = "binary"
+
+[[criterion]]
+name = "spark_driver_memory_of_60g_exceeds_the_total_mem"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.driver.memory of 60G exceeds the total memory of an m5.2xlarge instance (32 GB), which would prevent the driver from launching at all."
+type = "binary"
+
+[[criterion]]
+name = "spark_executor_instances_is_set_to_425_in_the_sp"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.executor.instances is set to 425 in the spark-defaults configuration."
+type = "binary"
+
+[[criterion]]
+name = "spark_executor_memory_is_set_to_20g_in_the_spark"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.executor.memory is set to 20G in the spark-defaults configuration."
+type = "binary"
+
+[[criterion]]
+name = "spark_yarn_executor_memoryoverhead_is_set_to_3g_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.yarn.executor.memoryOverhead is set to 3G in the spark-defaults configuration."
+type = "binary"
+
+[[criterion]]
+name = "the_core_instance_fleet_targets_only_1_m5_2xlarg"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The core instance fleet targets only 1 m5.2xlarge instance."
+type = "binary"
+
+[[criterion]]
+name = "with_23_gb_per_executor_and_the_core_instance_fl"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With 23 GB per executor and the core instance fleet targeting only 1 m5.2xlarge instance (32 GB), YARN could provision at most 1 executor, leaving the remaining 424 requested executors never allocated and the vast majority of Spark tasks waiting indefinitely."
+type = "binary"
+
+[[criterion]]
+name = "spark_dynamicallocation_enabled_is_false_in_the_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.dynamicAllocation.enabled is false in the spark-defaults configuration."
+type = "binary"
+
+[[criterion]]
+name = "with_spark_dynamicallocation_enabled_set_to_fals"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With spark.dynamicAllocation.enabled set to false, Spark cannot scale the executor count down to match actual cluster capacity."
+type = "binary"
+
+[[criterion]]
+name = "spark_sql_shuffle_partitions_is_set_to_3000_in_t"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.sql.shuffle.partitions is set to 3000 in the spark-defaults configuration."
+type = "binary"
+
+[[criterion]]
+name = "spark_sql_shuffle_partitions_of_3000_adds_unnece"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.sql.shuffle.partitions of 3000 adds unnecessary scheduling overhead relative to the 1 available executor."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

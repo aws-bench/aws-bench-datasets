@@ -5,9 +5,54 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "the_instance_has_a_public_ip"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance has a public IP."
+type = "binary"
+
+[[criterion]]
+name = "the_instance_has_two_security_groups_attached"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance has two security groups attached."
+type = "binary"
+
+[[criterion]]
+name = "the_ec2instancesg_has_no_ingress_rules_at_all"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Ec2InstanceSG has no ingress rules at all."
+type = "binary"
+
+[[criterion]]
+name = "the_ec2sshsecuritygroup_has_a_single_ingress_rul"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Ec2SshSecurityGroup has a single ingress rule allowing TCP port 22 from 10.0.0.0/16 (the VPC CIDR)."
+type = "binary"
+
+[[criterion]]
+name = "the_instance_sits_in_a_public_subnet"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance sits in a public subnet."
+type = "binary"
+
+[[criterion]]
+name = "the_ssh_security_group_restricts_port_22_to_the_"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SSH security group restricts port 22 to the VPC CIDR (10.0.0.0/16), not 0.0.0.0/0, so packets arriving at port 22 from any non-VPC source are dropped by the security group, preventing external SSH even though the instance has a public IP."
+type = "binary"
+
+[[criterion]]
+name = "the_instance_iam_role_has_amazonssmmanagedinstan"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance IAM role has AmazonSSMManagedInstanceCore attached."
+type = "binary"
+
+[[criterion]]
+name = "ssm_session_manager_reaches_the_instance_without"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SSM Session Manager reaches the instance without needing any security group ingress rule, so `aws ssm start-session --target {{reference-architectures-EC2-instance-us-east-1-InstanceId}}` works."
+type = "binary"
+
+[[criterion]]
+name = "the_recommended_solution_is_to_use_ssm_session_m"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The recommended solution is to use SSM Session Manager, not direct SSH."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

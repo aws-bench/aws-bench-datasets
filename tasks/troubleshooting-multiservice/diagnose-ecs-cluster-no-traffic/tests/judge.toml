@@ -5,9 +5,54 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "both_ecs_services_in_cluster_troubleshooting_mul"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Both ECS services in cluster {{troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-ClusterName}} have desiredCount=0"
+type = "binary"
+
+[[criterion]]
+name = "no_tasks_are_running_in_the_cluster"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No tasks are running in the cluster"
+type = "binary"
+
+[[criterion]]
+name = "no_targets_are_registered_with_the_alb"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No targets are registered with the ALB"
+type = "binary"
+
+[[criterion]]
+name = "the_services_run_in_isolated_subnets_without_int"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The services run in isolated subnets without internet access (no IGW, no NAT, no VPC endpoints)"
+type = "binary"
+
+[[criterion]]
+name = "the_task_definitions_reference_a_public_ecr_ngin"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definitions reference a public ECR nginx image"
+type = "binary"
+
+[[criterion]]
+name = "the_public_ecr_nginx_image_cannot_be_pulled_with"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The public ECR nginx image cannot be pulled without connectivity"
+type = "binary"
+
+[[criterion]]
+name = "the_alb_is_configured_as_internal"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB is configured as internal"
+type = "binary"
+
+[[criterion]]
+name = "the_alb_cannot_receive_public_traffic_because_it"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB cannot receive public traffic because it is internal"
+type = "binary"
+
+[[criterion]]
+name = "scaling_up_alone_will_not_fix_the_issue"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Scaling up alone will not fix the issue"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"
