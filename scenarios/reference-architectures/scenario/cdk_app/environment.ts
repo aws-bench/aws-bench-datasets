@@ -14,7 +14,7 @@
  */
 import * as cdk from 'aws-cdk-lib';
 import { EnvironmentProps } from './lib/shared';
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 
 // Lambda stacks
 import { LambdaCron } from './stacks/lambda/lambda_cron';
@@ -120,7 +120,7 @@ export function createEnvironment(app: cdk.App, envId: string, props: Environmen
     const env = { account, region };
 
     // QA Roles
-    new QARolesStack(app, `${envId}-QARoles-${region}`, { env });
+    new AppRolesStack(app, `${envId}-AppRoles-${region}`, { env });
 
     // Lambda
     new LambdaCron(app, `${envId}-Lambda-cron-${region}`, { env });

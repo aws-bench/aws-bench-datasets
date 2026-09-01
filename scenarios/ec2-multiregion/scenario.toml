@@ -2,7 +2,7 @@ schema_version = "1.0"
 
 [scenario]
 name = "ec2-multiregion"
-description = "Small EC2-only environment used for end-to-end env-setup validation. Two stacks (ec2_ks84v1fh1, ec2_ls9fuhb52) plus QARolesStack across us-east-1, us-west-1, and us-west-2."
+description = "Small EC2-only environment used for end-to-end env-setup validation. Two stacks (ec2_ks84v1fh1, ec2_ls9fuhb52) plus AppRolesStack across us-east-1, us-west-1, and us-west-2."
 account_tags = ["PRIMARY"]
 regions = ["us-east-1", "us-west-1", "us-west-2"]
 

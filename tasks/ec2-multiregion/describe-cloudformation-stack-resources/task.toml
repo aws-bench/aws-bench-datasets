@@ -9,7 +9,7 @@ keywords = []
 # --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "ec2-multiregion"
-agent_role_name = "QALocalInvocationApplicationRole"
+agent_role_name = "ApplicationReadOnlyRole"
 
 [concurrency]
 mode = "read-only"

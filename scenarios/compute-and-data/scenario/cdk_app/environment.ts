@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { EnvironmentProps } from './lib/shared';
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 import { athena_k89bh5er2 } from './stacks/athena/athena_k89bh5er2';
 import { cloudfront_492sidmdo } from './stacks/cloudfront/cloudfront_492sidmdo';
 import { cloudfront_t5s43s6ye } from './stacks/cloudfront/cloudfront_t5s43s6ye';
@@ -27,7 +27,7 @@ import { s3_uijodjso5 } from './stacks/s3/s3_uijodjso5';
 import { s3_dkj487ewd } from './stacks/s3_dkj487ewd';
 
 export function createEnvironment(app: cdk.App, envId: string, props: EnvironmentProps): void {
-    new QARolesStack(app, `${envId}-QARoles-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
+    new AppRolesStack(app, `${envId}-AppRoles-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
     new athena_k89bh5er2(app, `${envId}-athena-k89bh5er2-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
     new cloudfront_492sidmdo(app, `${envId}-cloudfront-492sidmdo-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
     new cloudfront_t5s43s6ye(app, `${envId}-cloudfront-t5s43s6ye-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });

@@ -9,7 +9,7 @@ keywords = []
 # --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "troubleshooting-multiservice"
-agent_role_name = "QALocalInvocationApplicationRole"
+agent_role_name = "ApplicationReadOnlyRole"
 
 [pre_invoke]
 timeout_sec = 600.0
