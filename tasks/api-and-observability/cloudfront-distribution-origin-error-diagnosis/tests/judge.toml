@@ -14,7 +14,7 @@ type = "binary"
 
 [[criterion]]
 name = "distribution_has_only_default_cache_behavior"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has zero additional cache behaviors beyond the default behavior."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has zero additional cache behaviors beyond the default behavior. This is a supporting architectural detail, not the core diagnosis -- satisfied if the junior's explanation of the 403 (requests forwarded as-is to S3 with no rewrite) is consistent with there being no extra cache behavior handling the affected paths differently; the junior does not need to separately state the count of cache behaviors."
 type = "binary"
 
 [[criterion]]

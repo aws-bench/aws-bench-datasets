@@ -19,7 +19,7 @@ type = "binary"
 
 [[criterion]]
 name = "ten_failures_mark_unhealthy"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): This causes 10 consecutive failures, marking instances unhealthy"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): This causes 10 consecutive failures, marking instances unhealthy. Satisfied if the junior establishes the mechanism -- repeated/consecutive failed health checks against the blocked port eventually mark the target unhealthy (e.g. via Target.FailedHealthChecks) -- without stating the literal threshold count of 10."
 type = "binary"
 
 [[criterion]]

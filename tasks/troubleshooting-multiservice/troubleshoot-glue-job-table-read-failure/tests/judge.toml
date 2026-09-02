@@ -44,12 +44,12 @@ type = "binary"
 
 [[criterion]]
 name = "data_admin_policy_grants_credential_vending"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The AWSLakeFormationDataAdmin managed policy grants lakeformation:* including lakeformation:GetDataAccess, the IAM permission required for Lake Formation credential vending."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The AWSLakeFormationDataAdmin managed policy grants lakeformation:* including lakeformation:GetDataAccess, the IAM permission required for Lake Formation credential vending. This is background mechanism detail, not the core diagnosis -- satisfied if the junior's answer is consistent with it (e.g. correctly concludes the attached IAM policy does not substitute for missing Lake Formation grants) without naming 'credential vending' as an explicit intermediate step."
 type = "binary"
 
 [[criterion]]
 name = "credential_vending_fails_without_grants"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With LF enforcing permissions and no grants present, the credential vending call fails with AccessDeniedException."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With LF enforcing permissions and no grants present, the credential vending call fails with AccessDeniedException. This is background mechanism detail, not the core diagnosis -- satisfied if the junior correctly attributes the AccessDeniedException to the missing Lake Formation grants without naming 'credential vending' as an explicit intermediate step."
 type = "binary"
 
 [[criterion]]

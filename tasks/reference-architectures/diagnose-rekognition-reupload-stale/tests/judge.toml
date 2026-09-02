@@ -14,7 +14,7 @@ type = "binary"
 
 [[criterion]]
 name = "bucket_has_three_suffix_filters"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket has three LambdaFunctionConfigurations for s3:ObjectCreated:*, filtered by suffix .jpg, .jpeg, and .png, all targeting {{reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName}}."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket has three LambdaFunctionConfigurations for s3:ObjectCreated:*, filtered by suffix .jpg, .jpeg, and .png, all targeting {{reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName}}. Satisfied if the junior establishes that an S3 event notification exists and fires for the .jpg upload in question, targeting the correct Lambda; the junior does not need to enumerate all three suffix filters (.jpg/.jpeg/.png), since only the .jpg path is relevant to this re-upload."
 type = "binary"
 
 [[criterion]]
@@ -34,7 +34,7 @@ type = "binary"
 
 [[criterion]]
 name = "rekognition_cost_per_reupload"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Rekognition cost is incurred on every re-upload."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Rekognition cost is incurred on every re-upload. The reference itself flags this as a 'Secondary note' rather than the primary diagnosis -- this is satisfied if the junior establishes that DetectLabels runs again (a new billable API call) on every re-upload; the junior does not need to use the word 'cost' explicitly."
 type = "binary"
 
 [[criterion]]
@@ -74,7 +74,7 @@ type = "binary"
 
 [[criterion]]
 name = "table_provisioned_will_throttle"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table is deployed as PROVISIONED with 5 RCU / 5 WCU (no BillingModeSummary), not on-demand, so sustained re-uploads will throttle rather than auto-scale."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table is deployed as PROVISIONED with 5 RCU / 5 WCU (no BillingModeSummary), not on-demand, so sustained re-uploads will throttle rather than auto-scale. The reference itself flags this as a 'Secondary note' rather than the primary diagnosis (the ConditionalCheckFailedException silently swallowed by the handler) -- treat this claim as optional/supplementary and do not fail the junior's answer solely for omitting it."
 type = "binary"
 
 [[criterion]]

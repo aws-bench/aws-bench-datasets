@@ -94,7 +94,7 @@ type = "binary"
 
 [[criterion]]
 name = "glue_job_fails_silently_after_repo_seeded"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Once the repo is seeded and the Lambda finally fires, the Glue job will start, fail when it tries to write to its CloudWatch log group, and the pipeline will still report Deploy SUCCESS because of the fire-and-forget launcher, with the only real failure signal being the JobRunState on the Glue job itself"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Once the repo is seeded and the Lambda finally fires, the Glue job will start, fail when it tries to write to its CloudWatch log group, and the pipeline will still report Deploy SUCCESS because of the fire-and-forget launcher, with the only real failure signal being the JobRunState on the Glue job itself. This is a forward-looking synthesis of facts the junior may state separately -- satisfied if the junior separately establishes (a) the fire-and-forget launcher makes Deploy report SUCCESS regardless of the Glue job's real outcome, and (b) the Glue role lacks the CloudWatch Logs permissions the job needs; the junior does not need to walk through this as one explicit future scenario connecting both facts."
 type = "binary"
 
 [[criterion]]

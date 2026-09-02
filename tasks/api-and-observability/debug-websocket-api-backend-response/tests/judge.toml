@@ -29,12 +29,12 @@ type = "binary"
 
 [[criterion]]
 name = "lambda_routes_four_actions_only"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler routes only 'heartbeat', 'register', 'agent_connected', and 'register_ui' actions."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler routes only 'heartbeat', 'register', 'agent_connected', and 'register_ui' actions. Satisfied if the junior establishes that 'ping' is not one of the routed/recognized actions and falls through to a default/unhandled path; the junior does not need to enumerate all four routed action names verbatim."
 type = "binary"
 
 [[criterion]]
 name = "ping_returns_400_via_default_handler"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Ping actions fall through to the default handler and return 400."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Ping actions fall through to the default handler and return 400. Satisfied if the junior establishes that unrecognized/unrouted actions like 'ping' are rejected by a default/fallback path; the junior does not need to cite the literal HTTP status code 400."
 type = "binary"
 
 [[criterion]]
