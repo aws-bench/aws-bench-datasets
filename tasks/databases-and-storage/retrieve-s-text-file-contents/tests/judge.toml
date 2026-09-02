@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_most_similar_file_among_all_s3_buckets_is_sa"
+name = "most_similar_file_is_samplefile_txt"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most similar file among all S3 buckets is 'samplefile.txt'"
 type = "binary"
 
 [[criterion]]
-name = "the_content_of_samplefile_txt_is_hello_this_is_a"
+name = "samplefile_txt_content_matches"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The content of 'samplefile.txt' is 'Hello, this is a sample text file!'"
 type = "binary"
 

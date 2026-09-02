@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "there_is_an_analytics_configuration_named_testan"
+name = "analytics_config_exists_on_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is an analytics configuration named 'testAnalyticsConfiguration' on {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_testanalyticsconfiguration_analytics_configu"
+name = "analytics_destination_account_id"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The 'testAnalyticsConfiguration' analytics configuration's S3BucketDestination sets BucketAccountId to 111122223333"
 type = "binary"
 
 [[criterion]]
-name = "111122223333_is_not_the_account_that_owns_the_so"
+name = "destination_account_differs_from_source"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 111122223333 is not the account that owns the source bucket {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}}"
 type = "binary"
 
 [[criterion]]
-name = "testanalyticsconfiguration_on_serverless_apps_s3"
+name = "only_cross_account_analytics_config"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 'testAnalyticsConfiguration' on {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} is the only analytics configuration that exports to a different account"
 type = "binary"
 

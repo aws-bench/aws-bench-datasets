@@ -8,32 +8,32 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_webacl_has_a_default_action_set_to_databases"
+name = "webacl_default_action_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The WebACL has a default action set to {{databases-and-storage-WAF-18b01a02d-us-east-1-WebAcldefaultAction}}"
 type = "binary"
 
 [[criterion]]
-name = "the_webacl_has_a_rate_limiting_rule_named_databa"
+name = "rate_limiting_rule_name_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The WebACL has a rate-limiting rule named {{databases-and-storage-WAF-18b01a02d-us-east-1-RuleName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_rate_limiting_rule_has_a_priority_of_databas"
+name = "rate_limiting_rule_priority_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The rate-limiting rule has a priority of {{databases-and-storage-WAF-18b01a02d-us-east-1-RulePriority}}"
 type = "binary"
 
 [[criterion]]
-name = "the_rate_limiting_rule_blocks_ip_addresses_excee"
+name = "rate_limit_threshold_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The rate-limiting rule blocks IP addresses exceeding {{databases-and-storage-WAF-18b01a02d-us-east-1-RuleRateLimit}} requests"
 type = "binary"
 
 [[criterion]]
-name = "the_web_acl_id_is_databases_and_storage_waf_18b0"
+name = "webacl_id_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Web ACL ID is {{databases-and-storage-WAF-18b01a02d-us-east-1-WebAclId}}"
 type = "binary"
 
 [[criterion]]
-name = "the_web_acl_arn_is_databases_and_storage_waf_18b"
+name = "webacl_arn_components_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Web ACL ARN is {{databases-and-storage-WAF-18b01a02d-us-east-1-WebAclArn}}. The instruction only asks to describe rule configuration, not to state the ARN as one assembled string -- credit this claim if the junior's answer contains all the components needed to construct the ARN (account, region, WebACL name/ID), even if never assembled into one literal ARN string."
 type = "binary"
 

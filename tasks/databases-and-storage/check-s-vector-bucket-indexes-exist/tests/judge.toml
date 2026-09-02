@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_first_index_databases_and_storage_s3_jayd5c4"
+name = "first_index_contains_vectors"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The first index {{databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex}} contains vectors"
 type = "binary"
 
 [[criterion]]
-name = "the_first_index_databases_and_storage_s3_jayd5c4_2"
+name = "first_index_has_three_documents"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The first index {{databases-and-storage-s3-jayd5c428-us-east-1-FirstVectorIndex}} contains 3 documents. The instruction only asks to check if vectors exist, not to state a document count or metadata -- credit this claim if the junior's answer confirms vectors exist in this index and does not contradict a count of 3, even if the junior never explicitly states the count."
 type = "binary"
 
 [[criterion]]
-name = "the_second_index_databases_and_storage_s3_jayd5c"
+name = "second_index_is_empty"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second index {{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}} is empty"
 type = "binary"
 
 [[criterion]]
-name = "no_vectors_exist_in_databases_and_storage_s3_jay"
+name = "second_index_lacks_vectors"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No vectors exist in {{databases-and-storage-s3-jayd5c428-us-east-1-SecondVectorIndex}}"
 type = "binary"
 

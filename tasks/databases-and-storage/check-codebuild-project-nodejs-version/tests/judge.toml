@@ -8,7 +8,7 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_node_js_version_configured_for_the_codebuild"
+name = "codebuild_project_node_version"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Node.js version configured for the CodeBuild project {{databases-and-storage-codebuild-g5etw5eu5-us-east-1-ProjectName}} is {{databases-and-storage-codebuild-g5etw5eu5-us-east-1-NodeVersion}}."
 type = "binary"
 

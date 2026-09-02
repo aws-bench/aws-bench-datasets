@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_container_image_used_by_the_service_in_the_e"
+name = "ecs_service_uses_windows_iis_image"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The container image used by the service in the ECS cluster {{serverless-apps-ECS-us-east-1-EcsClusterName}} is mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019"
 type = "binary"
 
 [[criterion]]
-name = "the_service_cannot_access_the_ecr_repository_my_"
+name = "service_cannot_access_ecr_repo"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The service cannot access the ECR repository my-ecr-repo"
 type = "binary"
 

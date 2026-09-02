@@ -8,17 +8,17 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "you_have_4b68864e_unusedsecuritygroupcount_unuse"
+name = "unused_security_group_count"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have {{4b68864e-UnusedSecurityGroupCount}} unused security groups"
 type = "binary"
 
 [[criterion]]
-name = "most_unused_security_groups_are_default_security"
+name = "unused_sgs_mostly_default"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Most unused security groups are default security groups automatically created for each VPC"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_one_of_the_unused_security_groups_i"
+name = "specific_unused_sg_in_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, one of the unused security groups is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-UnusedSecurityGroupId}}"
 type = "binary"
 

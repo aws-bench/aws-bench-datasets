@@ -8,47 +8,47 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "serverless_apps_s3storage_us_east_1_analyticsbuc"
+name = "analytics_bucket_block_public_acls_false"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} has BlockPublicAcls false"
 type = "binary"
 
 [[criterion]]
-name = "serverless_apps_s3storage_us_east_1_analyticsbuc_2"
+name = "analytics_bucket_ignore_public_acls_true"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} has IgnorePublicAcls true"
 type = "binary"
 
 [[criterion]]
-name = "serverless_apps_s3storage_us_east_1_analyticsbuc_3"
+name = "analytics_bucket_block_public_policy_true"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} has BlockPublicPolicy true"
 type = "binary"
 
 [[criterion]]
-name = "serverless_apps_s3storage_us_east_1_analyticsbuc_4"
+name = "analytics_bucket_restrict_public_buckets_true"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} has RestrictPublicBuckets true"
 type = "binary"
 
 [[criterion]]
-name = "every_bucket_other_than_serverless_apps_s3storag"
+name = "other_buckets_have_all_blocks_enabled"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Every bucket other than {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} has all four public access block settings (BlockPublicAcls, IgnorePublicAcls, BlockPublicPolicy, RestrictPublicBuckets) set to true"
 type = "binary"
 
 [[criterion]]
-name = "the_gap_in_serverless_apps_s3storage_us_east_1_a"
+name = "analytics_bucket_gap_does_not_expose"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The gap in {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} (BlockPublicAcls false while other settings are true) does not actually expose it to public access"
 type = "binary"
 
 [[criterion]]
-name = "ignorepublicacls_true_makes_s3_ignore_any_public"
+name = "ignore_public_acls_prevents_exposure"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): IgnorePublicAcls=true makes S3 ignore any public ACLs that BlockPublicAcls=false would otherwise allow. The instruction only asks whether the gap leaves the bucket exposed, not to enumerate every contributing setting -- credit this claim if the junior correctly concludes/explains the bucket is not exposed via any valid reasoning (e.g. citing Object Ownership settings, BlockPublicPolicy+RestrictPublicBuckets, or the settings as a whole), without requiring IgnorePublicAcls to be named specifically as the mechanism."
 type = "binary"
 
 [[criterion]]
-name = "blockpublicpolicy_true_plus_restrictpublicbucket"
+name = "policy_blocks_prevent_public_access"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the bucket's overall public-access-block configuration (despite BlockPublicAcls being false) prevents public access via bucket policy or access points. The instruction only asks whether the gap leaves the bucket exposed, not to enumerate every contributing setting -- credit this claim if the junior correctly concludes/explains the bucket is not exposed via any valid reasoning (e.g. citing IgnorePublicAcls, the absence of a bucket policy, or the settings as a whole), without requiring BlockPublicPolicy and RestrictPublicBuckets to be named specifically."
 type = "binary"
 
 [[criterion]]
-name = "none_of_the_buckets_currently_allow_public_acces"
+name = "no_buckets_allow_public_access"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): None of the buckets currently allow public access"
 type = "binary"
 

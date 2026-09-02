@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "databases_and_storage_s3_3kmc99rnc_us_east_1_buc"
+name = "bucket_1_contains_subdirectory_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket1Name}} contains folder structure {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}}"
 type = "binary"
 
 [[criterion]]
-name = "databases_and_storage_s3_3kmc99rnc_us_east_1_buc_2"
+name = "bucket_2_contains_subdirectory_2"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket2Name}} contains folder structure {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}}"
 type = "binary"
 
 [[criterion]]
-name = "the_file_content_in_databases_and_storage_s3_3km"
+name = "subdirectory_files_match_name_and_size"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The files in {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}} and {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}} are consistent with each other (matching name and size). The instruction only asks to compare structure and file sizes, not byte-level content -- do not require the junior to explicitly verify or state that file CONTENT is identical; matching file name and size (already covered by the size claim below) is sufficient evidence to satisfy this claim."
 type = "binary"
 
 [[criterion]]
-name = "the_file_size_in_both_databases_and_storage_s3_3"
+name = "file_size_is_14_bytes"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The file size in both {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}} and {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}} is 14 bytes"
 type = "binary"
 

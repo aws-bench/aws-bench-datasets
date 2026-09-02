@@ -8,7 +8,7 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "you_have_one_s3_bucket_with_lifecycle_policy_set"
+name = "bucket_has_lifecycle_policy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have one S3 bucket with lifecycle policy set named {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithLifeCycleRules}}."
 type = "binary"
 

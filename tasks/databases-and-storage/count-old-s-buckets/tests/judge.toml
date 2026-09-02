@@ -8,7 +8,7 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "you_have_c480b808_bucketcount_s3_buckets_that_we"
+name = "s3_buckets_older_than_one_day"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have {{c480b808-BucketCount}} S3 buckets that were created more than a day ago."
 type = "binary"
 

@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_csv_object_file_databases_and_storage_s3_jkd"
+name = "csv_object_exists_in_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The CSV object file {{databases-and-storage-s3-jkdf342er-us-east-1-ObjectName}} exists in S3 bucket {{databases-and-storage-s3-jkdf342er-us-east-1-BucketName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_contents_of_databases_and_storage_s3_jkdf342"
+name = "csv_object_contains_expected_data"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The contents of {{databases-and-storage-s3-jkdf342er-us-east-1-ObjectName}} are: Name,Age,City\\nJohn,25,New York\\nJane,30,London\\nBob,35,Paris"
 type = "binary"
 

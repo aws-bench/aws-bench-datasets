@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_dynamodb_table_named_databases_and_storage_d"
+name = "us_east_1_table_has_resource_policy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DynamoDB table named {{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy}} in the us-east-1 region has a resource-based policy"
 type = "binary"
 
 [[criterion]]
-name = "the_dynamodb_table_named_databases_and_storage_d_2"
+name = "us_west_2_table_has_resource_policy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DynamoDB table named {{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy}} in the us-west-2 region has a resource-based policy"
 type = "binary"
 

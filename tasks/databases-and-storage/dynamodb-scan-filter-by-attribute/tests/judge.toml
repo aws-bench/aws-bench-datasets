@@ -8,27 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_dynamodb_table_databases_and_storage_dynamod"
+name = "dynamodb_scan_completed_successfully"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DynamoDB table {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-TableName}} scan has been completed successfully"
 type = "binary"
 
 [[criterion]]
-name = "the_scan_retrieved_all_items_containing_the_spec"
+name = "scan_retrieved_specified_attributes"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The scan retrieved all items containing the specified attributes {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-AttributeNames}}"
 type = "binary"
 
 [[criterion]]
-name = "found_3_items_total_in_the_table"
+name = "found_three_items_total"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Found 3 items total in the table"
 type = "binary"
 
 [[criterion]]
-name = "1_item_with_status_inactive"
+name = "one_item_status_inactive"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 1 item with status \"inactive\""
 type = "binary"
 
 [[criterion]]
-name = "2_items_with_status_active"
+name = "two_items_status_active"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 2 items with status \"active\""
 type = "binary"
 

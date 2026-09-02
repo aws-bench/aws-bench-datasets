@@ -8,17 +8,17 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "ec2_multiregion_ec2_ks84v1fh12_us_east_1_launcht"
+name = "launch_template_instance_ssh_reachable"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} is SSH-reachable from the internet"
 type = "binary"
 
 [[criterion]]
-name = "ec2_multiregion_ec2_ks84v1fh12_us_east_1_instanc"
+name = "standalone_instance_ssh_reachable"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} is SSH-reachable from the internet"
 type = "binary"
 
 [[criterion]]
-name = "no_other_instances_besides_ec2_multiregion_ec2_k"
+name = "only_two_instances_ssh_reachable"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No other instances besides {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-LaunchTemplateInstanceId}} and {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-InstanceId}} are SSH-reachable from the internet"
 type = "binary"
 

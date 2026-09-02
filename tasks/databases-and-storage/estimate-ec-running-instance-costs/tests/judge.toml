@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_total_estimated_hourly_on_demand_cost_is_f62"
+name = "total_hourly_cost_matches"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The total estimated hourly on-demand cost is {{f6287f43-TotalHourlyCost}}"
 type = "binary"
 
 [[criterion]]
-name = "the_breakdown_by_instance_type_and_operating_sys"
+name = "breakdown_by_type_and_os_matches"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The breakdown by instance type and operating system is {{f6287f43-Breakdown}}"
 type = "binary"
 

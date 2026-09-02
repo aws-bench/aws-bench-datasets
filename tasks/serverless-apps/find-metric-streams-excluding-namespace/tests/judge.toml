@@ -8,7 +8,7 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_metric_stream_serverless_apps_monitoring_us_"
+name = "metric_stream_excludes_ec2_metrics"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The metric stream {{serverless-apps-Monitoring-us-east-1-MetricStreamName}} excludes the metrics CPUUtilization, NetworkIn, NetworkOut, DiskReadBytes, and DiskWriteBytes from the AWS/EC2 namespace."
 type = "binary"
 

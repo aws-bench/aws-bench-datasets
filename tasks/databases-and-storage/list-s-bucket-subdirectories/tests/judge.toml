@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "databases_and_storage_s3_eor38cdr9_us_east_1_sub"
+name = "subdirectory_exists_in_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{databases-and-storage-s3-eor38cdr9-us-east-1-SubDirectoryName}} is an immediate subdirectory in the S3 bucket {{databases-and-storage-s3-eor38cdr9-us-east-1-BucketName}}"
 type = "binary"
 
 [[criterion]]
-name = "databases_and_storage_s3_eor38cdr9_us_east_1_sub_2"
+name = "subdirectory_is_only_immediate_child"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{databases-and-storage-s3-eor38cdr9-us-east-1-SubDirectoryName}} is the only immediate subdirectory in the S3 bucket {{databases-and-storage-s3-eor38cdr9-us-east-1-BucketName}}"
 type = "binary"
 
