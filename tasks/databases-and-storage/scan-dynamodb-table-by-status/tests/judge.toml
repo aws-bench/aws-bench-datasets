@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_dynamodb_table_databases_and_storage_dynamod"
+name = "dynamodb_table_retrieved_five_records"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DynamoDB table {{databases-and-storage-dynamodb-kdf231sdf-us-east-1-TableName}} retrieved 5 records"
 type = "binary"
 
 [[criterion]]
-name = "the_retrieved_records_have_statuses_including_ac"
+name = "retrieved_records_include_four_statuses"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The retrieved records have statuses including active, inactive, pending, and suspended users"
 type = "binary"
 

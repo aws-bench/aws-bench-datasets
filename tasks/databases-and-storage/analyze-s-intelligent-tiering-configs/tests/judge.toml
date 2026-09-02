@@ -8,17 +8,17 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "you_have_two_s3_buckets_without_intelligent_tier"
+name = "two_buckets_lack_intelligent_tiering"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have two S3 buckets without Intelligent-Tiering configurations currently in your account"
 type = "binary"
 
 [[criterion]]
-name = "one_s3_bucket_without_intelligent_tiering_config"
+name = "bucket_1_lacks_intelligent_tiering"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): One S3 bucket without Intelligent-Tiering configuration is named {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations1}}"
 type = "binary"
 
 [[criterion]]
-name = "one_s3_bucket_without_intelligent_tiering_config_2"
+name = "bucket_2_lacks_intelligent_tiering"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): One S3 bucket without Intelligent-Tiering configuration is named {{databases-and-storage-S3-18475e2fc-us-east-1-S3BucketWithoutIntelligentTieringConfigurations2}}"
 type = "binary"
 

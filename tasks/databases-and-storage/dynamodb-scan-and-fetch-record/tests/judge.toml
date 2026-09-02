@@ -8,32 +8,32 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_scan_of_dynamodb_table_databases_and_storage"
+name = "table_scan_returned_20_items"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The scan of DynamoDB table {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName}} returned 20 items"
 type = "binary"
 
 [[criterion]]
-name = "the_record_with_contentid_databases_and_storage_"
+name = "record_has_task_id_task012"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The record with ContentId {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}} has TaskId TASK012"
 type = "binary"
 
 [[criterion]]
-name = "the_record_with_contentid_databases_and_storage__2"
+name = "record_has_database_backup_description"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The record with ContentId {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}} has Description 'Database backup'"
 type = "binary"
 
 [[criterion]]
-name = "the_record_with_contentid_databases_and_storage__3"
+name = "record_has_low_priority"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The record with ContentId {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}} has Priority LOW"
 type = "binary"
 
 [[criterion]]
-name = "the_record_with_contentid_databases_and_storage__4"
+name = "record_has_blocked_status"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The record with ContentId {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}} has TaskStatus BLOCKED"
 type = "binary"
 
 [[criterion]]
-name = "the_record_with_contentid_databases_and_storage__5"
+name = "record_assigned_to_user4"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The record with ContentId {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-ContentId}} is assigned to user4@example.com"
 type = "binary"
 

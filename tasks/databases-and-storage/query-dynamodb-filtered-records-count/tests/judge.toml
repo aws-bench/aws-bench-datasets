@@ -8,7 +8,7 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "there_are_databases_and_storage_dynamodb_tk2o3ja"
+name = "records_have_empty_tag_and_nonzero_resolvedat"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are {{databases-and-storage-dynamodb-tk2o3jasd-us-east-1-RecordCount}} records with an empty tag field and a ResolvedAt value greater than zero in the DynamoDB table {{databases-and-storage-dynamodb-tk2o3jasd-us-east-1-TableName}}"
 type = "binary"
 

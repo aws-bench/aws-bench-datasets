@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_bucket_serverless_apps_s3storage_us_east_1_m"
+name = "bucket_uses_tag_filters"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket {{serverless-apps-S3Storage-us-east-1-MetricsBucketName}} uses tag filters."
 type = "binary"
 
 [[criterion]]
-name = "no_downstream_resources_consume_this_tag_filtere"
+name = "no_alarms_consume_tag_filtered_metrics"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No downstream resources consume this tag-filtered metrics to create alarms."
 type = "binary"
 

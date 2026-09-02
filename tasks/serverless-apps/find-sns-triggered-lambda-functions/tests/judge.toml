@@ -8,7 +8,7 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "serverless_apps_lambdamisc_us_east_1_connectedla"
+name = "lambda_triggered_by_sns_topic"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-LambdaMisc-us-east-1-ConnectedLambdaName}} is triggered by SNS topic {{serverless-apps-LambdaMisc-us-east-1-ConnectedSNSTopicName}}"
 type = "binary"
 

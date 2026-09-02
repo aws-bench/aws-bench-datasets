@@ -8,17 +8,17 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_csv_file_has_6_columns_product_id_name_categ"
+name = "csv_has_six_columns"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The CSV file has 6 columns: product_id, name, category, price, stock, and description."
 type = "binary"
 
 [[criterion]]
-name = "columns_with_all_unique_values_product_id_name_p"
+name = "five_columns_have_unique_values"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Columns with all unique values: product_id, name, price, stock, and description."
 type = "binary"
 
 [[criterion]]
-name = "column_with_duplicate_values_category_e_g_electr"
+name = "category_column_has_duplicates"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Column with duplicate values: category (e.g., 'Electronics' appears more than once)."
 type = "binary"
 

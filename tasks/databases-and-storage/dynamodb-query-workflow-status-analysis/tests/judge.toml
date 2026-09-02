@@ -8,42 +8,42 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "record_with_id_web_003_has_workflowid_wf_alpha_a"
+name = "web_003_has_wf_alpha_completed"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Record with id=web-003 has workflowId=wf-alpha and status=completed"
 type = "binary"
 
 [[criterion]]
-name = "record_with_id_web_001_has_workflowid_wf_alpha_a"
+name = "web_001_has_wf_alpha_completed"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Record with id=web-001 has workflowId=wf-alpha and status=completed"
 type = "binary"
 
 [[criterion]]
-name = "record_with_id_web_002_has_workflowid_wf_beta_an"
+name = "web_002_has_wf_beta_processing"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Record with id=web-002 has workflowId=wf-beta and status=processing"
 type = "binary"
 
 [[criterion]]
-name = "2_records_have_status_completed"
+name = "two_records_completed_status"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 2 records have status \"completed\""
 type = "binary"
 
 [[criterion]]
-name = "3_total_records_scanned"
+name = "three_total_records_scanned"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 3 total records scanned. The instruction only asks for sample records, the completed-status count, and the unique workflow ID list -- it does not ask for an explicit total-scanned count. Credit this claim if the junior's shown records/answer are consistent with a total of 3 and do not contradict it, even if the junior never explicitly states the total."
 type = "binary"
 
 [[criterion]]
-name = "wf_alpha_appears_2_times"
+name = "wf_alpha_appears_twice"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): wf-alpha appears 2 times. The instruction only asks for the list of unique workflow IDs, not their frequency counts -- credit this claim if the junior's shown sample records are consistent with wf-alpha appearing 2 times and do not contradict it, even if the junior never explicitly restates the count."
 type = "binary"
 
 [[criterion]]
-name = "wf_beta_appears_1_time"
+name = "wf_beta_appears_once"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): wf-beta appears 1 time. The instruction only asks for the list of unique workflow IDs, not their frequency counts -- credit this claim if the junior's shown sample records are consistent with wf-beta appearing 1 time and do not contradict it, even if the junior never explicitly restates the count."
 type = "binary"
 
 [[criterion]]
-name = "the_table_contains_2_unique_workflow_ids"
+name = "two_unique_workflow_ids"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table contains 2 unique workflow IDs"
 type = "binary"
 

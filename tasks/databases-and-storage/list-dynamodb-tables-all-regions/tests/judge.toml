@@ -8,82 +8,82 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "there_are_12_tables_currently_active_in_dynamodb"
+name = "us_east_1_has_12_tables"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are 12 tables currently active in DynamoDB in the us-east-1 region"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases_"
+name = "us_east_1_includes_dynamodbtablename"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-ge54tw65t-us-east-1-DynamoDBTableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__2"
+name = "us_east_1_includes_tablename_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-tk2o3jasd-us-east-1-TableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__3"
+name = "us_east_1_includes_tablename_2"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-ghjk456ad-us-east-1-TableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__4"
+name = "us_east_1_includes_inventorytablename"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-InventoryTableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__5"
+name = "us_east_1_includes_orderstablename"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-OrdersTableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__6"
+name = "us_east_1_includes_tablename_3"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-gsdf23tr4-us-east-1-TableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__7"
+name = "us_east_1_includes_tablename_4"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-kdf231sdf-us-east-1-TableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__8"
+name = "us_east_1_includes_productstablename"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-ProductsTableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__9"
+name = "us_east_1_includes_cfn_dynamodbtablename"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-CFN-ax9w8fhs7-us-east-1-DynamoDBTableName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__10"
+name = "us_east_1_includes_tablewithstream"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableWithStream}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__11"
+name = "us_east_1_includes_tablewithpolicy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-east-1-DynamoDBTableTableWithPolicy}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_east_1_dynamodb_tables_include_databases__12"
+name = "us_east_1_includes_userstablename"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-east-1 DynamoDB tables include {{databases-and-storage-dynamodb-adhk146bg-us-east-1-UsersTableName}}"
 type = "binary"
 
 [[criterion]]
-name = "there_are_2_tables_in_us_west_2"
+name = "us_west_2_has_2_tables"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are 2 tables in us-west-2"
 type = "binary"
 
 [[criterion]]
-name = "the_us_west_2_dynamodb_tables_include_databases_"
+name = "us_west_2_includes_tablewithstream"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-west-2 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableWithStream}}"
 type = "binary"
 
 [[criterion]]
-name = "the_us_west_2_dynamodb_tables_include_databases__2"
+name = "us_west_2_includes_tablewithpolicy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The us-west-2 DynamoDB tables include {{databases-and-storage-DynamoDB-a9d78fhs7-us-west-2-DynamoDBTableTableWithPolicy}}"
 type = "binary"
 

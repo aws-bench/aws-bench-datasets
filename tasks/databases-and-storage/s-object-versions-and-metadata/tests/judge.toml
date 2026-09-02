@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_most_recently_modified_object_is_898c7f19_mo"
+name = "most_recent_object_key"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recently modified object is `{{898c7f19-MostRecentKey}}`"
 type = "binary"
 
 [[criterion]]
-name = "the_most_recently_modified_object_has_version_id"
+name = "most_recent_object_version_id"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recently modified object has version ID `{{898c7f19-MostRecentVersionId}}`"
 type = "binary"
 
 [[criterion]]
-name = "the_object_prod_data_txt_has_version_id_898c7f19"
+name = "prod_data_version_id"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The object `prod_data.txt` has version ID `{{898c7f19-ProdDataVersionId}}`"
 type = "binary"
 
 [[criterion]]
-name = "the_object_prod_data_txt_is_898c7f19_proddatasiz"
+name = "prod_data_size_bytes"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The object `prod_data.txt` is {{898c7f19-ProdDataSizeBytes}} bytes"
 type = "binary"
 

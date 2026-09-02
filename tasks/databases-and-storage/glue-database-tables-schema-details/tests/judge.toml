@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_database_databases_and_storage_athena_ton59i"
+name = "database_contains_one_table"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The database {{databases-and-storage-athena-ton59ib3f-us-east-1-DatabaseName}} contains one table: andes_3_0_data"
 type = "binary"
 
 [[criterion]]
-name = "the_table_andes_3_0_data_has_3_columns_id_bigint"
+name = "table_has_three_columns"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table andes_3_0_data has 3 columns: id (bigint), name (string), and created_date (date)"
 type = "binary"
 
 [[criterion]]
-name = "the_table_andes_3_0_data_is_an_external_table"
+name = "table_is_external_type"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table andes_3_0_data is an EXTERNAL_TABLE (i.e. its data is stored externally in S3 rather than managed internally by Glue). The junior does not need to use the literal term 'EXTERNAL_TABLE' -- stating that the table's data or location is in S3 is equivalent evidence and is sufficient to satisfy this claim."
 type = "binary"
 
 [[criterion]]
-name = "the_table_andes_3_0_data_has_data_stored_in_s3"
+name = "table_data_stored_in_s3"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table andes_3_0_data has data stored in S3"
 type = "binary"
 

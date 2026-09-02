@@ -8,27 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "serverless_apps_ecs_us_east_1_ecsservicename_has"
+name = "service_desired_task_count_is_two"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-ECS-us-east-1-EcsServiceName}} has a desired task count of 2"
 type = "binary"
 
 [[criterion]]
-name = "serverless_apps_ecs_us_east_1_ecsservicename_has_2"
+name = "service_has_public_ip_enabled"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-ECS-us-east-1-EcsServiceName}} has public IP assignment enabled"
 type = "binary"
 
 [[criterion]]
-name = "serverless_apps_ecs_us_east_1_ecsservicename_use"
+name = "service_uses_windows_platform"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-ECS-us-east-1-EcsServiceName}} uses a Windows Server 2019 Full platform, and this is a non-default/customized setting (Fargate's default operating system family is Linux). The instruction specifically asks to check for custom/non-default configurations, so merely stating the platform as a neutral fact (e.g. listing it only under a 'current state' heading, with no indication it is a deviation from default) does NOT satisfy this claim -- credit it only if the junior's answer identifies or treats this platform choice as a customization/deviation from default."
 type = "binary"
 
 [[criterion]]
-name = "serverless_apps_ecs_us_east_1_ecsservicename_has_3"
+name = "service_health_check_grace_sixty_seconds"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-ECS-us-east-1-EcsServiceName}} has a health check grace period of 60 seconds"
 type = "binary"
 
 [[criterion]]
-name = "serverless_apps_ecs_us_east_1_ecsservicename_has_4"
+name = "service_minimum_healthy_percent_fifty"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{serverless-apps-ECS-us-east-1-EcsServiceName}} has minimumHealthyPercent set to 50"
 type = "binary"
 
