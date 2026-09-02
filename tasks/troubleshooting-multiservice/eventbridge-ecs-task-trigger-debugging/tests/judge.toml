@@ -8,47 +8,47 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_eventbridge_rule_troubleshooting_multiservic"
+name = "eventbridge_rule_has_two_issues"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EventBridge rule {{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-EventBridgeRuleName}} has two issues preventing it from working."
 type = "binary"
 
 [[criterion]]
-name = "no_resources_exist_in_ap_southeast_7"
+name = "ap_southeast_7_has_no_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No resources exist in ap-southeast-7."
 type = "binary"
 
 [[criterion]]
-name = "the_ecs_task_definition_has_a_hardcoded_s3_locat"
+name = "task_definition_references_nonexistent_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS task definition has a hardcoded S3_LOCATION environment variable pointing to a bucket that does not exist in this account."
 type = "binary"
 
 [[criterion]]
-name = "the_task_role_only_has_s3_read_permissions_for_t"
+name = "task_role_limited_to_deployment_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task role only has S3 read permissions for {{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-DeploymentBucketName}}."
 type = "binary"
 
 [[criterion]]
-name = "when_the_task_runs_it_will_fail_with_access_deni"
+name = "task_fails_with_access_denied"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When the task runs it will fail with access denied."
 type = "binary"
 
 [[criterion]]
-name = "the_s3_location_path_is_a_literal_string_in_the_"
+name = "s3_location_hardcoded_in_template"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3_LOCATION path is a literal string in the CloudFormation template, so redeploying the stack doesn't fix it."
 type = "binary"
 
 [[criterion]]
-name = "the_eventbridge_rule_target_is_troubleshooting_m"
+name = "rule_targets_specific_task_definition"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EventBridge rule target is {{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-TaskDefinitionArn}}."
 type = "binary"
 
 [[criterion]]
-name = "any_code_changes_you_deploy_create_a_new_revisio"
+name = "rule_invokes_pinned_revision"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Any code changes you deploy create a new revision, but the rule keeps invoking the pinned revision."
 type = "binary"
 
 [[criterion]]
-name = "there_are_no_eventbridge_rules_ecs_clusters_or_t"
+name = "ap_southeast_7_lacks_deployed_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are no EventBridge rules, ECS clusters, or task definitions deployed in ap-southeast-7."
 type = "binary"
 

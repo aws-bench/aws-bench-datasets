@@ -8,47 +8,47 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "eni_attachment_for_instances_in_troubleshooting_"
+name = "eni_attachment_fails_two_issues"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): ENI attachment for instances in {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-AutoScalingGroupName}} fails due to two issues"
 type = "binary"
 
 [[criterion]]
-name = "the_asg_troubleshooting_multiservice_ec2_nx19kzw"
+name = "asg_has_customer_sg_tag"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ASG {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-AutoScalingGroupName}} has a tag Customer-SG with value {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSGTagValue}}"
 type = "binary"
 
 [[criterion]]
-name = "the_asg_troubleshooting_multiservice_ec2_nx19kzw_2"
+name = "asg_has_customer_subnet_tag"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ASG {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-AutoScalingGroupName}} has a tag Customer-Subnet with value {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSubnetTagValue}}"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ec2_nx19kzwoj_us_we"
+name = "tagged_security_group_not_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSGTagValue}} does not exist"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ec2_nx19kzwoj_us_we_2"
+name = "tagged_subnet_not_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSubnetTagValue}} does not exist"
 type = "binary"
 
 [[criterion]]
-name = "the_actual_customer_security_group_is_troublesho"
+name = "actual_customer_sg_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The actual customer security group is {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSecurityGroupId}}"
 type = "binary"
 
 [[criterion]]
-name = "the_actual_customer_subnet_is_troubleshooting_mu"
+name = "actual_customer_subnet_identified"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The actual customer subnet is {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSubnetId}}"
 type = "binary"
 
 [[criterion]]
-name = "the_instance_role_troubleshooting_multiservice_e"
+name = "role_has_only_secrets_permissions"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance role {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-InstanceRoleName}} only has Secrets Manager permissions"
 type = "binary"
 
 [[criterion]]
-name = "the_instance_role_troubleshooting_multiservice_e_2"
+name = "role_lacks_ec2_eni_permissions"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance role {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-InstanceRoleName}} is missing EC2 permissions needed to manage network interfaces, such as ec2:CreateNetworkInterface, ec2:CreateNetworkInterfacePermission, ec2:DescribeNetworkInterfaces, ec2:DescribeSubnets, and ec2:DescribeSecurityGroups"
 type = "binary"
 

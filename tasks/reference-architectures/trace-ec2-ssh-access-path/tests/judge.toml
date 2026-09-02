@@ -8,47 +8,47 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_instance_has_a_public_ip"
+name = "instance_has_public_ip"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance has a public IP."
 type = "binary"
 
 [[criterion]]
-name = "the_instance_has_two_security_groups_attached"
+name = "instance_has_two_security_groups"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance has two security groups attached."
 type = "binary"
 
 [[criterion]]
-name = "the_ec2instancesg_has_no_ingress_rules_at_all"
+name = "ec2instancesg_has_no_ingress_rules"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Ec2InstanceSG has no ingress rules at all."
 type = "binary"
 
 [[criterion]]
-name = "the_ec2sshsecuritygroup_has_a_single_ingress_rul"
+name = "ssh_sg_allows_port_22_from_vpc_cidr"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Ec2SshSecurityGroup has a single ingress rule allowing TCP port 22 from 10.0.0.0/16 (the VPC CIDR)."
 type = "binary"
 
 [[criterion]]
-name = "the_instance_sits_in_a_public_subnet"
+name = "instance_in_public_subnet"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance sits in a public subnet."
 type = "binary"
 
 [[criterion]]
-name = "the_ssh_security_group_restricts_port_22_to_the_"
+name = "ssh_sg_blocks_external_connections"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SSH security group restricts port 22 to the VPC CIDR (10.0.0.0/16), not 0.0.0.0/0, so packets arriving at port 22 from any non-VPC source are dropped by the security group, preventing external SSH even though the instance has a public IP."
 type = "binary"
 
 [[criterion]]
-name = "the_instance_iam_role_has_amazonssmmanagedinstan"
+name = "instance_role_has_ssm_policy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance IAM role has AmazonSSMManagedInstanceCore attached."
 type = "binary"
 
 [[criterion]]
-name = "ssm_session_manager_reaches_the_instance_without"
+name = "ssm_session_manager_works"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SSM Session Manager reaches the instance without needing any security group ingress rule, so `aws ssm start-session --target {{reference-architectures-EC2-instance-us-east-1-InstanceId}}` works."
 type = "binary"
 
 [[criterion]]
-name = "the_recommended_solution_is_to_use_ssm_session_m"
+name = "recommended_solution_uses_ssm"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The recommended solution is to use SSM Session Manager, not direct SSH."
 type = "binary"
 

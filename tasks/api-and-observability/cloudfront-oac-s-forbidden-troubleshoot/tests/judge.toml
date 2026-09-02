@@ -8,52 +8,52 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_s3_bucket_policy_for_api_and_observability_c"
+name = "bucket_policy_lacks_oac_grant"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 bucket policy for {{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}} does not grant CloudFront OAC access."
 type = "binary"
 
 [[criterion]]
-name = "the_s3_bucket_policy_for_api_and_observability_c_2"
+name = "bucket_policy_denies_non_ssl"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 bucket policy for {{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}} contains a Deny statement for non-SSL traffic."
 type = "binary"
 
 [[criterion]]
-name = "the_s3_bucket_policy_for_api_and_observability_c_3"
+name = "bucket_policy_lacks_cloudfront_principal"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 bucket policy for {{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}} has no Allow statement for the cloudfront.amazonaws.com service principal conditioned on the distribution ARN."
 type = "binary"
 
 [[criterion]]
-name = "oac_api_and_observability_cloudfront_laljfb348_u"
+name = "oac_attached_signs_sigv4"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OAC {{api-and-observability-cloudfront-laljfb348-us-east-1-OACId}} is attached and signs requests with SigV4."
 type = "binary"
 
 [[criterion]]
-name = "s3_rejects_requests_because_no_bucket_policy_per"
+name = "s3_rejects_unpermitted_requests"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): S3 rejects requests because no bucket policy permits them."
 type = "binary"
 
 [[criterion]]
-name = "the_distribution_is_configured_in_tenant_only_co"
+name = "distribution_tenant_only_mode"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution is configured in tenant-only connection mode."
 type = "binary"
 
 [[criterion]]
-name = "the_distribution_has_zero_distribution_tenants_c"
+name = "distribution_has_zero_tenants"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution has zero distribution tenants created."
 type = "binary"
 
 [[criterion]]
-name = "there_is_no_tenant_configuration_to_route_reques"
+name = "no_tenant_config_exists"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is no tenant configuration to route requests through."
 type = "binary"
 
 [[criterion]]
-name = "the_missing_bucket_policy_grant_is_the_primary_i"
+name = "bucket_policy_grant_primary_issue"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The missing bucket policy grant is the primary issue."
 type = "binary"
 
 [[criterion]]
-name = "even_with_tenants_configured_requests_would_stil"
+name = "failure_persists_without_policy_grant"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Even with tenants configured, requests would still fail without the bucket policy grant."
 type = "binary"
 

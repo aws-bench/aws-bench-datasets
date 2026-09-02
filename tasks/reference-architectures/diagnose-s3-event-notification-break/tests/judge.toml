@@ -8,72 +8,72 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_bucket_reference_architectures_s3_eventnotif"
+name = "bucket_has_zero_notification_configs"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket {{reference-architectures-S3-eventnotif-us-east-1-BucketName}} has ZERO notification configurations deployed."
 type = "binary"
 
 [[criterion]]
-name = "both_custom_resources_samplebucketnotificationa_"
+name = "both_custom_resources_report_create_complete"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Both custom resources SampleBucketNotificationA and SampleBucketNotificationB report CREATE_COMPLETE."
 type = "binary"
 
 [[criterion]]
-name = "the_sqs_queue_policy_allows_s3_amazonaws_com_sen"
+name = "sqs_policy_allows_s3_sendmessage"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SQS queue policy allows s3.amazonaws.com:SendMessage with aws:SourceArn=<bucket> (i.e. the SQS policy is NOT the cause of the break). If the junior's overall diagnosis concludes the root cause lies elsewhere (not in S3/SQS/SNS or their policies) without stating the specific grant text, that conclusion already implies this claim -- do not fail it solely for not restating the specific policy grant when the junior's ruling-out conclusion is correct."
 type = "binary"
 
 [[criterion]]
-name = "the_sns_topic_policy_allows_sns_publish_with_aws"
+name = "sns_policy_allows_s3_publish"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SNS topic policy allows sns:Publish with aws:SourceArn=<bucket> (i.e. the SNS policy is NOT the cause of the break). If the junior's overall diagnosis concludes the root cause lies elsewhere (not in S3/SQS/SNS or their policies) without stating the specific grant text, that conclusion already implies this claim -- do not fail it solely for not restating the specific policy grant when the junior's ruling-out conclusion is correct."
 type = "binary"
 
 [[criterion]]
-name = "the_root_cause_is_in_the_notificationmanager_cus"
+name = "root_cause_in_lambda_handler"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is in the NotificationManager custom resource handler ({{reference-architectures-S3-eventnotif-us-east-1-FunctionName}})."
 type = "binary"
 
 [[criterion]]
-name = "the_notificationmanager_lambda_s_mergeconfigurat"
+name = "merge_only_iterates_current_config_keys"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The NotificationManager Lambda's mergeConfigurations function is: for each key in Object.entries(currentConfig): copy value, then if inputConfig[key] exists concat it."
 type = "binary"
 
 [[criterion]]
-name = "at_first_deploy_the_bucket_had_no_prior_notifica"
+name = "bucket_had_no_prior_notification_config"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): At first deploy, the bucket had no prior notification configuration."
 type = "binary"
 
 [[criterion]]
-name = "object_entries_of_an_empty_object_yields_no_iter"
+name = "empty_object_entries_yields_no_iterations"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Object.entries of an empty object yields no iterations, so mergedConfig stays `{}` regardless of what's in inputConfig."
 type = "binary"
 
 [[criterion]]
-name = "the_inputconfig_contained_the_new_queueconfigura"
+name = "input_config_contained_new_configurations"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The inputConfig contained the new QueueConfiguration/TopicConfiguration."
 type = "binary"
 
 [[criterion]]
-name = "the_handler_calls_putbucketnotificationconfigura"
+name = "handler_calls_put_with_empty_body"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler calls PutBucketNotificationConfiguration with an empty body."
 type = "binary"
 
 [[criterion]]
-name = "the_custom_resource_returns_physicalresourceid_n"
+name = "custom_resource_returns_physical_id_normally"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The custom resource returns PhysicalResourceId normally, so CloudFormation marks it CREATE_COMPLETE."
 type = "binary"
 
 [[criterion]]
-name = "the_second_custom_resource_samplebucketnotificat"
+name = "second_custom_resource_repeats_same_behavior"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second custom resource (SampleBucketNotificationB) runs against the same empty current config and does the same thing."
 type = "binary"
 
 [[criterion]]
-name = "the_net_effect_is_that_bucket_notifications_are_"
+name = "notifications_never_installed_despite_clean_stack"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The net effect is that bucket notifications are never installed despite a clean stack."
 type = "binary"
 
 [[criterion]]
-name = "the_fix_is_either_to_seed_mergedconfig_from_inpu"
+name = "fix_seed_from_input_or_use_native_cfn"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The fix is either to seed mergedConfig from inputConfig's keys too (so keys present only in the new input still get applied) or to switch to the native CDK/CFN bucket notification (which uses a different merge strategy)."
 type = "binary"
 

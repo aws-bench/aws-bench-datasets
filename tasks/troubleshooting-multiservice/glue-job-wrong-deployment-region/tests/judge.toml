@@ -8,32 +8,32 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "basaltdataanalyzer_rolereport_isn_t_in_troublesh"
+name = "glue_job_missing_from_expected_region"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): BasaltDataAnalyzer-RoleReport isn't in {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}} at all"
 type = "binary"
 
 [[criterion]]
-name = "basaltdataanalyzer_rolereport_deployed_to_troubl"
+name = "glue_job_deployed_to_wrong_region"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): BasaltDataAnalyzer-RoleReport deployed to {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} as {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_cause_is_that_its_cloudformation_stack_was_d"
+name = "cloudformation_stack_deployed_wrong_region"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cause is that its CloudFormation stack was deployed to the wrong region"
 type = "binary"
 
 [[criterion]]
-name = "a_glue_job_is_regional_and_can_t_be_moved_in_pla"
+name = "glue_job_regional_cannot_move"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A Glue job is regional and can't be moved in place"
 type = "binary"
 
 [[criterion]]
-name = "the_glue_job_depends_on_the_iam_role_and_s3_buck"
+name = "glue_job_depends_on_stack_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue job depends on the IAM role and S3 buckets the same stack created alongside it"
 type = "binary"
 
 [[criterion]]
-name = "getting_it_into_troubleshooting_multiservice_glu"
+name = "fix_requires_redeploying_entire_stack"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Getting it into {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}} means redeploying the whole stack there, not just recreating the job, then tearing down the {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} stack if unwanted"
 type = "binary"
 

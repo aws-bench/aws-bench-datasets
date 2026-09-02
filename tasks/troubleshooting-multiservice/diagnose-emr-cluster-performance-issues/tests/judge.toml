@@ -8,67 +8,67 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "no_spark_steps_have_been_submitted_to_the_cluste"
+name = "no_spark_steps_submitted"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No Spark steps have been submitted to the cluster, so no job is currently running."
 type = "binary"
 
 [[criterion]]
-name = "spark_driver_memory_is_set_to_60g_in_the_spark_d"
+name = "driver_memory_set_to_60g"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.driver.memory is set to 60G in the spark-defaults configuration."
 type = "binary"
 
 [[criterion]]
-name = "the_m5_2xlarge_instance_has_total_memory_of_32_g"
+name = "m5_2xlarge_has_32gb_memory"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The m5.2xlarge instance has total memory of 32 GB."
 type = "binary"
 
 [[criterion]]
-name = "spark_driver_memory_of_60g_exceeds_the_total_mem"
+name = "driver_memory_exceeds_instance_capacity"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.driver.memory of 60G exceeds the total memory of an m5.2xlarge instance (32 GB), which would prevent the driver from launching at all."
 type = "binary"
 
 [[criterion]]
-name = "spark_executor_instances_is_set_to_425_in_the_sp"
+name = "executor_instances_set_to_425"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.executor.instances is set to 425 in the spark-defaults configuration."
 type = "binary"
 
 [[criterion]]
-name = "spark_executor_memory_is_set_to_20g_in_the_spark"
+name = "executor_memory_set_to_20g"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.executor.memory is set to 20G in the spark-defaults configuration."
 type = "binary"
 
 [[criterion]]
-name = "spark_yarn_executor_memoryoverhead_is_set_to_3g_"
+name = "executor_memory_overhead_set_to_3g"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.yarn.executor.memoryOverhead is set to 3G in the spark-defaults configuration."
 type = "binary"
 
 [[criterion]]
-name = "the_core_instance_fleet_targets_only_1_m5_2xlarg"
+name = "core_fleet_targets_one_instance"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The core instance fleet targets only 1 m5.2xlarge instance."
 type = "binary"
 
 [[criterion]]
-name = "with_23_gb_per_executor_and_the_core_instance_fl"
+name = "insufficient_capacity_for_executors"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With 23 GB per executor and the core instance fleet targeting only 1 m5.2xlarge instance (32 GB), YARN could provision at most 1 executor, leaving the remaining 424 requested executors never allocated and the vast majority of Spark tasks waiting indefinitely."
 type = "binary"
 
 [[criterion]]
-name = "spark_dynamicallocation_enabled_is_false_in_the_"
+name = "dynamic_allocation_disabled"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.dynamicAllocation.enabled is false in the spark-defaults configuration."
 type = "binary"
 
 [[criterion]]
-name = "with_spark_dynamicallocation_enabled_set_to_fals"
+name = "cannot_scale_executor_count"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With spark.dynamicAllocation.enabled set to false, Spark cannot scale the executor count down to match actual cluster capacity."
 type = "binary"
 
 [[criterion]]
-name = "spark_sql_shuffle_partitions_is_set_to_3000_in_t"
+name = "shuffle_partitions_set_to_3000"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.sql.shuffle.partitions is set to 3000 in the spark-defaults configuration."
 type = "binary"
 
 [[criterion]]
-name = "spark_sql_shuffle_partitions_of_3000_adds_unnece"
+name = "shuffle_partitions_add_overhead"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.sql.shuffle.partitions of 3000 adds unnecessary scheduling overhead relative to the 1 available executor."
 type = "binary"
 

@@ -8,57 +8,57 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_alarm_reference_architectures_transfer_sftp_"
+name = "alarm_watches_custom_sftp_errors_metric"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{reference-architectures-Transfer-sftp-us-east-1-AlarmName}} watches a custom metric SftpErrors in namespace SFTP/Transfer."
 type = "binary"
 
 [[criterion]]
-name = "a_metric_filter_on_log_group_reference_architect"
+name = "metric_filter_increments_on_error_string"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A metric filter on log group {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}} increments the SftpErrors metric on the literal string \"ERROR\"."
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_triggers_on_sum_1"
+name = "alarm_triggers_on_sum_threshold"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm triggers on Sum >= 1."
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_has_treatmissingdata_notbreaching"
+name = "alarm_treats_missing_data_not_breaching"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm has TreatMissingData=notBreaching."
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_never_fires_because_log_group_referenc"
+name = "log_group_receives_no_data"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm never fires because log group {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}} receives no data."
 type = "binary"
 
 [[criterion]]
-name = "the_transfer_server_uses_a_legacy_loggingrole_wi"
+name = "server_uses_legacy_logging_role"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Transfer server uses a legacy loggingRole with no structuredLogDestinations."
 type = "binary"
 
 [[criterion]]
-name = "aws_transfer_family_logs_to_the_service_managed_"
+name = "logs_route_to_service_managed_group"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AWS Transfer Family logs to the service-managed group /aws/transfer/<server-id>, not {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}}, because the server uses a legacy loggingRole with no structuredLogDestinations."
 type = "binary"
 
 [[criterion]]
-name = "with_nothing_published_to_sftperrors_the_alarm_s"
+name = "alarm_stays_insufficient_data_state"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With nothing published to SftpErrors, the alarm stays in INSUFFICIENT_DATA (treated as OK) and cannot reach ALARM from real errors."
 type = "binary"
 
 [[criterion]]
-name = "alarmactions_is_empty"
+name = "alarm_actions_empty"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AlarmActions is empty."
 type = "binary"
 
 [[criterion]]
-name = "even_if_the_alarm_did_fire_no_one_would_be_notif"
+name = "no_notification_configured"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Even if the alarm did fire, no one would be notified because AlarmActions is empty."
 type = "binary"
 
 [[criterion]]
-name = "to_fix_route_the_server_s_logs_to_reference_arch"
+name = "fix_requires_log_routing_and_sns"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To fix, route the server's logs to {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}} (add structuredLogDestinations, or repoint the metric filter to /aws/transfer/<server-id>) so ERROR events increment SftpErrors, and add an SNS topic ARN to AlarmActions."
 type = "binary"
 

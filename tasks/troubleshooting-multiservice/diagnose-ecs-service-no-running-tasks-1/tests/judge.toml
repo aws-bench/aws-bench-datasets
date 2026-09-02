@@ -8,42 +8,42 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_service_has_desiredcount_0"
+name = "service_desired_count_is_zero"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The service has desiredCount=0"
 type = "binary"
 
 [[criterion]]
-name = "desiredcount_0_is_the_immediate_reason_no_tasks_"
+name = "zero_desired_count_prevents_tasks"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): desiredCount=0 is the immediate reason no tasks run"
 type = "binary"
 
 [[criterion]]
-name = "the_task_definition_references_image_tag_dev_bui"
+name = "service_image_tag_missing_from_ecr"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definition references image tag dev_build_service_latest that does not exist in the ECR repo {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri}}"
 type = "binary"
 
 [[criterion]]
-name = "the_task_definition_references_image_tag_dev_bui_2"
+name = "sidecar_image_tag_missing_from_ecr"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definition references image tag dev_build_sidecar_latest that does not exist in the ECR repo {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri}}"
 type = "binary"
 
 [[criterion]]
-name = "the_only_available_tag_is_dev_build_service_main"
+name = "only_main_tag_exists_in_ecr"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The only available tag is dev_build_service_main in the ECR repo {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri}}"
 type = "binary"
 
 [[criterion]]
-name = "the_cluster_has_0_registered_ec2_container_insta"
+name = "cluster_has_no_container_instances"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster has 0 registered EC2 container instances"
 type = "binary"
 
 [[criterion]]
-name = "the_cluster_has_no_capacity_provider_strategy"
+name = "cluster_lacks_capacity_provider"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster has no capacity provider strategy"
 type = "binary"
 
 [[criterion]]
-name = "even_with_desired_count_0_tasks_would_stay_in_pr"
+name = "tasks_would_stay_provisioning_indefinitely"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Even with desired count > 0, tasks would stay in PROVISIONING indefinitely with no compute to schedule on"
 type = "binary"
 

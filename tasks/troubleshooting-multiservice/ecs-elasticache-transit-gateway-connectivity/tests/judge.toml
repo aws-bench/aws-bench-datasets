@@ -8,77 +8,77 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_ecs_service_troubleshooting_multiservice_ecs"
+name = "ecs_cannot_reach_elasticache_missing_routes"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS service `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-EcsServiceName}}` cannot reach ElastiCache cluster `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-ElastiCacheClusterId}}` because routes are missing in three places"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ecs_bp8hv08t8_us_ea"
+name = "ecs_route_table_1_lacks_tgw_route"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-EcsPrivateRouteTable1Id}}` does not have a route for 13.7.0.0/24 via Transit Gateway `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-TransitGatewayId}}`"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ecs_bp8hv08t8_us_ea_2"
+name = "ecs_route_table_2_lacks_tgw_route"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-EcsPrivateRouteTable2Id}}` does not have a route for 13.7.0.0/24 via Transit Gateway `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-TransitGatewayId}}`"
 type = "binary"
 
 [[criterion]]
-name = "traffic_to_the_elasticache_vpc_is_currently_sent"
+name = "traffic_routed_to_nat_gateway"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Traffic to the ElastiCache VPC is currently sent to the NAT Gateway instead"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ecs_bp8hv08t8_us_ea_3"
+name = "cache_route_table_has_local_only"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CachePrivateRouteTable1Id}}` only has a local route"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ecs_bp8hv08t8_us_ea_4"
+name = "cache_route_table_lacks_return_route"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CachePrivateRouteTable1Id}}` has no route for 13.1.0.0/16 back via the Transit Gateway"
 type = "binary"
 
 [[criterion]]
-name = "return_traffic_from_the_elasticache_vpc_is_dropp"
+name = "return_traffic_dropped_no_route"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Return traffic from the ElastiCache VPC is dropped because there is no route for 13.1.0.0/16 back via the Transit Gateway"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ecs_bp8hv08t8_us_ea_5"
+name = "cache_tgw_route_table_empty"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheTgwRouteTableId}}` is empty"
 type = "binary"
 
 [[criterion]]
-name = "troubleshooting_multiservice_ecs_bp8hv08t8_us_ea_6"
+name = "cache_tgw_route_table_associated"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheTgwRouteTableId}}` is associated with the Cache VPC attachment (`{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheVpcTgwAttachmentId}}`)"
 type = "binary"
 
 [[criterion]]
-name = "the_tgw_cannot_forward_return_traffic_to_the_ecs"
+name = "tgw_cannot_forward_return_traffic"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The TGW cannot forward return traffic to the ECS VPC because `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheTgwRouteTableId}}` has no routes"
 type = "binary"
 
 [[criterion]]
-name = "the_transit_gateway_itself_is_correctly_configur"
+name = "transit_gateway_correctly_configured"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Transit Gateway itself is correctly configured"
 type = "binary"
 
 [[criterion]]
-name = "both_vpc_attachments_are_correctly_configured"
+name = "vpc_attachments_correctly_configured"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Both VPC attachments are correctly configured"
 type = "binary"
 
 [[criterion]]
-name = "the_elasticache_security_group_has_port_11211_op"
+name = "elasticache_sg_allows_port_11211"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ElastiCache security group has port 11211 open to 13.1.0.0/16"
 type = "binary"
 
 [[criterion]]
-name = "the_elasticache_security_group_is_correctly_conf"
+name = "elasticache_sg_correctly_configured"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ElastiCache security group is correctly configured"
 type = "binary"
 
 [[criterion]]
-name = "the_ecs_service_is_correctly_configured"
+name = "ecs_service_correctly_configured"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS service is correctly configured"
 type = "binary"
 

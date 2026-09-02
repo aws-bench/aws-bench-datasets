@@ -8,32 +8,32 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_alb_target_group_flint_dashboards_tg_has_ip_"
+name = "dashboards_tg_registers_two_ips"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB target group flint-dashboards-tg has IP targets 10.80.4.37 and 10.80.8.112 registered"
 type = "binary"
 
 [[criterion]]
-name = "the_alb_target_group_flint_api_tg_has_ip_targets"
+name = "api_tg_registers_two_ips"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB target group flint-api-tg has IP targets 10.80.4.37 and 10.80.8.112 registered"
 type = "binary"
 
 [[criterion]]
-name = "the_ips_10_80_4_37_and_10_80_8_112_are_not_attac"
+name = "registered_ips_not_attached_to_eni"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The IPs 10.80.4.37 and 10.80.8.112 are not attached to any active ENI in the VPC"
 type = "binary"
 
 [[criterion]]
-name = "the_opensearch_domain_flint_analytics_is_deploye"
+name = "opensearch_domain_deployed_in_vpc"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The OpenSearch domain flint-analytics is deployed in the VPC"
 type = "binary"
 
 [[criterion]]
-name = "the_opensearch_domain_flint_analytics_has_curren"
+name = "opensearch_enis_have_different_ips"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The OpenSearch domain flint-analytics has current ENI private IPs that are different from 10.80.4.37 and 10.80.8.112"
 type = "binary"
 
 [[criterion]]
-name = "because_the_registered_target_ips_don_t_correspo"
+name = "orphaned_targets_cause_alb_502s"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Because the registered target IPs don't correspond to any running network interface, every health check fails and the ALB returns 502 for all requests"
 type = "binary"
 

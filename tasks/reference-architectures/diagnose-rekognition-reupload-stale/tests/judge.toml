@@ -8,72 +8,72 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_s3_event_is_firing"
+name = "s3_event_firing"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 event is firing."
 type = "binary"
 
 [[criterion]]
-name = "the_bucket_has_three_lambdafunctionconfiguration"
+name = "bucket_has_three_suffix_filters"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket has three LambdaFunctionConfigurations for s3:ObjectCreated:*, filtered by suffix .jpg, .jpeg, and .png, all targeting {{reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName}}."
 type = "binary"
 
 [[criterion]]
-name = "versioning_is_not_enabled_on_the_bucket"
+name = "versioning_not_enabled"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Versioning is not enabled on the bucket."
 type = "binary"
 
 [[criterion]]
-name = "the_second_put_overwrites_the_object_under_the_s"
+name = "second_put_triggers_event"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second put overwrites the object under the same key and still produces an ObjectCreated event."
 type = "binary"
 
 [[criterion]]
-name = "the_lambda_runs_and_calls_rekognition_detectlabe"
+name = "lambda_calls_detect_labels"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda runs and calls rekognition.DetectLabels on the new object bytes with MaxLabels 10 and MinConfidence 70."
 type = "binary"
 
 [[criterion]]
-name = "the_rekognition_cost_is_incurred_on_every_re_upl"
+name = "rekognition_cost_per_reupload"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Rekognition cost is incurred on every re-upload."
 type = "binary"
 
 [[criterion]]
-name = "the_handler_s_putitem_on_table_reference_archite"
+name = "put_item_has_condition"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler's putItem on table {{reference-architectures-Rekognition-s3trigger-us-east-1-TableName}} is issued with a condition that the primary key image_name must not already exist."
 type = "binary"
 
 [[criterion]]
-name = "the_second_putitem_fails_with_conditionalcheckfa"
+name = "second_put_item_fails"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second putItem fails with ConditionalCheckFailedException because the row for alpha.jpg was written by the first upload."
 type = "binary"
 
 [[criterion]]
-name = "the_handler_wraps_the_putitem_in_a_try_catch_tha"
+name = "handler_catches_and_logs_error"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler wraps the putItem in a try/catch that only logs the error and then returns normally, so the invocation exits as a success."
 type = "binary"
 
 [[criterion]]
-name = "lambda_invocations_and_errors_look_clean"
+name = "lambda_metrics_look_clean"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Lambda Invocations and Errors look clean."
 type = "binary"
 
 [[criterion]]
-name = "s3_shows_a_successful_delivery"
+name = "s3_shows_successful_delivery"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): S3 shows a successful delivery."
 type = "binary"
 
 [[criterion]]
-name = "the_only_place_the_failure_is_visible_is_cloudwa"
+name = "failure_visible_in_cloudwatch_logs"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The only place the failure is visible is CloudWatch Logs for the function, where the ConditionalCheckFailedException is printed."
 type = "binary"
 
 [[criterion]]
-name = "the_fix_is_to_drop_the_condition_from_the_put_or"
+name = "fix_remove_condition_or_update"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The fix is to drop the condition from the put, or to use updateItem, so that re-uploads overwrite the labels instead of being silently rejected."
 type = "binary"
 
 [[criterion]]
-name = "the_table_is_provisioned_with_5_rcu_5_wcu_not_on"
+name = "table_provisioned_will_throttle"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The table is deployed as PROVISIONED with 5 RCU / 5 WCU (no BillingModeSummary), not on-demand, so sustained re-uploads will throttle rather than auto-scale."
 type = "binary"
 

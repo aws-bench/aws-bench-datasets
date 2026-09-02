@@ -8,27 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_alarm_fires_because_p90_framequartzlag_laten"
+name = "alarm_fires_p90_lag_exceeds_threshold"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm fires because P90 FrameQuartzLag latency exceeds the 15-second threshold"
 type = "binary"
 
 [[criterion]]
-name = "x_ray_traces_show_the_bottleneck_is_in_the_downs"
+name = "xray_shows_quartz_bottleneck"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): X-Ray traces show the bottleneck is in the downstream Quartz service"
 type = "binary"
 
 [[criterion]]
-name = "the_quartzapi_subsegment_reportperson_calls_acco"
+name = "quartz_subsegment_dominates_trace_duration"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The QuartzAPI subsegment (ReportPerson calls) accounts for most of the total trace duration"
 type = "binary"
 
 [[criterion]]
-name = "internal_pipeline_components_and_cpu_are_within_"
+name = "pipeline_and_cpu_within_normal_ranges"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Internal pipeline components and CPU are within normal ranges"
 type = "binary"
 
 [[criterion]]
-name = "root_cause_is_quartz_service_degradation_not_the"
+name = "root_cause_quartz_not_ecs"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Root cause is Quartz service degradation, not the ECS service"
 type = "binary"
 

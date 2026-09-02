@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_vpc_has_a_single_active_flow_log_troubleshoo"
+name = "vpc_has_single_active_flow_log"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The VPC has a single active flow log ({{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-FlowLogId}})"
 type = "binary"
 
 [[criterion]]
-name = "the_flow_log_delivers_all_traffic_to_s3_bucket_t"
+name = "flow_log_delivers_to_s3"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The flow log delivers all traffic to S3 bucket {{troubleshooting-multiservice-cloudformation-vesgrw3ay-us-east-1-VpcFlowLogsBucketName}}"
 type = "binary"
 
 [[criterion]]
-name = "there_are_two_cloudwatch_log_groups_quartzstack_"
+name = "two_cloudwatch_log_groups_exist"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are two CloudWatch Log Groups (QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup1 and QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup2) with names suggesting VPC flow log usage"
 type = "binary"
 
 [[criterion]]
-name = "no_flow_log_data_is_being_written_to_the_two_clo"
+name = "no_data_written_to_log_groups"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No flow log data is being written to the two CloudWatch Log Groups (QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup1 and QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup2)"
 type = "binary"
 

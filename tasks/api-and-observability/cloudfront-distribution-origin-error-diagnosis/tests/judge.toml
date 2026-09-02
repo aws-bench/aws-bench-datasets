@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_distribution_api_and_observability_cloudfron"
+name = "distribution_lacks_default_root_object"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has no defaultRootObject configured."
 type = "binary"
 
 [[criterion]]
-name = "the_distribution_api_and_observability_cloudfron_2"
+name = "distribution_has_only_default_cache_behavior"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has zero additional cache behaviors beyond the default behavior."
 type = "binary"
 
 [[criterion]]
-name = "the_distribution_api_and_observability_cloudfron_3"
+name = "default_behavior_points_to_s3_origin"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has a default behavior pointing at an S3 origin."
 type = "binary"
 
 [[criterion]]
-name = "requests_to_tenant_id_are_forwarded_to_s3_as_is_"
+name = "directory_paths_not_rewritten_to_index"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Requests to /tenant-id/ are forwarded to S3 as-is, but S3 doesn't auto-resolve directory paths to index.html, causing tenant paths to return errors because there is no CloudFront Function or cache behavior that rewrites /tenant-id/ to /tenant-id/index.html."
 type = "binary"
 

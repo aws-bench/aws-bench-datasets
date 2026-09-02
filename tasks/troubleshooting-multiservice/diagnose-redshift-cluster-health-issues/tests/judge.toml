@@ -8,57 +8,57 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_cloudwatch_alarm_troubleshooting_multiservic"
+name = "alarm_in_alarm_state"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The CloudWatch alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} is in ALARM state"
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_troubleshooting_multiservice_redshift_"
+name = "alarm_uses_greater_than_threshold"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} is configured with GreaterThanThreshold comparison operator"
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_troubleshooting_multiservice_redshift__2"
+name = "alarm_threshold_is_point_five"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} has a threshold of 0.5"
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_troubleshooting_multiservice_redshift__3"
+name = "alarm_monitors_health_status_metric"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} monitors the HealthStatus metric"
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_fires_continuously_because_it_uses_the"
+name = "wrong_operator_triggers_on_healthy_status"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm fires continuously because it uses the wrong comparison operator: a healthy cluster reports HealthStatus of 1.0, which is greater than 0.5, triggering the GreaterThanThreshold alarm incorrectly"
 type = "binary"
 
 [[criterion]]
-name = "the_comparison_operator_should_be_lessthanthresh"
+name = "should_use_less_than_threshold"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The comparison operator should be LessThanThreshold to detect unhealthy status"
 type = "binary"
 
 [[criterion]]
-name = "the_cluster_troubleshooting_multiservice_redshif"
+name = "cluster_in_available_status"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} is in available status"
 type = "binary"
 
 [[criterion]]
-name = "the_cluster_troubleshooting_multiservice_redshif_2"
+name = "cluster_is_healthy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} itself is healthy"
 type = "binary"
 
 [[criterion]]
-name = "the_alarm_troubleshooting_multiservice_redshift__4"
+name = "leader_alarm_insufficient_data_state"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthLeaderAlarmName}} is in INSUFFICIENT_DATA state"
 type = "binary"
 
 [[criterion]]
-name = "the_cluster_troubleshooting_multiservice_redshif_3"
+name = "cluster_is_single_node"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} is a single-node cluster"
 type = "binary"
 
 [[criterion]]
-name = "the_insufficient_data_state_for_alarm_troublesho"
+name = "insufficient_data_expected_single_node"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The INSUFFICIENT_DATA state for alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthLeaderAlarmName}} is expected for a single-node cluster where the node has a SHARED role and no Leader-specific metrics are emitted"
 type = "binary"
 

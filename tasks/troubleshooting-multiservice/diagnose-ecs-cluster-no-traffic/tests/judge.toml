@@ -8,47 +8,47 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "both_ecs_services_in_cluster_troubleshooting_mul"
+name = "both_services_desired_count_zero"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Both ECS services in cluster {{troubleshooting-multiservice-ecs-i7uzvvzgr-ap-northeast-1-ClusterName}} have desiredCount=0"
 type = "binary"
 
 [[criterion]]
-name = "no_tasks_are_running_in_the_cluster"
+name = "no_tasks_running_cluster"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No tasks are running in the cluster"
 type = "binary"
 
 [[criterion]]
-name = "no_targets_are_registered_with_the_alb"
+name = "no_targets_registered_alb"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No targets are registered with the ALB"
 type = "binary"
 
 [[criterion]]
-name = "the_services_run_in_isolated_subnets_without_int"
+name = "subnets_lack_internet_access"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The services run in isolated subnets without internet access (no IGW, no NAT, no VPC endpoints)"
 type = "binary"
 
 [[criterion]]
-name = "the_task_definitions_reference_a_public_ecr_ngin"
+name = "task_definitions_reference_public_ecr"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definitions reference a public ECR nginx image"
 type = "binary"
 
 [[criterion]]
-name = "the_public_ecr_nginx_image_cannot_be_pulled_with"
+name = "public_image_requires_connectivity"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The public ECR nginx image cannot be pulled without connectivity"
 type = "binary"
 
 [[criterion]]
-name = "the_alb_is_configured_as_internal"
+name = "alb_configured_as_internal"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB is configured as internal"
 type = "binary"
 
 [[criterion]]
-name = "the_alb_cannot_receive_public_traffic_because_it"
+name = "internal_alb_blocks_public_traffic"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB cannot receive public traffic because it is internal"
 type = "binary"
 
 [[criterion]]
-name = "scaling_up_alone_will_not_fix_the_issue"
+name = "scaling_up_insufficient_fix"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Scaling up alone will not fix the issue"
 type = "binary"
 

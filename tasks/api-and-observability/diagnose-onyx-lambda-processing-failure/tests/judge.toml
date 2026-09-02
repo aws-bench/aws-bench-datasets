@@ -8,42 +8,42 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_onyx_lambda_handler_checks_for_the_presence_"
+name = "lambda_checks_oldimage_presence"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Onyx Lambda handler checks for the presence of OldImage in DynamoDB stream records before processing"
 type = "binary"
 
 [[criterion]]
-name = "bulk_regression_requests_are_inserted_directly_i"
+name = "bulk_requests_inserted_in_progress"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Bulk regression requests are inserted directly into the BasaltRegressionRequests-alpha table with state IN_PROGRESS"
 type = "binary"
 
 [[criterion]]
-name = "bulk_regression_requests_produce_insert_stream_e"
+name = "bulk_requests_produce_insert_events"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Bulk regression requests produce INSERT stream events"
 type = "binary"
 
 [[criterion]]
-name = "insert_events_do_not_contain_an_oldimage"
+name = "insert_events_lack_oldimage"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): INSERT events do not contain an OldImage"
 type = "binary"
 
 [[criterion]]
-name = "the_handler_skips_insert_events_because_they_lac"
+name = "handler_skips_insert_events"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler skips INSERT events because they lack OldImage"
 type = "binary"
 
 [[criterion]]
-name = "individual_bat_requests_are_first_created_in_buf"
+name = "individual_requests_created_buffer_state"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests are first created in BUFFER state in the BasaltRequests-alpha table"
 type = "binary"
 
 [[criterion]]
-name = "individual_bat_requests_are_then_updated_to_in_p"
+name = "individual_requests_updated_in_progress"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests are then updated to IN_PROGRESS state"
 type = "binary"
 
 [[criterion]]
-name = "individual_bat_requests_produce_modify_events_th"
+name = "individual_requests_produce_modify_events"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests produce MODIFY events that include OldImage"
 type = "binary"
 

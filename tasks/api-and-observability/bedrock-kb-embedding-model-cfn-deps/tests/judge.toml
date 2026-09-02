@@ -8,12 +8,12 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_agent_stack_api_and_observability_bedrock_ag"
+name = "agent_stack_imports_kb_ids"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The agent stack api-and-observability-bedrock-agent-dwiwbg5rr-us-east-1 has Fn::ImportValue dependencies on EscalationWriteupsKBKnowledgeBaseId and MetadataKBKnowledgeBaseId."
 type = "binary"
 
 [[criterion]]
-name = "remove_those_imports_before_replacing_the_kb_sta"
+name = "remove_imports_before_kb_replacement"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Remove those imports before replacing the KB stack."
 type = "binary"
 

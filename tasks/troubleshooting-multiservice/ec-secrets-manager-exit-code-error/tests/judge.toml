@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_ec2_instance_troubleshooting_multiservice_ec"
+name = "instance_role_missing_kms_decrypt"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EC2 instance {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-InstanceId}} gets exit code 255 because its IAM role is missing kms:Decrypt permission for the KMS key that encrypts the secret."
 type = "binary"
 
 [[criterion]]
-name = "the_secret_troubleshooting_multiservice_ec2_pg4r"
+name = "secret_encrypted_with_kms_key"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The secret {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-SecretArn}} is encrypted with KMS key {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-KmsKeyId}}."
 type = "binary"
 
 [[criterion]]
-name = "the_instance_role_has_secretsmanager_getsecretva"
+name = "instance_role_has_get_secret_value"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance role has secretsmanager:GetSecretValue permission."
 type = "binary"
 
 [[criterion]]
-name = "when_secrets_manager_tries_to_decrypt_the_data_k"
+name = "kms_decrypt_fails_access_denied"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When Secrets Manager tries to decrypt the data key with KMS, the call fails with access denied."
 type = "binary"
 

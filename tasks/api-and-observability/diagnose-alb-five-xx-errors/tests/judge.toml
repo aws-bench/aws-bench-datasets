@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_alb_access_logs_show_that_earlier_requests_t"
+name = "earlier_requests_returned_200"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB access logs show that earlier requests to POST /jobInstance/updateStatus returned HTTP 200 with normal processing times."
 type = "binary"
 
 [[criterion]]
-name = "recent_requests_are_all_going_to_post_jobinstanc"
+name = "recent_requests_use_wrong_path"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Recent requests are all going to POST /jobInstance/ instead."
 type = "binary"
 
 [[criterion]]
-name = "the_application_rejects_post_jobinstance_request"
+name = "app_rejects_wrong_path_with_500"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The application rejects POST /jobInstance/ requests with HTTP 500 almost instantly."
 type = "binary"
 
 [[criterion]]
-name = "the_root_cause_is_a_client_side_endpoint_misconf"
+name = "root_cause_client_endpoint_misconfiguration"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is a client-side endpoint misconfiguration where clients switched from the correct path /jobInstance/updateStatus to the incorrect path /jobInstance/."
 type = "binary"
 

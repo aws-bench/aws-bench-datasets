@@ -8,22 +8,22 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_request_url_contains_a_double_slash_but_api_"
+name = "double_slash_normalized_by_api_gateway"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The request URL contains a double slash but API Gateway normalizes this to resolve correctly"
 type = "binary"
 
 [[criterion]]
-name = "the_iam_policy_on_role_api_and_observability_api"
+name = "iam_role_allows_post_invoke"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The IAM policy on role {{api-and-observability-ApiGateway-6b015c55c-us-east-1-RestrictedRoleArn}} allows execute-api:Invoke for POST/* on API {{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiId}}"
 type = "binary"
 
 [[criterion]]
-name = "the_data_agreements_agreementid_endpoint_only_su"
+name = "endpoint_supports_get_only"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The /data-agreements/{agreementId} endpoint only supports GET"
 type = "binary"
 
 [[criterion]]
-name = "the_resource_arn_in_the_policy_needs_to_use_get_"
+name = "policy_arn_requires_get_method"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The resource ARN in the policy needs to use GET instead of POST"
 type = "binary"
 

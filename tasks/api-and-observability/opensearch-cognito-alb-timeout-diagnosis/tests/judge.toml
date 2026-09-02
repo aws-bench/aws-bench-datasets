@@ -8,17 +8,17 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_opensearch_domain_has_no_custom_endpoint_con"
+name = "opensearch_custom_endpoint_disabled"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The OpenSearch domain has no custom endpoint configured (CustomEndpointEnabled is false)"
 type = "binary"
 
 [[criterion]]
-name = "cognito_s_post_authentication_redirect_points_to"
+name = "cognito_redirects_to_vpc_endpoint"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Cognito's post-authentication redirect points to the VPC endpoint hostname instead of the ALB, causing the browser to be unable to reach it and resulting in the timeout"
 type = "binary"
 
 [[criterion]]
-name = "configure_a_custom_endpoint_on_the_domain_that_p"
+name = "configure_custom_endpoint_for_alb"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Configure a custom endpoint on the domain that points to the ALB so auth redirects go through it"
 type = "binary"
 

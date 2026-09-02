@@ -8,27 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "opensearch_audit_logs_only_capture_authenticatio"
+name = "audit_logs_capture_auth_not_status"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch audit logs only capture authentication and authorization events (AUTHENTICATED, GRANTED_PRIVILEGES), not HTTP response codes."
 type = "binary"
 
 [[criterion]]
-name = "the_audit_logs_confirm_the_get_to_changesets_doc"
+name = "get_request_authenticated_and_authorized"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The audit logs confirm the GET to /changesets/_doc/changeset-a3f8b921 was authenticated and authorized."
 type = "binary"
 
 [[criterion]]
-name = "no_log_category_records_whether_the_response_was"
+name = "no_log_category_records_status_code"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No log category records whether the response was 200 or 404."
 type = "binary"
 
 [[criterion]]
-name = "none_of_the_other_enabled_log_types_application_"
+name = "enabled_logs_cannot_determine_status"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): None of the other enabled log types (application, slow search, slow index) capture per-request status codes. A general conclusion that none of the configured OpenSearch logs can determine the status code satisfies this claim -- the junior does not need to individually name and rule out each log type by name as long as the overall conclusion (no log-based method works) is correct."
 type = "binary"
 
 [[criterion]]
-name = "opensearch_has_no_built_in_access_log_that_recor"
+name = "no_builtin_http_access_log"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch has no built-in access log that records HTTP response codes."
 type = "binary"
 

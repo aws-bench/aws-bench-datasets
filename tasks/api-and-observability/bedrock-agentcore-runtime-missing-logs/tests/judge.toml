@@ -8,27 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_iam_deny_policy_on_quartz_team_role_is_not_t"
+name = "iam_deny_policy_not_cause"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The IAM deny policy on quartz-team-role is not the cause of the empty vended logs groups."
 type = "binary"
 
 [[criterion]]
-name = "the_runtime_was_deleted"
+name = "runtime_was_deleted"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The runtime was deleted."
 type = "binary"
 
 [[criterion]]
-name = "the_runtime_s_cloudwatch_log_groups_were_retaine"
+name = "log_groups_retained_after_deletion"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The runtime's CloudWatch log groups were retained after deletion."
 type = "binary"
 
 [[criterion]]
-name = "the_runtime_log_group_api_and_observability_logs"
+name = "runtime_log_group_contains_historical_logs"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The runtime log group {{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpLogGroupName}} still contains historical invocation logs from when the runtime was active."
 type = "binary"
 
 [[criterion]]
-name = "the_vended_logs_groups_api_and_observability_log"
+name = "vended_logs_empty_agentcore_not_running"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The vended logs groups {{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpApplicationLogsGroupName}} and {{api-and-observability-logs-6b635d316-us-west-2-BasaltMcpUsageLogsGroupName}} are empty because the AgentCore service is no longer running to deliver logs to them."
 type = "binary"
 

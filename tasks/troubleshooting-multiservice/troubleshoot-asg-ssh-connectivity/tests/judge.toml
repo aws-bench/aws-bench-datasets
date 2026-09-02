@@ -8,47 +8,47 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_instances_in_asg_troubleshooting_multiservic"
+name = "asg_instances_lack_ssh_key_pair"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} were launched without an SSH key pair."
 type = "binary"
 
 [[criterion]]
-name = "the_instances_in_asg_troubleshooting_multiservic_2"
+name = "asg_instances_in_private_subnet"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} are in private subnet {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrimarySubnetId}}."
 type = "binary"
 
 [[criterion]]
-name = "subnet_troubleshooting_multiservice_sagemaker_yh"
+name = "primary_subnet_cidr_range"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Subnet {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrimarySubnetId}} has CIDR 172.25.0.0/24."
 type = "binary"
 
 [[criterion]]
-name = "the_instances_in_asg_troubleshooting_multiservic_3"
+name = "asg_instances_lack_public_ip"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} have no public IP address."
 type = "binary"
 
 [[criterion]]
-name = "network_acl_troubleshooting_multiservice_sagemak"
+name = "nacl_associated_with_primary_subnet"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Network ACL {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrivateSubnetNaclId}} is associated with subnet {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrimarySubnetId}}."
 type = "binary"
 
 [[criterion]]
-name = "network_acl_troubleshooting_multiservice_sagemak_2"
+name = "nacl_rule_denies_ssh_port"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Network ACL {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrivateSubnetNaclId}} has rule 50 that explicitly denies inbound TCP port 22."
 type = "binary"
 
 [[criterion]]
-name = "ssh_to_instances_in_asg_troubleshooting_multiser"
+name = "ssh_blocked_by_multiple_factors"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SSH to instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} is blocked because the instances were launched without an SSH key pair, they are in a private subnet with no public IP address, and the network ACL explicitly denies inbound TCP port 22."
 type = "binary"
 
 [[criterion]]
-name = "the_best_option_for_connecting_is_ssm_session_ma"
+name = "ssm_session_manager_best_option"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The best option for connecting is SSM Session Manager via aws ssm start-session."
 type = "binary"
 
 [[criterion]]
-name = "ssm_session_manager_is_already_configured_and_re"
+name = "ssm_already_configured_for_asg"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SSM Session Manager is already configured and ready to use for the instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}}."
 type = "binary"
 

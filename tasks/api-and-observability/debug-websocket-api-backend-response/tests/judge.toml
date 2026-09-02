@@ -8,67 +8,67 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_lambda_function_flint_agent_message_has_no_w"
+name = "lambda_missing_websocket_endpoint_var"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function flint-agent-message has no WEBSOCKET_ENDPOINT environment variable set."
 type = "binary"
 
 [[criterion]]
-name = "the_sendtoconnection_helper_throws_cannot_read_p"
+name = "send_helper_throws_on_undefined_endpoint"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The sendToConnection helper throws 'Cannot read properties of undefined (reading replace)' when it tries to push a reply back because the WEBSOCKET_ENDPOINT env var is not set."
 type = "binary"
 
 [[criterion]]
-name = "no_response_ever_reaches_the_client_because_the_"
+name = "client_receives_no_response"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No response ever reaches the client because the sendToConnection helper throws an error."
 type = "binary"
 
 [[criterion]]
-name = "the_lambda_handler_does_not_recognize_the_ping_a"
+name = "lambda_does_not_recognize_ping_action"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler does not recognize the 'ping' action that the agent script sends."
 type = "binary"
 
 [[criterion]]
-name = "the_lambda_handler_routes_only_heartbeat_registe"
+name = "lambda_routes_four_actions_only"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler routes only 'heartbeat', 'register', 'agent_connected', and 'register_ui' actions."
 type = "binary"
 
 [[criterion]]
-name = "ping_actions_fall_through_to_the_default_handler"
+name = "ping_returns_400_via_default_handler"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Ping actions fall through to the default handler and return 400."
 type = "binary"
 
 [[criterion]]
-name = "flint_agent_sh_keeps_each_websocket_open_for_onl"
+name = "agent_sh_closes_socket_after_two_seconds"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh keeps each WebSocket open for only about 2 seconds by piping a registration, sleep 1, ping, sleep 1 into websocat and then closing stdin, causing websocat to tear the socket down."
 type = "binary"
 
 [[criterion]]
-name = "flint_agent_sh_then_sleeps_5s_and_reconnects_in_"
+name = "agent_sh_reconnects_every_five_seconds"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh then sleeps 5s and reconnects in a loop, which causes the 'keep disconnecting' behavior."
 type = "binary"
 
 [[criterion]]
-name = "flint_agent_persistent_sh_in_the_same_s3_bucket_"
+name = "persistent_sh_keeps_socket_open"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-persistent.sh in the same S3 bucket keeps the socket open."
 type = "binary"
 
 [[criterion]]
-name = "flint_agent_professional_sh_in_the_same_s3_bucke"
+name = "professional_sh_keeps_socket_open"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh in the same S3 bucket keeps the socket open."
 type = "binary"
 
 [[criterion]]
-name = "flint_agent_persistent_sh_uses_the_unrouted_ping"
+name = "persistent_sh_uses_ping_action"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-persistent.sh uses the unrouted 'ping' action."
 type = "binary"
 
 [[criterion]]
-name = "flint_agent_professional_sh_uses_the_heartbeat_a"
+name = "professional_sh_uses_heartbeat_action"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh uses the 'heartbeat' action."
 type = "binary"
 
 [[criterion]]
-name = "fixing_the_backend_requires_setting_websocket_en"
+name = "fix_requires_setting_lambda_endpoint_var"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Fixing the backend requires setting WEBSOCKET_ENDPOINT on the Lambda function flint-agent-message."
 type = "binary"
 
