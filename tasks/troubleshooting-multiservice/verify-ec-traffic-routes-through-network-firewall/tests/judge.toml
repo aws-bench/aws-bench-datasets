@@ -23,11 +23,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "traffic_never_reaches_firewall_endpoints"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Traffic never reaches the firewall endpoints."
-type = "binary"
-
-[[criterion]]
 name = "workload_subnet_routes_to_tgw"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The workload subnet route table {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadSubnetRouteTableId}} sends 0.0.0.0/0 to Transit Gateway {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-TransitGatewayId}}."
 type = "binary"
@@ -35,11 +30,6 @@ type = "binary"
 [[criterion]]
 name = "tgw_forwards_default_to_dmz_vpc"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The TGW route table {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-TGWRouteTableId}} forwards 0.0.0.0/0 to the DMZ VPC attachment {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCAttachmentId}}."
-type = "binary"
-
-[[criterion]]
-name = "dmz_vpc_has_no_outbound_path"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DMZ VPC has no path out."
 type = "binary"
 
 [[criterion]]

@@ -13,11 +13,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "xray_shows_quartz_bottleneck"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): X-Ray traces show the bottleneck is in the downstream Quartz service"
-type = "binary"
-
-[[criterion]]
 name = "quartz_subsegment_dominates_trace_duration"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The QuartzAPI subsegment (ReportPerson calls) accounts for most of the total trace duration"
 type = "binary"

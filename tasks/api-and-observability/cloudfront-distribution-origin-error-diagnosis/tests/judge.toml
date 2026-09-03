@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "distribution_lacks_default_root_object"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has no defaultRootObject configured."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution has no defaultRootObject configured and lacks any CloudFront Function or additional cache behavior that would rewrite directory paths like /tenant-id/ to /tenant-id/index.html, causing requests forwarded as-is to S3 to fail because S3 doesn't auto-resolve directory paths to index.html."
 type = "binary"
 
 [[criterion]]
@@ -20,11 +20,6 @@ type = "binary"
 [[criterion]]
 name = "default_behavior_points_to_s3_origin"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution {{api-and-observability-cloudfront-e0239752d-us-east-1-DistributionId}} has a default behavior pointing at an S3 origin."
-type = "binary"
-
-[[criterion]]
-name = "directory_paths_not_rewritten_to_index"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Requests to /tenant-id/ are forwarded to S3 as-is, but S3 doesn't auto-resolve directory paths to index.html, causing tenant paths to return errors because there is no CloudFront Function or cache behavior that rewrites /tenant-id/ to /tenant-id/index.html."
 type = "binary"
 
 [[criterion]]

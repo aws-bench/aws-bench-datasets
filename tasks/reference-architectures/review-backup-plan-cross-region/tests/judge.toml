@@ -64,12 +64,7 @@ type = "binary"
 
 [[criterion]]
 name = "new_bucket_needs_versioning_enabled"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To add a second S3 bucket to the backup plan, you need to enable versioning on the new bucket, since AWS Backup requires versioning for S3 backups"
-type = "binary"
-
-[[criterion]]
-name = "new_bucket_needs_daily_backup_tag"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To add a second S3 bucket to the backup plan, you need to add the tag daily-backup=true to it"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To add a second S3 bucket to the backup plan, you need to (1) enable versioning on the new bucket, since AWS Backup requires versioning for S3 backups, and (2) add the tag daily-backup=true to it."
 type = "binary"
 
 [[criterion]]
@@ -79,7 +74,7 @@ type = "binary"
 
 [[criterion]]
 name = "vault_encryption_compatible_cross_region"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): For cross-region copy, the current vault's ENCRYPTION/DESIGN setup is compatible (the destination vault gets its own key, AWS Backup handles re-encryption). This claim is about vault/KMS design compatibility only -- if the junior separately reports a real, evidence-backed account-level permission blocker (e.g. an Organizations SCP restricting the region), that is an orthogonal operational finding, not a contradiction of this design-compatibility claim; do not fail this claim for that."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The current vault encryption setup (AWS-managed key) is compatible with cross-region copy because AWS Backup handles re-encryption during the copy process, so no changes to the source vault encryption are required. This is a necessity claim about design compatibility -- if the junior separately reports a real, evidence-backed account-level permission blocker (e.g. an Organizations SCP) or suggests an OPTIONAL enhancement (e.g. consider adding a CMK), those are orthogonal findings that do not contradict this claim."
 type = "binary"
 
 [[criterion]]
@@ -90,16 +85,6 @@ type = "binary"
 [[criterion]]
 name = "destination_vault_has_own_key"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The destination vault will have its own KMS encryption key (either the AWS-managed default key in that region or a customer-managed CMK you create there)"
-type = "binary"
-
-[[criterion]]
-name = "backup_handles_reencryption_during_copy"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AWS Backup handles re-encryption during the copy process, so using the AWS-managed default key on the source vault does not block cross-region copy"
-type = "binary"
-
-[[criterion]]
-name = "source_encryption_not_blocker"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No changes to the source vault encryption are required (i.e. the current source-vault encryption is not a BLOCKER for cross-region copy). This is a necessity claim, not a recommendation against optional improvements -- if the junior separately suggests an OPTIONAL enhancement (e.g. 'consider also adding a CMK to the source vault') without saying it's required to make cross-region copy work, that does not contradict this claim."
 type = "binary"
 
 [[criterion]]

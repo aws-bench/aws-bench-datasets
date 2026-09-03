@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "lambda_checks_oldimage_presence"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Onyx Lambda handler checks for the presence of OldImage in DynamoDB stream records before processing"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Onyx Lambda handler checks for the presence of OldImage in DynamoDB stream records and skips processing when OldImage is absent"
 type = "binary"
 
 [[criterion]]
@@ -19,27 +19,12 @@ type = "binary"
 
 [[criterion]]
 name = "bulk_requests_produce_insert_events"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Bulk regression requests produce INSERT stream events"
-type = "binary"
-
-[[criterion]]
-name = "insert_events_lack_oldimage"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): INSERT events do not contain an OldImage"
-type = "binary"
-
-[[criterion]]
-name = "handler_skips_insert_events"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler skips INSERT events because they lack OldImage"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Bulk regression requests produce INSERT stream events, which do not contain an OldImage"
 type = "binary"
 
 [[criterion]]
 name = "individual_requests_created_buffer_state"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests are first created in BUFFER state in the BasaltRequests-alpha table"
-type = "binary"
-
-[[criterion]]
-name = "individual_requests_updated_in_progress"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests are then updated to IN_PROGRESS state"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Individual BAT requests are first created in BUFFER state in the BasaltRequests-alpha table and then updated to IN_PROGRESS state"
 type = "binary"
 
 [[criterion]]

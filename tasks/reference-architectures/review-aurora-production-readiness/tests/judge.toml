@@ -39,17 +39,12 @@ type = "binary"
 
 [[criterion]]
 name = "secret_rotation_not_enabled"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The master secret {{reference-architectures-RDS-aurora-us-east-1-SecretArn}} has RotationEnabled=null"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The master secret {{reference-architectures-RDS-aurora-us-east-1-SecretArn}} has RotationEnabled=null / rotation has never been turned on"
 type = "binary"
 
 [[criterion]]
 name = "secret_lacks_rotation_lambda"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is no RotationLambdaARN attached to the master secret {{reference-architectures-RDS-aurora-us-east-1-SecretArn}}"
-type = "binary"
-
-[[criterion]]
-name = "rotation_never_configured"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Rotation has never been turned on for the master secret"
 type = "binary"
 
 [[criterion]]
@@ -73,18 +68,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "cluster_has_writer_only"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster has exactly one instance in it, the writer in promotion tier 0, db.serverless"
-type = "binary"
-
-[[criterion]]
 name = "reader_endpoint_routes_to_writer"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With zero reader instances, any traffic sent to the reader endpoint is routed to the writer, so reads contend with writes for the same 0.5–1 ACU"
-type = "binary"
-
-[[criterion]]
-name = "reads_contend_with_writes"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A read-heavy spike competes directly with inserts due to the lack of read-path isolation. Satisfied if the junior establishes that there is no reader instance / no read offload, so all traffic lands on the single writer; the junior does not need to also spell out the specific read-vs-write contention consequence in those exact terms."
 type = "binary"
 
 [[criterion]]

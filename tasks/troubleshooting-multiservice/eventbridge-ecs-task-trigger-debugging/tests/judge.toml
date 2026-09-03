@@ -8,28 +8,18 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "eventbridge_rule_has_two_issues"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EventBridge rule {{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-EventBridgeRuleName}} has two issues preventing it from working."
-type = "binary"
-
-[[criterion]]
 name = "ap_southeast_7_has_no_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No resources exist in ap-southeast-7."
 type = "binary"
 
 [[criterion]]
 name = "task_definition_references_nonexistent_bucket"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS task definition has a hardcoded S3_LOCATION environment variable pointing to a bucket that does not exist in this account."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS task definition has a hardcoded S3_LOCATION environment variable pointing to a bucket that does not exist in this account, and the task role only has permissions for the deployment bucket, causing the task to fail with access denied when it runs."
 type = "binary"
 
 [[criterion]]
 name = "task_role_limited_to_deployment_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task role only has S3 read permissions for {{troubleshooting-multiservice-eventbridge-odyzjo3n0-us-east-1-DeploymentBucketName}}."
-type = "binary"
-
-[[criterion]]
-name = "task_fails_with_access_denied"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When the task runs it will fail with access denied."
 type = "binary"
 
 [[criterion]]
@@ -45,11 +35,6 @@ type = "binary"
 [[criterion]]
 name = "rule_invokes_pinned_revision"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Any code changes you deploy create a new revision, but the rule keeps invoking the pinned revision."
-type = "binary"
-
-[[criterion]]
-name = "ap_southeast_7_lacks_deployed_resources"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are no EventBridge rules, ECS clusters, or task definitions deployed in ap-southeast-7."
 type = "binary"
 
 [[criterion]]

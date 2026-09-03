@@ -8,23 +8,13 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "checkstatus_runs_exactly_twice"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): CheckStatus runs exactly twice per production execution"
-type = "binary"
-
-[[criterion]]
 name = "wait_loop_never_iterates"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Wait→CheckStatus loop never iterates"
 type = "binary"
 
 [[criterion]]
 name = "submitjob_returns_succeeded_immediately"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SubmitJob's Python handler is `return {\"id\": event[\"id\"], \"status\": \"SUCCEEDED\"}`. Satisfied if the junior establishes that SubmitJob's handler always returns status=SUCCEEDED; the junior does not need to also mention that it passes through the `id` field, since that detail isn't needed to answer how many times CheckStatus runs or under what condition the loop would iterate."
-type = "binary"
-
-[[criterion]]
-name = "submitjob_ignores_input_always_succeeds"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SubmitJob ignores all other input and always emits status=SUCCEEDED"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SubmitJob's handler ignores input and always returns status=SUCCEEDED (wording may differ; satisfied if the junior establishes that SubmitJob unconditionally returns SUCCEEDED regardless of input)"
 type = "binary"
 
 [[criterion]]
@@ -44,12 +34,7 @@ type = "binary"
 
 [[criterion]]
 name = "loop_unreachable_with_current_handler"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The loop could only iterate if CheckStatus returned a non-SUCCEEDED, non-FAILED value, but with the current handler code that case is unreachable"
-type = "binary"
-
-[[criterion]]
-name = "loop_requires_handler_or_input_changes"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Triggering the loop in this stack requires either changing SubmitJob to return a different status, changing CheckStatus to return something other than SUCCEEDED/FAILED, or manually starting an execution with a custom input that CheckStatus would not immediately terminate on (but even then CheckStatus's else branch returns FAILED, which is terminal)"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The loop is unreachable with the current handler code; triggering it would require either changing SubmitJob to return a different status, changing CheckStatus to return something other than SUCCEEDED/FAILED, or manually starting with custom input (though CheckStatus's else branch still returns terminal FAILED)"
 type = "binary"
 
 [[criterion]]

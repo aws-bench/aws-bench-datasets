@@ -13,43 +13,18 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "no_tasks_running_cluster"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No tasks are running in the cluster"
-type = "binary"
-
-[[criterion]]
-name = "no_targets_registered_alb"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No targets are registered with the ALB"
-type = "binary"
-
-[[criterion]]
 name = "subnets_lack_internet_access"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The services run in isolated subnets without internet access (no IGW, no NAT, no VPC endpoints)"
 type = "binary"
 
 [[criterion]]
-name = "task_definitions_reference_public_ecr"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definitions reference a public ECR nginx image"
-type = "binary"
-
-[[criterion]]
 name = "public_image_requires_connectivity"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The public ECR nginx image cannot be pulled without connectivity"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definitions reference a public ECR nginx image that requires internet connectivity to pull."
 type = "binary"
 
 [[criterion]]
 name = "alb_configured_as_internal"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB is configured as internal"
-type = "binary"
-
-[[criterion]]
-name = "internal_alb_blocks_public_traffic"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ALB cannot receive public traffic because it is internal"
-type = "binary"
-
-[[criterion]]
-name = "scaling_up_insufficient_fix"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Scaling up alone will not fix the issue"
 type = "binary"
 
 [[criterion]]

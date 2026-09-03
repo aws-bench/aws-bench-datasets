@@ -9,12 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "service_desired_count_is_zero"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The service has desiredCount=0"
-type = "binary"
-
-[[criterion]]
-name = "zero_desired_count_prevents_tasks"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): desiredCount=0 is the immediate reason no tasks run"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The junior engineer identifies that the service has desiredCount=0, which is the immediate reason no tasks run."
 type = "binary"
 
 [[criterion]]
@@ -40,11 +35,6 @@ type = "binary"
 [[criterion]]
 name = "cluster_lacks_capacity_provider"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster has no capacity provider strategy"
-type = "binary"
-
-[[criterion]]
-name = "tasks_would_stay_provisioning_indefinitely"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Even with desired count > 0, tasks would stay in PROVISIONING indefinitely with no compute to schedule on"
 type = "binary"
 
 [[criterion]]

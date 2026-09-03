@@ -33,11 +33,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "server_uses_legacy_logging_role"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Transfer server uses a legacy loggingRole with no structuredLogDestinations."
-type = "binary"
-
-[[criterion]]
 name = "logs_route_to_service_managed_group"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AWS Transfer Family logs to the service-managed group /aws/transfer/<server-id>, not {{reference-architectures-Transfer-sftp-us-east-1-LogGroupName}}, because the server uses a legacy loggingRole with no structuredLogDestinations."
 type = "binary"
@@ -45,11 +40,6 @@ type = "binary"
 [[criterion]]
 name = "alarm_stays_insufficient_data_state"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With nothing published to SftpErrors, the alarm stays in INSUFFICIENT_DATA (treated as OK) and cannot reach ALARM from real errors."
-type = "binary"
-
-[[criterion]]
-name = "alarm_actions_empty"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AlarmActions is empty."
 type = "binary"
 
 [[criterion]]

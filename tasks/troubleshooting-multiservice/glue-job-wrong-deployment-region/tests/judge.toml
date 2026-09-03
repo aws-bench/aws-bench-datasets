@@ -9,12 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "glue_job_missing_from_expected_region"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): BasaltDataAnalyzer-RoleReport isn't in {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}} at all"
-type = "binary"
-
-[[criterion]]
-name = "glue_job_deployed_to_wrong_region"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): BasaltDataAnalyzer-RoleReport deployed to {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} as {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName}}"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): BasaltDataAnalyzer-RoleReport isn't in {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}}; it deployed to {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} as {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-GlueJobName}}"
 type = "binary"
 
 [[criterion]]
@@ -34,7 +29,7 @@ type = "binary"
 
 [[criterion]]
 name = "fix_requires_redeploying_entire_stack"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Getting it into {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}} means redeploying the whole stack there, not just recreating the job, then tearing down the {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} stack if unwanted"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Getting it into {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-ExpectedRegion}} means redeploying the whole stack there, then tearing down the {{troubleshooting-multiservice-glue-c3j34cj9z-us-west-2-DeploymentRegion}} stack if unwanted"
 type = "binary"
 
 [[criterion]]

@@ -29,17 +29,7 @@ type = "binary"
 
 [[criterion]]
 name = "cache_route_table_has_local_only"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CachePrivateRouteTable1Id}}` only has a local route"
-type = "binary"
-
-[[criterion]]
-name = "cache_route_table_lacks_return_route"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CachePrivateRouteTable1Id}}` has no route for 13.1.0.0/16 back via the Transit Gateway"
-type = "binary"
-
-[[criterion]]
-name = "return_traffic_dropped_no_route"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Return traffic from the ElastiCache VPC is dropped because there is no route for 13.1.0.0/16 back via the Transit Gateway"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CachePrivateRouteTable1Id}}` only has a local route and lacks a route for 13.1.0.0/16 back via the Transit Gateway"
 type = "binary"
 
 [[criterion]]
@@ -50,11 +40,6 @@ type = "binary"
 [[criterion]]
 name = "cache_tgw_route_table_associated"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheTgwRouteTableId}}` is associated with the Cache VPC attachment (`{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheVpcTgwAttachmentId}}`)"
-type = "binary"
-
-[[criterion]]
-name = "tgw_cannot_forward_return_traffic"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The TGW cannot forward return traffic to the ECS VPC because `{{troubleshooting-multiservice-ecs-bp8hv08t8-us-east-1-CacheTgwRouteTableId}}` has no routes"
 type = "binary"
 
 [[criterion]]
@@ -70,11 +55,6 @@ type = "binary"
 [[criterion]]
 name = "elasticache_sg_allows_port_11211"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ElastiCache security group has port 11211 open to 13.1.0.0/16"
-type = "binary"
-
-[[criterion]]
-name = "elasticache_sg_correctly_configured"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ElastiCache security group is correctly configured"
 type = "binary"
 
 [[criterion]]

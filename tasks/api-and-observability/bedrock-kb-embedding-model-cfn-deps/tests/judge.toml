@@ -14,7 +14,7 @@ type = "binary"
 
 [[criterion]]
 name = "remove_imports_before_kb_replacement"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Remove those imports before replacing the KB stack."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Remove the Fn::ImportValue dependencies on EscalationWriteupsKBKnowledgeBaseId and MetadataKBKnowledgeBaseId before replacing the KB stack."
 type = "binary"
 
 [[criterion]]

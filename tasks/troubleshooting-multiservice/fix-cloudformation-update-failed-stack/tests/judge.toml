@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "lambda_aliases_reference_nonexistent_versions"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack is failing because the Lambda alias resources reference hardcoded function versions that don't exist."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack is failing because Lambda alias resources reference hardcoded function versions that don't exist, and the fix is to correct these hardcoded version numbers in the template (e.g. via !GetAtt Function.Version) and redeploy. This is satisfied by either: (a) first running aws cloudformation rollback-stack to reach UPDATE_ROLLBACK_COMPLETE, then redeploying the corrected template, OR (b) directly redeploying the corrected template via update-stack -- (b) is valid here because DisableRollback=true caused CloudFormation to revert only the two failed resources while the rest reached stable state. Do not fail this claim if the junior chose procedure (b) or says rollback-stack isn't needed."
 type = "binary"
 
 [[criterion]]
@@ -20,11 +20,6 @@ type = "binary"
 [[criterion]]
 name = "detector_lambda_alias_references_version_268"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): GetDetectorOutcomeLambdaAlias references version 268 of {{troubleshooting-multiservice-cloudformation-t9dx4pgqw-us-east-1-GetDetectorOutcomeLambdaArn}}."
-type = "binary"
-
-[[criterion]]
-name = "fix_corrects_hardcoded_versions_and_redeploys"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the fix is to correct the hardcoded Lambda alias version numbers in the CloudFormation template (e.g. via !GetAtt Function.Version instead of a literal number) and redeploy. This is satisfied by EITHER of two valid AWS procedures: (a) first run aws cloudformation rollback-stack to reach UPDATE_ROLLBACK_COMPLETE, then redeploy the corrected template, OR (b) directly redeploy the corrected template via a normal update-stack call -- (b) is also valid here because DisableRollback=true already caused CloudFormation to revert only the two failed Lambda alias resources while the rest of the stack already reached a stable COMPLETE state, so there is nothing left to roll back. Do not fail this claim solely because the junior chose procedure (b) instead of (a), or because the junior explicitly says continue-update-rollback / rollback-stack isn't needed -- that is a correct, evidence-backed observation about this specific stack's state, not a contradiction."
 type = "binary"
 
 [[criterion]]

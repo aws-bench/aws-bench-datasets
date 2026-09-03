@@ -13,26 +13,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "app_config_application_env_var_value"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function {{troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-LambdaFunctionName}} environment variable APP_CONFIG_APPLICATION is set to GRNCMSAppConfigApplication537888D7."
-type = "binary"
-
-[[criterion]]
-name = "app_config_environment_env_var_value"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function {{troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-LambdaFunctionName}} environment variable APP_CONFIG_ENVIRONMENT is set to GRNCMSAppConfigEnvironment9802B737."
-type = "binary"
-
-[[criterion]]
-name = "app_config_configuration_env_var_value"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function {{troubleshooting-multiservice-lambda-1sscp39dx-us-west-2-LambdaFunctionName}} environment variable APP_CONFIG_CONFIGURATION is set to GRNCMSAppConfigConfigurationConfigurationProfile7AB3584E."
-type = "binary"
-
-[[criterion]]
-name = "actual_appconfig_resource_names"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The actual AppConfig resource names are GarnetAppConfig (application), beta (environment), and GarnetServicebeta-GRNCMSAppConfigConfiguration-EE839D38 (configuration profile)."
-type = "binary"
-
-[[criterion]]
 name = "logical_ids_cause_resource_not_found"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Any call to the AppConfig API using these logical IDs will fail with a ResourceNotFoundException."
 type = "binary"

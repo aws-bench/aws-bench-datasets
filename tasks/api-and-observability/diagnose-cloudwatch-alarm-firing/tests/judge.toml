@@ -29,27 +29,12 @@ type = "binary"
 
 [[criterion]]
 name = "ssm_degraded_mode_drives_latency"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The elevated Quartz latency is driven by the SSM parameter controlling latency mode being set to 'degraded'."
-type = "binary"
-
-[[criterion]]
-name = "ssm_parameter_set_degraded"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SSM parameter controlling latency mode is set to 'degraded'."
-type = "binary"
-
-[[criterion]]
-name = "degraded_mode_causes_high_latency"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The 'degraded' latency mode causes the ECS task to publish high Quartz API latency."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SSM parameter set to 'degraded' causes the ECS task to publish high Quartz API latency, which drives the elevated latency observed."
 type = "binary"
 
 [[criterion]]
 name = "fix_set_parameter_healthy"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The fix is to set the latency mode parameter back to 'healthy'."
-type = "binary"
-
-[[criterion]]
-name = "root_cause_downstream_not_internal"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm fires due to downstream Quartz latency, not an issue with the ECS service's own internal processing pipeline."
 type = "binary"
 
 [[criterion]]

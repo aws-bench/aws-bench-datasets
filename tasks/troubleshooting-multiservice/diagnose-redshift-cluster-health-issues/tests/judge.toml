@@ -39,12 +39,7 @@ type = "binary"
 
 [[criterion]]
 name = "cluster_in_available_status"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} is in available status"
-type = "binary"
-
-[[criterion]]
-name = "cluster_is_healthy"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} itself is healthy"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} is healthy/operational (may be expressed as 'healthy', 'available status', or equivalent wording indicating no actual cluster health problems)"
 type = "binary"
 
 [[criterion]]

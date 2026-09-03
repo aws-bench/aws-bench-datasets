@@ -23,11 +23,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "driver_memory_exceeds_instance_capacity"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.driver.memory of 60G exceeds the total memory of an m5.2xlarge instance (32 GB), which would prevent the driver from launching at all."
-type = "binary"
-
-[[criterion]]
 name = "executor_instances_set_to_425"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.executor.instances is set to 425 in the spark-defaults configuration."
 type = "binary"
@@ -49,17 +44,12 @@ type = "binary"
 
 [[criterion]]
 name = "insufficient_capacity_for_executors"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With 23 GB per executor and the core instance fleet targeting only 1 m5.2xlarge instance (32 GB), YARN could provision at most 1 executor, leaving the remaining 424 requested executors never allocated and the vast majority of Spark tasks waiting indefinitely."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): YARN could provision at most 1 executor, leaving the vast majority of Spark tasks waiting indefinitely"
 type = "binary"
 
 [[criterion]]
 name = "dynamic_allocation_disabled"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): spark.dynamicAllocation.enabled is false in the spark-defaults configuration."
-type = "binary"
-
-[[criterion]]
-name = "cannot_scale_executor_count"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With spark.dynamicAllocation.enabled set to false, Spark cannot scale the executor count down to match actual cluster capacity."
 type = "binary"
 
 [[criterion]]

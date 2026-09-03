@@ -14,22 +14,12 @@ type = "binary"
 
 [[criterion]]
 name = "lf_enforces_with_no_grants"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is that Lake Formation is enforcing permissions on the table with no grants in place."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Lake Formation is enforcing permissions on the table {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueTableName}}, but no Lake Formation permissions have been granted to the Glue role {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueServiceRoleArn}} on this table."
 type = "binary"
 
 [[criterion]]
 name = "lf_default_settings_disable_iam_principals"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The account's Lake Formation default settings have CreateTableDefaultPermissions set to empty, meaning the legacy IAMAllowedPrincipals auto-grant is disabled."
-type = "binary"
-
-[[criterion]]
-name = "lf_enforces_on_new_tables"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Lake Formation enforces permissions on all new Data Catalog tables. This general AWS behavior is satisfied if the junior's specific diagnosis is consistent with it (e.g. correctly explains that Lake Formation permission enforcement, via the DataAdmin role / default-settings mechanism, is why this specific table's access failed) -- the junior does not need to also state the general principle in the abstract."
-type = "binary"
-
-[[criterion]]
-name = "glue_role_lacks_lf_table_permissions"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No Lake Formation permissions have been granted to the Glue role {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueServiceRoleArn}} on the table {{troubleshooting-multiservice-glue-4hc72iv0v-us-east-1-GlueTableName}}."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Lake Formation is enforcing permissions on the table because the account's CreateTableDefaultPermissions setting is empty (disabling the legacy IAMAllowedPrincipals auto-grant). Credit this claim if the junior correctly explains that Lake Formation permission enforcement is active and causing the access failure, even without explicitly referencing the CreateTableDefaultPermissions setting."
 type = "binary"
 
 [[criterion]]
@@ -44,12 +34,7 @@ type = "binary"
 
 [[criterion]]
 name = "data_admin_policy_grants_credential_vending"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The AWSLakeFormationDataAdmin managed policy grants lakeformation:* including lakeformation:GetDataAccess, the IAM permission required for Lake Formation credential vending. This is background mechanism detail, not the core diagnosis -- satisfied if the junior's answer is consistent with it (e.g. correctly concludes the attached IAM policy does not substitute for missing Lake Formation grants) without naming 'credential vending' as an explicit intermediate step."
-type = "binary"
-
-[[criterion]]
-name = "credential_vending_fails_without_grants"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With LF enforcing permissions and no grants present, the credential vending call fails with AccessDeniedException. This is background mechanism detail, not the core diagnosis -- satisfied if the junior correctly attributes the AccessDeniedException to the missing Lake Formation grants without naming 'credential vending' as an explicit intermediate step."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue role's attached AWSLakeFormationDataAdmin policy triggers Lake Formation credential vending (via lakeformation:GetDataAccess permission), which fails with AccessDeniedException because no Lake Formation grants are present. Credit this claim if the junior correctly attributes the AccessDeniedException to missing Lake Formation grants, even without explicitly naming the credential vending mechanism."
 type = "binary"
 
 [[criterion]]

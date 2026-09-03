@@ -14,17 +14,12 @@ type = "binary"
 
 [[criterion]]
 name = "recent_requests_use_wrong_path"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Recent requests are all going to POST /jobInstance/ instead."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is a client-side endpoint misconfiguration where recent requests are going to POST /jobInstance/ instead of the correct path /jobInstance/updateStatus."
 type = "binary"
 
 [[criterion]]
 name = "app_rejects_wrong_path_with_500"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The application rejects POST /jobInstance/ requests with HTTP 500 almost instantly."
-type = "binary"
-
-[[criterion]]
-name = "root_cause_client_endpoint_misconfiguration"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is a client-side endpoint misconfiguration where clients switched from the correct path /jobInstance/updateStatus to the incorrect path /jobInstance/."
 type = "binary"
 
 [[criterion]]

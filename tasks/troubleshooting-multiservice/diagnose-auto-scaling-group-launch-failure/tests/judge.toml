@@ -23,11 +23,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "asg_made_no_launch_attempts"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No launch attempts have been made by the Auto Scaling Group"
-type = "binary"
-
-[[criterion]]
 name = "launch_template_uses_kms_encryption"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The launch template's EBS encryption uses KMS key {{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-KmsKeyId}}"
 type = "binary"

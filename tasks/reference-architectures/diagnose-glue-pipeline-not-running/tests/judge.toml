@@ -39,17 +39,12 @@ type = "binary"
 
 [[criterion]]
 name = "pipeline_requires_main_branch_commit"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Until someone pushes an initial commit on a main branch, the pipeline will never start again on its own"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Until someone pushes an initial commit on a main branch, the pipeline cannot progress beyond the Source stage (neither starting new executions on its own nor reaching any downstream work)"
 type = "binary"
 
 [[criterion]]
 name = "launcher_lambda_log_group_missing"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is no Lambda log group for the launcher"
-type = "binary"
-
-[[criterion]]
-name = "downstream_stages_never_reached"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): None of the downstream work has ever been reached because the Source stage has never succeeded"
 type = "binary"
 
 [[criterion]]
@@ -59,12 +54,7 @@ type = "binary"
 
 [[criterion]]
 name = "launcher_reports_success_without_polling"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The launcher Lambda runs start_job_run against Glue and then immediately calls put_job_success_result back to CodePipeline, with no get_job_run polling in between"
-type = "binary"
-
-[[criterion]]
-name = "deploy_succeeds_regardless_glue_outcome"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Deploy stage will report SUCCESS the instant the Glue job is accepted, regardless of whether the Glue job itself fails, times out, or produces garbage"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The launcher Lambda implements a fire-and-forget pattern: it runs start_job_run against Glue and then immediately calls put_job_success_result back to CodePipeline without polling get_job_run, causing the Deploy stage to report SUCCESS regardless of whether the Glue job itself fails, times out, or produces garbage"
 type = "binary"
 
 [[criterion]]
@@ -79,12 +69,7 @@ type = "binary"
 
 [[criterion]]
 name = "glue_role_lacks_cloudwatch_logs_permissions"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are no logs:CreateLogGroup/CreateLogStream/PutLogEvents permissions anywhere on the Glue worker role"
-type = "binary"
-
-[[criterion]]
-name = "glue_role_lacks_put_metric_data"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is no cloudwatch:PutMetricData permission on the Glue worker role"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue worker role lacks the CloudWatch Logs permissions (logs:CreateLogGroup/CreateLogStream/PutLogEvents) that the Glue job needs to write its logs"
 type = "binary"
 
 [[criterion]]

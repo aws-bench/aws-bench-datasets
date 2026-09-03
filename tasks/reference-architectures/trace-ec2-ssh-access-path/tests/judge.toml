@@ -24,17 +24,12 @@ type = "binary"
 
 [[criterion]]
 name = "ssh_sg_allows_port_22_from_vpc_cidr"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Ec2SshSecurityGroup has a single ingress rule allowing TCP port 22 from 10.0.0.0/16 (the VPC CIDR)."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Ec2SshSecurityGroup has a single ingress rule allowing TCP port 22 from 10.0.0.0/16 (the VPC CIDR), not 0.0.0.0/0, which blocks packets from external (non-VPC) sources."
 type = "binary"
 
 [[criterion]]
 name = "instance_in_public_subnet"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance sits in a public subnet."
-type = "binary"
-
-[[criterion]]
-name = "ssh_sg_blocks_external_connections"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SSH security group restricts port 22 to the VPC CIDR (10.0.0.0/16), not 0.0.0.0/0, so packets arriving at port 22 from any non-VPC source are dropped by the security group, preventing external SSH even though the instance has a public IP."
 type = "binary"
 
 [[criterion]]

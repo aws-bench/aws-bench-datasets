@@ -34,12 +34,7 @@ type = "binary"
 
 [[criterion]]
 name = "job_transitions_to_failed_state"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recent job on queue {{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}} transitions SUBMITTED to RUNNABLE to STARTING to FAILED."
-type = "binary"
-
-[[criterion]]
-name = "job_fails_with_image_pull_error"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recent job on queue {{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}} has a statusReason indicating the container image could not be pulled from the repository (no manifest found)."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recent job on queue {{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}} transitions SUBMITTED to RUNNABLE to STARTING to FAILED, with a statusReason indicating the container image could not be pulled from the repository (no manifest found)."
 type = "binary"
 
 [[criterion]]
@@ -54,12 +49,7 @@ type = "binary"
 
 [[criterion]]
 name = "batch_defaults_to_aws_batch_job_logs"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When no logConfiguration.options.awslogs-group override is set, Batch's default awslogs driver writes to /aws/batch/job instead of the declared group {{reference-architectures-Batch-openmp-us-east-1-LogGroupName}}."
-type = "binary"
-
-[[criterion]]
-name = "declared_log_group_remains_empty"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The declared log group {{reference-architectures-Batch-openmp-us-east-1-LogGroupName}} will keep reading as empty even after the ECR problem is fixed, because logs will be written to /aws/batch/job instead."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The declared log group {{reference-architectures-Batch-openmp-us-east-1-LogGroupName}} will remain empty even after the ECR problem is fixed because the job definition has no logConfiguration.options.awslogs-group override, so Batch's default awslogs driver writes to /aws/batch/job instead."
 type = "binary"
 
 [[criterion]]

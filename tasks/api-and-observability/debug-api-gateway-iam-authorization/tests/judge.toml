@@ -14,17 +14,12 @@ type = "binary"
 
 [[criterion]]
 name = "iam_role_allows_post_invoke"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The IAM policy on role {{api-and-observability-ApiGateway-6b015c55c-us-east-1-RestrictedRoleArn}} allows execute-api:Invoke for POST/* on API {{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiId}}"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The IAM policy on role {{api-and-observability-ApiGateway-6b015c55c-us-east-1-RestrictedRoleArn}} specifies execute-api:Invoke for POST/* on API {{api-and-observability-ApiGateway-6b015c55c-us-east-1-ApiId}}, but the resource ARN needs to use GET instead of POST (or the junior identifies that the policy method and endpoint method are mismatched)."
 type = "binary"
 
 [[criterion]]
 name = "endpoint_supports_get_only"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The /data-agreements/{agreementId} endpoint only supports GET"
-type = "binary"
-
-[[criterion]]
-name = "policy_arn_requires_get_method"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The resource ARN in the policy needs to use GET instead of POST"
 type = "binary"
 
 [[criterion]]

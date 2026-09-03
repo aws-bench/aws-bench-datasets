@@ -19,12 +19,7 @@ type = "binary"
 
 [[criterion]]
 name = "two_cloudwatch_log_groups_exist"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are two CloudWatch Log Groups (QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup1 and QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup2) with names suggesting VPC flow log usage"
-type = "binary"
-
-[[criterion]]
-name = "no_data_written_to_log_groups"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No flow log data is being written to the two CloudWatch Log Groups (QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup1 and QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup2)"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There are two CloudWatch Log Groups (QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup1 and QuartzStack-Basalt-us-east-1-VpcFlowLogLogGroup2) that appear configured for VPC flow logs but are not receiving flow log data"
 type = "binary"
 
 [[criterion]]

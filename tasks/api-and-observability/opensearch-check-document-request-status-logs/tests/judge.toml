@@ -9,17 +9,12 @@ mode = "batched"
 
 [[criterion]]
 name = "audit_logs_capture_auth_not_status"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch audit logs only capture authentication and authorization events (AUTHENTICATED, GRANTED_PRIVILEGES), not HTTP response codes."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch audit logs capture authentication and authorization events (AUTHENTICATED, GRANTED_PRIVILEGES) but do not capture HTTP response codes, and no other log category records whether the response was 200 or 404."
 type = "binary"
 
 [[criterion]]
 name = "get_request_authenticated_and_authorized"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The audit logs confirm the GET to /changesets/_doc/changeset-a3f8b921 was authenticated and authorized."
-type = "binary"
-
-[[criterion]]
-name = "no_log_category_records_status_code"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No log category records whether the response was 200 or 404."
 type = "binary"
 
 [[criterion]]

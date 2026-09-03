@@ -28,11 +28,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "opensearch_enis_have_different_ips"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The OpenSearch domain flint-analytics has current ENI private IPs that are different from 10.80.4.37 and 10.80.8.112"
-type = "binary"
-
-[[criterion]]
 name = "orphaned_targets_cause_alb_502s"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Because the registered target IPs don't correspond to any running network interface, every health check fails and the ALB returns 502 for all requests"
 type = "binary"

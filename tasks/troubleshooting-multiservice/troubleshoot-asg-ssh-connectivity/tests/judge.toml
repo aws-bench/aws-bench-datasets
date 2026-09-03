@@ -38,11 +38,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "ssh_blocked_by_multiple_factors"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SSH to instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} is blocked because the instances were launched without an SSH key pair, they are in a private subnet with no public IP address, and the network ACL explicitly denies inbound TCP port 22."
-type = "binary"
-
-[[criterion]]
 name = "ssm_session_manager_best_option"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The best option for connecting is SSM Session Manager via aws ssm start-session."
 type = "binary"

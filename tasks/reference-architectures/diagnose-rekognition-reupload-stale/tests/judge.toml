@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "s3_event_firing"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 event is firing."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 event fires for the re-upload. Because versioning is not enabled, the second put overwrites the object under the same key and still produces an ObjectCreated event."
 type = "binary"
 
 [[criterion]]
@@ -23,13 +23,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "second_put_triggers_event"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second put overwrites the object under the same key and still produces an ObjectCreated event."
-type = "binary"
-
-[[criterion]]
 name = "lambda_calls_detect_labels"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda runs and calls rekognition.DetectLabels on the new object bytes with MaxLabels 10 and MinConfidence 70."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda runs and calls rekognition.DetectLabels (with MaxLabels 10 and MinConfidence 70). Credit this claim even if the junior does not explicitly verify the call operates on the updated object bytes rather than cached data."
 type = "binary"
 
 [[criterion]]
@@ -54,12 +49,7 @@ type = "binary"
 
 [[criterion]]
 name = "lambda_metrics_look_clean"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Lambda Invocations and Errors look clean."
-type = "binary"
-
-[[criterion]]
-name = "s3_shows_successful_delivery"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): S3 shows a successful delivery."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Standard success metrics look clean -- Lambda Invocations and Errors show no failures, and S3 shows successful event delivery -- making the silent failure hard to detect."
 type = "binary"
 
 [[criterion]]

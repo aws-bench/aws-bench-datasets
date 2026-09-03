@@ -24,32 +24,17 @@ type = "binary"
 
 [[criterion]]
 name = "tagged_security_group_not_exists"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSGTagValue}} does not exist"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ASG tag Customer-SG points to {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSGTagValue}} which does not exist, while the actual customer security group is {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSecurityGroupId}}"
 type = "binary"
 
 [[criterion]]
 name = "tagged_subnet_not_exists"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSubnetTagValue}} does not exist"
-type = "binary"
-
-[[criterion]]
-name = "actual_customer_sg_identified"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The actual customer security group is {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSecurityGroupId}}"
-type = "binary"
-
-[[criterion]]
-name = "actual_customer_subnet_identified"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The actual customer subnet is {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSubnetId}}"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ASG tag Customer-Subnet points to {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSubnetTagValue}} which does not exist, while the actual customer subnet is {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSubnetId}}"
 type = "binary"
 
 [[criterion]]
 name = "role_has_only_secrets_permissions"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance role {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-InstanceRoleName}} only has Secrets Manager permissions"
-type = "binary"
-
-[[criterion]]
-name = "role_lacks_ec2_eni_permissions"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance role {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-InstanceRoleName}} is missing EC2 permissions needed to manage network interfaces, such as ec2:CreateNetworkInterface, ec2:CreateNetworkInterfacePermission, ec2:DescribeNetworkInterfaces, ec2:DescribeSubnets, and ec2:DescribeSecurityGroups"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance role {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-InstanceRoleName}} only has Secrets Manager permissions and is missing EC2 permissions needed to manage network interfaces (such as ec2:CreateNetworkInterface, ec2:CreateNetworkInterfacePermission, ec2:DescribeNetworkInterfaces, ec2:DescribeSubnets, and ec2:DescribeSecurityGroups)"
 type = "binary"
 
 [[criterion]]

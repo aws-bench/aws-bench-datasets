@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "state_machine_manually_deleted"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The state machine {{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}} was manually deleted outside of CloudFormation."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The state machine {{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineName}} was manually deleted outside of CloudFormation, as evidenced by a CloudTrail DeleteStateMachine event issued against the state machine after the stack was deployed (wording may differ, substance must match)."
 type = "binary"
 
 [[criterion]]
@@ -25,11 +25,6 @@ type = "binary"
 [[criterion]]
 name = "describe_returns_does_not_exist"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Calling describe-state-machine on {{api-and-observability-stepfunctions-9bww99xri-us-east-1-StateMachineArn}} returns StateMachineDoesNotExist."
-type = "binary"
-
-[[criterion]]
-name = "cloudtrail_shows_delete_event"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): CloudTrail confirms a DeleteStateMachine event was issued against the state machine after the stack was deployed."
 type = "binary"
 
 [[criterion]]

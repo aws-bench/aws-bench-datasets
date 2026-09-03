@@ -18,13 +18,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "gateway_endpoint_routes_same_region_only"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Gateway endpoints only route to the same region, so cross-region PutObject calls time out"
-type = "binary"
-
-[[criterion]]
 name = "cross_region_putobject_times_out"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda tries to write to an S3 bucket in us-east-1 but cross-region PutObject calls time out due to the gateway endpoint limitation"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda tries to write to an S3 bucket in us-east-1, but gateway endpoints only route to the same region, so these cross-region PutObject calls time out"
 type = "binary"
 
 [[criterion]]

@@ -9,42 +9,17 @@ mode = "batched"
 
 [[criterion]]
 name = "lambda_missing_websocket_endpoint_var"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function flint-agent-message has no WEBSOCKET_ENDPOINT environment variable set."
-type = "binary"
-
-[[criterion]]
-name = "send_helper_throws_on_undefined_endpoint"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The sendToConnection helper throws 'Cannot read properties of undefined (reading replace)' when it tries to push a reply back because the WEBSOCKET_ENDPOINT env var is not set."
-type = "binary"
-
-[[criterion]]
-name = "client_receives_no_response"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No response ever reaches the client because the sendToConnection helper throws an error."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function flint-agent-message has no WEBSOCKET_ENDPOINT environment variable set, causing the sendToConnection helper to throw \"Cannot read properties of undefined (reading replace)\" when attempting to push a reply back, so no response ever reaches the client."
 type = "binary"
 
 [[criterion]]
 name = "lambda_does_not_recognize_ping_action"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler does not recognize the 'ping' action that the agent script sends."
-type = "binary"
-
-[[criterion]]
-name = "lambda_routes_four_actions_only"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler routes only 'heartbeat', 'register', 'agent_connected', and 'register_ui' actions. Satisfied if the junior establishes that 'ping' is not one of the routed/recognized actions and falls through to a default/unhandled path; the junior does not need to enumerate all four routed action names verbatim."
-type = "binary"
-
-[[criterion]]
-name = "ping_returns_400_via_default_handler"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Ping actions fall through to the default handler and return 400. Satisfied if the junior establishes that unrecognized/unrouted actions like 'ping' are rejected by a default/fallback path; the junior does not need to cite the literal HTTP status code 400."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler does not recognize the 'ping' action that the agent script sends; it routes only 'heartbeat', 'register', 'agent_connected', and 'register_ui' actions, and unrecognized actions like 'ping' fall through to a default handler that returns 400 (junior may simply establish that ping is unrouted/unrecognized and falls through to a default/fallback path, without enumerating all routed actions or citing the exact status code)."
 type = "binary"
 
 [[criterion]]
 name = "agent_sh_closes_socket_after_two_seconds"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh keeps each WebSocket open for only about 2 seconds by piping a registration, sleep 1, ping, sleep 1 into websocat and then closing stdin, causing websocat to tear the socket down."
-type = "binary"
-
-[[criterion]]
-name = "agent_sh_reconnects_every_five_seconds"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh then sleeps 5s and reconnects in a loop, which causes the 'keep disconnecting' behavior."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh closes each WebSocket after about 2 seconds (by piping registration, sleep 1, ping, sleep 1 into websocat then closing stdin), then sleeps 5s and reconnects in a loop, causing the observed 'keep disconnecting' behavior."
 type = "binary"
 
 [[criterion]]

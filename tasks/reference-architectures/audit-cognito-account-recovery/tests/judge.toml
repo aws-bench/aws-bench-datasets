@@ -19,12 +19,7 @@ type = "binary"
 
 [[criterion]]
 name = "sms_configuration_is_null"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SmsConfiguration is null"
-type = "binary"
-
-[[criterion]]
-name = "no_sns_role_configured"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The pool has no SNS role/ExternalId configured, so Cognito has no way to actually send a verification SMS to anyone."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SmsConfiguration is null (the pool has no SNS role/ExternalId configured), so Cognito has no way to actually send a verification SMS to anyone."
 type = "binary"
 
 [[criterion]]
@@ -34,42 +29,17 @@ type = "binary"
 
 [[criterion]]
 name = "phone_verification_requires_sms_config"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Since the recovery mechanism specifically requires verified_phone_number, a user's phone number must first be verified via the SMS flow, which can't happen without SmsConfiguration."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Cognito evaluates recovery mechanisms in priority order but skips any for which the user has no verified attribute. Since phone verification requires SmsConfiguration (which is absent) and phone numbers are not auto-verified, nobody in this pool can have a verified phone number, so every password-recovery request falls through to priority-2 verified_email."
 type = "binary"
 
 [[criterion]]
 name = "username_attributes_email_only"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): UsernameAttributes = [\"email\"]"
-type = "binary"
-
-[[criterion]]
-name = "admin_create_user_only_enabled"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): sign-up is blocked via AdminCreateUserOnly=true"
-type = "binary"
-
-[[criterion]]
-name = "no_self_service_phone_registration"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): there's no self-service phone registration even if SmsConfiguration were added"
-type = "binary"
-
-[[criterion]]
-name = "recovery_falls_through_to_email"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Cognito evaluates recovery mechanisms in priority order but skips any for which the user has no verified attribute. Since nobody in this pool can have a verified phone number, every password-recovery request falls through to priority-2 verified_email, and users receive the reset email."
-type = "binary"
-
-[[criterion]]
-name = "phone_mechanism_is_dead_config"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The phone mechanism is effectively dead config, a lint warning for the auditor."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): UsernameAttributes = [\"email\"] and sign-up is blocked via AdminCreateUserOnly=true, so there's no self-service phone registration even if SmsConfiguration were added."
 type = "binary"
 
 [[criterion]]
 name = "pool_has_zero_app_clients"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the pool has zero app clients (list-user-pool-clients returns [])"
-type = "binary"
-
-[[criterion]]
-name = "no_client_id_for_forgot_password"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): there's no client_id to call ForgotPassword against"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the pool has zero app clients (list-user-pool-clients returns []), so there's no client_id to call ForgotPassword against."
 type = "binary"
 
 [[criterion]]

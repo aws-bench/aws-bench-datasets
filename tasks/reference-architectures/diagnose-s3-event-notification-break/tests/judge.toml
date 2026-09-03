@@ -13,11 +13,6 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "both_custom_resources_report_create_complete"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Both custom resources SampleBucketNotificationA and SampleBucketNotificationB report CREATE_COMPLETE."
-type = "binary"
-
-[[criterion]]
 name = "sqs_policy_allows_s3_sendmessage"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SQS queue policy allows s3.amazonaws.com:SendMessage with aws:SourceArn=<bucket> (i.e. the SQS policy is NOT the cause of the break). If the junior's overall diagnosis concludes the root cause lies elsewhere (not in S3/SQS/SNS or their policies) without stating the specific grant text, that conclusion already implies this claim -- do not fail it solely for not restating the specific policy grant when the junior's ruling-out conclusion is correct."
 type = "binary"
@@ -29,12 +24,7 @@ type = "binary"
 
 [[criterion]]
 name = "root_cause_in_lambda_handler"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is in the NotificationManager custom resource handler ({{reference-architectures-S3-eventnotif-us-east-1-FunctionName}})."
-type = "binary"
-
-[[criterion]]
-name = "merge_only_iterates_current_config_keys"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The NotificationManager Lambda's mergeConfigurations function is: for each key in Object.entries(currentConfig): copy value, then if inputConfig[key] exists concat it."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is in the NotificationManager custom resource handler's ({{reference-architectures-S3-eventnotif-us-east-1-FunctionName}}) mergeConfigurations function, which only iterates over keys in currentConfig (for each key in Object.entries(currentConfig): copy value, then if inputConfig[key] exists concat it)."
 type = "binary"
 
 [[criterion]]
@@ -54,22 +44,12 @@ type = "binary"
 
 [[criterion]]
 name = "handler_calls_put_with_empty_body"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler calls PutBucketNotificationConfiguration with an empty body."
-type = "binary"
-
-[[criterion]]
-name = "custom_resource_returns_physical_id_normally"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The custom resource returns PhysicalResourceId normally, so CloudFormation marks it CREATE_COMPLETE."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler calls PutBucketNotificationConfiguration with an empty body and returns PhysicalResourceId normally, causing CloudFormation to mark it CREATE_COMPLETE."
 type = "binary"
 
 [[criterion]]
 name = "second_custom_resource_repeats_same_behavior"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second custom resource (SampleBucketNotificationB) runs against the same empty current config and does the same thing."
-type = "binary"
-
-[[criterion]]
-name = "notifications_never_installed_despite_clean_stack"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The net effect is that bucket notifications are never installed despite a clean stack."
 type = "binary"
 
 [[criterion]]

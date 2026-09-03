@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "instance_role_missing_kms_decrypt"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EC2 instance {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-InstanceId}} gets exit code 255 because its IAM role is missing kms:Decrypt permission for the KMS key that encrypts the secret."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EC2 instance {{troubleshooting-multiservice-ec2-pg4rychx0-us-west-2-InstanceId}} gets exit code 255 because its IAM role is missing kms:Decrypt permission for the KMS key that encrypts the secret, causing the KMS decrypt call to fail with access denied when Secrets Manager attempts to decrypt the data key."
 type = "binary"
 
 [[criterion]]
@@ -20,11 +20,6 @@ type = "binary"
 [[criterion]]
 name = "instance_role_has_get_secret_value"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instance role has secretsmanager:GetSecretValue permission."
-type = "binary"
-
-[[criterion]]
-name = "kms_decrypt_fails_access_denied"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When Secrets Manager tries to decrypt the data key with KMS, the call fails with access denied."
 type = "binary"
 
 [[criterion]]

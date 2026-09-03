@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "bucket_policy_lacks_oac_grant"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 bucket policy for {{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}} does not grant CloudFront OAC access."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 bucket policy for {{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}} does not grant CloudFront OAC access (i.e., has no Allow statement for the cloudfront.amazonaws.com service principal conditioned on the distribution ARN)."
 type = "binary"
 
 [[criterion]]
@@ -18,18 +18,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "bucket_policy_lacks_cloudfront_principal"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 bucket policy for {{api-and-observability-cloudfront-laljfb348-us-east-1-TenantServicesBucketName}} has no Allow statement for the cloudfront.amazonaws.com service principal conditioned on the distribution ARN."
-type = "binary"
-
-[[criterion]]
 name = "oac_attached_signs_sigv4"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OAC {{api-and-observability-cloudfront-laljfb348-us-east-1-OACId}} is attached and signs requests with SigV4."
-type = "binary"
-
-[[criterion]]
-name = "s3_rejects_unpermitted_requests"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): S3 rejects requests because no bucket policy permits them."
 type = "binary"
 
 [[criterion]]
@@ -39,12 +29,7 @@ type = "binary"
 
 [[criterion]]
 name = "distribution_has_zero_tenants"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution has zero distribution tenants created."
-type = "binary"
-
-[[criterion]]
-name = "no_tenant_config_exists"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is no tenant configuration to route requests through."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The distribution has zero distribution tenants created (so there is no tenant configuration to route requests through)."
 type = "binary"
 
 [[criterion]]
