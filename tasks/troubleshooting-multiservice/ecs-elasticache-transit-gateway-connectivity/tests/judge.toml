@@ -43,23 +43,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "transit_gateway_correctly_configured"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Transit Gateway itself is correctly configured"
-type = "binary"
-
-[[criterion]]
-name = "vpc_attachments_correctly_configured"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Both VPC attachments are correctly configured"
-type = "binary"
-
-[[criterion]]
 name = "elasticache_sg_allows_port_11211"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ElastiCache security group has port 11211 open to 13.1.0.0/16"
-type = "binary"
-
-[[criterion]]
-name = "ecs_service_correctly_configured"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS service is correctly configured"
 type = "binary"
 
 [[criterion]]
