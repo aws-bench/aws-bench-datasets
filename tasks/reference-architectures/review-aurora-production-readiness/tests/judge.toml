@@ -5,9 +5,74 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "cluster_deletion_protection_disabled"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{reference-architectures-RDS-aurora-us-east-1-ClusterIdentifier}} has DeletionProtection=false"
+type = "binary"
+
+[[criterion]]
+name = "cluster_cfn_deletion_policy_delete"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster's CloudFormation resource carries DeletionPolicy=Delete"
+type = "binary"
+
+[[criterion]]
+name = "cluster_cfn_update_replace_policy_delete"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster's CloudFormation resource carries UpdateReplacePolicy=Delete"
+type = "binary"
+
+[[criterion]]
+name = "secret_cfn_deletion_policy_delete"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The attached master secret {{reference-architectures-RDS-aurora-us-east-1-SecretArn}} has DeletionPolicy=Delete"
+type = "binary"
+
+[[criterion]]
+name = "secret_cfn_update_replace_policy_delete"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The attached master secret {{reference-architectures-RDS-aurora-us-east-1-SecretArn}} has UpdateReplacePolicy=Delete"
+type = "binary"
+
+[[criterion]]
+name = "destroy_drops_data_without_snapshot"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A cdk destroy or any property change that triggers a cluster or secret replacement will drop the database and its data with no snapshot and no undo due to the DeletionProtection=false and DeletionPolicy=Delete settings"
+type = "binary"
+
+[[criterion]]
+name = "secret_rotation_not_enabled"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The master secret {{reference-architectures-RDS-aurora-us-east-1-SecretArn}} has RotationEnabled=null / rotation has never been turned on"
+type = "binary"
+
+[[criterion]]
+name = "secret_lacks_rotation_lambda"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is no RotationLambdaARN attached to the master secret {{reference-architectures-RDS-aurora-us-east-1-SecretArn}}"
+type = "binary"
+
+[[criterion]]
+name = "password_static_across_api_calls"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The dbadmin password generated at stack deploy is static for the life of the stack and is the same credential the Data API hands to every rds-data:ExecuteStatement call. Satisfied if the junior identifies that secret rotation is disabled/never configured on the master secret and connects this to the credential being unchanging; the junior does not need to separately spell out that the Data API specifically reuses this same static credential per call."
+type = "binary"
+
+[[criterion]]
+name = "min_capacity_half_acu"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster's ServerlessV2ScalingConfiguration has MinCapacity=0.5 ACU"
+type = "binary"
+
+[[criterion]]
+name = "max_capacity_one_acu_limits_production"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster's ServerlessV2ScalingConfiguration has MaxCapacity=1.0 ACU, which is a production-readiness concern as it tops out at roughly 2 GB of buffer pool and a handful of concurrent connections"
+type = "binary"
+
+[[criterion]]
+name = "api_calls_queue_before_cluster_saturates"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Under real concurrency the Data API calls will queue, and the Lambda side will show up as elevated latency and 504s long before the cluster itself looks unhealthy, due to the MaxCapacity=1.0 ACU ceiling. Satisfied if the junior identifies the MaxCapacity=1.0 ACU ceiling as a production-readiness concern that will cause queuing/latency under concurrency; the junior does not need to also state the specific downstream symptom (Lambda-side elevated latency and 504s) verbatim."
+type = "binary"
+
+[[criterion]]
+name = "reader_endpoint_routes_to_writer"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With zero reader instances, any traffic sent to the reader endpoint is routed to the writer, so reads contend with writes for the same 0.5–1 ACU"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

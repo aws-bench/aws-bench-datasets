@@ -8,32 +8,27 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_lambda_event_source_mapping_esm_that_connect"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda event source mapping (ESM) that connects the RabbitMQ broker to the Lambda function has a connection failure. The missing-queue claims below already establish that the queue is unreachable -- credit this claim if the junior identifies that the ESM has a connection/connectivity failure preventing it from consuming messages, even if the junior attributes the failure to a different, evidence-backed cause (e.g. missing VPC endpoints) rather than specifically saying it cannot reach the target queue."
+name = "esm_has_connection_failure"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda event source mapping (ESM) that connects the RabbitMQ broker to the Lambda function shows a connection/connectivity failure preventing it from consuming messages (e.g. errors or a disabled state). Credit this claim if the junior identifies that the ESM has a connection/connectivity failure, even if the junior attributes it to a different, evidence-backed cause (e.g. missing VPC endpoints) rather than specifically saying it cannot reach the target queue."
 type = "binary"
 
 [[criterion]]
-name = "the_esm_may_show_as_enabled_with_connection_erro"
+name = "esm_enabled_with_errors_or_disabled"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ESM may show as Enabled with connection errors or may have been automatically Disabled by AWS after repeated failures."
 type = "binary"
 
 [[criterion]]
-name = "the_target_queue_reference_architectures_amazonm"
+name = "target_queue_does_not_exist"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The target queue {{reference-architectures-AmazonMQ-rabbitmq-us-east-1-QueueName}} does not exist on the broker."
 type = "binary"
 
 [[criterion]]
-name = "the_queue_was_never_created_after_provisioning_s"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The queue was never created after provisioning, so the ESM cannot bind to it and Lambda is never triggered."
-type = "binary"
-
-[[criterion]]
-name = "to_fix_create_the_queue_on_the_broker_and_if_the"
+name = "create_queue_and_reenable_esm"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To fix: create the queue on the broker and, if the ESM was disabled, re-enable it."
 type = "binary"
 
 [[criterion]]
-name = "the_lambda_handler_is_a_minimal_stub_that_only_l"
+name = "lambda_stub_does_not_affect_consumption"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler is a minimal stub that only logs messages, but this does not affect whether messages are consumed from the queue."
 type = "binary"
 

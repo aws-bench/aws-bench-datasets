@@ -5,9 +5,49 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "lambda_missing_websocket_endpoint_var"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function flint-agent-message has no WEBSOCKET_ENDPOINT environment variable set, causing the sendToConnection helper to throw \"Cannot read properties of undefined (reading replace)\" when attempting to push a reply back, so no response ever reaches the client."
+type = "binary"
+
+[[criterion]]
+name = "lambda_does_not_recognize_ping_action"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler does not recognize the 'ping' action that the agent script sends; it routes only 'heartbeat', 'register', 'agent_connected', and 'register_ui' actions, and unrecognized actions like 'ping' fall through to a default handler that returns 400 (junior may simply establish that ping is unrouted/unrecognized and falls through to a default/fallback path, without enumerating all routed actions or citing the exact status code)."
+type = "binary"
+
+[[criterion]]
+name = "agent_sh_closes_socket_after_two_seconds"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent.sh closes each WebSocket after about 2 seconds (by piping registration, sleep 1, ping, sleep 1 into websocat then closing stdin), then sleeps 5s and reconnects in a loop, causing the observed 'keep disconnecting' behavior."
+type = "binary"
+
+[[criterion]]
+name = "persistent_sh_keeps_socket_open"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-persistent.sh in the same S3 bucket keeps the socket open."
+type = "binary"
+
+[[criterion]]
+name = "professional_sh_keeps_socket_open"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh in the same S3 bucket keeps the socket open."
+type = "binary"
+
+[[criterion]]
+name = "persistent_sh_uses_ping_action"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-persistent.sh uses the unrouted 'ping' action."
+type = "binary"
+
+[[criterion]]
+name = "professional_sh_uses_heartbeat_action"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh uses the 'heartbeat' action."
+type = "binary"
+
+[[criterion]]
+name = "fix_requires_setting_lambda_endpoint_var"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Fixing the backend requires setting WEBSOCKET_ENDPOINT on the Lambda function flint-agent-message."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

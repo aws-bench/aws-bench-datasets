@@ -8,18 +8,13 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "all_executions_fail_at_the_invokeprocessinglambd"
+name = "all_executions_fail_at_invoke_processing_lambda"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): All executions fail at the InvokeProcessingLambda state. InvokeProcessingLambda is this state machine's only task state, so identifying the one Lambda function that fails (with the correct ARN and error message) satisfies this claim even if the junior never uses the literal state name -- do not fail this claim solely for omitting the state-name label when the junior correctly pinpoints the single failing Lambda invocation."
 type = "binary"
 
 [[criterion]]
-name = "the_lambda_function_troubleshooting_multiservice"
+name = "lambda_throws_missing_target_bucket_error"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda function {{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-ProcessingLambdaArn}} throws a RuntimeError: \"Configuration validation failed: missing required field 'targetBucket'\""
-type = "binary"
-
-[[criterion]]
-name = "the_executions_fail_because_the_lambda_function_"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The executions fail because the Lambda function {{troubleshooting-multiservice-lambda-mw9wjm2q7-ap-southeast-2-ProcessingLambdaArn}} throws a RuntimeError: \"Configuration validation failed: missing required field 'targetBucket'\""
 type = "binary"
 
 [[criterion]]

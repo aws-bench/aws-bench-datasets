@@ -5,9 +5,89 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "pipeline_source_points_to_main_branch"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Source action of {{reference-architectures-Glue-etlpipeline-us-east-1-PipelineName}} is configured with Provider=CodeCommit and BranchName=main, pointing at {{reference-architectures-Glue-etlpipeline-us-east-1-CodeCommitRepoName}}"
+type = "binary"
+
+[[criterion]]
+name = "codecommit_repo_has_no_branches"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{reference-architectures-Glue-etlpipeline-us-east-1-CodeCommitRepoName}} has zero branches"
+type = "binary"
+
+[[criterion]]
+name = "pipeline_has_one_execution_only"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The pipeline has exactly one execution in its history"
+type = "binary"
+
+[[criterion]]
+name = "execution_triggered_by_cloudformation_deployment"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The one execution was triggered automatically by CloudFormation when the stack was first deployed"
+type = "binary"
+
+[[criterion]]
+name = "execution_failed_main_branch_not_found"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The one execution failed at the Source stage in about one second with ConfigurationError: no branch named main was found in the selected AWS CodeCommit repository"
+type = "binary"
+
+[[criterion]]
+name = "eventbridge_rule_filters_main_branch_only"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The EventBridge rule that would re-trigger the pipeline on a CodeCommit push only fires on referenceCreated/referenceUpdated events where referenceName is main"
+type = "binary"
+
+[[criterion]]
+name = "pipeline_requires_main_branch_commit"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Until someone pushes an initial commit on a main branch, the pipeline cannot progress beyond the Source stage (neither starting new executions on its own nor reaching any downstream work)"
+type = "binary"
+
+[[criterion]]
+name = "launcher_lambda_log_group_missing"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is no Lambda log group for the launcher"
+type = "binary"
+
+[[criterion]]
+name = "launcher_lambda_implements_deploy_action"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The launcher Lambda {{reference-architectures-Glue-etlpipeline-us-east-1-LambdaFunctionName}} implements the Deploy action"
+type = "binary"
+
+[[criterion]]
+name = "launcher_reports_success_without_polling"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The launcher Lambda implements a fire-and-forget pattern: it runs start_job_run against Glue and then immediately calls put_job_success_result back to CodePipeline without polling get_job_run, causing the Deploy stage to report SUCCESS regardless of whether the Glue job itself fails, times out, or produces garbage"
+type = "binary"
+
+[[criterion]]
+name = "glue_role_lacks_service_policy"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue worker role has no AWSGlueServiceRole managed policy attached (list-attached-role-policies returns an empty list)"
+type = "binary"
+
+[[criterion]]
+name = "glue_role_has_limited_inline_policy"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue worker role's single inline policy only grants glue:CreateJob/StartJobRun on the job, KMS on the pipeline key, and S3 read/write on the pipeline artifact bucket"
+type = "binary"
+
+[[criterion]]
+name = "glue_role_lacks_cloudwatch_logs_permissions"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Glue worker role lacks the CloudWatch Logs permissions (logs:CreateLogGroup/CreateLogStream/PutLogEvents) that the Glue job needs to write its logs"
+type = "binary"
+
+[[criterion]]
+name = "glue_actions_misplaced_on_worker_role"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The two glue:* actions (CreateJob and StartJobRun) that are on the worker role actually belong on the launcher Lambda, not on the worker role"
+type = "binary"
+
+[[criterion]]
+name = "glue_job_fails_silently_after_repo_seeded"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Once the repo is seeded and the Lambda finally fires, the Glue job will start, fail when it tries to write to its CloudWatch log group, and the pipeline will still report Deploy SUCCESS because of the fire-and-forget launcher, with the only real failure signal being the JobRunState on the Glue job itself. This is a forward-looking synthesis of facts the junior may state separately -- satisfied if the junior separately establishes (a) the fire-and-forget launcher makes Deploy report SUCCESS regardless of the Glue job's real outcome, and (b) the Glue role lacks the CloudWatch Logs permissions the job needs; the junior does not need to walk through this as one explicit future scenario connecting both facts."
+type = "binary"
+
+[[criterion]]
+name = "three_fixes_belong_in_same_pr"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): All three fixes belong in the same PR: seed the repo with an initial main commit that includes the ETL script, change the launcher to poll get_job_run (or use the CodePipeline Lambda continuation token) before reporting success, and attach AWSGlueServiceRole (or at minimum the necessary logs:* permissions) to the GlueRole"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

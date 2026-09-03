@@ -5,9 +5,34 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "audit_logs_capture_auth_not_status"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch audit logs capture authentication and authorization events (AUTHENTICATED, GRANTED_PRIVILEGES) but do not capture HTTP response codes, and no other log category records whether the response was 200 or 404."
+type = "binary"
+
+[[criterion]]
+name = "get_request_authenticated_and_authorized"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The audit logs confirm the GET to /changesets/_doc/changeset-a3f8b921 was authenticated and authorized."
+type = "binary"
+
+[[criterion]]
+name = "enabled_logs_cannot_determine_status"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): None of the other enabled log types (application, slow search, slow index) capture per-request status codes. A general conclusion that none of the configured OpenSearch logs can determine the status code satisfies this claim -- the junior does not need to individually name and rule out each log type by name as long as the overall conclusion (no log-based method works) is correct."
+type = "binary"
+
+[[criterion]]
+name = "no_builtin_http_access_log"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch has no built-in access log that records HTTP response codes."
+type = "binary"
+
+[[criterion]]
+name = "junior_does_not_assert_specific_status_code"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The junior does not assert a specific HTTP status code (200 or 404) as the likely/actual outcome of the GET request for changeset-a3f8b921. Per the reference, this cannot be determined from any available log, so the correct conclusion is that the status is undeterminable -- confidently guessing a status code, even with caveats or cited circumstantial evidence (e.g. a preceding successful operation, absence of errors), contradicts this required conclusion."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

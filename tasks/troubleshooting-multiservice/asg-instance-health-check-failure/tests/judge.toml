@@ -8,47 +8,37 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_security_group_troubleshooting_multiservice_"
+name = "sg_attached_to_asg_instances"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-SecurityGroupId}} is attached to the instances in Auto Scaling Group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-ASGName}}."
 type = "binary"
 
 [[criterion]]
-name = "the_security_group_troubleshooting_multiservice__2"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-SecurityGroupId}} does not allow inbound traffic on port 4000."
+name = "sg_blocks_port_4000"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-SecurityGroupId}} blocks the NLB health check traffic on port 4000 because it only has self-referencing ingress rules and NLB health checks come from the NLB's private IP address (not a security group reference)."
 type = "binary"
 
 [[criterion]]
-name = "port_4000_is_the_health_check_port_configured_on"
+name = "target_group_health_check_port_4000"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Port 4000 is the health check port configured on target group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-TargetGroupName}}."
 type = "binary"
 
 [[criterion]]
-name = "the_target_group_troubleshooting_multiservice_el"
+name = "target_group_uses_http_health_checks"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The target group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-TargetGroupName}} uses HTTP health checks at path /health-check."
 type = "binary"
 
 [[criterion]]
-name = "the_security_group_troubleshooting_multiservice__3"
+name = "sg_has_self_referencing_rules_only"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-SecurityGroupId}} only has self-referencing ingress rules (TCP 988, TCP 1018-1023, and all-traffic from itself)."
 type = "binary"
 
 [[criterion]]
-name = "the_target_group_is_associated_with_a_network_lo"
+name = "target_group_uses_nlb"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The target group is associated with a Network Load Balancer."
 type = "binary"
 
 [[criterion]]
-name = "with_a_network_load_balancer_health_check_traffi"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With a Network Load Balancer, health check traffic comes from the NLB's private IP address in the subnet, not from a security group reference, so the NLB health check packets are dropped by the security group that only has self-referencing ingress rules."
-type = "binary"
-
-[[criterion]]
-name = "the_security_group_blocking_nlb_health_checks_on"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group blocking NLB health checks on port 4000 causes the ASG to continuously cycle instances: they launch, fail the ELB health check after the grace period, get terminated, and a replacement is launched."
-type = "binary"
-
-[[criterion]]
-name = "to_resolve_add_an_inbound_tcp_rule_for_the_healt"
+name = "fix_add_subnet_cidr_rule"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve, add an inbound TCP rule for the health-check port 4000 to the security group, sourced from the CIDR of the subnet where the internal NLB resides; once the health check can reach the instances it succeeds, the targets stay healthy, and the terminate/replace loop stops."
 type = "binary"
 

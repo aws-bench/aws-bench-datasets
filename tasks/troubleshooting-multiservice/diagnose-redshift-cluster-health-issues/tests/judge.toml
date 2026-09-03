@@ -5,9 +5,59 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "alarm_in_alarm_state"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The CloudWatch alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} is in ALARM state"
+type = "binary"
+
+[[criterion]]
+name = "alarm_uses_greater_than_threshold"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} is configured with GreaterThanThreshold comparison operator"
+type = "binary"
+
+[[criterion]]
+name = "alarm_threshold_is_point_five"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} has a threshold of 0.5"
+type = "binary"
+
+[[criterion]]
+name = "alarm_monitors_health_status_metric"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthAllAlarmName}} monitors the HealthStatus metric"
+type = "binary"
+
+[[criterion]]
+name = "wrong_operator_triggers_on_healthy_status"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm fires continuously because it uses the wrong comparison operator: a healthy cluster reports HealthStatus of 1.0, which is greater than 0.5, triggering the GreaterThanThreshold alarm incorrectly"
+type = "binary"
+
+[[criterion]]
+name = "should_use_less_than_threshold"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The comparison operator should be LessThanThreshold to detect unhealthy status"
+type = "binary"
+
+[[criterion]]
+name = "cluster_in_available_status"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} is healthy/operational (may be expressed as 'healthy', 'available status', or equivalent wording indicating no actual cluster health problems)"
+type = "binary"
+
+[[criterion]]
+name = "leader_alarm_insufficient_data_state"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthLeaderAlarmName}} is in INSUFFICIENT_DATA state"
+type = "binary"
+
+[[criterion]]
+name = "cluster_is_single_node"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalClusterIdentifier}} is a single-node cluster"
+type = "binary"
+
+[[criterion]]
+name = "insufficient_data_expected_single_node"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The INSUFFICIENT_DATA state for alarm {{troubleshooting-multiservice-redshift-wfic8j0dt-us-east-1-GlobalHealthLeaderAlarmName}} is expected for a single-node cluster where the node has a SHARED role and no Leader-specific metrics are emitted"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

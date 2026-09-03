@@ -8,38 +8,23 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "security_group_troubleshooting_multiservice_sage"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}} has no inbound rules"
-type = "binary"
-
-[[criterion]]
-name = "the_instances_are_failing_health_checks_because_"
+name = "sg_blocks_nlb_health_check"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances are failing health checks because security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}} has no inbound rules, blocking NLB health check requests to port 4000 (/sync-health-check)"
 type = "binary"
 
 [[criterion]]
-name = "this_causes_10_consecutive_failures_marking_inst"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): This causes 10 consecutive failures, marking instances unhealthy"
+name = "ten_failures_mark_unhealthy"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): This causes 10 consecutive failures, marking instances unhealthy. Satisfied if the junior establishes the mechanism -- repeated/consecutive failed health checks against the blocked port eventually mark the target unhealthy (e.g. via Target.FailedHealthChecks) -- without stating the literal threshold count of 10."
 type = "binary"
 
 [[criterion]]
-name = "the_grace_period_is_0_seconds_a_non_default_valu"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The grace period is 0 seconds, a non-default value"
+name = "grace_period_is_zero"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): ASG immediately terminates and replaces instances in a continuous loop because the grace period is 0 seconds (a non-default value)"
 type = "binary"
 
 [[criterion]]
-name = "asg_immediately_terminates_and_replaces_instance"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): ASG immediately terminates and replaces instances in a continuous loop because the grace period is 0 seconds"
-type = "binary"
-
-[[criterion]]
-name = "to_resolve_add_an_inbound_tcp_rule_for_the_healt"
+name = "add_inbound_rule_for_port_4000"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve, add an inbound TCP rule for the health-check port 4000 from CIDR 172.25.0.0/23 (the subnet where the internal NLB resides) to the security group {{troubleshooting-multiservice-sagemaker-vszf4yl62-us-west-2-HelperSecurityGroupId}}; once the health check can reach the instances it succeeds and the targets stay healthy."
-type = "binary"
-
-[[criterion]]
-name = "the_internal_nlb_resides_in_the_subnet_with_cidr"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The internal NLB resides in the subnet with CIDR 172.25.0.0/23"
 type = "binary"
 
 [[criterion]]

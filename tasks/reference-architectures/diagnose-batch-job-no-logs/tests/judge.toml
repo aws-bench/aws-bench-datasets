@@ -8,58 +8,48 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_lambda_handler_calls_batch_submit_job_once_a"
+name = "lambda_submits_job_returns_immediately"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler calls batch.submit_job once and immediately returns {'statusCode': 200, 'body': {'jobId': ...} } without polling, describing the job, or waiting for a container to start."
 type = "binary"
 
 [[criterion]]
-name = "a_200_plus_a_jobid_only_confirms_that_the_batch_"
+name = "status_200_confirms_submission_not_execution"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A 200 plus a jobId only confirms that the Batch control plane accepted the submission into the queue; it says nothing about whether anything ever actually ran."
 type = "binary"
 
 [[criterion]]
-name = "the_job_definition_reference_architectures_batch"
+name = "job_definition_references_untagged_image"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The job definition {{reference-architectures-Batch-openmp-us-east-1-JobDefinitionArn}} references image {{reference-architectures-Batch-openmp-us-east-1-EcrRepositoryUri}} with no tag."
 type = "binary"
 
 [[criterion]]
-name = "when_no_tag_is_specified_batch_resolves_the_imag"
+name = "untagged_image_resolves_to_latest"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When no tag is specified, Batch resolves the image to :latest."
 type = "binary"
 
 [[criterion]]
-name = "the_ecr_repository_reference_architectures_batch"
+name = "ecr_repository_is_empty"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECR repository {{reference-architectures-Batch-openmp-us-east-1-EcrRepositoryName}} is empty with no image ever pushed to it."
 type = "binary"
 
 [[criterion]]
-name = "the_most_recent_job_on_queue_reference_architect"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recent job on queue {{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}} transitions SUBMITTED to RUNNABLE to STARTING to FAILED."
+name = "job_transitions_to_failed_state"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recent job on queue {{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}} transitions SUBMITTED to RUNNABLE to STARTING to FAILED, with a statusReason indicating the container image could not be pulled from the repository (no manifest found)."
 type = "binary"
 
 [[criterion]]
-name = "the_most_recent_job_on_queue_reference_architect_2"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recent job on queue {{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}} has a statusReason indicating the container image could not be pulled from the repository (no manifest found)."
-type = "binary"
-
-[[criterion]]
-name = "the_batch_job_cannot_start_because_the_ecr_repos"
+name = "job_cannot_start_missing_image"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Batch job cannot start because the ECR repository is empty and the container image cannot be pulled."
 type = "binary"
 
 [[criterion]]
-name = "the_job_definition_has_no_logconfiguration_optio"
+name = "job_definition_lacks_log_group_override"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The job definition has no logConfiguration.options.awslogs-group override."
 type = "binary"
 
 [[criterion]]
-name = "when_no_logconfiguration_options_awslogs_group_o"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When no logConfiguration.options.awslogs-group override is set, Batch's default awslogs driver writes to /aws/batch/job instead of the declared group {{reference-architectures-Batch-openmp-us-east-1-LogGroupName}}."
-type = "binary"
-
-[[criterion]]
-name = "the_declared_log_group_reference_architectures_b"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The declared log group {{reference-architectures-Batch-openmp-us-east-1-LogGroupName}} will keep reading as empty even after the ECR problem is fixed, because logs will be written to /aws/batch/job instead."
+name = "batch_defaults_to_aws_batch_job_logs"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The declared log group {{reference-architectures-Batch-openmp-us-east-1-LogGroupName}} will remain empty even after the ECR problem is fixed because the job definition has no logConfiguration.options.awslogs-group override, so Batch's default awslogs driver writes to /aws/batch/job instead."
 type = "binary"
 
 [[criterion]]

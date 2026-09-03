@@ -5,9 +5,49 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "email_recovery_works_phone_never_will"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A user can recover via email; they will never be able to recover via phone, despite phone being listed as the priority-1 recovery mechanism."
+type = "binary"
+
+[[criterion]]
+name = "phone_priority_one_email_priority_two"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AccountRecoverySetting.RecoveryMechanisms = [{Priority:1, Name:verified_phone_number}, {Priority:2, Name:verified_email}]"
+type = "binary"
+
+[[criterion]]
+name = "sms_configuration_is_null"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SmsConfiguration is null (the pool has no SNS role/ExternalId configured), so Cognito has no way to actually send a verification SMS to anyone."
+type = "binary"
+
+[[criterion]]
+name = "email_auto_verified_phone_not"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): AutoVerifiedAttributes = [\"email\"], and phone numbers are NOT auto-verified on sign-up"
+type = "binary"
+
+[[criterion]]
+name = "phone_verification_requires_sms_config"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Cognito evaluates recovery mechanisms in priority order but skips any for which the user has no verified attribute. Since phone verification requires SmsConfiguration (which is absent) and phone numbers are not auto-verified, nobody in this pool can have a verified phone number, so every password-recovery request falls through to priority-2 verified_email."
+type = "binary"
+
+[[criterion]]
+name = "username_attributes_email_only"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): UsernameAttributes = [\"email\"] and sign-up is blocked via AdminCreateUserOnly=true, so there's no self-service phone registration even if SmsConfiguration were added."
+type = "binary"
+
+[[criterion]]
+name = "pool_has_zero_app_clients"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the pool has zero app clients (list-user-pool-clients returns []), so there's no client_id to call ForgotPassword against."
+type = "binary"
+
+[[criterion]]
+name = "adding_client_enables_email_only"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Once an app client is added, email recovery will work end-to-end; phone recovery will still not, and remains misleading."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

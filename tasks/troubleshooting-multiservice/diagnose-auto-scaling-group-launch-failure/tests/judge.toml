@@ -5,9 +5,44 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "asg_desired_capacity_is_zero"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Auto Scaling Group's DesiredCapacity is 0"
+type = "binary"
+
+[[criterion]]
+name = "asg_max_size_is_one"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Auto Scaling Group's MaxSize is 1"
+type = "binary"
+
+[[criterion]]
+name = "asg_min_size_is_zero"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Auto Scaling Group's MinSize is 0"
+type = "binary"
+
+[[criterion]]
+name = "launch_template_uses_kms_encryption"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The launch template's EBS encryption uses KMS key {{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-KmsKeyId}}"
+type = "binary"
+
+[[criterion]]
+name = "kms_key_is_disabled"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): KMS key {{troubleshooting-multiservice-ec2-u5j9r8syp-us-west-2-KmsKeyId}} is disabled"
+type = "binary"
+
+[[criterion]]
+name = "zero_desired_capacity_prevents_launches"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): DesiredCapacity being 0 prevents instances from launching because no launches are attempted when desired capacity is zero"
+type = "binary"
+
+[[criterion]]
+name = "disabled_kms_key_blocks_volume_creation"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Even after increasing desired capacity, launches would fail because EC2 cannot create encrypted volumes from a disabled KMS key (Client.InvalidKMSKey.InvalidState)"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"
