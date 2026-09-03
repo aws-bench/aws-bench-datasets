@@ -8,21 +8,21 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_bucket_prod_bucket_jdn294ng4_uses_aws_kms_en"
+name = "prod_bucket_uses_kms_encryption"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket prod-bucket-jdn294ng4 uses AWS KMS encryption (SSE-KMS with the AWS-managed key)"
 type = "binary"
 
 [[criterion]]
-name = "the_cdk_infrastructure_staging_buckets_use_kms_e"
+name = "cdk_staging_buckets_use_kms"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The CDK infrastructure staging buckets use KMS encryption"
 type = "binary"
 
 [[criterion]]
-name = "all_other_buckets_use_the_default_s3_managed_enc"
+name = "remaining_buckets_use_default_encryption"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): All other buckets use the default S3-managed encryption (SSE-S3/AES256). If the junior exhaustively and correctly lists which buckets use KMS encryption (matching the other claims above) without claiming that any additional bucket uses a non-default encryption scheme, that satisfies this claim by implication -- the junior does not need to explicitly restate that the remaining buckets use default encryption."
 type = "binary"
 
 [[criterion]]
 name = "no_extraneous_or_contradicting_facts"
-description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

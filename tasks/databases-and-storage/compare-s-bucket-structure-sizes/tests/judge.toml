@@ -8,26 +8,26 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "databases_and_storage_s3_3kmc99rnc_us_east_1_buc"
+name = "bucket_1_contains_subdirectory_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket1Name}} contains folder structure {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}}"
 type = "binary"
 
 [[criterion]]
-name = "databases_and_storage_s3_3kmc99rnc_us_east_1_buc_2"
+name = "bucket_2_contains_subdirectory_2"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{databases-and-storage-s3-3kmc99rnc-us-east-1-Bucket2Name}} contains folder structure {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}}"
 type = "binary"
 
 [[criterion]]
-name = "the_file_content_in_databases_and_storage_s3_3km"
+name = "subdirectory_files_match_name_and_size"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The files in {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}} and {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}} are consistent with each other (matching name and size). The instruction only asks to compare structure and file sizes, not byte-level content -- do not require the junior to explicitly verify or state that file CONTENT is identical; matching file name and size (already covered by the size claim below) is sufficient evidence to satisfy this claim."
 type = "binary"
 
 [[criterion]]
-name = "the_file_size_in_both_databases_and_storage_s3_3"
+name = "file_size_is_14_bytes"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The file size in both {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory1Name}} and {{databases-and-storage-s3-3kmc99rnc-us-east-1-SubDirectory2Name}} is 14 bytes"
 type = "binary"
 
 [[criterion]]
 name = "no_extraneous_or_contradicting_facts"
-description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

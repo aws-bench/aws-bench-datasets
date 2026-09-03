@@ -8,26 +8,26 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "in_us_east_1_00da49d8_totalstackswiths3_active_c"
+name = "stacks_declare_s3_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, {{00da49d8-TotalStacksWithS3}} active CloudFormation stacks declare an S3 bucket resource"
 type = "binary"
 
 [[criterion]]
-name = "00da49d8_regularbucketstackcount_contain_a_regul"
+name = "stacks_contain_regular_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): {{00da49d8-RegularBucketStackCount}} contain a regular `AWS::S3::Bucket`"
 type = "binary"
 
 [[criterion]]
-name = "vector_buckets_aws_s3vectors_vectorbucket_are_de"
+name = "vector_bucket_stack_count_matches"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the number of stacks declaring a vector bucket (`AWS::S3Vectors::VectorBucket`) matches what the reference states (the specific stack(s): {{00da49d8-VectorBucketStacks}}). The instruction's core ask is a count broken down by S3 variant -- do not require the junior to name the specific stack(s); crediting the correct per-variant count alone is sufficient."
 type = "binary"
 
 [[criterion]]
-name = "table_buckets_aws_s3tables_tablebucket_are_decla"
+name = "table_bucket_stack_count_matches"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the number of stacks declaring a table bucket (`AWS::S3Tables::TableBucket`) matches what the reference states (the specific stack(s): {{00da49d8-TableBucketStacks}}). The instruction's core ask is a count broken down by S3 variant -- do not require the junior to name the specific stack(s); crediting the correct per-variant count alone is sufficient."
 type = "binary"
 
 [[criterion]]
 name = "no_extraneous_or_contradicting_facts"
-description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

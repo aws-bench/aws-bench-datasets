@@ -8,26 +8,26 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "there_is_an_analytics_configuration_named_testan"
+name = "analytics_config_exists_on_bucket"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): There is an analytics configuration named 'testAnalyticsConfiguration' on {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_testanalyticsconfiguration_analytics_configu"
+name = "analytics_destination_account_id"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The 'testAnalyticsConfiguration' analytics configuration's S3BucketDestination sets BucketAccountId to 111122223333"
 type = "binary"
 
 [[criterion]]
-name = "111122223333_is_not_the_account_that_owns_the_so"
+name = "destination_account_differs_from_source"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 111122223333 is not the account that owns the source bucket {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}}"
 type = "binary"
 
 [[criterion]]
-name = "testanalyticsconfiguration_on_serverless_apps_s3"
+name = "only_cross_account_analytics_config"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): 'testAnalyticsConfiguration' on {{serverless-apps-S3Storage-us-east-1-AnalyticsBucketName}} is the only analytics configuration that exports to a different account"
 type = "binary"
 
 [[criterion]]
 name = "no_extraneous_or_contradicting_facts"
-description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

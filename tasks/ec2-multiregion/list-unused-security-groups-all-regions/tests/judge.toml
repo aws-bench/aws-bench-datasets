@@ -8,21 +8,21 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "you_have_4b68864e_unusedsecuritygroupcount_unuse"
+name = "unused_security_group_count"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): You have {{4b68864e-UnusedSecurityGroupCount}} unused security groups"
 type = "binary"
 
 [[criterion]]
-name = "most_unused_security_groups_are_default_security"
+name = "unused_sgs_mostly_default"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Most unused security groups are default security groups automatically created for each VPC"
 type = "binary"
 
 [[criterion]]
-name = "in_us_east_1_one_of_the_unused_security_groups_i"
+name = "specific_unused_sg_in_us_east_1"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): In us-east-1, one of the unused security groups is {{ec2-multiregion-EC2-ks84v1fh12-us-east-1-UnusedSecurityGroupId}}"
 type = "binary"
 
 [[criterion]]
 name = "no_extraneous_or_contradicting_facts"
-description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does. IMPORTANT: this account is restricted by an SCP to only us-east-1, us-west-1, and us-west-2 -- the reference answer's own security-group count was derived by attempting every AWS region and discarding the ones that raised AccessDenied. If the junior's answer notes that it attempted other regions and was denied access (e.g. by an SCP, or an AccessDenied/UnauthorizedOperation error), that is NOT an extraneous or contradicting claim -- it is the same methodology the reference answer used, and must not cause this criterion to fail."
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does. IMPORTANT: this account is restricted by an SCP to only us-east-1, us-west-1, and us-west-2 -- the reference answer's own security-group count was derived by attempting every AWS region and discarding the ones that raised AccessDenied. If the junior's answer notes that it attempted other regions and was denied access (e.g. by an SCP, or an AccessDenied/UnauthorizedOperation error), that is NOT an extraneous or contradicting claim -- it is the same methodology the reference answer used, and must not cause this criterion to fail."
 type = "binary"

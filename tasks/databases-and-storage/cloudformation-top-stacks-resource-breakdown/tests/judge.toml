@@ -8,36 +8,36 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_stack_with_the_most_resources_is_4dd10da5_st"
+name = "stack_1_has_most_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack with the most resources is {{4dd10da5-Stack1Name}} with {{4dd10da5-Stack1Count}} resources"
 type = "binary"
 
 [[criterion]]
-name = "the_top_3_resource_types_in_4dd10da5_stack1name_"
+name = "stack_1_top_three_types"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The top 3 resource types in {{4dd10da5-Stack1Name}} are {{4dd10da5-Stack1TopTypes}}"
 type = "binary"
 
 [[criterion]]
-name = "the_stack_with_the_second_most_resources_is_4dd1"
+name = "stack_2_has_second_most_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack with the second most resources is {{4dd10da5-Stack2Name}} with {{4dd10da5-Stack2Count}} resources"
 type = "binary"
 
 [[criterion]]
-name = "the_top_3_resource_types_in_4dd10da5_stack2name_"
+name = "stack_2_top_three_types"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The top 3 resource types in {{4dd10da5-Stack2Name}} are {{4dd10da5-Stack2TopTypes}}"
 type = "binary"
 
 [[criterion]]
-name = "the_stack_with_the_third_most_resources_is_4dd10"
+name = "stack_3_has_third_most_resources"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The stack with the third most resources is {{4dd10da5-Stack3Name}} with {{4dd10da5-Stack3Count}} resources"
 type = "binary"
 
 [[criterion]]
-name = "the_top_3_resource_types_in_4dd10da5_stack3name_"
+name = "stack_3_top_three_types"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The top 3 resource types in {{4dd10da5-Stack3Name}} are {{4dd10da5-Stack3TopTypes}}"
 type = "binary"
 
 [[criterion]]
 name = "no_extraneous_or_contradicting_facts"
-description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

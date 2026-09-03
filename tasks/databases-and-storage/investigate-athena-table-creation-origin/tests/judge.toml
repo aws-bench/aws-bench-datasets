@@ -8,41 +8,41 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "the_athena_table_databases_and_storage_athena_9j"
+name = "athena_table_created_by_cloudformation"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Athena table {{databases-and-storage-athena-9jhgt3tfs-us-east-1-TableName}} was created using the CloudFormation stack named {{databases-and-storage-athena-9jhgt3tfs-us-east-1-StackName}}"
 type = "binary"
 
 [[criterion]]
-name = "the_resource_was_created_as_an_aws_glue_table_re"
+name = "resource_type_is_glue_table"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The resource was created as an AWS::Glue::Table resource in CloudFormation"
 type = "binary"
 
 [[criterion]]
-name = "it_has_a_storagedescriptor_pointing_to_actual_da"
+name = "storage_descriptor_points_to_s3"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): It has a StorageDescriptor pointing to actual data in S3"
 type = "binary"
 
 [[criterion]]
-name = "it_has_no_vieworiginaltext_property"
+name = "no_view_original_text_property"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): It has no ViewOriginalText property"
 type = "binary"
 
 [[criterion]]
-name = "it_has_no_viewexpandedtext_property"
+name = "no_view_expanded_text_property"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): It has no ViewExpandedText property"
 type = "binary"
 
 [[criterion]]
-name = "ismultidialectview_is_false"
+name = "is_multi_dialect_view_false"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): IsMultiDialectView is false"
 type = "binary"
 
 [[criterion]]
-name = "the_resource_shows_as_a_table_rather_than_a_view"
+name = "displays_as_table_not_view"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The resource shows as a table rather than a view because it was created as an AWS::Glue::Table resource in CloudFormation, has a StorageDescriptor pointing to actual data in S3, and has no view-related properties (ViewOriginalText, ViewExpandedText) or view flags (IsMultiDialectView is false)"
 type = "binary"
 
 [[criterion]]
 name = "no_extraneous_or_contradicting_facts"
-description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"
