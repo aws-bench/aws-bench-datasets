@@ -62,10 +62,13 @@ def run(session=None, region="us-east-1", **parameters) -> None:
     tag = "dev_build_service_main"
     image = f"{repo_uri}:{tag}"
 
-    # Use busybox as a minimal stand-in (scratch requires cross-platform tricks)
-    _sh(["docker", "pull", BUSYBOX_IMAGE])
+    # Use busybox as a minimal stand-in (scratch requires cross-platform tricks).
+    # pull/push hit external/remote registries and are prone to transient 5xx and
+    # throttling (e.g. Docker Hub HTTP 500), so retry them with backoff. The digest
+    # is pinned, so retries stay deterministic. tag is local — no retry needed.
+    _sh(["docker", "pull", BUSYBOX_IMAGE], retries=5)
     _sh(["docker", "tag", BUSYBOX_IMAGE, image])
-    _sh(["docker", "push", image])
+    _sh(["docker", "push", image], retries=5)
     print(f"Pushed image: {image}")
 
     # Verify only this one tag exists (retry for ECR eventual consistency)
@@ -81,16 +84,27 @@ def run(session=None, region="us-east-1", **parameters) -> None:
         raise RuntimeError(f"Unexpected images in repo: {tags}")
 
 
-def _sh(cmd: list, input: str = None) -> None:
-    result = subprocess.run(
-        cmd,
-        input=input.encode() if input else None,
-        capture_output=True,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(
+def _sh(cmd: list, input: str = None, retries: int = 1, backoff: float = 3.0) -> None:
+    last_err = None
+    for attempt in range(retries):
+        result = subprocess.run(
+            cmd,
+            input=input.encode() if input else None,
+            capture_output=True,
+        )
+        if result.returncode == 0:
+            return
+        last_err = RuntimeError(
             f"Command {cmd} failed (exit {result.returncode}): {result.stderr.decode()}"
         )
+        if attempt + 1 < retries:
+            print(
+                f"Command {cmd[:2]} failed (attempt {attempt + 1}/{retries}), "
+                f"retrying in {backoff}s...",
+                flush=True,
+            )
+            time.sleep(backoff)
+    raise last_err
 
 
 if __name__ == "__main__":
