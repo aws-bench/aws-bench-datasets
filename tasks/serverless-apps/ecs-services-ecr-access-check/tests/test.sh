@@ -23,7 +23,7 @@ while true; do
     # $? right after `fi` is the if-statement's own exit status (0 when the
     # condition is false and there's no else), not the condition's exit
     # status -- capture it inside `else` instead, before anything else runs.
-    if output="$(uvx --from harbor-rewardkit --with boto3 rewardkit /tests 2>&1 | tee /dev/stderr)"; then
+    if output="$(rewardkit /tests 2>&1 | tee /dev/stderr)"; then
         break
     else
         status=$?
