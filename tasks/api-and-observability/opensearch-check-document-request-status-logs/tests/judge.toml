@@ -24,7 +24,7 @@ type = "binary"
 
 [[criterion]]
 name = "no_builtin_http_access_log"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch has no built-in access log that records HTTP response codes."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): OpenSearch has no built-in access log that records HTTP response codes. Credit this claim if the junior establishes the operational equivalent -- that none of the OpenSearch log types available on the domain can yield the per-request status, so an external component (ALB, API Gateway, reverse proxy, or the client itself) would be needed to obtain it. The literal phrase 'no built-in access log' is not required."
 type = "binary"
 
 [[criterion]]
