@@ -29,7 +29,7 @@ type = "binary"
 
 [[criterion]]
 name = "professional_sh_keeps_socket_open"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh in the same S3 bucket keeps the socket open (unlike flint-agent.sh, which closes it after ~2s). Credit this claim if the junior establishes that this script maintains a persistent connection, including via a collective statement about the non-flint-agent.sh scripts in the bucket -- a separate sentence naming this script alone is not required."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): flint-agent-professional.sh in the same S3 bucket keeps the socket open (unlike flint-agent.sh, which closes it after ~2s). Credit this claim if the junior establishes that THIS script maintains a persistent connection, however worded; a verbatim restatement is not required. Do NOT credit it on the basis of a grouped or collective statement about several scripts that does not establish persistence for this one specifically."
 type = "binary"
 
 [[criterion]]
