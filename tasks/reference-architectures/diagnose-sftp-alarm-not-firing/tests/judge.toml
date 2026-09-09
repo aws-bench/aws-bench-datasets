@@ -38,8 +38,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "alarm_stays_insufficient_data_state"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With nothing published to SftpErrors, the alarm stays in INSUFFICIENT_DATA (treated as OK) and cannot reach ALARM from real errors."
+name = "alarm_cannot_reach_alarm_state"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): With nothing published to SftpErrors, the alarm cannot reach ALARM from real errors; missing datapoints are treated as notBreaching, so it sits in OK. Credit this claim if the junior establishes that the alarm can never be triggered by real errors because the metric receives no data. The specific state label is secondary -- accept OK, or an equivalent description of missing data being treated as notBreaching; do NOT require the junior to say the alarm remains in INSUFFICIENT_DATA, which is only the transient pre-evaluation state."
 type = "binary"
 
 [[criterion]]
