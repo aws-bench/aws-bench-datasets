@@ -32,3 +32,14 @@ timeout_sec = 1800.0
 
 [cleanup]
 timeout_sec = 5400.0
+
+[[quotas]]
+account_tag = "PRIMARY"
+region = "us-east-1"
+service_code = "lambda"
+quota_code = "L-B99A9384"
+desired_value = 1000
+# Concurrent executions. The order-ingest stack sets reservedConcurrentExecutions
+# on two functions (4 + 5) and the drain-sqs-backlog task raises the processor's
+# ceiling to 20. Lambda keeps at least 10 unreserved, so a new account at the
+# initial limit of 10 rejects every reserved value. 1000 is the standard default.
