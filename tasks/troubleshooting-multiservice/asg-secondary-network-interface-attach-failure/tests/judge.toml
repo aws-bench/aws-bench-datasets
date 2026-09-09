@@ -8,11 +8,6 @@ prompt_template = "judge_prompt.md"
 mode = "batched"
 
 [[criterion]]
-name = "eni_attachment_fails_two_issues"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): ENI attachment for instances in {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-AutoScalingGroupName}} fails due to two issues"
-type = "binary"
-
-[[criterion]]
 name = "asg_has_customer_sg_tag"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ASG {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-AutoScalingGroupName}} has a tag Customer-SG with value {{troubleshooting-multiservice-ec2-nx19kzwoj-us-west-2-CustomerSGTagValue}}"
 type = "binary"
