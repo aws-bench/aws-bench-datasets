@@ -5,9 +5,54 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "lambda_submits_job_returns_immediately"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda handler calls batch.submit_job once and immediately returns {'statusCode': 200, 'body': {'jobId': ...} } without polling, describing the job, or waiting for a container to start."
+type = "binary"
+
+[[criterion]]
+name = "status_200_confirms_submission_not_execution"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A 200 plus a jobId only confirms that the Batch control plane accepted the submission into the queue; it says nothing about whether anything ever actually ran."
+type = "binary"
+
+[[criterion]]
+name = "job_definition_references_untagged_image"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The job definition {{reference-architectures-Batch-openmp-us-east-1-JobDefinitionArn}} references image {{reference-architectures-Batch-openmp-us-east-1-EcrRepositoryUri}} with no tag."
+type = "binary"
+
+[[criterion]]
+name = "untagged_image_resolves_to_latest"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): When no tag is specified, Batch resolves the image to :latest."
+type = "binary"
+
+[[criterion]]
+name = "ecr_repository_is_empty"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECR repository {{reference-architectures-Batch-openmp-us-east-1-EcrRepositoryName}} is empty, so there is no image available to pull. Current emptiness is the whole claim -- an answer does NOT need to assert anything about the repository's push history, which is not observable from the ECR API. Answer 'yes' for equivalent phrasings such as the repository contains no images, has no :latest tag, or has no manifest."
+type = "binary"
+
+[[criterion]]
+name = "job_transitions_to_failed_state"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The most recent job on queue {{reference-architectures-Batch-openmp-us-east-1-JobQueueArn}} transitions SUBMITTED to RUNNABLE to STARTING to FAILED, with a statusReason indicating the container image could not be pulled from the repository (no manifest found)."
+type = "binary"
+
+[[criterion]]
+name = "job_cannot_start_missing_image"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Batch job cannot start because the ECR repository is empty and the container image cannot be pulled."
+type = "binary"
+
+[[criterion]]
+name = "job_definition_lacks_log_group_override"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The job definition has no logConfiguration.options.awslogs-group override."
+type = "binary"
+
+[[criterion]]
+name = "batch_defaults_to_aws_batch_job_logs"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The declared log group {{reference-architectures-Batch-openmp-us-east-1-LogGroupName}} will remain empty even after the ECR problem is fixed because the job definition has no logConfiguration.options.awslogs-group override, so Batch's default awslogs driver writes to /aws/batch/job instead."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

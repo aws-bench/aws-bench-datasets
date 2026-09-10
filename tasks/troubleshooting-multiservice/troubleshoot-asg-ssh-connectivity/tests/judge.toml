@@ -5,9 +5,49 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "asg_instances_lack_ssh_key_pair"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} were launched without an SSH key pair."
+type = "binary"
+
+[[criterion]]
+name = "asg_instances_in_private_subnet"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} are in private subnet {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrimarySubnetId}}."
+type = "binary"
+
+[[criterion]]
+name = "primary_subnet_cidr_range"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Subnet {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrimarySubnetId}} has CIDR 172.25.0.0/24."
+type = "binary"
+
+[[criterion]]
+name = "asg_instances_lack_public_ip"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}} have no public IP address."
+type = "binary"
+
+[[criterion]]
+name = "nacl_associated_with_primary_subnet"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Network ACL {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrivateSubnetNaclId}} is associated with subnet {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrimarySubnetId}}."
+type = "binary"
+
+[[criterion]]
+name = "nacl_rule_denies_ssh_port"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Network ACL {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-PrivateSubnetNaclId}} has rule 50 that explicitly denies inbound TCP port 22."
+type = "binary"
+
+[[criterion]]
+name = "ssm_session_manager_best_option"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The best option for connecting is SSM Session Manager via aws ssm start-session."
+type = "binary"
+
+[[criterion]]
+name = "ssm_already_configured_for_asg"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SSM Session Manager is already configured and ready to use for the instances in ASG {{troubleshooting-multiservice-sagemaker-yhxcakof0-us-west-2-AutoScalingGroupName}}."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

@@ -5,9 +5,34 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "instance_traffic_bypasses_network_firewall"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Outbound internet traffic from instance {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadInstanceId}} does not pass through AWS Network Firewall."
+type = "binary"
+
+[[criterion]]
+name = "dmz_vpc_lacks_internet_gateway"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DMZ VPC {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCId}} has no Internet Gateway."
+type = "binary"
+
+[[criterion]]
+name = "dmz_vpc_routes_only_local"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DMZ VPC {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCId}} route tables only contain the local 10.2.0.0/16 route."
+type = "binary"
+
+[[criterion]]
+name = "workload_subnet_routes_to_tgw"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The workload subnet route table {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-WorkloadSubnetRouteTableId}} sends 0.0.0.0/0 to Transit Gateway {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-TransitGatewayId}}."
+type = "binary"
+
+[[criterion]]
+name = "tgw_forwards_default_to_dmz_vpc"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The TGW route table {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-TGWRouteTableId}} forwards 0.0.0.0/0 to the DMZ VPC attachment {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCAttachmentId}}."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

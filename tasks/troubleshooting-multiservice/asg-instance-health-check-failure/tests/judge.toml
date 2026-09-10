@@ -5,9 +5,44 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "sg_attached_to_asg_instances"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-SecurityGroupId}} is attached to the instances in Auto Scaling Group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-ASGName}}."
+type = "binary"
+
+[[criterion]]
+name = "sg_blocks_port_4000"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-SecurityGroupId}} blocks the NLB health check traffic on port 4000 because it only has self-referencing ingress rules and NLB health checks come from the NLB's private IP address (not a security group reference)."
+type = "binary"
+
+[[criterion]]
+name = "target_group_health_check_port_4000"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Port 4000 is the health check port configured on target group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-TargetGroupName}}."
+type = "binary"
+
+[[criterion]]
+name = "target_group_uses_http_health_checks"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The target group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-TargetGroupName}} uses HTTP health checks at path /health-check."
+type = "binary"
+
+[[criterion]]
+name = "sg_has_self_referencing_rules_only"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The security group {{troubleshooting-multiservice-elbv2-n35haewp6-us-west-2-SecurityGroupId}} only has self-referencing ingress rules (TCP 988, TCP 1018-1023, and all-traffic from itself)."
+type = "binary"
+
+[[criterion]]
+name = "target_group_uses_nlb"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The target group is associated with a Network Load Balancer."
+type = "binary"
+
+[[criterion]]
+name = "fix_add_subnet_cidr_rule"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): To resolve, add an inbound TCP rule for the health-check port 4000 to the security group, sourced from the CIDR of the subnet where the internal NLB resides; once the health check can reach the instances it succeeds, the targets stay healthy, and the terminate/replace loop stops."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

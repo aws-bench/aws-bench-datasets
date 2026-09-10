@@ -5,9 +5,59 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "bucket_has_zero_notification_configs"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket {{reference-architectures-S3-eventnotif-us-east-1-BucketName}} has ZERO notification configurations deployed."
+type = "binary"
+
+[[criterion]]
+name = "sqs_policy_allows_s3_sendmessage"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SQS queue policy allows s3.amazonaws.com:SendMessage with aws:SourceArn=<bucket> (i.e. the SQS policy is NOT the cause of the break). If the junior's overall diagnosis concludes the root cause lies elsewhere (not in S3/SQS/SNS or their policies) without stating the specific grant text, that conclusion already implies this claim -- do not fail it solely for not restating the specific policy grant when the junior's ruling-out conclusion is correct."
+type = "binary"
+
+[[criterion]]
+name = "sns_policy_allows_s3_publish"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SNS topic policy allows sns:Publish with aws:SourceArn=<bucket> (i.e. the SNS policy is NOT the cause of the break). If the junior's overall diagnosis concludes the root cause lies elsewhere (not in S3/SQS/SNS or their policies) without stating the specific grant text, that conclusion already implies this claim -- do not fail it solely for not restating the specific policy grant when the junior's ruling-out conclusion is correct."
+type = "binary"
+
+[[criterion]]
+name = "root_cause_in_lambda_handler"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The root cause is in the NotificationManager custom resource handler's ({{reference-architectures-S3-eventnotif-us-east-1-FunctionName}}) mergeConfigurations function, which only iterates over keys in currentConfig (for each key in Object.entries(currentConfig): copy value, then if inputConfig[key] exists concat it)."
+type = "binary"
+
+[[criterion]]
+name = "bucket_had_no_prior_notification_config"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): At first deploy, the bucket had no prior notification configuration."
+type = "binary"
+
+[[criterion]]
+name = "empty_object_entries_yields_no_iterations"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Object.entries of an empty object yields no iterations, so mergedConfig stays `{}` regardless of what's in inputConfig."
+type = "binary"
+
+[[criterion]]
+name = "input_config_contained_new_configurations"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The inputConfig contained the new QueueConfiguration/TopicConfiguration."
+type = "binary"
+
+[[criterion]]
+name = "handler_calls_put_with_empty_body"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler calls PutBucketNotificationConfiguration with an empty body and returns PhysicalResourceId normally, causing CloudFormation to mark it CREATE_COMPLETE."
+type = "binary"
+
+[[criterion]]
+name = "second_custom_resource_repeats_same_behavior"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second custom resource (SampleBucketNotificationB) runs against the same empty current config and does the same thing."
+type = "binary"
+
+[[criterion]]
+name = "fix_seed_from_input_or_use_native_cfn"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The fix is either to seed mergedConfig from inputConfig's keys too (so keys present only in the new input still get applied) or to switch to the native CDK/CFN bucket notification (which uses a different merge strategy)."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"
