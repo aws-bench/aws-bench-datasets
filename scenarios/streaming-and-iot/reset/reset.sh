@@ -124,6 +124,14 @@ else
     echo "[reset.sh] Running per-task post_invoke scripts..."
     export AWS_PROFILE="PRIMARY"
 
+    # Bridge the scenario reset export to the name the task hooks read. The
+    # ecs-on-ec2-with-cloudmap post_invoke resolves its agent-created ECS
+    # service (and the Cloud Map service/namespace behind it) via
+    # os.environ["CLUSTER_NAME"]; scenario.toml injects that cluster name as
+    # ECS_CLUSTER_NAME through [reset.env]. Without this the hook reads an empty
+    # CLUSTER_NAME, no-ops, and leaves the namespace to re-contaminate the account.
+    export CLUSTER_NAME="${ECS_CLUSTER_NAME:-}"
+
     for task_dir in "${POST_INVOKES_DIR}"/*; do
         [ -d "${task_dir}" ] || continue
         task_name="$(basename "${task_dir}")"
