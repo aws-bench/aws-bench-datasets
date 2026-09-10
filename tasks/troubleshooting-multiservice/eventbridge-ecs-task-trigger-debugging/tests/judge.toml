@@ -14,7 +14,7 @@ type = "binary"
 
 [[criterion]]
 name = "task_definition_references_nonexistent_bucket"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS task definition has a hardcoded S3_LOCATION environment variable pointing to a bucket that does not exist in this account, and the task role only has permissions for the deployment bucket, causing the task to fail with access denied when it runs."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECS task definition has a hardcoded S3_LOCATION environment variable pointing to a bucket that does not exist in this account, which the task role also has no permission to read. Credit this claim if the junior identifies the hardcoded S3_LOCATION and establishes that the bucket is wrong or nonexistent. Do NOT require the junior to assert that the task fails at runtime with access denied: the container definition has no command or entryPoint, so as deployed the container exits without executing the test workflow and never attempts the S3 read. An answer that correctly observes this must not fail here."
 type = "binary"
 
 [[criterion]]
