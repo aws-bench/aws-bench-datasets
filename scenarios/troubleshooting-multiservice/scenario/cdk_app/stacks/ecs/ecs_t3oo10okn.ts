@@ -120,6 +120,7 @@ export class Ecs_t3oo10okn extends DeploymentStack {
             instanceType: new ec2.InstanceType('g4dn.2xlarge'),
             machineImage: ecs.EcsOptimizedImage.amazonLinux2023(ecs.AmiHardwareType.GPU),
             role: instanceRole,
+            requireImdsv2: true,
             userData,
         });
 

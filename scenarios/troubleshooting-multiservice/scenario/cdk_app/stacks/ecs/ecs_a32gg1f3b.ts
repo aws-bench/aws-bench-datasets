@@ -223,6 +223,23 @@ export class Ecs_a32gg1f3b extends cdk.Stack {
         });
 
         // WAF Web ACL for ALB (Regional)
+        const knownBadInputsRule = (metricName: string) => ({
+            name: 'AWSManagedRulesKnownBadInputsRuleSet',
+            priority: 0,
+            overrideAction: { none: {} },
+            statement: {
+                managedRuleGroupStatement: {
+                    vendorName: 'AWS',
+                    name: 'AWSManagedRulesKnownBadInputsRuleSet',
+                },
+            },
+            visibilityConfig: {
+                sampledRequestsEnabled: true,
+                cloudWatchMetricsEnabled: true,
+                metricName,
+            },
+        });
+
         const albWaf = new wafv2.CfnWebACL(this, 'ALBWebACL', {
             scope: 'REGIONAL',
             defaultAction: { allow: {} },
@@ -231,7 +248,7 @@ export class Ecs_a32gg1f3b extends cdk.Stack {
                 cloudWatchMetricsEnabled: true,
                 metricName: 'ALBWebACL',
             },
-            rules: [],
+            rules: [knownBadInputsRule('ALBKnownBadInputs')],
         });
 
         // Associate WAF with ALB
@@ -249,7 +266,7 @@ export class Ecs_a32gg1f3b extends cdk.Stack {
                 cloudWatchMetricsEnabled: true,
                 metricName: 'CloudFrontWebACL',
             },
-            rules: [],
+            rules: [knownBadInputsRule('CloudFrontKnownBadInputs')],
         });
 
         // CloudFront Distribution
