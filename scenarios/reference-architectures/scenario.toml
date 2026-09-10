@@ -20,6 +20,13 @@ timeout_sec = 120.0
 [cleanup]
 timeout_sec = 5400.0
 
+[reset]
+timeout_sec = 600
+
+[reset.env]
+# diagnose-rabbitmq-consumer-failure
+BROKER_ARN = "{{reference-architectures-AmazonMQ-rabbitmq-us-east-1-BrokerArn}}"
+
 [[quotas]]
 account_tag = "PRIMARY"
 region = "us-east-1"
