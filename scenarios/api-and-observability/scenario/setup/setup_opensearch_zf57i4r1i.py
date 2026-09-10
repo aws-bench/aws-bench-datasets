@@ -6,21 +6,13 @@ so real audit events are generated in CloudWatch.
 """
 
 import json
-import ssl
 import sys
 import time
 from datetime import datetime, timedelta
 from typing import Any, Dict, Optional
 
 import boto3
-from botocore.auth import SigV4Auth
-from botocore.awsrequest import AWSRequest
 from botocore.config import Config
-from botocore.credentials import Credentials
-
-
-import urllib.error
-import urllib.request
 
 
 STACK_NAME = "api-and-observability-opensearch-zf57i4r1i-us-east-1"
@@ -30,52 +22,23 @@ INDEX_NAME = "changesets"
 _config = Config(connect_timeout=5, read_timeout=60)
 
 
-def _sign_request(
-    method: str, url: str, body: Optional[str], credentials, region: str
-) -> Dict[str, str]:
-    request = AWSRequest(method=method, url=url, data=body)
-    request.headers["Content-Type"] = "application/json"
-    SigV4Auth(credentials, "es", region).add_auth(request)
-    return dict(request.headers)
-
-
-def _opensearch_request(
-    method: str, endpoint: str, path: str, body=None, credentials=None, region: str = ""
+def _invoke_opensearch_request(
+    lambda_client, function_name: str, method: str, path: str, body=None
 ) -> Dict:
-    url = f"https://{endpoint}{path}"
-    body_str = json.dumps(body) if body else None
-    headers = _sign_request(method, url, body_str, credentials, region)
-    ctx = ssl.create_default_context()
-    req = urllib.request.Request(
-        url,
-        data=body_str.encode() if body_str else None,
-        headers=headers,
-        method=method,
+    response = lambda_client.invoke(
+        FunctionName=function_name,
+        InvocationType="RequestResponse",
+        Payload=json.dumps({"method": method, "path": path, "body": body}).encode(),
     )
-    try:
-        with urllib.request.urlopen(req, context=ctx, timeout=30) as response:
-            response_body = response.read().decode()
-            return {
-                "status_code": response.status,
-                "body": json.loads(response_body) if response_body else {},
-            }
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode()
-        return {
-            "status_code": e.code,
-            "body": json.loads(error_body) if error_body else {},
-        }
+    payload = json.loads(response["Payload"].read().decode())
+    if response.get("FunctionError"):
+        raise RuntimeError(f"OpenSearch setup probe failed: {payload}")
+    return payload
 
 
-def _ensure_audit_logging(endpoint: str, credentials, region: str) -> None:
-    """Enable Security Plugin audit logging if not already enabled."""
-    current = _opensearch_request(
-        "GET",
-        endpoint,
-        "/_opendistro/_security/api/audit",
-        credentials=credentials,
-        region=region,
-    )
+def _ensure_audit_logging_via_probe(request_fn) -> None:
+    """Enable Security Plugin audit logging through the in-VPC setup probe."""
+    current = request_fn("GET", "/_opendistro/_security/api/audit")
     cfg = current.get("body", {}).get("config", {})
 
     already_enabled = (
@@ -104,14 +67,7 @@ def _ensure_audit_logging(endpoint: str, credentials, region: str) -> None:
             "value": [],
         },
     ]
-    result = _opensearch_request(
-        "PATCH",
-        endpoint,
-        "/_opendistro/_security/api/audit",
-        patch_ops,
-        credentials,
-        region,
-    )
+    result = request_fn("PATCH", "/_opendistro/_security/api/audit", patch_ops)
     if result.get("status_code") != 200:
         raise RuntimeError(f"Failed to enable audit logging: {result}")
     print("Audit logging enabled")
@@ -180,36 +136,26 @@ def run(
     }
 
     audit_log_group_name = outputs["AuditLogGroupName"]
-    domain_endpoint = outputs["OpenSearchDomainEndpoint"]
-    opensearch_role_arn = outputs["OpenSearchReadWriteRoleArn"]
+    setup_probe_name = outputs["OpenSearchSetupProbeName"]
+    lambda_client = session.client("lambda", config=_config, region_name=region)
 
-    print("Assuming OpenSearchReadWriteRole...")
-    sts_client = session.client("sts", config=_config, region_name=region)
-    assumed_role = sts_client.assume_role(
-        RoleArn=opensearch_role_arn, RoleSessionName="setup-script-session"
-    )
-
-    creds = Credentials(
-        access_key=assumed_role["Credentials"]["AccessKeyId"],
-        secret_key=assumed_role["Credentials"]["SecretAccessKey"],
-        token=assumed_role["Credentials"]["SessionToken"],
-    )
+    def request_fn(method: str, path: str, body=None) -> Dict:
+        return _invoke_opensearch_request(
+            lambda_client, setup_probe_name, method, path, body
+        )
 
     # 1. Ensure audit logging is enabled
     try:
-        _ensure_audit_logging(domain_endpoint, creds, region)
+        _ensure_audit_logging_via_probe(request_fn)
     except RuntimeError as e:
         print(str(e), file=sys.stderr)
         return {"success": False, "output_values": None, "reason": str(e)}
 
     # 2. Create index (ignore if exists)
-    create_result = _opensearch_request(
+    create_result = request_fn(
         "PUT",
-        domain_endpoint,
         f"/{INDEX_NAME}",
         {"settings": {"number_of_shards": 1, "number_of_replicas": 0}},
-        creds,
-        region,
     )
     if create_result["status_code"] == 400:
         pass  # index already exists
@@ -230,15 +176,11 @@ def run(
         "timestamp": (now - timedelta(minutes=10)).strftime("%Y-%m-%dT%H:%M:%S.000Z"),
         "status": "indexed",
     }
-    put_result = _opensearch_request(
-        "PUT", domain_endpoint, f"/{INDEX_NAME}/_doc/{DOCUMENT_ID}", doc, creds, region
-    )
+    put_result = request_fn("PUT", f"/{INDEX_NAME}/_doc/{DOCUMENT_ID}", doc)
     print(f"PUT {DOCUMENT_ID}: {put_result['status_code']}")
 
     # 4. Make the GET the user claims to have made
-    get_result = _opensearch_request(
-        "GET", domain_endpoint, f"/{INDEX_NAME}/_doc/{DOCUMENT_ID}", None, creds, region
-    )
+    get_result = request_fn("GET", f"/{INDEX_NAME}/_doc/{DOCUMENT_ID}")
     print(
         f"GET {DOCUMENT_ID}: {get_result['status_code']}, found={get_result['body'].get('found')}"
     )

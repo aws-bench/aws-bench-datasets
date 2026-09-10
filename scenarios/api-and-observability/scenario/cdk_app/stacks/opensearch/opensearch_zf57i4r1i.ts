@@ -3,6 +3,7 @@ import * as opensearch from 'aws-cdk-lib/aws-opensearchservice';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
 import { StackUtils } from '../../lib/shared';
 
@@ -46,6 +47,31 @@ export class Opensearch_zf57i4r1i extends cdk.Stack {
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
+        const vpc = new ec2.Vpc(this, 'OpenSearchVpc', {
+            maxAzs: 1,
+            natGateways: 0,
+            subnetConfiguration: [
+                {
+                    name: 'Private',
+                    subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+                    cidrMask: 24,
+                },
+            ],
+        });
+        const domainSecurityGroup = new ec2.SecurityGroup(this, 'OpenSearchSecurityGroup', {
+            vpc,
+            allowAllOutbound: true,
+        });
+        const seederSecurityGroup = new ec2.SecurityGroup(this, 'SeederSecurityGroup', {
+            vpc,
+            allowAllOutbound: true,
+        });
+        domainSecurityGroup.addIngressRule(
+            seederSecurityGroup,
+            ec2.Port.tcp(443),
+            'Allow setup probe to reach OpenSearch',
+        );
+
         const opensearchReadWriteRole = new iam.Role(this, 'OpenSearchReadWriteRole', {
             roleName: 'OpenSearchReadWriteRole',
             assumedBy: new iam.CompositePrincipal(
@@ -53,6 +79,14 @@ export class Opensearch_zf57i4r1i extends cdk.Stack {
                 new iam.AccountPrincipal(this.account),
             ),
             description: 'IAM role used to access OpenSearch domain with read/write permissions',
+            managedPolicies: [
+                iam.ManagedPolicy.fromAwsManagedPolicyName(
+                    'service-role/AWSLambdaBasicExecutionRole',
+                ),
+                iam.ManagedPolicy.fromAwsManagedPolicyName(
+                    'service-role/AWSLambdaVPCAccessExecutionRole',
+                ),
+            ],
         });
 
         const domain = new opensearch.Domain(this, 'FlintProdDomain', {
@@ -92,6 +126,9 @@ export class Opensearch_zf57i4r1i extends cdk.Stack {
                     resources: ['*'],
                 }),
             ],
+            vpc,
+            vpcSubnets: [{ subnets: vpc.isolatedSubnets.slice(0, 1) }],
+            securityGroups: [domainSecurityGroup],
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
@@ -106,6 +143,56 @@ export class Opensearch_zf57i4r1i extends cdk.Stack {
                 resources: [domain.domainArn, `${domain.domainArn}/*`],
             }),
         );
+
+        const setupProbeLambda = new lambda.Function(this, 'OpenSearchSetupProbe', {
+            functionName: 'OpenSearchSetupProbe',
+            runtime: lambda.Runtime.PYTHON_3_11,
+            handler: 'index.handler',
+            role: opensearchReadWriteRole,
+            vpc,
+            vpcSubnets: { subnets: vpc.isolatedSubnets.slice(0, 1) },
+            securityGroups: [seederSecurityGroup],
+            timeout: cdk.Duration.seconds(60),
+            code: lambda.Code.fromInline(
+                [
+                    'import json',
+                    'import os',
+                    'import urllib.error',
+                    'import urllib.request',
+                    '',
+                    'import boto3',
+                    'from botocore.auth import SigV4Auth',
+                    'from botocore.awsrequest import AWSRequest',
+                    '',
+                    '',
+                    'def handler(event, context):',
+                    '    method = event["method"]',
+                    '    path = event["path"]',
+                    '    body = event.get("body")',
+                    '    data = json.dumps(body).encode() if body is not None else None',
+                    '    url = f"https://{os.environ[\'OPENSEARCH_ENDPOINT\']}{path}"',
+                    '',
+                    '    request = AWSRequest(method=method, url=url, data=data)',
+                    '    request.headers["Content-Type"] = "application/json"',
+                    '    credentials = boto3.Session().get_credentials().get_frozen_credentials()',
+                    '    SigV4Auth(credentials, "es", os.environ["AWS_REGION"]).add_auth(request)',
+                    '',
+                    '    http_request = urllib.request.Request(',
+                    '        url, data=data, headers=dict(request.headers), method=method',
+                    '    )',
+                    '    try:',
+                    '        with urllib.request.urlopen(http_request, timeout=30) as response:',
+                    '            raw = response.read().decode()',
+                    '            return {"status_code": response.status, "body": json.loads(raw) if raw else {}}',
+                    '    except urllib.error.HTTPError as error:',
+                    '        raw = error.read().decode()',
+                    '        return {"status_code": error.code, "body": json.loads(raw) if raw else {}}',
+                ].join('\n'),
+            ),
+            environment: {
+                OPENSEARCH_ENDPOINT: domain.domainEndpoint,
+            },
+        });
 
         const flintIndexerLogGroup = new logs.LogGroup(this, 'FlintIndexerLogGroup', {
             logGroupName: '/aws/lambda/FlintIndexerLambda',
@@ -164,5 +251,6 @@ export class Opensearch_zf57i4r1i extends cdk.Stack {
         StackUtils.exportStack(this, 'BasaltFlintIndexerLambdaName', basaltFlintIndexerLambda.functionName, 'Basalt Flint indexer Lambda name');
         StackUtils.exportStack(this, 'BasaltFlintIndexerLogGroupName', basaltFlintIndexerLogGroup.logGroupName, 'Basalt Flint indexer log group name');
         StackUtils.exportStack(this, 'OpenSearchReadWriteRoleArn', opensearchReadWriteRole.roleArn, 'OpenSearch read/write role ARN');
+        StackUtils.exportStack(this, 'OpenSearchSetupProbeName', setupProbeLambda.functionName, 'OpenSearch setup probe Lambda name');
     }
 }
