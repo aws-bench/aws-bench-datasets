@@ -29,7 +29,7 @@ type = "binary"
 
 [[criterion]]
 name = "ecr_repository_is_empty"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECR repository {{reference-architectures-Batch-openmp-us-east-1-EcrRepositoryName}} is empty with no image ever pushed to it."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The ECR repository {{reference-architectures-Batch-openmp-us-east-1-EcrRepositoryName}} is empty, so there is no image available to pull. Current emptiness is the whole claim -- an answer does NOT need to assert anything about the repository's push history, which is not observable from the ECR API. Answer 'yes' for equivalent phrasings such as the repository contains no images, has no :latest tag, or has no manifest."
 type = "binary"
 
 [[criterion]]
