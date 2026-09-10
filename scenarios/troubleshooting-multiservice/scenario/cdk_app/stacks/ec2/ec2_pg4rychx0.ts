@@ -38,7 +38,8 @@ export class Ec2_pg4rychx0 extends cdk.Stack {
 
         this.accountId = this.account;
 
-        // Create VPC for Helper Network
+        // Create a private VPC for the helper instance. Interface endpoints
+        // preserve the intended Secrets Manager/KMS path without a public IP.
         const helperVpc = new ec2.Vpc(this, 'HelperVPC', {
             vpcName: `helper-vpc-${this.account}-${this.region}`,
             ipAddresses: ec2.IpAddresses.cidr('172.25.0.0/16'),
@@ -47,7 +48,7 @@ export class Ec2_pg4rychx0 extends cdk.Stack {
             subnetConfiguration: [
                 {
                     name: 'HelperPrimary',
-                    subnetType: ec2.SubnetType.PUBLIC,
+                    subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
                     cidrMask: 23,
                 },
             ],
@@ -62,15 +63,31 @@ export class Ec2_pg4rychx0 extends cdk.Stack {
             subnetConfiguration: [
                 {
                     name: 'CustomerSecondary',
-                    subnetType: ec2.SubnetType.PUBLIC,
+                    subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
                     cidrMask: 16,
                 },
             ],
         });
 
         // Get the subnets
-        const helperSubnet = helperVpc.publicSubnets[0];
-        const customerSubnet = customerVpc.publicSubnets[0];
+        const helperSubnet = helperVpc.isolatedSubnets[0];
+        const customerSubnet = customerVpc.isolatedSubnets[0];
+
+        helperVpc.addInterfaceEndpoint('SecretsManagerEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.SECRETS_MANAGER,
+        });
+        helperVpc.addInterfaceEndpoint('KmsEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.KMS,
+        });
+        helperVpc.addInterfaceEndpoint('SsmEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.SSM,
+        });
+        helperVpc.addInterfaceEndpoint('SsmMessagesEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES,
+        });
+        helperVpc.addInterfaceEndpoint('Ec2MessagesEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES,
+        });
 
         // Create Security Group for Helper VPC
         const helperSecurityGroup = new ec2.SecurityGroup(this, 'HelperSecurityGroup', {
