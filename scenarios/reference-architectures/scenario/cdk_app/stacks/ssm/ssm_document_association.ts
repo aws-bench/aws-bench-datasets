@@ -14,7 +14,7 @@ import { StackUtils } from '../../lib/shared';
  * that periodically creates timestamped files.
  *
  * Resources created:
- * 1. VPC (1 AZ, no NAT, public subnets only)
+ * 1. VPC (1 AZ, no NAT, private subnet with SSM endpoints)
  * 2. IAM Role for EC2 with AmazonSSMManagedInstanceCore
  * 3. EC2 Instance (t3.nano, Amazon Linux 2023) tagged Environment=Development
  * 4. SSM Document (Command type) with shell script
@@ -25,7 +25,7 @@ export class SsmDocumentAssociation extends cdk.Stack {
     constructor(scope: Construct, id: string, props: cdk.StackProps) {
         super(scope, id, props);
 
-        // VPC: 1 AZ, no NAT, public subnets only
+        // VPC: 1 AZ, no NAT, private subnet with SSM endpoints
         const vpc = new ec2.Vpc(this, 'SsmVpc', {
             vpcName: `SsmDocAssocVpc-${this.account}-${this.region}`,
             maxAzs: 1,
@@ -33,12 +33,22 @@ export class SsmDocumentAssociation extends cdk.Stack {
             subnetConfiguration: [
                 {
                     cidrMask: 24,
-                    name: 'Public',
-                    subnetType: ec2.SubnetType.PUBLIC,
+                    name: 'Private',
+                    subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
                 },
             ],
         });
         vpc.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
+
+        vpc.addInterfaceEndpoint('SsmEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.SSM,
+        });
+        vpc.addInterfaceEndpoint('SsmMessagesEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES,
+        });
+        vpc.addInterfaceEndpoint('Ec2MessagesEndpoint', {
+            service: ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES,
+        });
 
         // IAM Role for EC2 with SSM managed policy
         const role = new iam.Role(this, 'SsmInstanceRole', {
@@ -57,7 +67,7 @@ export class SsmDocumentAssociation extends cdk.Stack {
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.NANO),
             machineImage: ec2.MachineImage.latestAmazonLinux2023(),
             instanceName: `SsmDocAssocInstance-${this.account}-${this.region}`,
-            vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+            vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
             requireImdsv2: true,
         });
         instance.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
