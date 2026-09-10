@@ -24,7 +24,7 @@ type = "binary"
 
 [[criterion]]
 name = "lambda_calls_detect_labels"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda runs and calls rekognition.DetectLabels (with MaxLabels 10 and MinConfidence 70). Credit this claim even if the junior does not explicitly verify the call operates on the updated object bytes rather than cached data."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda runs and calls rekognition.DetectLabels on the re-uploaded object. Credit this claim if the junior establishes that the Lambda executed and that Rekognition processed the NEW bytes (e.g. by showing a second invocation and different labels than the first upload produced); the MaxLabels 10 and MinConfidence 70 parameter values are incidental configuration that does not bear on this diagnosis and need NOT be stated. Also credit it even if the junior does not explicitly verify the call operates on the updated object bytes rather than cached data."
 type = "binary"
 
 [[criterion]]

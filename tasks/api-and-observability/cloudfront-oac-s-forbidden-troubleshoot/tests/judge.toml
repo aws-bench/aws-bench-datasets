@@ -33,8 +33,8 @@ description = "Per the rubric, does the junior engineer's answer support this cl
 type = "binary"
 
 [[criterion]]
-name = "bucket_policy_grant_primary_issue"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The missing bucket policy grant is the primary issue."
+name = "bucket_policy_grant_blocks_signed_gets"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The missing bucket policy grant is a blocking cause: with no OAC Allow statement, every CloudFront-signed GET to the origin returns S3 AccessDenied. Credit this claim if the junior establishes that the absent grant independently blocks origin access. Do NOT fail this claim because the junior orders or prioritises the causes differently (e.g. treats the zero-tenant configuration as the current edge-level failure and this as the subsequent origin-level failure) -- relative priority among correct findings is editorial and is not judged here."
 type = "binary"
 
 [[criterion]]
