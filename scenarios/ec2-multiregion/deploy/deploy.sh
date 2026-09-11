@@ -28,3 +28,9 @@ cdk_deploy() {
 }
 
 cdk_deploy --profile PRIMARY --all --require-approval never --concurrency 10
+
+# The EC2 stack registers an AMI through a CreateImage custom resource, and CloudFormation
+# completes the stack while EC2 is still writing the AMI's backing snapshot. Deploy must not
+# return before the image is available.
+aws ec2 wait image-available --profile PRIMARY --region us-east-1 \
+    --owners self --filters "Name=name,Values=ami-${PRIMARY}-us-east-1"
