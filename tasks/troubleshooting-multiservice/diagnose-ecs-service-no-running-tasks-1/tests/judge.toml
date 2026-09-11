@@ -5,9 +5,39 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "service_desired_count_is_zero"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The junior engineer identifies that the service has desiredCount=0, which is the immediate reason no tasks run."
+type = "binary"
+
+[[criterion]]
+name = "service_image_tag_missing_from_ecr"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definition references image tag dev_build_service_latest that does not exist in the ECR repo {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri}}"
+type = "binary"
+
+[[criterion]]
+name = "sidecar_image_tag_missing_from_ecr"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The task definition references image tag dev_build_sidecar_latest that does not exist in the ECR repo {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri}}"
+type = "binary"
+
+[[criterion]]
+name = "only_main_tag_exists_in_ecr"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The only available tag is dev_build_service_main in the ECR repo {{troubleshooting-multiservice-ecs-t3oo10okn-us-east-1-EcrRepositoryUri}}"
+type = "binary"
+
+[[criterion]]
+name = "cluster_has_no_container_instances"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster has 0 registered EC2 container instances"
+type = "binary"
+
+[[criterion]]
+name = "cluster_lacks_capacity_provider"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The cluster has no capacity provider strategy"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

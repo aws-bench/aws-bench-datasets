@@ -5,9 +5,39 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "alarm_tracks_p90_framequartzlag"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm tracks P90 FrameQuartzLag in the Flint namespace."
+type = "binary"
+
+[[criterion]]
+name = "alarm_threshold_fifteen_seconds"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The alarm fires when P90 FrameQuartzLag exceeds 15 seconds."
+type = "binary"
+
+[[criterion]]
+name = "internal_pipeline_metrics_normal"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The internal pipeline metrics (ProcessFrame, MotionDetection, HLSStartLag, CPU) are all normal."
+type = "binary"
+
+[[criterion]]
+name = "quartz_reportperson_latency_elevated"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bottleneck is in the downstream Quartz service's ReportPerson operation, whose API latency is well above the threshold."
+type = "binary"
+
+[[criterion]]
+name = "ssm_degraded_mode_drives_latency"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The SSM parameter set to 'degraded' causes the ECS task to publish high Quartz API latency, which drives the elevated latency observed."
+type = "binary"
+
+[[criterion]]
+name = "fix_set_parameter_healthy"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The fix is to set the latency mode parameter back to 'healthy'."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

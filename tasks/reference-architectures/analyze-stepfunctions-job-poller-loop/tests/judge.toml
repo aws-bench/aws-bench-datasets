@@ -5,9 +5,44 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "wait_loop_never_iterates"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Wait→CheckStatus loop never iterates"
+type = "binary"
+
+[[criterion]]
+name = "submitjob_returns_succeeded_immediately"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): SubmitJob's handler ignores input and always returns status=SUCCEEDED (wording may differ; satisfied if the junior establishes that SubmitJob unconditionally returns SUCCEEDED regardless of input)"
+type = "binary"
+
+[[criterion]]
+name = "checkstatus_echoes_succeeded_or_failed"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): CheckStatus is `if event[\"status\"]==\"SUCCEEDED\": return {\"status\":\"SUCCEEDED\", \"id\": event[\"id\"]} else: return {\"status\":\"FAILED\", ...}`"
+type = "binary"
+
+[[criterion]]
+name = "checkstatus_never_calls_external_systems"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): CheckStatus doesn't call Batch, ECS, Glue, or any external system; it just echoes SUCCEEDED or collapses anything else to FAILED"
+type = "binary"
+
+[[criterion]]
+name = "first_checkstatus_observes_succeeded_path"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Because SubmitJob sets status=SUCCEEDED immediately, the first CheckStatus invocation observes SUCCEEDED, the Choice matches the SUCCEEDED branch, and the execution transitions to GetFinalJobStatus, which itself invokes CheckStatus one more time before ending, resulting in 2 CheckStatus invocations total"
+type = "binary"
+
+[[criterion]]
+name = "loop_unreachable_with_current_handler"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The loop is unreachable with the current handler code; triggering it would require either changing SubmitJob to return a different status, changing CheckStatus to return something other than SUCCEEDED/FAILED, or manually starting with custom input (though CheckStatus's else branch still returns terminal FAILED)"
+type = "binary"
+
+[[criterion]]
+name = "eventbridge_sends_default_scheduled_payload"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): EventBridge rule sends the default scheduled-event payload (which has top-level `id`, `detail-type` etc.)"
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"

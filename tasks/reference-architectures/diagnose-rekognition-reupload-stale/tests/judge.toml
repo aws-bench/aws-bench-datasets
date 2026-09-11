@@ -5,9 +5,64 @@ files = [
     "/tests/ground_truth.json",
 ]
 prompt_template = "judge_prompt.md"
-mode = "individual"
+mode = "batched"
 
 [[criterion]]
-name = "answers_equivalent"
-description = "Are the junior engineer's findings equivalent to the senior engineer's reference answer per the rubric?"
+name = "s3_event_firing"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The S3 event fires for the re-upload. Because versioning is not enabled, the second put overwrites the object under the same key and still produces an ObjectCreated event."
+type = "binary"
+
+[[criterion]]
+name = "bucket_has_three_suffix_filters"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The bucket has three LambdaFunctionConfigurations for s3:ObjectCreated:*, filtered by suffix .jpg, .jpeg, and .png, all targeting {{reference-architectures-Rekognition-s3trigger-us-east-1-FunctionName}}. Satisfied if the junior establishes that an S3 event notification exists and fires for the .jpg upload in question, targeting the correct Lambda; the junior does not need to enumerate all three suffix filters (.jpg/.jpeg/.png), since only the .jpg path is relevant to this re-upload."
+type = "binary"
+
+[[criterion]]
+name = "versioning_not_enabled"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Versioning is not enabled on the bucket."
+type = "binary"
+
+[[criterion]]
+name = "lambda_calls_detect_labels"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Lambda runs and calls rekognition.DetectLabels on the re-uploaded object. Credit this claim if the junior establishes that the Lambda executed and that Rekognition processed the NEW bytes (e.g. by showing a second invocation and different labels than the first upload produced); the MaxLabels 10 and MinConfidence 70 parameter values are incidental configuration that does not bear on this diagnosis and need NOT be stated. Also credit it even if the junior does not explicitly verify the call operates on the updated object bytes rather than cached data."
+type = "binary"
+
+[[criterion]]
+name = "rekognition_cost_per_reupload"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The Rekognition cost is incurred on every re-upload. The reference itself flags this as a 'Secondary note' rather than the primary diagnosis -- this is satisfied if the junior establishes that DetectLabels runs again (a new billable API call) on every re-upload; the junior does not need to use the word 'cost' explicitly."
+type = "binary"
+
+[[criterion]]
+name = "put_item_has_condition"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler's putItem on table {{reference-architectures-Rekognition-s3trigger-us-east-1-TableName}} is issued with a condition that the primary key image_name must not already exist."
+type = "binary"
+
+[[criterion]]
+name = "second_put_item_fails"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The second putItem fails with ConditionalCheckFailedException because the row for alpha.jpg was written by the first upload."
+type = "binary"
+
+[[criterion]]
+name = "handler_catches_and_logs_error"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The handler wraps the putItem in a try/catch that only logs the error and then returns normally, so the invocation exits as a success."
+type = "binary"
+
+[[criterion]]
+name = "lambda_metrics_look_clean"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Standard success metrics look clean -- Lambda Invocations and Errors show no failures, and S3 shows successful event delivery -- making the silent failure hard to detect."
+type = "binary"
+
+[[criterion]]
+name = "failure_visible_in_cloudwatch_logs"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The only place the failure is visible is CloudWatch Logs for the function, where the ConditionalCheckFailedException is printed."
+type = "binary"
+
+[[criterion]]
+name = "fix_remove_condition_or_update"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The fix is to drop the condition from the put, or to use updateItem, so that re-uploads overwrite the labels instead of being silently rejected."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state (e.g. a different count, the wrong resource, an opposite status), and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Judge the junior's answer as a whole against the entire reference answer for this, not any single claim. IMPORTANT: an additional finding that cites specific, concrete evidence (a resource ID, an exact error/log message, an API response, or a well-established AWS behavior) and does not contradict anything the reference states is a legitimate supplementary discovery, not a violation of this criterion, even if the reference answer doesn't mention it -- the reference answer is not guaranteed to be exhaustive. Only answer 'no' for extra claims that are vague, unsupported by any cited evidence, or that directly contradict a fact the reference explicitly states. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
 type = "binary"
