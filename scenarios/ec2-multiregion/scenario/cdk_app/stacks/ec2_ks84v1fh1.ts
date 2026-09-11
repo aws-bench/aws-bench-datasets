@@ -188,7 +188,7 @@ export class EC2_ks84v1fh12 extends cdk.Stack {
                 }),
                 new iam.PolicyStatement({
                     actions: ['ec2:DeleteSnapshot'],
-                    resources: ['arn:aws:ec2:*:*:snapshot/*'],
+                    resources: [`arn:${this.partition}:ec2:*:*:snapshot/*`],
                 }),
             ]),
         });
