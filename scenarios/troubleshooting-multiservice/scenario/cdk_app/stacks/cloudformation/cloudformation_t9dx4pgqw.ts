@@ -202,7 +202,7 @@ def handler(event, context):
 
         // Add stack metadata to simulate CloudFormation stack states
         this.templateOptions.description =
-            'Troubleshooting scenario: CloudFormation stacks with failed Lambda alias updates';
+            'CloudFormation stacks with Lambda alias deployments';
 
         // Export stack outputs
         StackUtils.exportStack(

@@ -8,7 +8,7 @@ keywords = []
 
 [scenario]
 scenario_id = "compute-and-data"
-agent_role_name = "QALocalInvocationApplicationAdmin"
+agent_role_name = "ApplicationAdminRole"
 
 [metadata]
 id = "7c6dae8e-a77d-450c-a5db-6af8275c6a8e"

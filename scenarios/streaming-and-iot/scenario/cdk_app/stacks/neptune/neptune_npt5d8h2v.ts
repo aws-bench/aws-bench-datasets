@@ -79,7 +79,7 @@ export class neptune_npt5d8h2v extends cdk.Stack {
         });
 
         const subnetGroup = new neptune.CfnDBSubnetGroup(this, 'NeptuneSubnetGroup', {
-            dbSubnetGroupDescription: 'Subnet group for the bench Neptune cluster',
+            dbSubnetGroupDescription: 'Subnet group for the Neptune cluster',
             subnetIds: vpc.isolatedSubnets.map((s) => s.subnetId),
         });
 
@@ -214,7 +214,7 @@ export class neptune_npt5d8h2v extends cdk.Stack {
         // Neptune cluster + instance, with loader role pre-associated
         // -------------------------------------------------------------
         const cluster = new neptune.CfnDBCluster(this, 'NeptuneCluster', {
-            dbClusterIdentifier: `bench-neptune-${this.account.slice(-6)}`,
+            dbClusterIdentifier: `app-neptune-${this.account.slice(-6)}`,
             engineVersion: '1.3.0.0',
             iamAuthEnabled: true,
             dbSubnetGroupName: subnetGroup.ref,
@@ -231,7 +231,7 @@ export class neptune_npt5d8h2v extends cdk.Stack {
         cluster.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
         const instance = new neptune.CfnDBInstance(this, 'NeptuneInstance', {
-            dbInstanceIdentifier: `bench-neptune-${this.account.slice(-6)}-instance-1`,
+            dbInstanceIdentifier: `app-neptune-${this.account.slice(-6)}-instance-1`,
             dbInstanceClass: 'db.t3.medium',
             dbClusterIdentifier: cluster.ref,
         });
@@ -311,7 +311,7 @@ export class neptune_npt5d8h2v extends cdk.Stack {
         StackUtils.exportStack(this, 'NeptuneClusterResourceId', cluster.attrClusterResourceId, 'Cluster resource id (for IAM ARN)');
         StackUtils.exportStack(this, 'LoaderBucketName', loaderBucket.bucketName, 'S3 bucket pre-seeded with vertices.csv + edges.csv');
         StackUtils.exportStack(this, 'LoaderRoleArn', loaderRole.roleArn, 'IAM role to pass to start_loader_job (already associated with cluster)');
-        StackUtils.exportStack(this, 'BridgeLambdaName', bridgeLambda.functionName, 'Lambda inside VPC for verifier-side Neptune queries');
+        StackUtils.exportStack(this, 'BridgeLambdaName', bridgeLambda.functionName, 'Lambda inside VPC for Neptune queries');
         StackUtils.exportStack(this, 'VpcId', vpc.vpcId, 'VPC hosting Neptune');
     }
 }

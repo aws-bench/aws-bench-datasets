@@ -94,7 +94,7 @@ EXPECTED_BUCKETS_CSV = "{{compute-and-data-eks-gztvy25g1-us-east-1-S3BucketNames
 
 # move-s3-contents-and-cleanup
 SOURCE_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-FolderPath}}"
-DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-CorrectedFolderPath}}"
+DEST_PATH = "{{compute-and-data-s3-uijodjso5-us-east-1-DestinationFolderPath}}"
 
 # move-s3-contents-within-bucket
 MOVE_DATA_BUCKET = "{{compute-and-data-s3-oeimf302d-us-east-1-BucketName}}"

@@ -428,7 +428,7 @@ export class Complex_l7ywv4f6c extends cdk.Stack {
         // Create DocumentDB cluster
         const docDBCluster = new docdb.DatabaseCluster(this, 'my-recommendation-engine', {
             masterUser: {
-                username: 'EvalAdmin',
+                username: 'appadmin',
             },
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MEDIUM),
             vpc,
@@ -893,7 +893,7 @@ export class Complex_l7ywv4f6c extends cdk.Stack {
                 },
             ],
             includeLinkedAccountsMetrics: false,
-            name: 'TestEvalStream',
+            name: 'app-metric-stream',
         });
         metricStream.node.addDependency(metricStreamRole);
         metricStream.node.addDependency(firehoseDeliveryStream);

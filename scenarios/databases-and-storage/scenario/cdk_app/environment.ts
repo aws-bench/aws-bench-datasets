@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { EnvironmentProps } from './lib/shared';
-import { QARolesStack } from './stacks/qa_roles_stack';
+import { AppRolesStack } from './stacks/app_roles_stack';
 import { athena_9jhgt3tfs } from './stacks/athena/athena_9jhgt3tfs';
 import { athena_ton59ib3f } from './stacks/athena/athena_ton59ib3f';
 import { CFN_ax9w8fhs7 } from './stacks/cfn/cfn_ax9w8fhs7';
@@ -31,7 +31,7 @@ import { SSM_a1b2c3d46 } from './stacks/ssm/SSM_a1b2c3d46';
 import { WAF_18b01a02d } from './stacks/waf/waf_18b01a02d';
 
 export function createEnvironment(app: cdk.App, envId: string, props: EnvironmentProps): void {
-    new QARolesStack(app, `${envId}-QARoles-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
+    new AppRolesStack(app, `${envId}-AppRoles-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
     new athena_9jhgt3tfs(app, `${envId}-athena-9jhgt3tfs-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
     new athena_ton59ib3f(app, `${envId}-athena-ton59ib3f-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
     new codebuild_g5etw5eu5(app, `${envId}-codebuild-g5etw5eu5-us-east-1`, { env: { account: props.account, region: 'us-east-1' } });
