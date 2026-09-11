@@ -159,7 +159,6 @@ export class EC2_ks84v1fh12 extends cdk.Stack {
 
         const amiName = `ami-${this.account}-${this.region}`;
 
-        // Custom resource to create the AMI
         const createAmi = new cr.AwsCustomResource(this, 'CreateAmi', {
             onCreate: {
                 service: 'EC2',
@@ -180,9 +179,18 @@ export class EC2_ks84v1fh12 extends cdk.Stack {
                     DeleteAssociatedSnapshots: true,
                 },
             },
-            policy: cr.AwsCustomResourcePolicy.fromSdkCalls({
-                resources: cr.AwsCustomResourcePolicy.ANY_RESOURCE,
-            }),
+            // The image id is unknown at synth time, so the image actions take any resource.
+            // DeleteAssociatedSnapshots needs ec2:DeleteSnapshot on top of DeregisterImage.
+            policy: cr.AwsCustomResourcePolicy.fromStatements([
+                new iam.PolicyStatement({
+                    actions: ['ec2:CreateImage', 'ec2:DeregisterImage'],
+                    resources: ['*'],
+                }),
+                new iam.PolicyStatement({
+                    actions: ['ec2:DeleteSnapshot'],
+                    resources: ['arn:aws:ec2:*:*:snapshot/*'],
+                }),
+            ]),
         });
 
         // Look up the default VPC
