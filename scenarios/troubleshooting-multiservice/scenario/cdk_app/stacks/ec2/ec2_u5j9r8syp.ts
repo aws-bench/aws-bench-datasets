@@ -206,12 +206,6 @@ export class Ec2_u5j9r8syp extends cdk.Stack {
         StackUtils.exportStack(this, 'EscrowBucketName', escrowBucket.bucketName, 'Escrow bucket name');
         StackUtils.exportStack(
             this,
-            'TroubleshootingNote',
-            'KMS key is intentionally DISABLED - EC2 instances will fail to launch with Client.InvalidKMSKey.InvalidState',
-            'Troubleshooting scenario description',
-        );
-        StackUtils.exportStack(
-            this,
             'AccountRootArn',
             `arn:aws:iam::${this.account}:root`,
             'Account root ARN',

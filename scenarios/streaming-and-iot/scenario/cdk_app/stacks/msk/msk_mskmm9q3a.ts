@@ -25,7 +25,7 @@ import { StackUtils } from '../../lib/shared';
  * Resources:
  *   - Multi-AZ private VPC (2 AZs, no NAT gateways)
  *   - 2-broker MSK cluster, IAM SASL on, TLS in transit + in cluster
- *   - AWS::MSK::Topic for `bench-events` (3 partitions, RF=2) -- verifier
+ *   - AWS::MSK::Topic for `app-events` (3 partitions, RF=2) -- verifier
  *     and agent's Lambda ESM both read from this topic name
  *   - S3 sink bucket for the agent's Lambda to write decoded records
  *
@@ -43,7 +43,7 @@ export class msk_mskmm9q3a extends cdk.Stack {
         // brokerCount must be an integer multiple of the clientSubnet count
         // (one subnet per AZ below), so keep this and maxAzs in lockstep.
         const brokerCount = 2;
-        const topicName = 'bench-events';
+        const topicName = 'app-events';
 
         const vpc = new ec2.Vpc(this, 'MskVpc', {
             ipAddresses: ec2.IpAddresses.cidr('10.70.0.0/16'),
@@ -68,7 +68,7 @@ export class msk_mskmm9q3a extends cdk.Stack {
             // CFN replacement creates the new cluster before deleting the old,
             // so a fixed name collides (AlreadyExists) on live envs — bump the
             // v-suffix with any replacement-forcing change (e.g. ClientSubnets).
-            clusterName: `bench-source-v2-${this.account.slice(-6)}`,
+            clusterName: `app-source-v2-${this.account.slice(-6)}`,
             kafkaVersion: '3.6.0',
             numberOfBrokerNodes: brokerCount,
             brokerNodeGroupInfo: {
@@ -96,7 +96,7 @@ export class msk_mskmm9q3a extends cdk.Stack {
         // AWS::MSK::Topic -- control-plane topic creation against the
         // cluster. No client-side admin call needed.
         // https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-msk-topic.html
-        const topic = new cdk.CfnResource(this, 'BenchTopic', {
+        const topic = new cdk.CfnResource(this, 'AppTopic', {
             type: 'AWS::MSK::Topic',
             properties: {
                 ClusterArn: cluster.attrArn,

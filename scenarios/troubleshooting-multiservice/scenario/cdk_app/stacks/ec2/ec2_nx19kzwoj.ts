@@ -131,7 +131,7 @@ export class EC2_nx19kzwoj extends cdk.Stack {
         StackUtils.exportStack(this, 'InstanceRoleName', instanceRole.roleName, 'Instance Role Name');
         StackUtils.exportStack(this, 'LaunchTemplateId', launchTemplate.launchTemplateId!, 'Launch Template ID');
         StackUtils.exportStack(this, 'AutoScalingGroupName', asg.autoScalingGroupName, 'Auto Scaling Group Name');
-        StackUtils.exportStack(this, 'CustomerSGTagValue', 'sg-01eeee4696a5c0ace', 'Intentionally non-existent SG ID used as ASG tag value (troubleshooting scenario)');
-        StackUtils.exportStack(this, 'CustomerSubnetTagValue', 'subnet-0ff0f7602567267d1', 'Intentionally non-existent subnet ID used as ASG tag value (troubleshooting scenario)');
+        StackUtils.exportStack(this, 'CustomerSGTagValue', 'sg-01eeee4696a5c0ace', 'SG ID used as ASG Customer-SG tag value');
+        StackUtils.exportStack(this, 'CustomerSubnetTagValue', 'subnet-0ff0f7602567267d1', 'Subnet ID used as ASG Customer-Subnet tag value');
     }
 }

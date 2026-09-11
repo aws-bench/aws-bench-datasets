@@ -80,7 +80,7 @@ export class ApiGateway6b015c55c extends cdk.Stack {
                 'execute-api:Invoke',
             ],
             resources: [
-                `arn:aws:execute-api:${this.region}:${this.account}:fk9z0dummy/beta/GET/*`,
+                `arn:aws:execute-api:${this.region}:${this.account}:a1b2c3d4e5/beta/GET/*`,
             ],
         }));
 
@@ -107,7 +107,7 @@ export class ApiGateway6b015c55c extends cdk.Stack {
         StackUtils.exportStack(this, 'LambdaFunctionName', getAgreementFunction.functionName, 'Lambda function name');
         StackUtils.exportStack(this, 'LambdaFunctionArn', getAgreementFunction.functionArn, 'Lambda function ARN');
         StackUtils.exportStack(this, 'RestrictedRoleArn', restrictedRole.roleArn, 'IAM role ARN');
-        StackUtils.exportStack(this, 'AgreementId', 'dua-benchmark-001', 'Data Usage Agreement ID');
-        StackUtils.exportStack(this, 'AgreementPath', '/data-agreements/dua-benchmark-001', 'API path to agreement');
+        StackUtils.exportStack(this, 'AgreementId', 'dua-2024-001', 'Data Usage Agreement ID');
+        StackUtils.exportStack(this, 'AgreementPath', '/data-agreements/dua-2024-001', 'API path to agreement');
     }
 }

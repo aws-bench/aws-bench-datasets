@@ -70,8 +70,8 @@ export class iot_iotipv43d8 extends cdk.Stack {
 
         // The IoT Thing the agent operates on. Stable name so the verifier
         // can address it without env-var indirection.
-        const thing = new iot.CfnThing(this, 'BenchThing', {
-            thingName: `bench-thing-${this.account.slice(-6)}`,
+        const thing = new iot.CfnThing(this, 'AppThing', {
+            thingName: `app-thing-${this.account.slice(-6)}`,
         });
         thing.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 

@@ -9,7 +9,7 @@ keywords = []
 # --- aws-bench extension --- which scenario this task uses
 [scenario]
 scenario_id = "reference-architectures"
-agent_role_name = "QALocalInvocationApplicationRole"
+agent_role_name = "ApplicationReadOnlyRole"
 
 [concurrency]
 # The hooks upload an object, write a table row, and cause Lambda to create its
