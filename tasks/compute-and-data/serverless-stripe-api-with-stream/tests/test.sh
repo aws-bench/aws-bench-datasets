@@ -8,4 +8,4 @@
 # and for the @criterion calls that hit AWS.
 set -ex
 
-uvx --from harbor-rewardkit --with boto3 rewardkit /tests
+rewardkit /tests

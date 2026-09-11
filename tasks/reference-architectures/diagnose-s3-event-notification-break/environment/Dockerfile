@@ -19,4 +19,7 @@ RUN ARCH=$(uname -m) && \
     /tmp/aws/install && \
     rm -rf /tmp/aws /tmp/awscliv2.zip
 
+# Pre-install verifier dependencies
+RUN uv pip install --system --no-cache harbor-rewardkit boto3 pyyaml
+
 WORKDIR /app
