@@ -134,6 +134,18 @@ task's `pre_invoke/` and `post_invoke/`, authored under `shared/tasks/`):
 ./shared/tasks/scripts/sync.sh --check  # CI: verify the hook-dir copies match canonical
 ```
 
+## Contributing
+
+We welcome new tasks, batches of tasks, and scenarios that are genuinely challenging for frontier
+agents, not just novel. See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and
+task design guidance. The contribution flow is Propose → Build → Review:
+
+1. **Propose** your task idea by opening a [New Task Proposal](../../issues/new?template=new-task-proposal.md) issue.
+2. **Build** the task after a maintainer reviews your proposal. If you prefer to contribute only
+   the idea, the aws-bench team or another contributor can take care of the implementation. See
+   [CONTRIBUTING.md](CONTRIBUTING.md) for a step-by-step guide and task quality guidelines.
+3. **Review** — every task PR receives maintainer review before it can be merged.
+
 ## Citing aws-bench
 
 A BibTeX citation will be added when the technical report is published.

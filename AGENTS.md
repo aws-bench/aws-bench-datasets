@@ -4,6 +4,10 @@
 
 aws-bench-datasets contains the benchmark content executed by the [aws-bench framework](https://github.com/aws-bench/aws-bench): task prompts, verifiers, reference solutions, per-task lifecycle hooks, and containerized AWS scenarios. Framework orchestration belongs in the aws-bench repository.
 
+This guide defines the technical contracts published tasks and scenarios must satisfy. If you're
+proposing or building a new one, start with [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution
+process, then come back here for the contracts.
+
 ## Repository layout
 
 - `tasks/<scenario-id>/<task-name>/` — published task definitions.
