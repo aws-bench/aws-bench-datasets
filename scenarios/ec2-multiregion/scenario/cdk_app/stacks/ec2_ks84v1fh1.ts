@@ -176,6 +176,8 @@ export class EC2_ks84v1fh12 extends cdk.Stack {
                 action: 'deregisterImage',
                 parameters: {
                     ImageId: new cr.PhysicalResourceIdReference(),
+                    // Deregistering alone leaves the AMI's backing EBS snapshot in the account.
+                    DeleteAssociatedSnapshots: true,
                 },
             },
             policy: cr.AwsCustomResourcePolicy.fromSdkCalls({
