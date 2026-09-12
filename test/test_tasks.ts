@@ -234,37 +234,43 @@ function readVerifierEnvKeys(taskTomlText: string): Set<string> {
 // A `judge.toml` marker file scopes this check to rewardkit-converted
 // tasks. Legacy hand-rolled test.py tasks have lenient substitution and
 // a different invariant; this check does not apply to them.
-test('every {{placeholder}} in ground_truth.json is declared in [verifier.env]', () => {
+test('every {{placeholder}} in ground_truth.json and judge.toml is declared in [verifier.env]; none sits in judge_prompt.md', () => {
     const drifts: string[] = [];
     let checked = 0;
     for (const taskTomlPath of listTaskTomls()) {
         const taskDir = path.dirname(taskTomlPath);
         const judgeMarker = path.join(taskDir, 'tests', 'judge.toml');
         const gtPath = path.join(taskDir, 'tests', 'ground_truth.json');
+        const rel = path.relative(rootDir, taskDir);
+        // Nothing substitutes the prompt template, so a token there reaches the judge as text.
+        const promptPath = path.join(taskDir, 'tests', 'judge_prompt.md');
+        if (fs.existsSync(promptPath) && /\{\{[^}]+\}\}/.test(fs.readFileSync(promptPath, 'utf-8'))) {
+            drifts.push(`  ${rel}: {{...}} token in tests/judge_prompt.md, which nothing substitutes`);
+        }
         if (!fs.existsSync(judgeMarker) || !fs.existsSync(gtPath)) continue;
         checked++;
 
-        const gtText = fs.readFileSync(gtPath, 'utf-8');
+        // The resolver substitutes placeholders in both files; an undeclared token in either makes
+        // resolve_placeholders.py exit non-zero before the judge runs.
         const placeholders = new Set<string>();
-        for (const m of gtText.matchAll(/\{\{([^}]+)\}\}/g)) {
-            placeholders.add(m[1]);
-        }
+        for (const file of [gtPath, judgeMarker])
+            for (const m of fs.readFileSync(file, 'utf-8').matchAll(/\{\{([^}]+)\}\}/g)) placeholders.add(m[1]);
         if (placeholders.size === 0) continue;
 
         const declared = readVerifierEnvKeys(fs.readFileSync(taskTomlPath, 'utf-8'));
         const missing = [...placeholders].filter(p => !declared.has(p)).sort();
         if (missing.length > 0) {
-            const rel = path.relative(rootDir, taskDir);
             drifts.push(`  ${rel}: undeclared placeholder(s): ${missing.join(', ')}`);
         }
     }
 
     if (drifts.length > 0) {
         throw new Error(
-            `Found ${drifts.length} task(s) with undeclared placeholders out of ${checked} checked. ` +
-            `Every {{name}} token in tests/ground_truth.json must have a matching key in ` +
-            `[verifier.env] of task.toml so the framework injects it at run time. ` +
-            `Run \`shared/judge/scripts/fix_verifier_env.py --apply\` to backfill.\n\n` +
+            `Found ${drifts.length} task(s) with placeholder drift out of ${checked} checked. ` +
+            `Every {{name}} token in tests/ground_truth.json or tests/judge.toml must have a matching key in ` +
+            `[verifier.env] of task.toml so the framework injects it at run time; a token in ` +
+            `tests/judge_prompt.md must be removed. \`shared/judge/scripts/fix_verifier_env.py --apply\` ` +
+            `backfills ground_truth.json keys only.\n\n` +
             drifts.join('\n')
         );
     }
