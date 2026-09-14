@@ -234,7 +234,7 @@ function readVerifierEnvKeys(taskTomlText: string): Set<string> {
 // A `judge.toml` marker file scopes this check to rewardkit-converted
 // tasks. Legacy hand-rolled test.py tasks have lenient substitution and
 // a different invariant; this check does not apply to them.
-test('every {{placeholder}} in ground_truth.json is declared in [verifier.env]', () => {
+test('every {{placeholder}} in ground_truth.json and judge.toml is declared in [verifier.env]', () => {
     const drifts: string[] = [];
     let checked = 0;
     for (const taskTomlPath of listTaskTomls()) {
@@ -244,9 +244,9 @@ test('every {{placeholder}} in ground_truth.json is declared in [verifier.env]',
         if (!fs.existsSync(judgeMarker) || !fs.existsSync(gtPath)) continue;
         checked++;
 
-        const gtText = fs.readFileSync(gtPath, 'utf-8');
+        const text = fs.readFileSync(gtPath, 'utf-8') + fs.readFileSync(judgeMarker, 'utf-8');
         const placeholders = new Set<string>();
-        for (const m of gtText.matchAll(/\{\{([^}]+)\}\}/g)) {
+        for (const m of text.matchAll(/\{\{([^}]+)\}\}/g)) {
             placeholders.add(m[1]);
         }
         if (placeholders.size === 0) continue;
@@ -262,7 +262,7 @@ test('every {{placeholder}} in ground_truth.json is declared in [verifier.env]',
     if (drifts.length > 0) {
         throw new Error(
             `Found ${drifts.length} task(s) with undeclared placeholders out of ${checked} checked. ` +
-            `Every {{name}} token in tests/ground_truth.json must have a matching key in ` +
+            `Every {{name}} token in tests/ground_truth.json and tests/judge.toml must have a matching key in ` +
             `[verifier.env] of task.toml so the framework injects it at run time. ` +
             `Run \`shared/judge/scripts/fix_verifier_env.py --apply\` to backfill.\n\n` +
             drifts.join('\n')
