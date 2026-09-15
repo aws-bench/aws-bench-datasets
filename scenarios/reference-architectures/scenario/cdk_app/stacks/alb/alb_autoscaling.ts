@@ -55,6 +55,7 @@ export class AlbAutoscaling extends cdk.Stack {
                 cpuType: ec2.AmazonLinuxCpuType.ARM_64,
             }),
             securityGroup: instanceSg,
+            requireImdsv2: true,
         });
 
         // Auto Scaling Group
