@@ -87,6 +87,7 @@ export class ec2_ydhdiehs5 extends cdk.Stack {
         // Transit EC2 Instance
         const transitInstance = new ec2.Instance(this, 'TransitInstance', {
             vpc: transitVpc,
+            associatePublicIpAddress: false,
             instanceType: new ec2.InstanceType('t3.medium'),
             machineImage: ec2.MachineImage.latestAmazonLinux2023(),
             securityGroup: transitSG,
