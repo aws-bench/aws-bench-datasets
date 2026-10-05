@@ -23,7 +23,6 @@ export class AppRolesStack extends Stack {
         const accountId = this.account;
 
         const s3VectorsReadOnlyPolicy = new ManagedPolicy(this, 'S3VectorsReadOnlyAccess', {
-            managedPolicyName: `S3VectorsReadOnlyAccess-${accountId}-${this.region}`,
             description: 'Read-only access to S3 Vectors operations',
             statements: [
                 new PolicyStatement({
