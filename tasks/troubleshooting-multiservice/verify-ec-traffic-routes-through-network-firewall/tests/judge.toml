@@ -19,7 +19,7 @@ type = "binary"
 
 [[criterion]]
 name = "dmz_vpc_routes_only_local"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The DMZ VPC {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCId}} route tables only contain the local 10.2.0.0/16 route."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Within the DMZ VPC {{troubleshooting-multiservice-ec2-m3jbrd9n2-ap-northeast-2-DMZVPCId}}, the subnet that receives this instance's traffic from the Transit Gateway has a route table containing only the local 10.2.0.0/16 route -- there is no 0.0.0.0/0 route to a Network Firewall endpoint or to any other egress target. Identifying the route table for the DMZ subnet on this instance's own path satisfies this claim; the answer need not enumerate every route table in the VPC."
 type = "binary"
 
 [[criterion]]

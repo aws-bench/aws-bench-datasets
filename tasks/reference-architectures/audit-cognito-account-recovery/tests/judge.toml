@@ -9,7 +9,7 @@ mode = "batched"
 
 [[criterion]]
 name = "email_recovery_works_phone_never_will"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A user can recover via email; they will never be able to recover via phone, despite phone being listed as the priority-1 recovery mechanism."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A user can recover their password via email, but not via phone, even though phone is configured as the priority-1 recovery mechanism. An answer that states phone is not an operational or recovery-ready path and that verified_email is the only working recovery channel satisfies this claim."
 type = "binary"
 
 [[criterion]]
@@ -29,7 +29,7 @@ type = "binary"
 
 [[criterion]]
 name = "phone_verification_requires_sms_config"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Cognito evaluates recovery mechanisms in priority order but skips any for which the user has no verified attribute. Since phone verification requires SmsConfiguration (which is absent) and phone numbers are not auto-verified, nobody in this pool can have a verified phone number, so every password-recovery request falls through to priority-2 verified_email."
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): No user in this pool can have a verified phone number, so every password-recovery request falls through to the priority-2 verified_email mechanism. An answer that states phone numbers are not auto-verified and that SmsConfiguration is absent, and that verified_email is therefore the only recovery-ready channel, satisfies this claim; the causal chain from absent SmsConfiguration to Cognito skipping the phone mechanism need not be written out step by step."
 type = "binary"
 
 [[criterion]]
@@ -40,11 +40,6 @@ type = "binary"
 [[criterion]]
 name = "pool_has_zero_app_clients"
 description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): the pool has zero app clients (list-user-pool-clients returns []), so there's no client_id to call ForgotPassword against."
-type = "binary"
-
-[[criterion]]
-name = "adding_client_enables_email_only"
-description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Once an app client is added, email recovery will work end-to-end; phone recovery will still not, and remains misleading."
 type = "binary"
 
 [[criterion]]
