@@ -38,6 +38,7 @@ export class EC2_ls9fuhb522 extends cdk.Stack {
         // Create EC2 Instance
         const instance = new ec2.Instance(this, 'WebServerInstance', {
             vpc,
+            associatePublicIpAddress: false,
             vpcSubnets: {
                 subnetType: ec2.SubnetType.PUBLIC,
             },
