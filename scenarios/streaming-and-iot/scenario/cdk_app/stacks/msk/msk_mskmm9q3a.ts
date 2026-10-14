@@ -69,7 +69,12 @@ export class msk_mskmm9q3a extends cdk.Stack {
             // so a fixed name collides (AlreadyExists) on live envs — bump the
             // v-suffix with any replacement-forcing change (e.g. ClientSubnets).
             clusterName: `app-source-v2-${this.account.slice(-6)}`,
-            kafkaVersion: '3.6.0',
+            // 3.9.x is AWS's recommended version and still supports ZooKeeper
+            // metadata mode (this cluster is ZooKeeper-style: numberOfBrokerNodes,
+            // no KRaft fields). 3.6.0 was dropped here because AWS stopped allowing
+            // Standard broker instance types (kafka.m5.large below) on 3.6.0, which
+            // made every deploy fail with InvalidRequest.
+            kafkaVersion: '3.9.x',
             numberOfBrokerNodes: brokerCount,
             brokerNodeGroupInfo: {
                 // m5.large is the cheapest type AWS confirms supports IAM SASL.
