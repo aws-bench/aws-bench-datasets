@@ -2,13 +2,13 @@
 
 ## v0.7.0 (2026-07-24)
 
-### Feat
+### Features
 
 - **ci**: harden Slack notification workflows against script injection (#10)
 - **ci**: run make check as a Github Action (#9)
 - **dependabot**: add Dependabot Github Action (#8)
 
-### Fix
+### Bug Fixes
 
 - **api-and-observability**: enforce TLS 1.2 minimum in apigateway setup script (#12)
 - explicitly set to no permissions (#11)

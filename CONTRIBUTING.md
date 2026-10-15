@@ -157,3 +157,7 @@ contact opensource-codeofconduct@amazon.com with any additional questions or com
 
 By contributing, you agree that your contributions will be licensed under the
 [Apache License 2.0](LICENSE).
+
+## Releases (maintainers)
+
+Releases are cut by [release-please](https://github.com/googleapis/release-please-action). A maintainer runs the Release Please workflow by hand (Actions > Release Please > Run workflow). The run opens or refreshes one release pull request that bumps the version in `package.json` and `package-lock.json` and adds the next `CHANGELOG.md` section, computed from the conventional commits since the last tag. Merging that pull request creates the tag and the GitHub Release. `release-please-config.json` holds the configuration; a `release-as` entry forces the next version and is removed once that release ships. The workflow needs the `RELEASE_PLEASE_TOKEN` secret, a fine-grained personal access token with contents, pull requests and issues read and write, because pull requests opened with the default token get no CI runs. Another team member approves the release pull request; the token owner cannot approve pull requests opened in their name.
