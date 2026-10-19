@@ -19,7 +19,11 @@ RUN ARCH=$(uname -m) && \
     /tmp/aws/install && \
     rm -rf /tmp/aws /tmp/awscliv2.zip
 
-# Pre-install verifier dependencies
-RUN uv pip install --system --no-cache harbor-rewardkit boto3 pyyaml
+# Pre-install verifier dependencies.
+# litellm<1.106: 1.106.0 imports the optional `mcp` package on any call it routes
+# through the Responses API, so judges such as GPT-5.x crash with "No module named
+# 'mcp'" (harbor-rewardkit leaves litellm unbounded). Remove once
+# https://github.com/BerriAI/litellm/issues/46045 is fixed.
+RUN uv pip install --system --no-cache harbor-rewardkit 'litellm<1.106' boto3 pyyaml
 
 WORKDIR /app
