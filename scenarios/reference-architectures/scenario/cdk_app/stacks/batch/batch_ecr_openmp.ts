@@ -93,6 +93,12 @@ export class BatchEcrOpenmpStack extends cdk.Stack {
             roles: [ec2InstanceRole.roleName],
         });
 
+        // Batch creates an implicit launch template when none is provided.
+        // Supply one explicitly so any compute instances require IMDSv2.
+        const launchTemplate = new ec2.LaunchTemplate(this, 'BatchLaunchTemplate', {
+            requireImdsv2: true,
+        });
+
         // IAM Role - Batch Job Role
         const batchJobRole = new iam.Role(this, 'BatchJobRole', {
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
@@ -116,6 +122,10 @@ export class BatchEcrOpenmpStack extends cdk.Stack {
                 subnets: vpc.privateSubnets.map((subnet) => subnet.subnetId),
                 securityGroupIds: [batchSecurityGroup.securityGroupId],
                 instanceRole: instanceProfile.attrArn,
+                launchTemplate: {
+                    launchTemplateId: launchTemplate.launchTemplateId,
+                    version: launchTemplate.latestVersionNumber,
+                },
             },
         });
         computeEnvironment.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);

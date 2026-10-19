@@ -123,6 +123,7 @@ export class Ec2_u5j9r8syp extends cdk.Stack {
                 cpuType: ec2.AmazonLinuxCpuType.X86_64,
             }),
             role: instanceRole,
+            requireImdsv2: true,
             securityGroup: platformSecurityGroup,
             blockDevices: [
                 {

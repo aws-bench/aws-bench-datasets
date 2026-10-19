@@ -51,6 +51,7 @@ export class ECS_sir8fhb31 extends cdk.Stack {
             role: asgInstanceRole,
             machineImage: ecs.EcsOptimizedImage.amazonLinux2023(),
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MEDIUM),
+            requireImdsv2: true,
             userData: ec2.UserData.forLinux(),
         });
 
