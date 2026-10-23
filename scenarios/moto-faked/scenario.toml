@@ -1,0 +1,31 @@
+schema_version = "1.0"
+
+[scenario]
+name = "moto-faked"
+description = "Offline-gradable order-intake pipeline (S3 landing bucket, SQS order-events queue with DLQ, DynamoDB orders table, reader/writer IAM roles). Every resource is created from moto-supported CloudFormation types so deploy, verifiers, and reference solutions grade with no AWS account."
+account_tags = ["PRIMARY"]
+regions = ["us-east-1"]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+
+[deploy]
+timeout_sec = 900.0
+
+[verify]
+timeout_sec = 120.0
+
+[cleanup]
+timeout_sec = 900.0
+
+[reset]
+timeout_sec = 600.0
+
+[reset.env]
+LANDING_BUCKET = "{{moto-faked-s3-orders-us-east-1-LandingBucketName}}"
+ORDER_QUEUE_URL = "{{moto-faked-sqs-orders-us-east-1-OrderQueueUrl}}"
+ORDERS_TABLE = "{{moto-faked-ddb-orders-us-east-1-OrdersTableName}}"
+AWS_REGION = "us-east-1"
+AWS_DEFAULT_REGION = "us-east-1"
