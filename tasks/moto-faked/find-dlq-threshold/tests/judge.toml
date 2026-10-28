@@ -1,0 +1,23 @@
+[judge]
+judge = "bedrock/us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+files = [
+    "/logs/agent/agent-output.txt",
+    "/tests/ground_truth.json",
+]
+prompt_template = "judge_prompt.md"
+mode = "batched"
+
+[[criterion]]
+name = "threshold_is_three"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): Messages move to the DLQ after {{moto-faked-sqs-orders-us-east-1-MaxReceiveCount}} failed receives (maxReceiveCount 3)."
+type = "binary"
+
+[[criterion]]
+name = "dlq_identity"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The dead-letter queue is {{moto-faked-sqs-orders-us-east-1-OrderDlqUrl}} (ARN {{moto-faked-sqs-orders-us-east-1-OrderDlqArn}})."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state, and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+type = "binary"

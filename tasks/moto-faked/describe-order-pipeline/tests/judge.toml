@@ -1,0 +1,23 @@
+[judge]
+judge = "bedrock/us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+files = [
+    "/logs/agent/agent-output.txt",
+    "/tests/ground_truth.json",
+]
+prompt_template = "judge_prompt.md"
+mode = "batched"
+
+[[criterion]]
+name = "names_all_three_stages"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): The pipeline has three stages: S3 landing bucket {{moto-faked-s3-orders-us-east-1-LandingBucketName}} with batches under incoming/, SQS queue {{moto-faked-sqs-orders-us-east-1-OrderQueueUrl}}, and DynamoDB table {{moto-faked-ddb-orders-us-east-1-OrdersTableName}} keyed by orderId."
+type = "binary"
+
+[[criterion]]
+name = "dlq_after_three_failures"
+description = "Per the rubric, does the junior engineer's answer support this claim (wording may differ, substance must match): A message that fails processing {{moto-faked-sqs-orders-us-east-1-MaxReceiveCount}} times is moved to the dead-letter queue {{moto-faked-sqs-orders-us-east-1-OrderDlqUrl}}."
+type = "binary"
+
+[[criterion]]
+name = "no_extraneous_or_contradicting_facts"
+description = "Per the rubric's Fail-If and Clarifications rules, does the junior engineer's answer AVOID both of the following: (1) stating any fact that contradicts the reference answer's stated infrastructure state, and (2) claiming the existence of additional resources, findings, or facts beyond what the reference answer states, UNSUPPORTED by concrete evidence, in a way that would mislead a practitioner into a different conclusion or action. Answer 'yes' if the junior's answer contains no such contradiction or unsupported extra claim; answer 'no' if it does."
+type = "binary"
