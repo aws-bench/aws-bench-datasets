@@ -71,6 +71,18 @@ cleanup_residuals() {
 }
 cleanup_residuals || echo "[cleanup.sh]   Phase 1 incomplete; continuing"
 
+# Record the scenario AMI's EBS snapshots before CDK destroy. The CreateAmi
+# custom resource (stacks/ec2_ks84v1fh1.ts) only deregisters the AMI on delete,
+# and deregistering does not delete the snapshots behind it. After destroy the
+# AMI is gone, so its snapshot IDs must be captured now (deleted in Phase 3).
+AMI_REGION="us-east-1"
+AMI_NAME="ami-${PRIMARY}-${AMI_REGION}"
+AMI_SNAPSHOT_IDS=$(aws ec2 describe-images --profile PRIMARY --region "$AMI_REGION" \
+    --owners self --filters "Name=name,Values=${AMI_NAME}" \
+    --query 'Images[].BlockDeviceMappings[].Ebs.SnapshotId' --output text 2>/dev/null || true)
+[ "$AMI_SNAPSHOT_IDS" = "None" ] && AMI_SNAPSHOT_IDS=""
+echo "[cleanup.sh]   Scenario AMI ${AMI_NAME} snapshots: ${AMI_SNAPSHOT_IDS:-none}"
+
 # ===========================================================================
 # Phase 2: CDK destroy
 # ===========================================================================
@@ -80,7 +92,8 @@ npx cdk destroy --profile PRIMARY --all --force --concurrency 10 || \
 # ===========================================================================
 # Phase 3: Post-destroy residual cleanup
 # ===========================================================================
-# CDK's CustomVpcRestrictDefault Lambda leaves behind a CloudWatch log group.
+# CDK's CustomVpcRestrictDefault Lambda leaves behind a CloudWatch log group,
+# and deregistering the scenario AMI leaves its EBS snapshot behind.
 cleanup_post_destroy_residuals() {
     for region in $REGIONS; do
         echo "[cleanup.sh]   [Phase 3] Cleaning post-destroy residuals in ${region}..."
@@ -97,6 +110,24 @@ cleanup_post_destroy_residuals() {
             done
         fi
     done
+
+    # 3b. Delete the scenario AMI's snapshots recorded before destroy. Only
+    #     once the AMI is deregistered: a snapshot still backing a registered
+    #     AMI cannot be deleted (e.g. cdk destroy failed).
+    if [ -n "$AMI_SNAPSHOT_IDS" ]; then
+        remaining=$(aws ec2 describe-images --profile PRIMARY --region "$AMI_REGION" \
+            --owners self --filters "Name=name,Values=${AMI_NAME}" \
+            --query 'Images[].ImageId' --output text 2>/dev/null || true)
+        if [ -n "$remaining" ] && [ "$remaining" != "None" ]; then
+            echo "[cleanup.sh]     AMI ${AMI_NAME} still registered (${remaining}); keeping its snapshots"
+        else
+            for snap in $AMI_SNAPSHOT_IDS; do
+                echo "[cleanup.sh]     Deleting AMI snapshot: ${snap}"
+                aws ec2 delete-snapshot --profile PRIMARY --region "$AMI_REGION" \
+                    --snapshot-id "$snap" 2>/dev/null || true
+            done
+        fi
+    fi
 }
 cleanup_post_destroy_residuals || echo "[cleanup.sh]   Phase 3 incomplete; continuing"
 
