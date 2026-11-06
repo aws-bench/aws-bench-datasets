@@ -42,8 +42,8 @@ export class Ec2_67wz6v9zc extends DeploymentStack {
             ],
         });
 
-        // Get the public subnet in us-east-1c (or first available)
-        const publicSubnet = vpc.publicSubnets[0];
+        // Keep the jump server private; no task depends on direct internet access.
+        const jumpServerSubnet = vpc.isolatedSubnets[0];
 
         // Create security group for RDS (referenced by jump server SG)
         const rdsSecurityGroup = new ec2.SecurityGroup(this, 'QaRdsSg', {
@@ -87,13 +87,13 @@ export class Ec2_67wz6v9zc extends DeploymentStack {
             instanceName: `qa-rds-jump-server-${this.account}-${this.region}`,
             vpc,
             vpcSubnets: {
-                subnets: [publicSubnet],
+                subnets: [jumpServerSubnet],
             },
             instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
             machineImage: ec2.MachineImage.latestAmazonLinux2023(),
             securityGroup: jumpServerSg,
             role: instanceRole,
-            associatePublicIpAddress: true,
+            associatePublicIpAddress: false,
             blockDevices: [
                 {
                     deviceName: '/dev/xvda',
@@ -153,14 +153,14 @@ export class Ec2_67wz6v9zc extends DeploymentStack {
 
         // Add tags
         cdk.Tags.of(vpc).add('Name', 'garnet-qa-vpc');
-        cdk.Tags.of(publicSubnet).add('Name', 'garnet-qa-vpc-public-subnet-01');
-        cdk.Tags.of(publicSubnet).add('env', 'qa');
+        cdk.Tags.of(jumpServerSubnet).add('Name', 'garnet-qa-vpc-private-subnet-01');
+        cdk.Tags.of(jumpServerSubnet).add('env', 'qa');
         cdk.Tags.of(jumpServer).add('Name', 'qa-rds-jump-server');
         cdk.Tags.of(jumpServerSg).add('Name', 'garnet-qa-rds-jump-server-sg');
 
         // Export stack outputs
         StackUtils.exportStack(this, 'VpcId', vpc.vpcId, 'The ID of the QA VPC');
-        StackUtils.exportStack(this, 'PublicSubnetId', publicSubnet.subnetId, 'The ID of the public subnet');
+        StackUtils.exportStack(this, 'PublicSubnetId', jumpServerSubnet.subnetId, 'The ID of the jump server subnet');
         StackUtils.exportStack(
             this,
             'JumpServerInstanceId',
