@@ -191,6 +191,7 @@ export class EC2_ks84v1fh12 extends cdk.Stack {
         // Create the EC2 instance
         const defaultVpcInstance = new ec2.Instance(this, 'MyEC2Instance', {
             vpc: defaultVpc,
+            associatePublicIpAddress: false,
             vpcSubnets: {
                 subnetType: ec2.SubnetType.PUBLIC, // Choose public subnet
             },
