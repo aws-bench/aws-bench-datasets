@@ -19,4 +19,4 @@ select = ["E9", "F63", "F7", "F82"]
 # installed during static analysis, so unresolved imports are expected and not
 # actionable here. Suppress them so ty reports only real type errors in the
 # maintained first-party code it is pointed at (see PY_TYPECHECK_PATHS).
-unresolved-import = "ignore"
+import-not-found = "ignore"
