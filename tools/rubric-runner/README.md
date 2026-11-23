@@ -66,7 +66,7 @@ and pass any `judge.py` arguments straight through:
 
 ```bash
 AWS_PROFILE=my-bedrock tools/rubric-runner/run.sh
-AWS_PROFILE=my-bedrock tools/rubric-runner/run.sh --model us.anthropic.claude-sonnet-4-6 --concurrency 12
+AWS_PROFILE=my-bedrock tools/rubric-runner/run.sh --model openai.gpt-5.6-sol --concurrency 12
 AWS_PROFILE=my-bedrock tools/rubric-runner/run.sh --type introspection
 ```
 
