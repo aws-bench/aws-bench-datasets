@@ -32,7 +32,7 @@ Usage:
     AWS_PROFILE=my-bedrock-profile uv run tools/rubric-runner/judge.py   # all stable tasks
     uv run tools/rubric-runner/judge.py --tasks tasks/serverless-apps/check-s-buckets-public-access
     uv run tools/rubric-runner/judge.py --type introspection            # only introspection tasks
-    uv run tools/rubric-runner/judge.py --model us.anthropic.claude-sonnet-4-5-20250929-v1:0
+    uv run tools/rubric-runner/judge.py --model openai.gpt-5.6-sol
     uv run tools/rubric-runner/judge.py --concurrency 8 --force
 """
 
@@ -62,7 +62,7 @@ from lib import (  # noqa: E402
 
 PROMPT_PATH = REPO_ROOT / "rubrics" / "evaluator-prompt.txt"
 # A Bedrock inference-profile id, not the Anthropic alias, so the CLI resolves it directly.
-DEFAULT_MODEL = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+DEFAULT_MODEL = "openai.gpt-5.6-sol"
 DEFAULT_CONCURRENCY = 8
 
 
