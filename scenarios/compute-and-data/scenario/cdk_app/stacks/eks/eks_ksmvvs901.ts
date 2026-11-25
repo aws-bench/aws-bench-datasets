@@ -66,7 +66,7 @@ export class eks_ksmvvs901 extends cdk.Stack {
         nodeRole.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
         const cluster = new eks.CfnCluster(this, 'EksCluster', {
-            version: '1.30',
+            version: '1.37',
             roleArn: clusterRole.roleArn,
             resourcesVpcConfig: {
                 subnetIds: vpc.privateSubnets.map((subnet) => subnet.subnetId),
