@@ -1,0 +1,4 @@
+{
+  "instruction": "The on-call alert \"order-events DLQ growing\" just fired. A teammate asks:\nafter how many failed processing attempts does a message on\n{{moto-faked-sqs-orders-us-east-1-OrderQueueUrl}} move to the dead-letter\nqueue, and which DLQ does it go to?\n\nInspect the queue's redrive policy and answer with the exact threshold and\nthe exact DLQ identity. Do not change anything.",
+  "expected_answer": "The queue {{moto-faked-sqs-orders-us-east-1-OrderQueueUrl}} has a redrive policy with maxReceiveCount {{moto-faked-sqs-orders-us-east-1-MaxReceiveCount}}: after 3 failed receives a message is moved to the dead-letter queue {{moto-faked-sqs-orders-us-east-1-OrderDlqUrl}} (ARN {{moto-faked-sqs-orders-us-east-1-OrderDlqArn}})."
+}
